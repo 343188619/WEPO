@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>环保宣传视频 | WEPO - 世界环境保护组织</title>
+	<style>
+		:root {
+			--primary-dark: #0a2647;
+			--primary-medium: #144272;
+			--primary-light: #205295;
+			--accent-blue: #2C74B3;
+			--accent-green: #4CAF50;
+			--text-light: #f8f9fa;
+			--text-dark: #212529;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+			background-color: #f5f5f5;
+			color: var(--text-dark);
+			line-height: 1.6;
+		}
+
+		header {
+			background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+			color: white;
+			padding: 1rem 5%;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+
+		.header-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.logo {
+			height: 50px;
+		}
+
+		.breadcrumb {
+			font-size: 0.9rem;
+			color: rgba(255,255,255,0.8);
+		}
+
+		.breadcrumb a {
+			color: white;
+			text-decoration: none;
+		}
+
+		.main-container {
+			max-width: 1200px;
+			margin: 2rem auto;
+			padding: 0 5%;
+		}
+
+		.page-title {
+			color: var(--primary-dark);
+			margin-bottom: 2rem;
+			font-size: 2.2rem;
+			position: relative;
+			padding-bottom: 10px;
+		}
+
+		.page-title::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 60px;
+			height: 4px;
+			background: var(--accent-green);
+		}
+
+		.intro-text {
+			margin-bottom: 2rem;
+			font-size: 1.1rem;
+			line-height: 1.8;
+		}
+
+		.video-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.video-card {
+			background: white;
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.video-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+		}
+
+		.video-container {
+			position: relative;
+			padding-bottom: 56.25%;
+			height: 0;
+			overflow: hidden;
+		}
+
+		.video-container iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+		.video-info {
+			padding: 1.5rem;
+		}
+
+		.video-title {
+			font-size: 1.3rem;
+			margin-bottom: 0.5rem;
+			color: var(--primary-dark);
+		}
+
+		.video-description {
+			color: #666;
+			font-size: 0.95rem;
+			margin-bottom: 1rem;
+		}
+
+		.video-meta {
+			display: flex;
+			justify-content: space-between;
+			font-size: 0.85rem;
+			color: #888;
+		}
+
+		.category-tags {
+			margin: 2rem 0;
+		}
+
+		.tag {
+			display: inline-block;
+			background: var(--accent-green);
+			color: white;
+			padding: 0.3rem 0.8rem;
+			border-radius: 20px;
+			font-size: 0.8rem;
+			margin-right: 0.5rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.call-to-action {
+			background: linear-gradient(135deg, var(--primary-medium), var(--primary-dark));
+			color: white;
+			padding: 3rem;
+			border-radius: 8px;
+			text-align: center;
+			margin: 3rem 0;
+		}
+
+		.cta-title {
+			font-size: 1.8rem;
+			margin-bottom: 1rem;
+		}
+
+		.cta-text {
+			max-width: 700px;
+			margin: 0 auto 1.5rem;
+			font-size: 1.1rem;
+		}
+
+		.cta-button {
+			display: inline-block;
+			background: white;
+			color: var(--primary-dark);
+			padding: 0.8rem 2rem;
+			border-radius: 30px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
+
+		.cta-button:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+
+		footer {
+			background: var(--primary-dark);
+			color: white;
+			padding: 3rem 5%;
+			margin-top: 3rem;
+		}
+
+		.footer-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 2rem;
+		}
+
+		.footer-column h3 {
+			font-size: 1.2rem;
+			margin-bottom: 1.2rem;
+			position: relative;
+			padding-bottom: 10px;
+		}
+
+		.footer-column h3::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 40px;
+			height: 3px;
+			background: var(--accent-green);
+		}
+
+		.footer-column p, .footer-column a {
+			color: rgba(255,255,255,0.7);
+			margin-bottom: 0.8rem;
+			font-size: 0.95rem;
+			line-height: 1.6;
+		}
+
+		.footer-column a {
+			display: block;
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+		.footer-column a:hover {
+			color: white;
+		}
+
+		.social-links {
+			display: flex;
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.social-link {
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.1);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+		}
+
+		.social-link:hover {
+			background: var(--accent-green);
+			transform: translateY(-3px);
+		}
+
+		.copyright {
+			text-align: center;
+			margin-top: 2rem;
+			padding-top: 2rem;
+			border-top: 1px solid rgba(255,255,255,0.1);
+			font-size: 0.9rem;
+			color: rgba(255,255,255,0.6);
+		}
+
+		@media (max-width: 768px) {
+			.video-grid {
+				grid-template-columns: 1fr;
+			}
+			
+			.page-title {
+				font-size: 1.8rem;
+			}
+			
+			.cta-title {
+				font-size: 1.5rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="header-content">
+			
+			<div class="breadcrumb">
+				<a href="#">首页</a> > <a href="#">媒体中心</a> 
+			</div>
+		</div>
+	</header>
+
+	<div class="main-container">
+		<h1 class="page-title">环保宣传视频</h1>
+		
+		<div class="intro-text">
+			<p>世界环境保护组织(WEPO)精选了一系列震撼人心的环保宣传视频，通过这些视觉作品，我们希望唤起人们对地球环境的关注，激发保护行动。这些视频涵盖了气候变化、生物多样性、可持续发展等多个环保主题，适合不同年龄段的观众观看。</p>
+		</div>
+
+		<div class="category-tags">
+		
+		</div>
+
+		<div class="video-grid">
+			<!-- Video 1 -->
+			<div class="video-card">
+				<div class="video-container">
+					<iframe src="//player.bilibili.com/player.html?bvid=BV16s4y1M7ab" scrolling="no" allowfullscreen></iframe>
+				</div>
+				<div class="video-info">
+					<h3 class="video-title">环保宣传片</h3>
+					<p class="video-description">这部8分钟的环境保护公益广告宣传片通过震撼的视觉画面，展示了地球面临的严峻环境问题，呼吁人们立即采取行动保护我们共同的家园。</p>
+					<div class="video-meta">
+						<span>时长: 8分钟</span>
+						<span>播放量: 10.5万</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Video 2 -->
+			<div class="video-card">
+				<div class="video-container">
+					<iframe src="//player.bilibili.com/player.html?bvid=BV19i4y1x7Hn" scrolling="no" allowfullscreen></iframe>
+				</div>
+				<div class="video-info">
+					<h3 class="video-title">大自然在说话</h3>
+					<p class="video-description">这部震撼人心的公益宣传片以大自然的第一人称视角，向人类发出警告："人类需要大自然，大自然不需要人类"。由蒋雯丽、姜文等明星配音。</p>
+					<div class="video-meta">
+						<span>时长: 6分钟</span>
+						<span>播放量: 13.9万</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Video 3 -->
+			<div class="video-card">
+				<div class="video-container">
+					<iframe src="//player.bilibili.com/player.html?bvid=BV1Wr4y1Q7Td" scrolling="no" allowfullscreen></iframe>
+				</div>
+				<div class="video-info">
+					<h3 class="video-title">迁徙</h3>
+					<p class="video-description">这部获奖环保题材动画短片讲述了两只北极熊因全球变暖被迫迁徙的故事，它们将在旅途中遇到棕熊并尝试共同生活。法国学生作品，配乐精良。</p>
+					<div class="video-meta">
+						<span>时长: 3分钟</span>
+						<span>播放量: 2.2万</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Video 4 -->
+			<div class="video-card">
+				<div class="video-container">
+					<iframe src="//player.bilibili.com/player.html?bvid=BV1kU4y127KL" scrolling="no" allowfullscreen></iframe>
+				</div>
+				<div class="video-info">
+					<h3 class="video-title">The Earth</h3>
+					<p class="video-description">这部4K高清环保宣传片以震撼的航拍画面展示了地球的壮丽景观和脆弱生态，提醒人们珍惜和保护这颗蓝色星球。</p>
+					<div class="video-meta">
+						<span>时长: 2分钟</span>
+						<span>播放量: 11.1万</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Video 5 -->
+			<div class="video-card">
+				<div class="video-container">
+					<iframe src="//player.bilibili.com/player.html?bvid=BV1FV411m7zK" scrolling="no" allowfullscreen></iframe>
+				</div>
+				<div class="video-info">
+					<h3 class="video-title">我的地球</h3>
+					<p class="video-description">《我的地球》MV由李晓青作词作曲，群星演唱。地球是目前宇宙中人类已知存在生命的唯一天体，保护环境，人人有责；爱护地球，从我做起。</p>
+					<div class="video-meta">
+						<span>时长: 4分钟</span>
+						<span>播放量: 1.8万</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="call-to-action">
+			<h2 class="cta-title">加入我们的环保行动</h2>
+			<p class="cta-text">这些视频只是开始，真正的改变需要每个人的参与。加入世界环境保护组织，成为地球守护者的一员，共同为我们的星球创造更美好的未来。</p>
+			<a href="https://wj.qq.com/s2/17731884/9fba/" class="cta-button zh" target="_blank">立即行动</a>
+<a href="https://wj.qq.com/s2/17731884/9fba/" class="cta-button en" target="_blank">Take Action</a>
+		</div>
+	</div>
+
+	<footer>
+		<div class="footer-content">
+			<div class="footer-column">
+				<h3>关于WEPO</h3>
+				<p>世界环境保护组织(WEPO)是一个非营利性国际环保组织，致力于通过科学研究、政策倡导和公众教育来推动全球环境保护事业。</p>
+				<div class="social-links">
+				
+				</div>
+			</div>
+			<div class="footer-column">
+			
+			</div>
+		<div class="footer-column">
+	<h3>快速链接</h3>
+	<a href="index.html">关于我们</a>
+	<a href="index.html">环保项目</a>
+	<a href="yjbg.html">研究报告</a>
+	<a href="zyz.html">志愿者</a>
+	<a href="index.html">捐赠支持</a>
+</div>
+		</div>
+		<div class="copyright">
+			© 2025 世界环境保护组织(WEPO) 版权所有
+		</div>
+	</footer>
+</body>
+</html>
