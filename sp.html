@@ -1,427 +1,1128 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>环保宣传视频 | WEPO - 世界环境保护组织</title>
-	<style>
-		:root {
-			--primary-dark: #0a2647;
-			--primary-medium: #144272;
-			--primary-light: #205295;
-			--accent-blue: #2C74B3;
-			--accent-green: #4CAF50;
-			--text-light: #f8f9fa;
-			--text-dark: #212529;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEPO - 环保视频中心</title>
+    <style>
+        :root {
+            --primary-dark: #0a2647;
+            --primary-medium: #144272;
+            --primary-light: #205295;
+            --accent-blue: #2C74B3;
+            --accent-purple: #6a3093;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --transition-time: 0.5s;
+        }
 
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-		body {
-			background-color: #f5f5f5;
-			color: var(--text-dark);
-			line-height: 1.6;
-		}
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-		header {
-			background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
-			color: white;
-			padding: 1rem 5%;
-			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-		}
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
 
-		.header-content {
-			max-width: 1200px;
-			margin: 0 auto;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
+        .loading-logo {
+            width: 150px;
+            height: auto;
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-		.logo {
-			height: 50px;
-		}
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
 
-		.breadcrumb {
-			font-size: 0.9rem;
-			color: rgba(255,255,255,0.8);
-		}
+        /* Header */
+        header {
+            background: rgba(10, 38, 71, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
 
-		.breadcrumb a {
-			color: white;
-			text-decoration: none;
-		}
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
 
-		.main-container {
-			max-width: 1200px;
-			margin: 2rem auto;
-			padding: 0 5%;
-		}
+        .logo {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
 
-		.page-title {
-			color: var(--primary-dark);
-			margin-bottom: 2rem;
-			font-size: 2.2rem;
-			position: relative;
-			padding-bottom: 10px;
-		}
+        .logo:hover {
+            transform: scale(1.05);
+        }
 
-		.page-title::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 60px;
-			height: 4px;
-			background: var(--accent-green);
-		}
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
 
-		.intro-text {
-			margin-bottom: 2rem;
-			font-size: 1.1rem;
-			line-height: 1.8;
-		}
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
 
-		.video-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-			gap: 2rem;
-			margin-top: 2rem;
-		}
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
 
-		.video-card {
-			background: white;
-			border-radius: 8px;
-			overflow: hidden;
-			box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-		}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: width 0.3s ease;
+        }
 
-		.video-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-		}
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-		.video-container {
-			position: relative;
-			padding-bottom: 56.25%;
-			height: 0;
-			overflow: hidden;
-		}
+        .nav-links a:hover {
+            color: #8ab4f8;
+        }
 
-		.video-container iframe {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			border: none;
-		}
+        .language-switcher {
+            margin-left: 30px;
+        }
 
-		.video-info {
-			padding: 1.5rem;
-		}
+        .language-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
 
-		.video-title {
-			font-size: 1.3rem;
-			margin-bottom: 0.5rem;
-			color: var(--primary-dark);
-		}
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-		.video-description {
-			color: #666;
-			font-size: 0.95rem;
-			margin-bottom: 1rem;
-		}
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+        }
 
-		.video-meta {
-			display: flex;
-			justify-content: space-between;
-			font-size: 0.85rem;
-			color: #888;
-		}
+        /* Main Content */
+        .main-content {
+            padding: 120px 5% 80px;
+            min-height: 100vh;
+        }
 
-		.category-tags {
-			margin: 2rem 0;
-		}
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
 
-		.tag {
-			display: inline-block;
-			background: var(--accent-green);
-			color: white;
-			padding: 0.3rem 0.8rem;
-			border-radius: 20px;
-			font-size: 0.8rem;
-			margin-right: 0.5rem;
-			margin-bottom: 0.5rem;
-		}
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #8ab4f8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
 
-		.call-to-action {
-			background: linear-gradient(135deg, var(--primary-medium), var(--primary-dark));
-			color: white;
-			padding: 3rem;
-			border-radius: 8px;
-			text-align: center;
-			margin: 3rem 0;
-		}
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
 
-		.cta-title {
-			font-size: 1.8rem;
-			margin-bottom: 1rem;
-		}
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
 
-		.cta-text {
-			max-width: 700px;
-			margin: 0 auto 1.5rem;
-			font-size: 1.1rem;
-		}
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
 
-		.cta-button {
-			display: inline-block;
-			background: white;
-			color: var(--primary-dark);
-			padding: 0.8rem 2rem;
-			border-radius: 30px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.3s ease;
-		}
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
-		.cta-button:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-		}
+        .video-card:nth-child(1) { animation-delay: 0.1s; }
+        .video-card:nth-child(2) { animation-delay: 0.2s; }
+        .video-card:nth-child(3) { animation-delay: 0.3s; }
+        .video-card:nth-child(4) { animation-delay: 0.4s; }
+        .video-card:nth-child(5) { animation-delay: 0.5s; }
 
-		footer {
-			background: var(--primary-dark);
-			color: white;
-			padding: 3rem 5%;
-			margin-top: 3rem;
-		}
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-		.footer-content {
-			max-width: 1200px;
-			margin: 0 auto;
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 2rem;
-		}
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
 
-		.footer-column h3 {
-			font-size: 1.2rem;
-			margin-bottom: 1.2rem;
-			position: relative;
-			padding-bottom: 10px;
-		}
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
-		.footer-column h3::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 40px;
-			height: 3px;
-			background: var(--accent-green);
-		}
+        .video-info {
+            padding: 25px;
+        }
 
-		.footer-column p, .footer-column a {
-			color: rgba(255,255,255,0.7);
-			margin-bottom: 0.8rem;
-			font-size: 0.95rem;
-			line-height: 1.6;
-		}
+        .video-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
 
-		.footer-column a {
-			display: block;
-			text-decoration: none;
-			transition: color 0.3s ease;
-		}
+        .video-card:hover .video-title {
+            color: #8ab4f8;
+        }
 
-		.footer-column a:hover {
-			color: white;
-		}
+        .video-description {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
 
-		.social-links {
-			display: flex;
-			gap: 1rem;
-			margin-top: 1rem;
-		}
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
 
-		.social-link {
-			width: 36px;
-			height: 36px;
-			border-radius: 50%;
-			background: rgba(255,255,255,0.1);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			transition: all 0.3s ease;
-		}
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-		.social-link:hover {
-			background: var(--accent-green);
-			transform: translateY(-3px);
-		}
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
 
-		.copyright {
-			text-align: center;
-			margin-top: 2rem;
-			padding-top: 2rem;
-			border-top: 1px solid rgba(255,255,255,0.1);
-			font-size: 0.9rem;
-			color: rgba(255,255,255,0.6);
-		}
+        .play-icon::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
+        }
 
-		@media (max-width: 768px) {
-			.video-grid {
-				grid-template-columns: 1fr;
-			}
-			
-			.page-title {
-				font-size: 1.8rem;
-			}
-			
-			.cta-title {
-				font-size: 1.5rem;
-			}
-		}
-	</style>
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Categories */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .category-tab {
+            padding: 10px 25px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .category-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .category-tab.active {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            box-shadow: 0 4px 15px rgba(42, 116, 179, 0.4);
+        }
+
+        /* Search */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(138, 180, 248, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 38, 71, 0.9);
+            padding: 60px 5% 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-blue);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Language Toggle */
+        .en {
+            display: none;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 30px;
+            }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .main-content {
+                padding: 100px 5% 60px;
+            }
+            
+            .category-tabs {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background: rgba(10, 38, 71, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 80px 30px 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .mobile-menu-links li {
+            margin: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-links li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .mobile-menu-links a:hover {
+            color: #8ab4f8;
+            transform: translateX(10px);
+        }
+
+        .mobile-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover::before {
+            transform: translateY(-50%) scale(1);
+        }
+
+        .mobile-language-switcher {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 菜单打开时禁止背景滚动 */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* 移动菜单按钮样式优化 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .mobile-menu-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-	<header>
-		<div class="header-content">
-			
-			<div class="breadcrumb">
-				<a href="#">首页</a> > <a href="#">媒体中心</a> 
-			</div>
-		</div>
-	</header>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="loading-logo">
+    </div>
 
-	<div class="main-container">
-		<h1 class="page-title">环保宣传视频</h1>
-		
-		<div class="intro-text">
-			<p>世界环境保护组织(WEPO)精选了一系列震撼人心的环保宣传视频，通过这些视觉作品，我们希望唤起人们对地球环境的关注，激发保护行动。这些视频涵盖了气候变化、生物多样性、可持续发展等多个环保主题，适合不同年龄段的观众观看。</p>
-		</div>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" class="logo" alt="WEPO Logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
+                <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Projects</a></li>
+                <li><a href="sp.html" class="nav-link zh active">环保视频</a><a href="sp.html" class="nav-link en active">Videos</a></li>
+                <li><a href="zyz.html" class="nav-link zh">志愿者</a><a href="zyz.html" class="nav-link en">Volunteers</a></li>
+                <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
+            </ul>
+        </nav>
+        <div class="language-switcher">
+            <button class="language-btn" id="languageBtn">EN</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    </header>
 
-		<div class="category-tags">
-		
-		</div>
+    <!-- 移动菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
+            <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Projects</a></li>
+            <li><a href="sp.html" class="nav-link zh active">环保视频</a><a href="sp.html" class="nav-link en active">Videos</a></li>
+            <li><a href="zyz.html" class="nav-link zh">志愿者</a><a href="zyz.html" class="nav-link en">Volunteers</a></li>
+            <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
+        </ul>
+        <div class="mobile-language-switcher">
+            <button class="language-btn" id="mobileLanguageBtn">EN</button>
+        </div>
+    </div>
 
-		<div class="video-grid">
-			<!-- Video 1 -->
-			<div class="video-card">
-				<div class="video-container">
-					<iframe src="//player.bilibili.com/player.html?bvid=BV16s4y1M7ab" scrolling="no" allowfullscreen></iframe>
-				</div>
-				<div class="video-info">
-					<h3 class="video-title">环保宣传片</h3>
-					<p class="video-description">这部8分钟的环境保护公益广告宣传片通过震撼的视觉画面，展示了地球面临的严峻环境问题，呼吁人们立即采取行动保护我们共同的家园。</p>
-					<div class="video-meta">
-						<span>时长: 8分钟</span>
-						<span>播放量: 10.5万</span>
-					</div>
-				</div>
-			</div>
+    <!-- 添加遮罩层 -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-			<!-- Video 2 -->
-			<div class="video-card">
-				<div class="video-container">
-					<iframe src="//player.bilibili.com/player.html?bvid=BV19i4y1x7Hn" scrolling="no" allowfullscreen></iframe>
-				</div>
-				<div class="video-info">
-					<h3 class="video-title">大自然在说话</h3>
-					<p class="video-description">这部震撼人心的公益宣传片以大自然的第一人称视角，向人类发出警告："人类需要大自然，大自然不需要人类"。由蒋雯丽、姜文等明星配音。</p>
-					<div class="video-meta">
-						<span>时长: 6分钟</span>
-						<span>播放量: 13.9万</span>
-					</div>
-				</div>
-			</div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1 class="page-title zh">环保视频中心</h1>
+            <h1 class="page-title en">Environmental Videos</h1>
+            <p class="page-subtitle zh">通过震撼的视觉画面展示地球面临的严峻环境问题，呼吁人们立即采取行动保护我们共同的家园</p>
+            <p class="page-subtitle en">Showcasing Earth's pressing environmental issues through compelling visuals, urging immediate action to protect our shared home</p>
+        </div>
 
-			<!-- Video 3 -->
-			<div class="video-card">
-				<div class="video-container">
-					<iframe src="//player.bilibili.com/player.html?bvid=BV1Wr4y1Q7Td" scrolling="no" allowfullscreen></iframe>
-				</div>
-				<div class="video-info">
-					<h3 class="video-title">迁徙</h3>
-					<p class="video-description">这部获奖环保题材动画短片讲述了两只北极熊因全球变暖被迫迁徙的故事，它们将在旅途中遇到棕熊并尝试共同生活。法国学生作品，配乐精良。</p>
-					<div class="video-meta">
-						<span>时长: 3分钟</span>
-						<span>播放量: 2.2万</span>
-					</div>
-				</div>
-			</div>
+        <div class="search-container">
+            <input type="text" class="search-input zh" placeholder="搜索环保视频...">
+            <input type="text" class="search-input en" placeholder="Search environmental videos...">
+            <span class="search-icon">🔍</span>
+        </div>
 
-			<!-- Video 4 -->
-			<div class="video-card">
-				<div class="video-container">
-					<iframe src="//player.bilibili.com/player.html?bvid=BV1kU4y127KL" scrolling="no" allowfullscreen></iframe>
-				</div>
-				<div class="video-info">
-					<h3 class="video-title">The Earth</h3>
-					<p class="video-description">这部4K高清环保宣传片以震撼的航拍画面展示了地球的壮丽景观和脆弱生态，提醒人们珍惜和保护这颗蓝色星球。</p>
-					<div class="video-meta">
-						<span>时长: 2分钟</span>
-						<span>播放量: 11.1万</span>
-					</div>
-				</div>
-			</div>
+        <div class="category-tabs">
+            <button class="category-tab active zh">全部</button>
+            <button class="category-tab en active">All</button>
+            <button class="category-tab zh">气候变化</button>
+            <button class="category-tab en">Climate Change</button>
+            <button class="category-tab zh">生物多样性</button>
+            <button class="category-tab en">Biodiversity</button>
+            <button class="category-tab zh">水资源保护</button>
+            <button class="category-tab en">Water Conservation</button>
+            <button class="category-tab zh">污染防治</button>
+            <button class="category-tab en">Pollution Control</button>
+        </div>
 
-			<!-- Video 5 -->
-			<div class="video-card">
-				<div class="video-container">
-					<iframe src="//player.bilibili.com/player.html?bvid=BV1FV411m7zK" scrolling="no" allowfullscreen></iframe>
-				</div>
-				<div class="video-info">
-					<h3 class="video-title">我的地球</h3>
-					<p class="video-description">《我的地球》MV由李晓青作词作曲，群星演唱。地球是目前宇宙中人类已知存在生命的唯一天体，保护环境，人人有责；爱护地球，从我做起。</p>
-					<div class="video-meta">
-						<span>时长: 4分钟</span>
-						<span>播放量: 1.8万</span>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="video-grid">
+            <!-- Video 1 -->
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="//player.bilibili.com/player.html?bvid=BV1aT4y1P7CX" scrolling="no" allowfullscreen></iframe>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title zh">环保宣传片</h3>
+                    <h3 class="video-title en">Environmental PSA</h3>
+                    <p class="video-description zh">这部8分钟的环境保护公益广告宣传片通过震撼的视觉画面，展示了地球面临的严峻环境问题，呼吁人们立即采取行动保护我们共同的家园。</p>
+                    <p class="video-description en">This 8-minute environmental public service announcement showcases Earth's pressing environmental issues through compelling visuals, urging immediate action to protect our shared home.</p>
+                    <div class="video-meta">
+                        <span class="zh">时长: 8分钟</span>
+                        <span class="en">Duration: 8min</span>
+                        <span class="zh">播放量: 10.5万</span>
+                        <span class="en">Views: 105K</span>
+                    </div>
+                </div>
+            </div>
 
-		<div class="call-to-action">
-			<h2 class="cta-title">加入我们的环保行动</h2>
-			<p class="cta-text">这些视频只是开始，真正的改变需要每个人的参与。加入世界环境保护组织，成为地球守护者的一员，共同为我们的星球创造更美好的未来。</p>
-			<a href="https://wj.qq.com/s2/17731884/9fba/" class="cta-button zh" target="_blank">立即行动</a>
-<a href="https://wj.qq.com/s2/17731884/9fba/" class="cta-button en" target="_blank">Take Action</a>
-		</div>
-	</div>
+            <!-- Video 2 -->
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="//player.bilibili.com/player.html?bvid=BV19i4y1x7Hn" scrolling="no" allowfullscreen></iframe>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title zh">大自然在说话</h3>
+                    <h3 class="video-title en">Nature Is Speaking</h3>
+                    <p class="video-description zh">这部震撼人心的公益宣传片以大自然的第一人称视角，向人类发出警告："人类需要大自然，大自然不需要人类"。由蒋雯丽、姜文等明星配音。</p>
+                    <p class="video-description en">This powerful PSA presents nature's first-person perspective, warning humanity: "Nature doesn't need people. People need nature." Voiced by celebrities including Jiang Wenli and Jiang Wen.</p>
+                    <div class="video-meta">
+                        <span class="zh">时长: 6分钟</span>
+                        <span class="en">Duration: 6min</span>
+                        <span class="zh">播放量: 13.9万</span>
+                        <span class="en">Views: 139K</span>
+                    </div>
+                </div>
+            </div>
 
-	<footer>
-		<div class="footer-content">
-			<div class="footer-column">
-				<h3>关于WEPO</h3>
-				<p>世界环境保护组织(WEPO)是一个非营利性国际环保组织，致力于通过科学研究、政策倡导和公众教育来推动全球环境保护事业。</p>
-				<div class="social-links">
-				
-				</div>
-			</div>
-			<div class="footer-column">
-			
-			</div>
-		<div class="footer-column">
-	<h3>快速链接</h3>
-	<a href="index.html">关于我们</a>
-	<a href="index.html">环保项目</a>
-	<a href="yjbg.html">研究报告</a>
-	<a href="zyz.html">志愿者</a>
-	<a href="index.html">捐赠支持</a>
-</div>
-		</div>
-		<div class="copyright">
-			© 2025 世界环境保护组织(WEPO) 版权所有
-		</div>
-	</footer>
+            <!-- Video 3 -->
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="//player.bilibili.com/player.html?bvid=BV1Wr4y1Q7Td" scrolling="no" allowfullscreen></iframe>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title zh">迁徙</h3>
+                    <h3 class="video-title en">Migration</h3>
+                    <p class="video-description zh">这部获奖环保题材动画短片讲述了两只北极熊因全球变暖被迫迁徙的故事，它们将在旅途中遇到棕熊并尝试共同生活。法国学生作品，配乐精良。</p>
+                    <p class="video-description en">This award-winning animated short tells the story of two polar bears forced to migrate due to global warming, encountering brown bears along their journey. A French student production with excellent soundtrack.</p>
+                    <div class="video-meta">
+                        <span class="zh">时长: 3分钟</span>
+                        <span class="en">Duration: 3min</span>
+                        <span class="zh">播放量: 2.2万</span>
+                        <span class="en">Views: 22K</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="//player.bilibili.com/player.html?bvid=BV1kU4y127KL" scrolling="no" allowfullscreen></iframe>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title zh">The Earth</h3>
+                    <h3 class="video-title en">The Earth</h3>
+                    <p class="video-description zh">这部4K高清环保宣传片以震撼的航拍画面展示了地球的壮丽景观和脆弱生态，提醒人们珍惜和保护这颗蓝色星球。</p>
+                    <p class="video-description en">This 4K HD environmental PSA showcases Earth's magnificent landscapes and fragile ecosystems through stunning aerial footage, reminding us to cherish and protect our blue planet.</p>
+                    <div class="video-meta">
+                        <span class="zh">时长: 2分钟</span>
+                        <span class="en">Duration: 2min</span>
+                        <span class="zh">播放量: 11.1万</span>
+                        <span class="en">Views: 111K</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe src="//player.bilibili.com/player.html?bvid=BV1FV411m7zK" scrolling="no" allowfullscreen></iframe>
+                    <div class="play-overlay">
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title zh">我的地球</h3>
+                    <h3 class="video-title en">My Earth</h3>
+                    <p class="video-description zh">《我的地球》MV由李晓青作词作曲，群星演唱。地球是目前宇宙中人类已知存在生命的唯一天体，保护环境，人人有责；爱护地球，从我做起。</p>
+                    <p class="video-description en">"My Earth" MV, composed by Li Xiaoqing and performed by celebrities. Earth is the only known celestial body with life in the universe. Protecting the environment is everyone's responsibility; caring for Earth starts with me.</p>
+                    <div class="video-meta">
+                        <span class="zh">时长: 4分钟</span>
+                        <span class="en">Duration: 4min</span>
+                        <span class="zh">播放量: 1.8万</span>
+                        <span class="en">Views: 18K</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
+                <p class="zh">世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。</p>
+                <p class="en">World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.</p>
+                <div class="social-links">
+                    <a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank">T</a>
+                    <a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank">K</a>
+                    <a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank">W</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3 class="zh">快速链接</h3>
+                <h3 class="en">Quick Links</h3>
+                <ul>
+                    <li><a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a></li>
+                    <li><a href="hbxm.html" class="zh">环保项目</a><a href="hbxm.html" class="en">Projects</a></li>
+                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
+                    <li><a href="zyz.html" class="zh">志愿者</a><a href="zyz.html" class="en">Volunteers</a></li>
+                    <li><a href="jz.html" class="zh">捐赠支持</a><a href="jz.html" class="en">Donate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3 class="zh">组织架构</h3>
+                <h3 class="en">Organization</h3>
+                <ul>
+                    <li><a href="crlsh.html" class="zh">理事会</a><a href="crlsh.html" class="en">Council</a></li>
+                    <li><a href="zc.html" class="zh">组织章程</a><a href="zc.html" class="en">Charter</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3 class="zh">资源中心</h3>
+                <h3 class="en">Resources</h3>
+                <ul>
+                    <li><a href="ndbg.html" class="zh">年度报告</a><a href="ndbg.html" class="en">Annual Reports</a></li>
+                    <li><a href="yjbg.html" class="zh">研究报告</a><a href="yjbg.html" class="en">Research Papers</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="zh">© 2025 世界环境保护组织. 版权所有.</p>
+            <p class="en">© 2025 World Environmental Protection Organization. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 500);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const body = document.body;
+
+        // 打开菜单
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            body.classList.add('no-scroll');
+        }
+
+        // 关闭菜单
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            body.classList.remove('no-scroll');
+        }
+
+        // 事件监听
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+
+        // 点击菜单链接后关闭菜单
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // 防止菜单内容点击触发 overlay 关闭事件
+        mobileMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // ESC键关闭菜单
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Language Toggle
+        const languageBtn = document.getElementById('languageBtn');
+        const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+        let currentLanguage = 'zh';
+
+        function toggleLanguage() {
+            const zhElements = document.querySelectorAll('.zh');
+            const enElements = document.querySelectorAll('.en');
+            
+            if (currentLanguage === 'zh') {
+                zhElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                languageBtn.textContent = '中文';
+                mobileLanguageBtn.textContent = '中文';
+                currentLanguage = 'en';
+            } else {
+                zhElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                languageBtn.textContent = 'EN';
+                mobileLanguageBtn.textContent = 'EN';
+                currentLanguage = 'zh';
+            }
+        }
+
+        languageBtn.addEventListener('click', toggleLanguage);
+        mobileLanguageBtn.addEventListener('click', toggleLanguage);
+
+        // Initially hide English content
+        document.querySelectorAll('.en').forEach(el => el.style.display = 'none');
+
+        // Scroll Animation
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Trigger on initial load
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Video Card Hover Effect
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+            });
+        });
+
+        // Category Tab Switching
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.category-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Here you would typically filter videos based on category
+                // For demo purposes, we'll just log the category
+                console.log('Selected category:', this.textContent.trim());
+            });
+        });
+
+        // Search Functionality
+        document.querySelectorAll('.search-input').forEach(input => {
+            input.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    // Here you would typically search videos
+                    // For demo purposes, we'll just log the search term
+                    console.log('Searching for:', this.value);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
