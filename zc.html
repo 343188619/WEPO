@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEPO - 组织章程</title>
+    <style>
+        :root {
+            --primary-dark: #0a2647;
+            --primary-medium: #144272;
+            --primary-light: #205295;
+            --accent-blue: #2C74B3;
+            --accent-purple: #6a3093;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --transition-time: 0.5s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            animation: loading 2s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 38, 71, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-100%);
+            animation: slideDown 1s ease-out 1s forwards;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #8ab4f8;
+        }
+
+        .language-switcher {
+            margin-left: 30px;
+        }
+
+        .language-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 50%, rgba(44, 116, 179, 0.2), transparent 60%);
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            z-index: 1;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, #8ab4f8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Constitution Section */
+        .constitution-section {
+            padding: 100px 10%;
+            position: relative;
+            background: rgba(10, 38, 71, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .constitution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .constitution-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .constitution-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+
+        .chapter {
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .chapter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
+        }
+
+        .chapter-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #8ab4f8;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .chapter-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .article {
+            margin-bottom: 30px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .article:hover .article-number {
+            transform: scale(1.2);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .article-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #8ab4f8;
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content p {
+            margin-bottom: 15px;
+        }
+
+        .article-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .article-content li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 38, 71, 0.9);
+            padding: 60px 10% 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            transform: translateY(-5px);
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-blue);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .constitution-title {
+                font-size: 2.2rem;
+            }
+            
+            .chapter-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .constitution-title {
+                font-size: 2rem;
+            }
+            
+            .chapter {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .constitution-section {
+                padding: 70px 5%;
+            }
+            
+            .chapter-title {
+                font-size: 1.4rem;
+            }
+            
+            .article-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background: rgba(10, 38, 71, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 80px 30px 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .mobile-menu-links li {
+            margin: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-links li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .mobile-menu-links a:hover {
+            color: #8ab4f8;
+            transform: translateX(10px);
+        }
+
+        .mobile-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover::before {
+            transform: translateY(-50%) scale(1);
+        }
+
+        .mobile-language-switcher {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 菜单打开时禁止背景滚动 */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* 移动菜单按钮样式优化 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .mobile-menu-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Language Toggle */
+        .en {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" class="logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
+                <li><a href="index.html#about" class="nav-link zh">关于我们</a><a href="index.html#about" class="nav-link en">About</a></li>
+                <li><a href="index.html#mission" class="nav-link zh">使命愿景</a><a href="index.html#mission" class="nav-link en">Mission</a></li>
+                <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Programs</a></li>
+                <li><a href="index.html#partners" class="nav-link zh">合作伙伴</a><a href="index.html#partners" class="nav-link en">Partners</a></li>
+                <li><a href="index.html#contact" class="nav-link zh">联系我们</a><a href="index.html#contact" class="nav-link en">Contact</a></li>
+                <li><a href="sp.html" class="nav-link zh">环保视频</a><a href="sp.html" class="nav-link en">Videos</a></li>
+                <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
+            </ul>
+        </nav>
+        <div class="language-switcher">
+            <button class="language-btn" id="languageBtn">EN</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    </header>
+
+    <!-- 移动菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
+            <li><a href="index.html#about" class="nav-link zh">关于我们</a><a href="index.html#about" class="nav-link en">About</a></li>
+            <li><a href="index.html#mission" class="nav-link zh">使命愿景</a><a href="index.html#mission" class="nav-link en">Mission</a></li>
+            <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Programs</a></li>
+            <li><a href="index.html#partners" class="nav-link zh">合作伙伴</a><a href="index.html#partners" class="nav-link en">Partners</a></li>
+            <li><a href="index.html#contact" class="nav-link zh">联系我们</a><a href="index.html#contact" class="nav-link en">Contact</a></li>
+            <li><a href="sp.html" class="nav-link zh">环保视频</a><a href="sp.html" class="nav-link en">Videos</a></li>
+            <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
+        </ul>
+        <div class="mobile-language-switcher">
+            <button class="language-btn" id="mobileLanguageBtn">EN</button>
+        </div>
+    </div>
+
+    <!-- 添加遮罩层 -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="zh">组织章程</h1>
+            <h1 class="en">Constitution</h1>
+            <p class="zh">世界环境保护组织的根本制度文件，规定了组织的宗旨、结构、运作方式和成员权利义务</p>
+            <p class="en">The fundamental document of WEPO, defining the organization's purpose, structure, operations, and members' rights and obligations</p>
+        </div>
+    </section>
+
+    <!-- Constitution Section -->
+    <section class="constitution-section">
+        <div class="constitution-container">
+            <h2 class="constitution-title zh">世界环境保护组织章程</h2>
+            <h2 class="constitution-title en">Constitution of World Environmental Protection Organization</h2>
+            
+            <!-- 第一章 -->
+            <div class="chapter animate-on-scroll">
+                <h3 class="chapter-title zh">第一章 总则</h3>
+                <h3 class="chapter-title en">Chapter 1 General Provisions</h3>
+                
+                <div class="article">
+                    <div class="article-number">1</div>
+                    <h4 class="article-title zh">名称与性质</h4>
+                    <h4 class="article-title en">Name and Nature</h4>
+                    <div class="article-content">
+                        <p class="zh">本组织名称为"世界环境保护组织"（World Environmental Protection Organization，简称WEPO），是一个非政府、非营利性的国际环保组织。</p>
+                        <p class="en">The organization shall be named "World Environmental Protection Organization" (abbreviated as WEPO), a non-governmental, non-profit international environmental organization.</p>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">2</div>
+                    <h4 class="article-title zh">宗旨</h4>
+                    <h4 class="article-title en">Purpose</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO的宗旨是通过科学研究、政策倡导和公众教育，推动全球环境保护事业，应对气候变化，保护生物多样性，促进可持续发展。</p>
+                        <p class="en">The purpose of WEPO is to promote global environmental protection through scientific research, policy advocacy, and public education, addressing climate change, protecting biodiversity, and fostering sustainable development.</p>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">3</div>
+                    <h4 class="article-title zh">总部</h4>
+                    <h4 class="article-title en">Headquarters</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO总部设在中国重庆市，可在全球各地设立分支机构或代表处。</p>
+                        <p class="en">The headquarters of WEPO is located in Chongqing, China, and may establish branches or representative offices worldwide.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第二章 -->
+            <div class="chapter animate-on-scroll">
+                <h3 class="chapter-title zh">第二章 会员</h3>
+                <h3 class="chapter-title en">Chapter 2 Membership</h3>
+                
+                <div class="article">
+                    <div class="article-number">4</div>
+                    <h4 class="article-title zh">会员资格</h4>
+                    <h4 class="article-title en">Membership Eligibility</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO会员分为个人会员和团体会员：</p>
+                        <p class="en">WEPO membership consists of individual members and institutional members:</p>
+                        <ul>
+                            <li class="zh">个人会员：年满18周岁，认同本组织宗旨，愿意为环境保护事业贡献力量的自然人</li>
+                            <li class="en">Individual members: Natural persons aged 18 or above who endorse the organization's purpose and are willing to contribute to environmental protection</li>
+                            <li class="zh">团体会员：依法成立的法人或其他组织，认同本组织宗旨，愿意参与环境保护活动</li>
+                            <li class="en">Institutional members: Legally established legal entities or other organizations that endorse the organization's purpose and are willing to participate in environmental protection activities</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">5</div>
+                    <h4 class="article-title zh">会员权利</h4>
+                    <h4 class="article-title en">Membership Rights</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO会员享有以下权利：</p>
+                        <p class="en">WEPO members enjoy the following rights:</p>
+                        <ul>
+                            <li class="zh">参与本组织的各项活动</li>
+                            <li class="en">Participate in all activities of the organization</li>
+                            <li class="zh">获得本组织提供的服务和信息</li>
+                            <li class="en">Receive services and information provided by the organization</li>
+                            <li class="zh">对本组织工作提出建议和意见</li>
+                            <li class="en">Provide suggestions and opinions on the organization's work</li>
+                            <li class="zh">选举和被选举为理事会成员</li>
+                            <li class="en">Elect and be elected as members of the Council</li>
+                            <li class="zh">自愿退会的权利</li>
+                            <li class="en">The right to voluntarily withdraw from membership</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">6</div>
+                    <h4 class="article-title zh">会员义务</h4>
+                    <h4 class="article-title en">Membership Obligations</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO会员应履行以下义务：</p>
+                        <p class="en">WEPO members shall fulfill the following obligations:</p>
+                        <ul>
+                            <li class="zh">遵守本组织章程和各项规章制度</li>
+                            <li class="en">Comply with the organization's constitution and regulations</li>
+                            <li class="zh">维护本组织的声誉和利益</li>
+                            <li class="en">Safeguard the reputation and interests of the organization</li>
+                            <li class="zh">积极参与本组织的活动</li>
+                            <li class="en">Actively participate in the organization's activities</li>
+                            <li class="zh">按时缴纳会费</li>
+                            <li class="en">Pay membership fees on time</li>
+                            <li class="zh">履行理事会规定的其他义务</li>
+                            <li class="en">Fulfill other obligations stipulated by the Council</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第三章 -->
+            <div class="chapter animate-on-scroll">
+                <h3 class="chapter-title zh">第三章 组织机构</h3>
+                <h3 class="chapter-title en">Chapter 3 Organizational Structure</h3>
+                
+                <div class="article">
+                    <div class="article-number">7</div>
+                    <h4 class="article-title zh">会员大会</h4>
+                    <h4 class="article-title en">General Assembly</h4>
+                    <div class="article-content">
+                        <p class="zh">会员大会是WEPO的最高权力机构，由全体会员组成，每年召开一次会议。会员大会的职责包括：</p>
+                        <p class="en">The General Assembly is the supreme authority of WEPO, composed of all members, and convenes once a year. The responsibilities of the General Assembly include:</p>
+                        <ul>
+                            <li class="zh">制定和修改章程</li>
+                            <li class="en">Formulating and amending the constitution</li>
+                            <li class="zh">选举和罢免理事会成员</li>
+                            <li class="en">Electing and dismissing Council members</li>
+                            <li class="zh">审议理事会工作报告和财务报告</li>
+                            <li class="en">Reviewing the Council's work reports and financial reports</li>
+                            <li class="zh">决定本组织的重大事项</li>
+                            <li class="en">Deciding on major matters of the organization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">8</div>
+                    <h4 class="article-title zh">理事会</h4>
+                    <h4 class="article-title en">Council</h4>
+                    <div class="article-content">
+                        <p class="zh">理事会是WEPO的执行机构，由会员大会选举产生，任期三年，可连选连任。理事会设主席一人，副主席若干人，秘书长一人。理事会的主要职责包括：</p>
+                        <p class="en">The Council is the executive body of WEPO, elected by the General Assembly for a term of three years and eligible for re-election. The Council consists of one Chairperson, several Vice-Chairpersons, and one Secretary-General. The main responsibilities of the Council include:</p>
+                        <ul>
+                            <li class="zh">执行会员大会的决议</li>
+                            <li class="en">Implementing resolutions of the General Assembly</li>
+                            <li class="zh">制定本组织的工作计划和预算</li>
+                            <li class="en">Formulating the organization's work plans and budgets</li>
+                            <li class="zh">管理本组织的日常事务</li>
+                            <li class="en">Managing the organization's daily affairs</li>
+                            <li class="zh">决定分支机构的设立和撤销</li>
+                            <li class="en">Deciding on the establishment and dissolution of branches</li>
+                            <li class="zh">任命和罢免秘书长</li>
+                            <li class="en">Appointing and dismissing the Secretary-General</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">9</div>
+                    <h4 class="article-title zh">秘书处</h4>
+                    <h4 class="article-title en">Secretariat</h4>
+                    <div class="article-content">
+                        <p class="zh">秘书处是WEPO的常设办事机构，由秘书长领导，负责处理本组织的日常事务。秘书处的主要职责包括：</p>
+                        <p class="en">The Secretariat is the permanent administrative body of WEPO, led by the Secretary-General, responsible for handling the organization's daily affairs. The main responsibilities of the Secretariat include:</p>
+                        <ul>
+                            <li class="zh">执行理事会的决议</li>
+                            <li class="en">Implementing resolutions of the Council</li>
+                            <li class="zh">协调各部门和各分支机构的工作</li>
+                            <li class="en">Coordinating the work of various departments and branches</li>
+                            <li class="zh">管理本组织的财务和资产</li>
+                            <li class="en">Managing the organization's finances and assets</li>
+                            <li class="zh">组织各类活动和项目</li>
+                            <li class="en">Organizing various activities and projects</li>
+                            <li class="zh">处理会员事务</li>
+                            <li class="en">Handling membership affairs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">10</div>
+                    <h4 class="article-title zh">专业委员会</h4>
+                    <h4 class="article-title en">Special Committees</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO可根据工作需要设立专业委员会，如科学委员会、政策委员会、教育委员会等。各专业委员会由相关领域的专家组成，负责提供专业咨询和建议。</p>
+                        <p class="en">WEPO may establish Special Committees as needed, such as the Science Committee, Policy Committee, Education Committee, etc. Each Special Committee consists of experts in relevant fields, responsible for providing professional advice and recommendations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第四章 -->
+            <div class="chapter animate-on-scroll">
+                <h3 class="chapter-title zh">第四章 财务管理</h3>
+                <h3 class="chapter-title en">Chapter 4 Financial Management</h3>
+                
+                <div class="article">
+                    <div class="article-number">11</div>
+                    <h4 class="article-title zh">资金来源</h4>
+                    <h4 class="article-title en">Funding Sources</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO的资金来源包括：</p>
+                        <p class="en">WEPO's funding sources include:</p>
+                        <ul>
+                            <li class="zh">会员会费</li>
+                            <li class="en">Membership fees</li>
+                            <li class="zh">社会捐赠</li>
+                            <li class="en">Social donations</li>
+                            <li class="zh">政府资助</li>
+                            <li class="en">Government grants</li>
+                            <li class="zh">项目收入</li>
+                            <li class="en">Project income</li>
+                            <li class="zh">其他合法收入</li>
+                            <li class="en">Other lawful income</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">12</div>
+                    <h4 class="article-title zh">资金使用</h4>
+                    <h4 class="article-title en">Use of Funds</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO的资金必须用于本章程规定的业务范围和事业发展，不得在会员中分配。本组织的资产管理必须执行国家规定的财务管理制度，接受会员大会和财政部门的监督。</p>
+                        <p class="en">WEPO's funds must be used for the business scope and development as stipulated in this constitution and shall not be distributed among members. The organization's asset management must comply with the financial management system stipulated by the state and be subject to supervision by the General Assembly and financial departments.</p>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">13</div>
+                    <h4 class="article-title zh">财务监督</h4>
+                    <h4 class="article-title en">Financial Supervision</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO设立监事会，负责监督本组织的财务活动。监事会由会员大会选举产生，任期三年。监事会的职责包括：</p>
+                        <p class="en">WEPO establishes a Supervisory Board responsible for supervising the organization's financial activities. The Supervisory Board is elected by the General Assembly for a term of three years. The responsibilities of the Supervisory Board include:</p>
+                        <ul>
+                            <li class="zh">监督理事会和秘书处的财务活动</li>
+                            <li class="en">Supervising the financial activities of the Council and Secretariat</li>
+                            <li class="zh">审查本组织的财务报告</li>
+                            <li class="en">Reviewing the organization's financial reports</li>
+                            <li class="zh">向会员大会报告监督情况</li>
+                            <li class="en">Reporting supervision results to the General Assembly</li>
+                            <li class="zh">提出改进财务管理的建议</li>
+                            <li class="en">Providing recommendations for improving financial management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第五章 -->
+            <div class="chapter animate-on-scroll">
+                <h3 class="chapter-title zh">第五章 章程修改与终止</h3>
+                <h3 class="chapter-title en">Chapter 5 Amendments and Termination</h3>
+                
+                <div class="article">
+                    <div class="article-number">14</div>
+                    <h4 class="article-title zh">章程修改</h4>
+                    <h4 class="article-title en">Amendments</h4>
+                    <div class="article-content">
+                        <p class="zh">本章程的修改须经会员大会三分之二以上会员表决通过，并报相关部门备案后生效。</p>
+                        <p class="en">Amendments to this constitution must be approved by more than two-thirds of the members at the General Assembly and shall take effect after being filed with relevant authorities.</p>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">15</div>
+                    <h4 class="article-title zh">组织终止</h4>
+                    <h4 class="article-title en">Termination</h4>
+                    <div class="article-content">
+                        <p class="zh">WEPO完成宗旨或自行解散或由于分立、合并等原因需要注销的，由理事会提出终止动议，经会员大会表决通过，并报相关部门审查同意后，按国家有关规定处理剩余财产。</p>
+                        <p class="en">If WEPO completes its purpose, voluntarily dissolves, or needs to be terminated due to division, merger, or other reasons, the Council shall propose a termination motion, which shall be approved by the General Assembly and reviewed and agreed upon by relevant authorities. The remaining assets shall be handled according to relevant national regulations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第六章 -->
+            <div class="chapter animate-on-scroll">
+                <h3 class="chapter-title zh">第六章 附则</h3>
+                <h3 class="chapter-title en">Chapter 6 Supplementary Provisions</h3>
+                
+                <div class="article">
+                    <div class="article-number">16</div>
+                    <h4 class="article-title zh">生效日期</h4>
+                    <h4 class="article-title en">Effective Date</h4>
+                    <div class="article-content">
+                        <p class="zh">本章程自2021年5月22日起生效。</p>
+                        <p class="en">This constitution shall take effect from May 22, 2021.</p>
+                    </div>
+                </div>
+                
+                <div class="article">
+                    <div class="article-number">17</div>
+                    <h4 class="article-title zh">解释权</h4>
+                    <h4 class="article-title en">Interpretation</h4>
+                    <div class="article-content">
+                        <p class="zh">本章程的解释权属于WEPO理事会。</p>
+                        <p class="en">The interpretation of this constitution belongs to the WEPO Council.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
+                <p class="zh">世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。</p>
+                <p class="en">World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.</p>
+                <div class="social-links">
+                    <a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank">T</a>
+                    <a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank">K</a>
+                    <a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank">W</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3 class="zh">快速链接</h3>
+                <h3 class="en">Quick Links</h3>
+                <ul>
+                    <li><a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a></li>
+                    <li><a href="index.html#about" class="zh">关于我们</a><a href="index.html#about" class="en">About</a></li>
+                    <li><a href="index.html#mission" class="zh">使命愿景</a><a href="index.html#mission" class="en">Mission</a></li>
+                    <li><a href="hbxm.html" class="zh">环保项目</a><a href="hbxm.html" class="en">Programs</a></li>
+                    <li><a href="index.html#partners" class="zh">合作伙伴</a><a href="index.html#partners" class="en">Partners</a></li>
+                    <li><a href="index.html#contact" class="zh">联系我们</a><a href="index.html#contact" class="en">Contact</a></li>
+                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
+                    <li><a href="jz.html" class="zh">捐赠支持</a><a href="jz.html" class="en">Donate</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3 class="zh">组织架构</h3>
+                <h3 class="en">Organization</h3>
+                <ul>
+                    <li><a href="crlsh.html" class="zh">理事会</a><a href="crlsh.html" class="en">Council</a></li>
+                    <li><a href="zyz.html" class="zh">志愿者网络</a><a href="zyz.html" class="en">Volunteers</a></li>
+                    <li><a href="zc.html" class="zh">组织章程</a><a href="zc.html" class="en">Constitution</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3 class="zh">资源中心</h3>
+                <h3 class="en">Resources</h3>
+                <ul>
+                    <li><a href="ndbg.html" class="zh">年度报告</a><a href="ndbg.html" class="en">Annual Reports</a></li>
+                    <li><a href="yjbg.html" class="zh">研究报告</a><a href="yjbg.html" class="en">Research Papers</a></li>
+                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="zh">© 2021-2025 世界环境保护组织 版权所有</p>
+            <p class="en">© 2021-2025 World Environmental Protection Organization. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 500);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const body = document.body;
+
+        // 打开菜单
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            body.classList.add('no-scroll');
+        }
+
+        // 关闭菜单
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            body.classList.remove('no-scroll');
+        }
+
+        // 事件监听
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+
+        // 点击菜单链接后关闭菜单
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // 防止菜单内容点击触发 overlay 关闭事件
+        mobileMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // ESC键关闭菜单
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Language Toggle
+        const languageBtn = document.getElementById('languageBtn');
+        const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
+        let currentLanguage = 'zh';
+
+        function toggleLanguage() {
+            const zhElements = document.querySelectorAll('.zh');
+            const enElements = document.querySelectorAll('.en');
+            
+            if (currentLanguage === 'zh') {
+                zhElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                languageBtn.textContent = '中文';
+                mobileLanguageBtn.textContent = '中文';
+                currentLanguage = 'en';
+            } else {
+                zhElements.forEach(el => el.style.display = 'block');
+                enElements.forEach(el => el.style.display = 'none');
+                languageBtn.textContent = 'EN';
+                mobileLanguageBtn.textContent = 'EN';
+                currentLanguage = 'zh';
+            }
+        }
+
+        languageBtn.addEventListener('click', toggleLanguage);
+        mobileLanguageBtn.addEventListener('click', toggleLanguage);
+
+        // Initially hide English content
+        document.querySelectorAll('.en').forEach(el => el.style.display = 'none');
+
+        // Scroll Animation
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Trigger on initial load
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Logo Change Functionality
+        function updateLogo(newLogoUrl) {
+            document.querySelector('.logo').src = newLogoUrl;
+            document.querySelector('.footer-logo').src = newLogoUrl;
+        }
+    </script>
+</body>
+</html>
