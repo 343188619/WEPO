@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEPO - 年度报告</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>研究报告 | WEPO - 世界环境保护组织</title>
     <style>
         :root {
             --primary-dark: #0a2647;
@@ -12,7 +12,6 @@
             --primary-light: #205295;
             --accent-blue: #2C74B3;
             --accent-purple: #6a3093;
-            --accent-light: #8AB4F8;
             --text-light: #f8f9fa;
             --text-dark: #212529;
             --transition-time: 0.5s;
@@ -43,18 +42,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             z-index: 9999;
             transition: opacity 0.5s ease;
-        }
-
-        .loading-content {
-            text-align: center;
         }
 
         .loading-logo {
             width: 150px;
             margin-bottom: 30px;
-            animation: pulse 2s infinite;
+            animation: pulse 2s infinite ease-in-out;
         }
 
         @keyframes pulse {
@@ -64,24 +60,32 @@
         }
 
         .loading-bar {
-            width: 300px;
+            width: 200px;
             height: 4px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 2px;
             overflow: hidden;
-            margin: 0 auto;
+            position: relative;
         }
 
         .loading-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            animation: loading 2s ease-in-out forwards;
+            animation: loading 0.2s ease-in-out forwards;
         }
 
         @keyframes loading {
             0% { width: 0%; }
             100% { width: 100%; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Header */
@@ -156,7 +160,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--accent-light);
+            color: #8ab4f8;
         }
 
         .language-switcher {
@@ -188,8 +192,8 @@
         }
 
         /* Hero Section */
-        .report-hero {
-            height: 70vh;
+        .research-hero {
+            height: 60vh;
             display: flex;
             align-items: center;
             padding: 0 10%;
@@ -198,7 +202,7 @@
             margin-top: 80px;
         }
 
-        .report-hero::before {
+        .research-hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -208,7 +212,7 @@
             background: radial-gradient(circle at 70% 50%, rgba(44, 116, 179, 0.2), transparent 60%);
         }
 
-        .report-hero-content {
+        .research-hero-content {
             max-width: 800px;
             z-index: 1;
             transform: translateY(50px);
@@ -221,7 +225,7 @@
             100% { transform: translateY(0); opacity: 1; }
         }
 
-        .report-hero h1 {
+        .research-hero h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
             background: linear-gradient(90deg, #fff, #8ab4f8);
@@ -231,71 +235,14 @@
             line-height: 1.2;
         }
 
-        .report-hero p {
+        .research-hero p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
         }
 
-        .report-hero-btns {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            box-shadow: 0 4px 15px rgba(42, 116, 179, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(42, 116, 179, 0.6);
-        }
-
-        .btn-secondary {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .report-hero-image {
-            position: absolute;
-            right: 10%;
-            width: 40%;
-            max-width: 600px;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: fadeInRight 1s ease-out 1s forwards, float 6s ease-in-out 4.2s infinite;
-        }
-
-        @keyframes fadeInRight {
-            0% { opacity: 0; transform: translateX(50px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-
-        /* Report Section */
-        .report-section {
+        /* Research Section */
+        .research-section {
             padding: 100px 10%;
             position: relative;
             background: rgba(10, 38, 71, 0.5);
@@ -321,170 +268,48 @@
             background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
         }
 
-        .report-timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .report-timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
-        }
-
-        .timeline-container {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .timeline-container.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -17px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border: 4px solid var(--primary-dark);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .left {
-            left: 0;
-        }
-
-        .right {
-            left: 50%;
-        }
-
-        .right::after {
-            left: -16px;
-        }
-
-        .timeline-content {
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            position: relative;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .timeline-year {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .timeline-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--accent-light);
-        }
-
-        .timeline-text {
-            margin-bottom: 15px;
-        }
-
-        .timeline-stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .stat-badge {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .stat-badge i {
-            color: var(--accent-blue);
-        }
-
-        /* Report Highlights */
-        .highlights-grid {
+        .research-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
         }
 
-        .highlight-card {
+        .research-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            position: relative;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .highlight-card.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .highlight-card:hover {
+        .research-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .highlight-image {
+        .research-image {
             height: 200px;
             overflow: hidden;
             position: relative;
         }
 
-        .highlight-image img {
+        .research-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .highlight-card:hover .highlight-image img {
+        .research-card:hover .research-image img {
             transform: scale(1.1);
         }
 
-        .highlight-badge {
+        .research-badge {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -494,99 +319,234 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .highlight-content {
+        .research-content {
             padding: 25px;
-        }
-
-        .highlight-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .highlight-stats {
+            flex: 1;
             display: flex;
-            gap: 15px;
+            flex-direction: column;
+        }
+
+        .research-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #8ab4f8;
+        }
+
+        .research-content p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+            flex: 1;
+        }
+
+        .research-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .research-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
             margin-top: 15px;
-            flex-wrap: wrap;
+            align-self: flex-start;
         }
 
-        /* Report Download */
-        .download-section {
-            background: linear-gradient(135deg, rgba(10, 38, 71, 0.8), rgba(32, 82, 149, 0.8));
-            padding: 100px 10%;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .research-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 116, 179, 0.4);
         }
 
-        .download-section::before {
-            content: '';
-            position: absolute;
+        /* Research Detail Modal */
+        .research-modal {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        .download-cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .download-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 300px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .download-card.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .download-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .download-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 50%;
+            z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 25px;
-            font-size: 30px;
-            color: white;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        .download-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--accent-light);
+        .research-modal.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .download-card p {
-            margin-bottom: 25px;
+        .modal-content {
+            background: rgba(10, 38, 71, 0.95);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .research-modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #8ab4f8;
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
             opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            line-height: 1.8;
+        }
+
+        .modal-body h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: #8ab4f8;
+        }
+
+        .modal-body p {
+            margin-bottom: 20px;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-body li {
+            margin-bottom: 10px;
+        }
+
+        .modal-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 116, 179, 0.4);
+        }
+
+        /* Filter Section */
+        .research-filter {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #8ab4f8;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
         }
 
         /* Footer */
@@ -688,84 +648,36 @@
             transform: translateY(0);
         }
 
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .report-hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .report-hero-image {
-                position: relative;
-                right: auto;
-                width: 100%;
-                max-width: 100%;
-                margin-top: 50px;
-            }
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .report-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .report-hero-btns {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-
-            /* Timeline */
-            .report-timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-container {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-container::after {
-                left: 15px;
-            }
-            
-            .left::after, .right::after {
-                left: 15px;
-            }
-            
-            .right {
-                left: 0%;
-            }
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        @media (max-width: 576px) {
-            .report-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .report-hero p {
-                font-size: 1rem;
-            }
-            
-            .report-section {
-                padding: 70px 5%;
-            }
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         /* Mobile Menu */
@@ -890,105 +802,99 @@
             text-align: center;
         }
 
-        /* 菜单打开时禁止背景滚动 */
-        body.no-scroll {
-            overflow: hidden;
-        }
-
-        /* 移动菜单按钮样式优化 */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 24px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .mobile-menu-btn:hover {
-                background: rgba(255, 255, 255, 0.1);
-            }
-            
-            .nav-links {
-                display: none;
-            }
-        }
-
         /* Language Toggle */
         .en {
             display: none;
         }
 
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            z-index: 999;
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .research-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .research-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
         }
 
-        .scroll-top.active {
-            opacity: 1;
-            visibility: visible;
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .research-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+            
+            .modal-image {
+                height: 250px;
+            }
         }
 
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        @media (max-width: 576px) {
+            .research-hero {
+                height: 70vh;
+                margin-top: 60px;
+            }
+            
+            .research-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .research-hero p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 70px 5%;
+            }
+            
+            .research-card {
+                height: auto;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="loading-logo">
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="loading-logo" id="loadingLogo">
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
         </div>
     </div>
 
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <a href="index.html">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-            </a>
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo" id="mainLogo">
         </div>
         <nav>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
-                <li><a href="ndbg.html" class="nav-link zh active">年度报告</a><a href="ndbg.html" class="nav-link en active">Annual Report</a></li>
-                <li><a href="yjbg.html" class="nav-link zh">研究报告</a><a href="yjbg.html" class="nav-link en">Research</a></li>
-                <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Projects</a></li>
-                <li><a href="zyz.html" class="nav-link zh">志愿者</a><a href="zyz.html" class="nav-link en">Volunteers</a></li>
-                <li><a href="crlsh.html" class="nav-link zh">理事会</a><a href="crlsh.html" class="nav-link en">Council</a></li>
+                <li><a href="index.html#about" class="nav-link zh">关于我们</a><a href="index.html#about" class="nav-link en">About</a></li>
+                <li><a href="index.html#mission" class="nav-link zh">使命愿景</a><a href="index.html#mission" class="nav-link en">Mission</a></li>
+                <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Programs</a></li>
+                <li><a href="index.html#partners" class="nav-link zh">合作伙伴</a><a href="index.html#partners" class="nav-link en">Partners</a></li>
+                <li><a href="index.html#contact" class="nav-link zh">联系我们</a><a href="index.html#contact" class="nav-link en">Contact</a></li>
                 <li><a href="sp.html" class="nav-link zh">环保视频</a><a href="sp.html" class="nav-link en">Videos</a></li>
                 <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
             </ul>
@@ -1004,11 +910,11 @@
         <button class="mobile-menu-close" id="mobileMenuClose">×</button>
         <ul class="mobile-menu-links">
             <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
-            <li><a href="ndbg.html" class="nav-link zh active">年度报告</a><a href="ndbg.html" class="nav-link en active">Annual Report</a></li>
-            <li><a href="yjbg.html" class="nav-link zh">研究报告</a><a href="yjbg.html" class="nav-link en">Research</a></li>
-            <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Projects</a></li>
-            <li><a href="zyz.html" class="nav-link zh">志愿者</a><a href="zyz.html" class="nav-link en">Volunteers</a></li>
-            <li><a href="crlsh.html" class="nav-link zh">理事会</a><a href="crlsh.html" class="nav-link en">Council</a></li>
+            <li><a href="index.html#about" class="nav-link zh">关于我们</a><a href="index.html#about" class="nav-link en">About</a></li>
+            <li><a href="index.html#mission" class="nav-link zh">使命愿景</a><a href="index.html#mission" class="nav-link en">Mission</a></li>
+            <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Programs</a></li>
+            <li><a href="index.html#partners" class="nav-link zh">合作伙伴</a><a href="index.html#partners" class="nav-link en">Partners</a></li>
+            <li><a href="index.html#contact" class="nav-link zh">联系我们</a><a href="index.html#contact" class="nav-link en">Contact</a></li>
             <li><a href="sp.html" class="nav-link zh">环保视频</a><a href="sp.html" class="nav-link en">Videos</a></li>
             <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
         </ul>
@@ -1021,313 +927,239 @@
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
     <!-- Hero Section -->
-    <section class="report-hero">
-        <div class="report-hero-content">
-            <h1 class="zh">2024年度报告</h1>
-            <h1 class="en">2024 Annual Report</h1>
-            <p class="zh">世界环境保护组织2024年度报告展示了我们在全球环境保护领域取得的重大成就、关键数据和未来规划。</p>
-            <p class="en">The World Environmental Protection Organization's 2024 Annual Report showcases our major achievements, key data, and future plans in global environmental protection.</p>
-            <div class="report-hero-btns">
-               
-                <a href="hbxm.html" class="btn btn-secondary zh">查看项目</a>
-                <a href="hbxm.html" class="btn btn-secondary en">View Projects</a>
-            </div>
-        </div>
-        <div class="report-hero-image">
-            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Environmental Protection">
+    <section class="research-hero">
+        <div class="research-hero-content">
+            <h1 class="zh">环境保护研究报告</h1>
+            <h1 class="en">Environmental Research Reports</h1>
+            <p class="zh">探索我们最新的环境保护研究成果，深入了解全球环境挑战的科学分析和解决方案。</p>
+            <p class="en">Explore our latest environmental research findings, gaining in-depth understanding of scientific analysis and solutions for global environmental challenges.</p>
         </div>
     </section>
 
-    <!-- Report Timeline Section -->
-    <section class="report-section" id="timeline">
-        <h2 class="section-title zh">年度回顾</h2>
-        <h2 class="section-title en">Year in Review</h2>
-        <div class="report-timeline">
-            <div class="timeline-container left animate-on-scroll">
-                <div class="timeline-content">
-                    <div class="timeline-year">2024 Q1</div>
-                    <h3 class="timeline-title zh">全球气候倡议启动</h3>
-                    <h3 class="timeline-title en">Global Climate Initiative Launch</h3>
-                    <p class="timeline-text zh">我们在全球启动了10个气候适应项目，帮助脆弱社区应对气候变化影响。</p>
-                    <p class="timeline-text en">We launched 10 climate adaptation projects worldwide to help vulnerable communities cope with climate change impacts.</p>
-                    <div class="timeline-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-globe"></i>
-                            <span class="zh">10个国家</span>
-                            <span class="en">10 Countries</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-users"></i>
-                            <span class="zh">50万受益人</span>
-                            <span class="en">500K Beneficiaries</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-container right animate-on-scroll">
-                <div class="timeline-content">
-                    <div class="timeline-year">2024 Q2</div>
-                    <h3 class="timeline-title zh">海洋保护行动</h3>
-                    <h3 class="timeline-title en">Ocean Protection Campaign</h3>
-                    <p class="timeline-text zh">清理了超过100吨海洋塑料垃圾，建立了5个海洋保护区。</p>
-                    <p class="timeline-text en">Cleaned over 100 tons of marine plastic waste and established 5 marine protected areas.</p>
-                    <div class="timeline-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-trash"></i>
-                            <span class="zh">100吨垃圾</span>
-                            <span class="en">100 Tons Waste</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-fish"></i>
-                            <span class="zh">5个保护区</span>
-                            <span class="en">5 Protected Areas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-container left animate-on-scroll">
-                <div class="timeline-content">
-                    <div class="timeline-year">2024 Q3</div>
-                    <h3 class="timeline-title zh">森林恢复计划</h3>
-                    <h3 class="timeline-title en">Forest Restoration Program</h3>
-                    <p class="timeline-text zh">在亚马逊、刚果和东南亚种植了超过100万棵树，恢复了5000公顷森林。</p>
-                    <p class="timeline-text en">Planted over 1 million trees in the Amazon, Congo, and Southeast Asia, restoring 5,000 hectares of forest.</p>
-                    <div class="timeline-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-tree"></i>
-                            <span class="zh">100万棵树</span>
-                            <span class="en">1M Trees</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <span class="zh">5000公顷</span>
-                            <span class="en">5,000 Hectares</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-container right animate-on-scroll">
-                <div class="timeline-content">
-                    <div class="timeline-year">2024 Q4</div>
-                    <h3 class="timeline-title zh">可再生能源项目</h3>
-                    <h3 class="timeline-title en">Renewable Energy Projects</h3>
-                    <p class="timeline-text zh">在非洲和亚洲偏远地区安装了500套太阳能系统，减少了2000吨碳排放。</p>
-                    <p class="timeline-text en">Installed 500 solar systems in remote areas of Africa and Asia, reducing 2,000 tons of carbon emissions.</p>
-                    <div class="timeline-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-solar-panel"></i>
-                            <span class="zh">500套系统</span>
-                            <span class="en">500 Systems</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-cloud"></i>
-                            <span class="zh">2000吨减排</span>
-                            <span class="en">2K Tons Reduced</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Research Filter -->
+    <section class="research-section">
+        <div class="research-filter animate-on-scroll">
+            <h3 class="filter-title zh">筛选研究报告</h3>
+            <h3 class="filter-title en">Filter Reports</h3>
+            <div class="filter-options">
+                <button class="filter-btn active zh" data-category="all">全部</button>
+                <button class="filter-btn active en" data-category="all">All</button>
+                <button class="filter-btn zh" data-category="climate">气候变化</button>
+                <button class="filter-btn en" data-category="climate">Climate Change</button>
+                <button class="filter-btn zh" data-category="biodiversity">生物多样性</button>
+                <button class="filter-btn en" data-category="biodiversity">Biodiversity</button>
+                <button class="filter-btn zh" data-category="water">水资源</button>
+                <button class="filter-btn en" data-category="water">Water Resources</button>
+                <button class="filter-btn zh" data-category="pollution">污染防治</button>
+                <button class="filter-btn en" data-category="pollution">Pollution Control</button>
+                <button class="filter-btn zh" data-category="sustainability">可持续发展</button>
+                <button class="filter-btn en" data-category="sustainability">Sustainability</button>
             </div>
         </div>
-    </section>
 
-    <!-- Report Highlights Section -->
-    <section class="report-section" id="highlights">
-        <h2 class="section-title zh">年度亮点</h2>
-        <h2 class="section-title en">Annual Highlights</h2>
-        <div class="highlights-grid">
-            <div class="highlight-card animate-on-scroll">
-                <div class="highlight-image">
-                    <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Climate Action">
-                    <div class="highlight-badge zh">气候行动</div>
-                    <div class="highlight-badge en">Climate Action</div>
+        <!-- Research Grid -->
+        <h2 class="section-title zh">最新研究报告</h2>
+        <h2 class="section-title en">Latest Research Reports</h2>
+        <div class="research-grid">
+            <!-- Report 1 -->
+            <div class="research-card animate-on-scroll" data-category="climate">
+                <div class="research-image">
+                    <img src="https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Climate Change Impact">
+                    <div class="research-badge zh">气候变化</div>
+                    <div class="research-badge en">Climate Change</div>
                 </div>
-                <div class="highlight-content">
-                    <h3 class="zh">全球气候倡议</h3>
-                    <h3 class="en">Global Climate Initiative</h3>
-                    <p class="zh">在10个国家实施气候适应项目，培训了5000名当地气候适应专家。</p>
-                    <p class="en">Implemented climate adaptation projects in 10 countries, training 5,000 local climate adaptation experts.</p>
-                    <div class="highlight-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-check-circle"></i>
-                            <span class="zh">10国完成</span>
-                            <span class="en">10 Countries</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-user-graduate"></i>
-                            <span class="zh">5000专家</span>
-                            <span class="en">5K Experts</span>
-                        </div>
+                <div class="research-content">
+                    <h3 class="zh">全球气候变化影响评估报告2025</h3>
+                    <h3 class="en">Global Climate Change Impact Assessment Report 2025</h3>
+                    <p class="zh">本报告全面评估了全球气候变化的最新趋势及其对生态系统、经济和社会的影响，提出了适应性策略建议。</p>
+                    <p class="en">This report comprehensively assesses the latest trends in global climate change and its impacts on ecosystems, economies, and societies, proposing adaptation strategy recommendations.</p>
+                    <div class="research-meta">
+                        <span class="zh">2025年6月</span>
+                        <span class="en">June 2025</span>
+                        <span>48页</span>
                     </div>
+                    <a href="#" class="research-btn zh" data-report="1">查看详情</a>
+                    <a href="#" class="research-btn en" data-report="1">View Details</a>
                 </div>
             </div>
-            <div class="highlight-card animate-on-scroll">
-                <div class="highlight-image">
-                    <img src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ocean Cleanup">
-                    <div class="highlight-badge zh">海洋保护</div>
-                    <div class="highlight-badge en">Ocean Protection</div>
+
+            <!-- Report 2 -->
+            <div class="research-card animate-on-scroll" data-category="biodiversity">
+                <div class="research-image">
+                    <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Biodiversity">
+                    <div class="research-badge zh">生物多样性</div>
+                    <div class="research-badge en">Biodiversity</div>
                 </div>
-                <div class="highlight-content">
-                    <h3 class="zh">海洋清洁行动</h3>
-                    <h3 class="en">Ocean Cleanup Campaign</h3>
-                    <p class="zh">清理100吨海洋塑料垃圾，建立5个海洋保护区，保护濒危海洋物种。</p>
-                    <p class="en">Cleaned 100 tons of marine plastic waste, established 5 marine protected areas to protect endangered marine species.</p>
-                    <div class="highlight-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-trash"></i>
-                            <span class="zh">100吨垃圾</span>
-                            <span class="en">100 Tons Waste</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-shield-alt"></i>
-                            <span class="zh">5保护区</span>
-                            <span class="en">5 Protected Areas</span>
-                        </div>
+                <div class="research-content">
+                    <h3 class="zh">全球生物多样性保护现状与展望</h3>
+                    <h3 class="en">Global Biodiversity Conservation Status and Prospects</h3>
+                    <p class="zh">分析了全球生物多样性保护的最新进展，评估了保护措施的成效，并提出了未来十年的保护战略。</p>
+                    <p class="en">Analyzes the latest progress in global biodiversity conservation, evaluates the effectiveness of conservation measures, and proposes conservation strategies for the next decade.</p>
+                    <div class="research-meta">
+                        <span class="zh">2025年4月</span>
+                        <span class="en">April 2025</span>
+                        <span>36页</span>
                     </div>
+                    <a href="#" class="research-btn zh" data-report="2">查看详情</a>
+                    <a href="#" class="research-btn en" data-report="2">View Details</a>
                 </div>
             </div>
-            <div class="highlight-card animate-on-scroll">
-                <div class="highlight-image">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Forest Restoration">
-                    <div class="highlight-badge zh">森林恢复</div>
-                    <div class="highlight-badge en">Forest Restoration</div>
+
+            <!-- Report 3 -->
+            <div class="research-card animate-on-scroll" data-category="water">
+                <div class="research-image">
+                    <img src="https://pic.baike.soso.com/ugc/baikepic2/0/20220317170012-2085315121_png_610_568_294229.jpg/800" alt="Water Resources">
+                    <div class="research-badge zh">水资源</div>
+                    <div class="research-badge en">Water Resources</div>
                 </div>
-                <div class="highlight-content">
-                    <h3 class="zh">百万树木计划</h3>
-                    <h3 class="en">Million Trees Program</h3>
-                    <p class="zh">在三大热带雨林区种植100万棵树，恢复5000公顷森林生态系统。</p>
-                    <p class="en">Planted 1 million trees in three major rainforest regions, restoring 5,000 hectares of forest ecosystems.</p>
-                    <div class="highlight-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-tree"></i>
-                            <span class="zh">100万棵树</span>
-                            <span class="en">1M Trees</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-arrows-alt"></i>
-                            <span class="zh">5000公顷</span>
-                            <span class="en">5K Hectares</span>
-                        </div>
+                <div class="research-content">
+                    <h3 class="zh">全球淡水资源可持续管理研究</h3>
+                    <h3 class="en">Research on Sustainable Management of Global Freshwater Resources</h3>
+                    <p class="zh">评估了全球淡水资源面临的挑战，提出了创新性的水资源管理方案和技术，以确保水资源的可持续利用。</p>
+                    <p class="en">Assesses the challenges facing global freshwater resources and proposes innovative water management solutions and technologies to ensure sustainable water use.</p>
+                    <div class="research-meta">
+                        <span class="zh">2025年3月</span>
+                        <span class="en">March 2025</span>
+                        <span>42页</span>
                     </div>
+                    <a href="#" class="research-btn zh" data-report="3">查看详情</a>
+                    <a href="#" class="research-btn en" data-report="3">View Details</a>
                 </div>
             </div>
-            <div class="highlight-card animate-on-scroll">
-                <div class="highlight-image">
-                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Renewable Energy">
-                    <div class="highlight-badge zh">清洁能源</div>
-                    <div class="highlight-badge en">Clean Energy</div>
+
+            <!-- Report 4 -->
+            <div class="research-card animate-on-scroll" data-category="pollution">
+                <div class="research-image">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pollution Control">
+                    <div class="research-badge zh">污染防治</div>
+                    <div class="research-badge en">Pollution Control</div>
                 </div>
-                <div class="highlight-content">
-                    <h3 class="zh">太阳能普及计划</h3>
-                    <h3 class="en">Solar Energy Program</h3>
-                    <p class="zh">为偏远社区安装500套太阳能系统，减少2000吨碳排放。</p>
-                    <p class="en">Installed 500 solar systems for remote communities, reducing 2,000 tons of carbon emissions.</p>
-                    <div class="highlight-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-solar-panel"></i>
-                            <span class="zh">500套系统</span>
-                            <span class="en">500 Systems</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-leaf"></i>
-                            <span class="zh">2000吨减排</span>
-                            <span class="en">2K Tons Reduced</span>
-                        </div>
+                <div class="research-content">
+                    <h3 class="zh">城市空气污染综合治理策略研究</h3>
+                    <h3 class="en">Research on Comprehensive Strategies for Urban Air Pollution Control</h3>
+                    <p class="zh">基于全球50个城市的案例分析，提出了针对不同城市特点的空气污染综合治理方案和技术路线。</p>
+                    <p class="en">Based on case studies of 50 cities worldwide, proposes comprehensive air pollution control solutions and technical routes tailored to the characteristics of different cities.</p>
+                    <div class="research-meta">
+                        <span class="zh">2025年2月</span>
+                        <span class="en">February 2025</span>
+                        <span>56页</span>
                     </div>
+                    <a href="#" class="research-btn zh" data-report="4">查看详情</a>
+                    <a href="#" class="research-btn en" data-report="4">View Details</a>
                 </div>
             </div>
-            <div class="highlight-card animate-on-scroll">
-                <div class="highlight-image">
-                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Education">
-                    <div class="highlight-badge zh">环境教育</div>
-                    <div class="highlight-badge en">Environmental Education</div>
+
+            <!-- Report 5 -->
+            <div class="research-card animate-on-scroll" data-category="sustainability">
+                <div class="research-image">
+                    <img src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sustainability">
+                    <div class="research-badge zh">可持续发展</div>
+                    <div class="research-badge en">Sustainability</div>
                 </div>
-                <div class="highlight-content">
-                    <h3 class="zh">全球环境教育</h3>
-                    <h3 class="en">Global Environmental Education</h3>
-                    <p class="zh">在30个国家开展环境教育项目，培训了10000名教师，影响了50万学生。</p>
-                    <p class="en">Conducted environmental education programs in 30 countries, trained 10,000 teachers, and impacted 500,000 students.</p>
-                    <div class="highlight-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-globe-americas"></i>
-                            <span class="zh">30个国家</span>
-                            <span class="en">30 Countries</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                            <span class="zh">1万教师</span>
-                            <span class="en">10K Teachers</span>
-                        </div>
+                <div class="research-content">
+                    <h3 class="zh">可持续发展目标(SDGs)实施进展评估</h3>
+                    <h3 class="en">Assessment of Progress in Implementing Sustainable Development Goals (SDGs)</h3>
+                    <p class="zh">全面评估了全球各国在实现联合国可持续发展目标方面的进展，分析了成功案例和面临的挑战。</p>
+                    <p class="en">Comprehensively assesses the progress of countries worldwide in achieving the UN Sustainable Development Goals, analyzing success stories and challenges faced.</p>
+                    <div class="research-meta">
+                        <span class="zh">2025年1月</span>
+                        <span class="en">January 2025</span>
+                        <span>64页</span>
                     </div>
+                    <a href="#" class="research-btn zh" data-report="5">查看详情</a>
+                    <a href="#" class="research-btn en" data-report="5">View Details</a>
                 </div>
             </div>
-            <div class="highlight-card animate-on-scroll">
-                <div class="highlight-image">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Policy">
-                    <div class="highlight-badge zh">政策倡导</div>
-                    <div class="highlight-badge en">Policy Advocacy</div>
+
+            <!-- Report 6 -->
+            <div class="research-card animate-on-scroll" data-category="climate">
+                <div class="research-image">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Renewable Energy">
+                    <div class="research-badge zh">气候变化</div>
+                    <div class="research-badge en">Climate Change</div>
                 </div>
-                <div class="highlight-content">
-                    <h3 class="zh">环保政策影响</h3>
-                    <h3 class="en">Environmental Policy Impact</h3>
-                    <p class="zh">促成15个国家采纳更严格的环境保护政策，推动了全球塑料污染条约谈判。</p>
-                    <p class="en">Facilitated 15 countries to adopt stricter environmental policies and promoted global plastic pollution treaty negotiations.</p>
-                    <div class="highlight-stats">
-                        <div class="stat-badge">
-                            <i class="fas fa-landmark"></i>
-                            <span class="zh">15个国家</span>
-                            <span class="en">15 Countries</span>
-                        </div>
-                        <div class="stat-badge">
-                            <i class="fas fa-handshake"></i>
-                            <span class="zh">全球条约</span>
-                            <span class="en">Global Treaty</span>
-                        </div>
+                <div class="research-content">
+                    <h3 class="zh">可再生能源发展对减缓气候变化的贡献</h3>
+                    <h3 class="en">Contribution of Renewable Energy Development to Climate Change Mitigation</h3>
+                    <p class="zh">评估了全球可再生能源发展现状，量化分析了其对减少温室气体排放的贡献，并提出了未来发展路径。</p>
+                    <p class="en">Evaluates the current state of global renewable energy development, quantitatively analyzes its contribution to reducing greenhouse gas emissions, and proposes future development pathways.</p>
+                    <div class="research-meta">
+                        <span class="zh">2024年12月</span>
+                        <span class="en">December 2024</span>
+                        <span>40页</span>
                     </div>
+                    <a href="#" class="research-btn zh" data-report="6">查看详情</a>
+                    <a href="#" class="research-btn en" data-report="6">View Details</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
-    <section class="download-section" id="download">
-        
-        <h2 class="section-title en">Download Report</h2>
-        <p class="zh" style="text-align: center; max-width: 800px; margin: 0 auto 40px;">了解我们在全球环境保护工作中的详细成就和未来计划。</p>
-        <p class="en" style="text-align: center; max-width: 800px; margin: 0 auto 40px;"> learn about our detailed achievements and future plans in global environmental protection.</p>
-        <div class="download-cards">
-            <div class="download-card animate-on-scroll">
-                <div class="download-icon">
-                    <i class="fas fa-file-pdf"></i>
+    <!-- Research Detail Modal -->
+    <div class="research-modal" id="researchModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <div class="modal-header">
+                <h2 class="zh" id="modalTitle">全球气候变化影响评估报告2025</h2>
+                <h2 class="en" id="modalTitleEn">Global Climate Change Impact Assessment Report 2025</h2>
+                <div class="modal-meta">
+                    <span class="zh" id="modalCategory">气候变化</span>
+                    <span class="en" id="modalCategoryEn">Climate Change</span>
+                    <span class="zh" id="modalDate">2025年6月</span>
+                    <span class="en" id="modalDateEn">June 2025</span>
+                    <span id="modalPages">48页</span>
                 </div>
-                <h3 class="zh">完整报告</h3>
-                <h3 class="en">Full Report</h3>
-                <p class="zh">包含所有章节的完整年度报告PDF版本</p>
-                <p class="en">Complete annual report PDF with all chapters</p>
-               
             </div>
-            <div class="download-card animate-on-scroll">
-                <div class="download-icon">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <h3 class="zh">执行摘要</h3>
-                <h3 class="en">Executive Summary</h3>
-                <p class="zh">年度报告的关键发现和主要成就摘要</p>
-                <p class="en">Summary of key findings and major achievements</p>
-               
-                <a href="#" class="btn btn-primary en">Download (5MB)</a>
+            <div class="modal-image">
+                <img id="modalImage" src="https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Report Cover">
             </div>
-            <div class="download-card animate-on-scroll">
-                <div class="download-icon">
-                    <i class="fas fa-chart-bar"></i>
-                </div>
-                <h3 class="zh">数据简报</h3>
-                <h3 class="en">Data Brief</h3>
-                <p class="zh">所有项目和倡议的关键统计数据</p>
-                <p class="en">Key statistics for all projects and initiatives</p>
-               
+            <div class="modal-body">
+                <h3 class="zh">报告摘要</h3>
+                <h3 class="en">Report Summary</h3>
+                <p class="zh" id="modalSummary">本报告基于全球气候观测数据和模型模拟结果，全面评估了气候变化对生态系统、农业、水资源、人类健康和经济社会发展的影响。报告显示，全球平均气温较工业化前水平已上升1.2°C，极端天气事件频率和强度显著增加。海洋酸化加剧，生物多样性丧失速度加快，粮食安全面临严峻挑战。报告提出了基于自然的解决方案和适应性管理策略，为各国制定气候政策提供科学依据。</p>
+                <p class="en" id="modalSummaryEn">Based on global climate observation data and model simulation results, this report comprehensively assesses the impacts of climate change on ecosystems, agriculture, water resources, human health, and economic and social development. The report shows that the global average temperature has risen by 1.2°C compared to pre-industrial levels, with significant increases in the frequency and intensity of extreme weather events. Ocean acidification is intensifying, biodiversity loss is accelerating, and food security faces severe challenges. The report proposes nature-based solutions and adaptive management strategies, providing a scientific basis for countries to formulate climate policies.</p>
+                
+                <h3 class="zh">主要发现</h3>
+                <h3 class="en">Key Findings</h3>
+                <ul class="zh" id="modalFindings">
+                    <li>全球平均气温上升速度超出预期，2024年成为有记录以来最热年份</li>
+                    <li>极端高温事件频率增加5倍，极端降水事件增加30%</li>
+                    <li>北极海冰范围达到历史最低水平，冰川退缩速度加快</li>
+                    <li>海洋热含量创历史新高，海洋酸化威胁海洋生态系统</li>
+                    <li>全球粮食产量预计到2050年将下降5-15%</li>
+                </ul>
+                <ul class="en" id="modalFindingsEn">
+                    <li>The rate of global average temperature rise exceeds expectations, with 2024 becoming the hottest year on record</li>
+                    <li>Frequency of extreme heat events increased fivefold, extreme precipitation events increased by 30%</li>
+                    <li>Arctic sea ice extent reached historic lows, glacier retreat accelerated</li>
+                    <li>Ocean heat content reached record highs, ocean acidification threatens marine ecosystems</li>
+                    <li>Global food production is projected to decline by 5-15% by 2050</li>
+                </ul>
+                
+                <h3 class="zh">政策建议</h3>
+                <h3 class="en">Policy Recommendations</h3>
+                <ul class="zh" id="modalRecommendations">
+                    <li>加速能源转型，2030年前将可再生能源占比提高至50%</li>
+                    <li>加强生态系统保护和恢复，提升自然碳汇能力</li>
+                    <li>建立气候适应型农业体系，保障粮食安全</li>
+                    <li>完善极端天气预警系统，增强社区抗灾能力</li>
+                    <li>加强国际合作，建立全球气候治理新机制</li>
+                </ul>
+                <ul class="en" id="modalRecommendationsEn">
+                    <li>Accelerate energy transition, increase renewable energy share to 50% by 2030</li>
+                    <li>Strengthen ecosystem protection and restoration to enhance natural carbon sinks</li>
+                    <li>Establish climate-resilient agricultural systems to ensure food security</li>
+                    <li>Improve extreme weather early warning systems and enhance community disaster resilience</li>
+                    <li>Strengthen international cooperation to establish new mechanisms for global climate governance</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                
+                <span class="zh" id="modalCitation">引用格式: WEPO (2025). 全球气候变化影响评估报告2025. 世界环境保护组织.</span>
+                <span class="en" id="modalCitationEn">Citation: WEPO (2025). Global Climate Change Impact Assessment Report 2025. World Environmental Protection Organization.</span>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -1337,7 +1169,9 @@
                 <p class="zh">世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。</p>
                 <p class="en">World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.</p>
                 <div class="social-links">
-               
+                    <a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank">T</a>
+                    <a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank">K</a>
+                    <a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank">W</a>
                 </div>
             </div>
             <div class="footer-links">
@@ -1345,9 +1179,13 @@
                 <h3 class="en">Quick Links</h3>
                 <ul>
                     <li><a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a></li>
-                    <li><a href="ndbg.html" class="zh">年度报告</a><a href="ndbg.html" class="en">Annual Report</a></li>
-                    <li><a href="yjbg.html" class="zh">研究报告</a><a href="yjbg.html" class="en">Research</a></li>
-                   
+                    <li><a href="index.html#about" class="zh">关于我们</a><a href="index.html#about" class="en">About</a></li>
+                    <li><a href="index.html#mission" class="zh">使命愿景</a><a href="index.html#mission" class="en">Mission</a></li>
+                    <li><a href="hbxm.html" class="zh">环保项目</a><a href="hbxm.html" class="en">Programs</a></li>
+                    <li><a href="index.html#partners" class="zh">合作伙伴</a><a href="index.html#partners" class="en">Partners</a></li>
+                    <li><a href="index.html#contact" class="zh">联系我们</a><a href="index.html#contact" class="en">Contact</a></li>
+                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
+                    <li><a href="jz.html" class="zh">捐赠支持</a><a href="jz.html" class="en">Donate</a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -1356,23 +1194,21 @@
                 <ul>
                     <li><a href="crlsh.html" class="zh">理事会</a><a href="crlsh.html" class="en">Council</a></li>
                     <li><a href="zyz.html" class="zh">志愿者网络</a><a href="zyz.html" class="en">Volunteers</a></li>
-                    <li><a href="zc.html" class="zh">组织章程</a><a href="zc.html" class="en">Charter</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h3 class="zh">联系我们</h3>
-                <h3 class="en">Contact Us</h3>
+                <h3 class="zh">资源中心</h3>
+                <h3 class="en">Resources</h3>
                 <ul>
-                    <li class="zh">中国重庆市渝北区兴盛大道十号</li>
-                    <li class="en">No. 10, Xingsheng Avenue, Yubei District, Chongqing, China</li>
-                    <li>130-2835-0677</li>
-                    <li><a href="mailto:wepo2021@outlook.com">wepo2021@outlook.com</a></li>
+                    <li><a href="ndbg.html" class="zh">年度报告</a><a href="ndbg.html" class="en">Annual Reports</a></li>
+                    <li><a href="yjbg.html" class="zh">研究报告</a><a href="yjbg.html" class="en">Research Papers</a></li>
+                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="zh">© 2024 世界环境保护组织. 版权所有.</p>
-            <p class="en">© 2024 World Environmental Protection Organization. All Rights Reserved.</p>
+            <p class="zh">© 2025 世界环境保护组织(WEPO). 版权所有.</p>
+            <p class="en">© 2025 World Environmental Protection Organization (WEPO). All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -1387,7 +1223,7 @@
                 setTimeout(function() {
                     document.getElementById('loadingScreen').style.display = 'none';
                 }, 500);
-            }, 1500);
+            }, 500);
         });
 
         // Mobile Menu Toggle
@@ -1413,12 +1249,14 @@
         mobileMenuClose.addEventListener('click', closeMenu);
         mobileMenuOverlay.addEventListener('click', closeMenu);
 
-        // 防止菜单内容点击触发 overlay 关闭事件
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
         mobileMenu.addEventListener('click', function(e) {
             e.stopPropagation();
         });
 
-        // ESC键关闭菜单
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 closeMenu();
@@ -1487,8 +1325,6 @@
                     
                     // Close mobile menu if open
                     mobileMenu.classList.remove('active');
-                    mobileMenuOverlay.classList.remove('active');
-                    body.classList.remove('no-scroll');
                 }
             });
         });
@@ -1510,6 +1346,407 @@
                 behavior: 'smooth'
             });
         });
+
+        // Research Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const researchCards = document.querySelectorAll('.research-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter cards
+                researchCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Research Modal
+        const researchModal = document.getElementById('researchModal');
+        const modalClose = document.getElementById('modalClose');
+        const researchBtns = document.querySelectorAll('.research-btn');
+        
+        // Report data
+        const reports = [
+            {
+                id: 1,
+                title: "全球气候变化影响评估报告2025",
+                titleEn: "Global Climate Change Impact Assessment Report 2025",
+                category: "气候变化",
+                categoryEn: "Climate Change",
+                date: "2025年6月",
+                dateEn: "June 2025",
+                pages: "48页",
+                image: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                summary: "本报告基于全球气候观测数据和模型模拟结果，全面评估了气候变化对生态系统、农业、水资源、人类健康和经济社会发展的影响。报告显示，全球平均气温较工业化前水平已上升1.2°C，极端天气事件频率和强度显著增加。海洋酸化加剧，生物多样性丧失速度加快，粮食安全面临严峻挑战。报告提出了基于自然的解决方案和适应性管理策略，为各国制定气候政策提供科学依据。",
+                summaryEn: "Based on global climate observation data and model simulation results, this report comprehensively assesses the impacts of climate change on ecosystems, agriculture, water resources, human health, and economic and social development. The report shows that the global average temperature has risen by 1.2°C compared to pre-industrial levels, with significant increases in the frequency and intensity of extreme weather events. Ocean acidification is intensifying, biodiversity loss is accelerating, and food security faces severe challenges. The report proposes nature-based solutions and adaptive management strategies, providing a scientific basis for countries to formulate climate policies.",
+                findings: [
+                    "全球平均气温上升速度超出预期，2024年成为有记录以来最热年份",
+                    "极端高温事件频率增加5倍，极端降水事件增加30%",
+                    "北极海冰范围达到历史最低水平，冰川退缩速度加快",
+                    "海洋热含量创历史新高，海洋酸化威胁海洋生态系统",
+                    "全球粮食产量预计到2050年将下降5-15%"
+                ],
+                findingsEn: [
+                    "The rate of global average temperature rise exceeds expectations, with 2024 becoming the hottest year on record",
+                    "Frequency of extreme heat events increased fivefold, extreme precipitation events increased by 30%",
+                    "Arctic sea ice extent reached historic lows, glacier retreat accelerated",
+                    "Ocean heat content reached record highs, ocean acidification threatens marine ecosystems",
+                    "Global food production is projected to decline by 5-15% by 2050"
+                ],
+                recommendations: [
+                    "加速能源转型，2030年前将可再生能源占比提高至50%",
+                    "加强生态系统保护和恢复，提升自然碳汇能力",
+                    "建立气候适应型农业体系，保障粮食安全",
+                    "完善极端天气预警系统，增强社区抗灾能力",
+                    "加强国际合作，建立全球气候治理新机制"
+                ],
+                recommendationsEn: [
+                    "Accelerate energy transition, increase renewable energy share to 50% by 2030",
+                    "Strengthen ecosystem protection and restoration to enhance natural carbon sinks",
+                    "Establish climate-resilient agricultural systems to ensure food security",
+                    "Improve extreme weather early warning systems and enhance community disaster resilience",
+                    "Strengthen international cooperation to establish new mechanisms for global climate governance"
+                ],
+                citation: "引用格式: WEPO (2025). 全球气候变化影响评估报告2025. 世界环境保护组织.",
+                citationEn: "Citation: WEPO (2025). Global Climate Change Impact Assessment Report 2025. World Environmental Protection Organization."
+            },
+            {
+                id: 2,
+                title: "全球生物多样性保护现状与展望",
+                titleEn: "Global Biodiversity Conservation Status and Prospects",
+                category: "生物多样性",
+                categoryEn: "Biodiversity",
+                date: "2025年4月",
+                dateEn: "April 2025",
+                pages: "36页",
+                image: "https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                summary: "分析了全球生物多样性保护的最新进展，评估了保护措施的成效，并提出了未来十年的保护战略。报告显示，尽管全球在保护地建设方面取得进展，但生物多样性丧失的速度仍未减缓。报告呼吁采取更积极的保护措施，包括扩大保护地网络、恢复退化生态系统、控制外来物种入侵等。",
+                summaryEn: "Analyzes the latest progress in global biodiversity conservation, evaluates the effectiveness of conservation measures, and proposes conservation strategies for the next decade. The report shows that despite progress in protected area establishment globally, the rate of biodiversity loss has not slowed. The report calls for more aggressive conservation measures, including expanding protected area networks, restoring degraded ecosystems, and controlling invasive species.",
+                findings: [
+                    "全球物种灭绝速度是自然灭绝率的100-1000倍",
+                    "75%的陆地环境和66%的海洋环境已被人类活动显著改变",
+                    "保护地覆盖率已达到陆地面积的17%和海洋面积的10%",
+                    "生态系统服务价值每年下降约3%，威胁人类福祉",
+                    "气候变化成为生物多样性丧失的第二大驱动因素"
+                ],
+                findingsEn: [
+                    "Global species extinction rates are 100-1000 times higher than natural background rates",
+                    "75% of terrestrial environments and 66% of marine environments have been significantly altered by human activities",
+                    "Protected area coverage has reached 17% of terrestrial areas and 10% of marine areas",
+                    "Ecosystem service values decline by about 3% annually, threatening human well-being",
+                    "Climate change has become the second largest driver of biodiversity loss"
+                ],
+                recommendations: [
+                    "2030年前将保护地覆盖率提高至30%",
+                    "制定并实施生态系统恢复国家战略",
+                    "加强生物多样性主流化，纳入各行业政策",
+                    "建立全球生物多样性监测网络",
+                    "增加生物多样性保护资金投入，至少翻倍"
+                ],
+                recommendationsEn: [
+                    "Increase protected area coverage to 30% by 2030",
+                    "Develop and implement national strategies for ecosystem restoration",
+                    "Strengthen biodiversity mainstreaming into policies across sectors",
+                    "Establish a global biodiversity monitoring network",
+                    "At least double funding for biodiversity conservation"
+                ],
+                citation: "引用格式: WEPO (2025). 全球生物多样性保护现状与展望. 世界环境保护组织.",
+                citationEn: "Citation: WEPO (2025). Global Biodiversity Conservation Status and Prospects. World Environmental Protection Organization."
+            },
+            {
+                id: 3,
+                title: "全球淡水资源可持续管理研究",
+                titleEn: "Research on Sustainable Management of Global Freshwater Resources",
+                category: "水资源",
+                categoryEn: "Water Resources",
+                date: "2025年3月",
+                dateEn: "March 2025",
+                pages: "42页",
+                image: "https://pic.baike.soso.com/ugc/baikepic2/0/20220317170012-2085315121_png_610_568_294229.jpg/800",
+                summary: "评估了全球淡水资源面临的挑战，提出了创新性的水资源管理方案和技术，以确保水资源的可持续利用。报告指出，全球约40%的人口面临水资源短缺问题，水质污染加剧了这一挑战。报告提出了基于流域的综合管理方法、节水技术推广、水污染治理和水资源定价等解决方案。",
+                summaryEn: "Assesses the challenges facing global freshwater resources and proposes innovative water management solutions and technologies to ensure sustainable water use. The report indicates that about 40% of the global population faces water scarcity, with water pollution exacerbating this challenge. The report proposes solutions including integrated watershed management approaches, water-saving technology promotion, water pollution control, and water resource pricing.",
+                findings: [
+                    "全球约20亿人生活在水资源严重短缺的地区",
+                    "农业用水占全球淡水取水量的70%，但效率低下",
+                    "水污染导致可用水资源减少约三分之一",
+                    "地下水超采导致全球许多地区地下水位持续下降",
+                    "气候变化预计将使水资源短缺地区增加20%"
+                ],
+                findingsEn: [
+                    "About 2 billion people live in areas with severe water scarcity",
+                    "Agricultural water use accounts for 70% of global freshwater withdrawals but is inefficient",
+                    "Water pollution reduces available water resources by about one-third",
+                    "Groundwater overdraft leads to continued declines in water tables in many regions worldwide",
+                    "Climate change is projected to increase water-scarce areas by 20%"
+                ],
+                recommendations: [
+                    "实施流域综合管理，协调上下游用水需求",
+                    "推广高效节水灌溉技术，提高农业用水效率",
+                    "加强工业废水处理和水循环利用",
+                    "建立基于生态系统服务的水资源定价机制",
+                    "投资水源地保护和生态修复工程"
+                ],
+                recommendationsEn: [
+                    "Implement integrated watershed management to coordinate upstream and downstream water needs",
+                    "Promote efficient water-saving irrigation technologies to improve agricultural water use efficiency",
+                    "Strengthen industrial wastewater treatment and water recycling",
+                    "Establish ecosystem service-based water pricing mechanisms",
+                    "Invest in water source protection and ecological restoration projects"
+                ],
+                citation: "引用格式: WEPO (2025). 全球淡水资源可持续管理研究. 世界环境保护组织.",
+                citationEn: "Citation: WEPO (2025). Research on Sustainable Management of Global Freshwater Resources. World Environmental Protection Organization."
+            },
+            {
+                id: 4,
+                title: "城市空气污染综合治理策略研究",
+                titleEn: "Research on Comprehensive Strategies for Urban Air Pollution Control",
+                category: "污染防治",
+                categoryEn: "Pollution Control",
+                date: "2025年2月",
+                dateEn: "February 2025",
+                pages: "56页",
+                image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                summary: "基于全球50个城市的案例分析，提出了针对不同城市特点的空气污染综合治理方案和技术路线。研究发现，交通排放、工业排放和居民燃煤是城市空气污染的主要来源。报告提出了多污染物协同控制策略，包括清洁能源替代、交通结构调整、工业排放标准和城市绿化等措施。",
+                summaryEn: "Based on case studies of 50 cities worldwide, proposes comprehensive air pollution control solutions and technical routes tailored to the characteristics of different cities. The study found that traffic emissions, industrial emissions, and residential coal burning are the main sources of urban air pollution. The report proposes multi-pollutant co-control strategies, including clean energy substitution, traffic structure adjustment, industrial emission standards, and urban greening measures.",
+                findings: [
+                    "全球90%的城市人口暴露在超出WHO标准的空气污染中",
+                    "空气污染导致全球每年约700万人过早死亡",
+                    "交通源贡献了城市PM2.5的30-50%",
+                    "冬季供暖季节空气污染浓度平均高出30%",
+                    "城市绿化可降低局部PM2.5浓度10-20%"
+                ],
+                findingsEn: [
+                    "90% of the global urban population is exposed to air pollution exceeding WHO standards",
+                    "Air pollution causes about 7 million premature deaths worldwide annually",
+                    "Traffic sources contribute 30-50% of urban PM2.5",
+                    "Air pollution concentrations are on average 30% higher during winter heating seasons",
+                    "Urban greening can reduce local PM2.5 concentrations by 10-20%"
+                ],
+                recommendations: [
+                    "制定城市空气质量达标路线图，明确阶段性目标",
+                    "加速公共交通和新能源汽车推广",
+                    "实施工业污染源超低排放改造",
+                    "推进散煤治理和清洁能源替代",
+                    "构建城市通风廊道和绿地系统"
+                ],
+                recommendationsEn: [
+                    "Develop urban air quality compliance roadmaps with clear phased targets",
+                    "Accelerate public transport and new energy vehicle promotion",
+                    "Implement ultra-low emission retrofits for industrial pollution sources",
+                    "Advance scattered coal management and clean energy substitution",
+                    "Construct urban ventilation corridors and green space systems"
+                ],
+                citation: "引用格式: WEPO (2025). 城市空气污染综合治理策略研究. 世界环境保护组织.",
+                citationEn: "Citation: WEPO (2025). Research on Comprehensive Strategies for Urban Air Pollution Control. World Environmental Protection Organization."
+            },
+            {
+                id: 5,
+                title: "可持续发展目标(SDGs)实施进展评估",
+                titleEn: "Assessment of Progress in Implementing Sustainable Development Goals (SDGs)",
+                category: "可持续发展",
+                categoryEn: "Sustainability",
+                date: "2025年1月",
+                dateEn: "January 2025",
+                pages: "64页",
+                image: "https://images.unsplash.com/photo-1526779259212-939e64788e3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                summary: "全面评估了全球各国在实现联合国可持续发展目标方面的进展，分析了成功案例和面临的挑战。报告显示，全球在消除贫困、清洁饮水和卫生设施方面取得显著进展，但在气候变化、生物多样性保护和减少不平等方面进展滞后。报告呼吁加强政策协调、增加资金投入和创新解决方案，以加速实现可持续发展目标。",
+                summaryEn: "Comprehensively assesses the progress of countries worldwide in achieving the UN Sustainable Development Goals, analyzing success stories and challenges faced. The report shows that significant progress has been made globally in poverty eradication, clean water, and sanitation, but progress has lagged in climate change, biodiversity conservation, and reducing inequality. The report calls for strengthened policy coordination, increased funding, and innovative solutions to accelerate achievement of the Sustainable Development Goals.",
+                findings: [
+                    "全球极端贫困率已降至5%以下，但地区差异显著",
+                    "20亿人获得了基本卫生设施，但仍有6.5亿人缺乏安全饮用水",
+                    "可再生能源占比达到30%，但能源转型速度仍需加快",
+                    "全球物质消费量持续增长，资源效率提高不足",
+                    "生物多样性保护目标(Aichi目标)多数未能实现"
+                ],
+                findingsEn: [
+                    "Global extreme poverty rate has fallen below 5%, but regional disparities are significant",
+                    "2 billion people have gained access to basic sanitation, but 650 million still lack safe drinking water",
+                    "Renewable energy share has reached 30%, but energy transition pace needs acceleration",
+                    "Global material consumption continues to grow with insufficient resource efficiency improvements",
+                    "Most biodiversity conservation targets (Aichi Targets) were not achieved"
+                ],
+                recommendations: [
+                    "将可持续发展目标纳入国家发展规划和预算",
+                    "建立跨部门协调机制，解决目标间的权衡问题",
+                    "调动私营部门资金，填补每年2.5万亿美元的资金缺口",
+                    "加强数据收集和监测，支持循证决策",
+                    "促进技术创新和知识共享，加速解决方案推广"
+                ],
+                recommendationsEn: [
+                    "Integrate SDGs into national development plans and budgets",
+                    "Establish cross-sectoral coordination mechanisms to address inter-target trade-offs",
+                    "Mobilize private sector financing to fill the annual $2.5 trillion funding gap",
+                    "Strengthen data collection and monitoring to support evidence-based decision-making",
+                    "Promote technological innovation and knowledge sharing to accelerate solution scaling"
+                ],
+                citation: "引用格式: WEPO (2025). 可持续发展目标(SDGs)实施进展评估. 世界环境保护组织.",
+                citationEn: "Citation: WEPO (2025). Assessment of Progress in Implementing Sustainable Development Goals (SDGs). World Environmental Protection Organization."
+            },
+            {
+                id: 6,
+                title: "可再生能源发展对减缓气候变化的贡献",
+                titleEn: "Contribution of Renewable Energy Development to Climate Change Mitigation",
+                category: "气候变化",
+                categoryEn: "Climate Change",
+                date: "2024年12月",
+                dateEn: "December 2024",
+                pages: "40页",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                summary: "评估了全球可再生能源发展现状，量化分析了其对减少温室气体排放的贡献，并提出了未来发展路径。报告显示，2024年全球可再生能源发电量占比达到30%，避免了约120亿吨二氧化碳排放。太阳能和风能成本持续下降，已成为最具竞争力的电力来源。报告建议进一步加速可再生能源部署，以实现1.5°C温控目标。",
+                summaryEn: "Evaluates the current state of global renewable energy development, quantitatively analyzes its contribution to reducing greenhouse gas emissions, and proposes future development pathways. The report shows that renewable energy accounted for 30% of global electricity generation in 2024, avoiding approximately 12 billion tons of CO2 emissions. Solar and wind power costs continue to decline, becoming the most competitive electricity sources. The report recommends further accelerating renewable energy deployment to achieve the 1.5°C temperature control target.",
+                findings: [
+                    "2024年全球可再生能源投资达到5000亿美元，创历史新高",
+                    "太阳能和风能发电成本较2010年下降80%以上",
+                    "可再生能源行业直接和间接创造了3000万个就业岗位",
+                    "可再生能源发展使电力行业碳排放强度下降25%",
+                    "储能技术突破推动可再生能源并网比例提高"
+                ],
+                findingsEn: [
+                    "Global renewable energy investment reached a record $500 billion in 2024",
+                    "Solar and wind power generation costs have fallen by more than 80% since 2010",
+                    "The renewable energy sector has directly and indirectly created 30 million jobs",
+                    "Renewable energy development has reducedthe carbon intensity of the power sector by 25%",
+                    "Breakthroughs in energy storage technology have increased the grid integration ratio of renewable energy"
+                ],
+                recommendations: [
+                    "2030年前将可再生能源发电占比提高至50%",
+                    "加强电网基础设施投资，提高可再生能源消纳能力",
+                    "建立可再生能源电力市场机制",
+                    "推动可再生能源与储能技术协同发展",
+                    "加强国际合作，促进可再生能源技术转移"
+                ],
+                recommendationsEn: [
+                    "Increase the share of renewable energy power generation to 50% by 2030",
+                    "Strengthen investment in grid infrastructure to improve renewable energy absorption capacity",
+                    "Establish renewable energy electricity market mechanisms",
+                    "Promote coordinated development of renewable energy and energy storage technologies",
+                    "Strengthen international cooperation to promote renewable energy technology transfer"
+                ],
+                citation: "引用格式: WEPO (2024). 可再生能源发展对减缓气候变化的贡献. 世界环境保护组织.",
+                citationEn: "Citation: WEPO (2024). Contribution of Renewable Energy Development to Climate Change Mitigation. World Environmental Protection Organization."
+            }
+        ];
+
+        // Open modal with report data
+        researchBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const reportId = parseInt(this.dataset.report);
+                const report = reports.find(r => r.id === reportId);
+                
+                if (report) {
+                    // Set modal content
+                    document.getElementById('modalTitle').textContent = report.title;
+                    document.getElementById('modalTitleEn').textContent = report.titleEn;
+                    document.getElementById('modalCategory').textContent = report.category;
+                    document.getElementById('modalCategoryEn').textContent = report.categoryEn;
+                    document.getElementById('modalDate').textContent = report.date;
+                    document.getElementById('modalDateEn').textContent = report.dateEn;
+                    document.getElementById('modalPages').textContent = report.pages;
+                    document.getElementById('modalImage').src = report.image;
+                    document.getElementById('modalImage').alt = report.title;
+                    document.getElementById('modalSummary').textContent = report.summary;
+                    document.getElementById('modalSummaryEn').textContent = report.summaryEn;
+                    
+                    // Clear previous findings and recommendations
+                    const findingsList = document.getElementById('modalFindings');
+                    const findingsListEn = document.getElementById('modalFindingsEn');
+                    const recList = document.getElementById('modalRecommendations');
+                    const recListEn = document.getElementById('modalRecommendationsEn');
+                    
+                    findingsList.innerHTML = '';
+                    findingsListEn.innerHTML = '';
+                    recList.innerHTML = '';
+                    recListEn.innerHTML = '';
+                    
+                    // Add findings
+                    report.findings.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        findingsList.appendChild(li);
+                    });
+                    
+                    report.findingsEn.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        findingsListEn.appendChild(li);
+                    });
+                    
+                    // Add recommendations
+                    report.recommendations.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        recList.appendChild(li);
+                    });
+                    
+                    report.recommendationsEn.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        recListEn.appendChild(li);
+                    });
+                    
+                    // Set citation
+                    document.getElementById('modalCitation').textContent = report.citation;
+                    document.getElementById('modalCitationEn').textContent = report.citationEn;
+                    
+                    // Set download link
+                    document.getElementById('downloadBtn').href = `reports/report_${report.id}.pdf`;
+                    document.getElementById('downloadBtnEn').href = `reports/report_${report.id}.pdf`;
+                    
+                    // Show modal
+                    researchModal.classList.add('active');
+                    document.body.classList.add('no-scroll');
+                }
+            });
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', function() {
+            researchModal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+
+        // Close modal when clicking outside
+        researchModal.addEventListener('click', function(e) {
+            if (e.target === researchModal) {
+                researchModal.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && researchModal.classList.contains('active')) {
+                researchModal.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+
+        // Animate elements on scroll
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        checkScroll(); // Check on initial load
     </script>
 </body>
 </html>
