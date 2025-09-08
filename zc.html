@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WEPO - 组织章程</title>
+    <title data-i18n="page.title">WEPO - 组织章程</title>
     <link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
     <style>
         :root {
-            --primary-dark: #0a2647;
-            --primary-medium: #144272;
-            --primary-light: #205295;
-            --accent-blue: #2C74B3;
-            --accent-purple: #6a3093;
+            --primary-dark: #1a0933; /* 更深的蓝紫色 */
+            --primary-medium: #2a1a4a;
+            --primary-light: #3a2a6a;
+            --accent-blue: #4a3a8a;
+            --accent-purple: #7d5ab5;
             --text-light: #f8f9fa;
             --text-dark: #212529;
+            --text-regular: #e0e0e0; /* 稍微柔和的文本色 */
+            --text-muted: #b0b0b0;   /* 更柔和的次要文本色 */
             --transition-time: 0.5s;
+            --bg-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
+            --chapter-bg: rgba(30, 20, 50, 0.6); /* 章节背景，更沉稳 */
+            --article-bg: rgba(40, 30, 60, 0.4); /* 条款背景，更浅 */
+            --border-color: rgba(255, 255, 255, 0.15); /* 统一边框色 */
         }
 
         * {
@@ -25,13 +31,24 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
-            color: var(--text-light);
+            /* 动态背景将通过 Canvas 实现 */
+            color: var(--text-regular);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7; /* 增加行高 */
+            background: var(--bg-gradient);
         }
 
-        /* Loading Screen */
+        /* 动态背景 Canvas */
+        #backgroundCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 确保在所有内容之下 */
+        }
+
+        /* Loading Screen (简化) */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -42,44 +59,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         .loading-bar {
             width: 200px;
-            height: 4px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin-top: 20px;
+            border-radius: 3px;
             overflow: hidden;
-            position: relative;
         }
 
         .loading-progress {
-            position: absolute;
-            top: 0;
-            left: 0;
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            animation: loading 2s ease-in-out forwards;
+            border-radius: 3px;
+            transition: width 0.2s ease-in-out;
         }
 
-        @keyframes loading {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Header */
+        /* Header (复用 index.html 样式) */
         header {
-            background: rgba(10, 38, 71, 0.9);
+            background: rgba(26, 9, 51, 0.9);
             backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
@@ -91,13 +93,6 @@
             align-items: center;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(-100%);
-            animation: slideDown 1s ease-out 1s forwards;
-        }
-
-        @keyframes slideDown {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(0); }
         }
 
         .logo-container {
@@ -114,29 +109,30 @@
             transform: scale(1.05);
         }
 
-        .nav-links {
+        nav ul {
             display: flex;
             list-style: none;
         }
 
-        .nav-links li {
-            margin-left: 30px;
+        nav ul li {
+            margin-left: 25px;
             position: relative;
         }
 
-        .nav-links a {
+        nav ul li a {
             color: var(--text-light);
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
             transition: color 0.3s ease;
             position: relative;
+            padding: 5px 0;
         }
 
-        .nav-links a::after {
+        nav ul li a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -144,16 +140,23 @@
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        nav ul li a:hover::after {
             width: 100%;
         }
 
-        .nav-links a:hover {
-            color: #8ab4f8;
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #b8a2e6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .language-switcher {
-            margin-left: 30px;
+            position: relative;
         }
 
         .language-btn {
@@ -165,10 +168,48 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .language-btn:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(26, 9, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-dropdown li {
+            list-style: none;
+            margin: 0;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .language-dropdown li:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .mobile-menu-btn {
@@ -178,393 +219,37 @@
             color: var(--text-light);
             font-size: 24px;
             cursor: pointer;
-        }
-
-        /* Page Header */
-        .page-header {
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 10%;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 70% 50%, rgba(44, 116, 179, 0.2), transparent 60%);
-        }
-
-        .page-header-content {
-            max-width: 800px;
-            z-index: 1;
-            transform: translateY(50px);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1s forwards;
-        }
-
-        @keyframes fadeInUp {
-            0% { transform: translateY(50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        .page-header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #fff, #8ab4f8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.2;
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        /* Constitution Section */
-        .constitution-section {
-            padding: 100px 10%;
-            position: relative;
-            background: rgba(10, 38, 71, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .constitution-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .constitution-title {
-            text-align: center;
-            margin-bottom: 60px;
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .constitution-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-        }
-
-        .chapter {
-            margin-bottom: 60px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .chapter:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .chapter::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
-        }
-
-        .chapter-title {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #8ab4f8;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .chapter-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-        }
-
-        .article {
-            margin-bottom: 30px;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .article:hover .article-number {
-            transform: scale(1.2);
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-        }
-
-        .article-number {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 25px;
-            height: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .article-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #8ab4f8;
-        }
-
-        .article-content {
-            line-height: 1.8;
-        }
-
-        .article-content p {
-            margin-bottom: 15px;
-        }
-
-        .article-content ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .article-content li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .article-content li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 38, 71, 0.9);
-            padding: 60px 10% 30px;
-            position: relative;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 40px;
-        }
-
-        .footer-logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-
-        .footer-about p {
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
             width: 40px;
             height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border-radius: 4px;
             transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            transform: translateY(-5px);
-        }
-
-        .footer-links h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-links h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent-blue);
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
+            justify-content: center;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Menu (复用 index.html 样式) */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            z-index: 999;
         }
 
-        .scroll-top.active {
+        .mobile-menu-overlay.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .page-header h1 {
-                font-size: 2.8rem;
-            }
-            
-            .constitution-title {
-                font-size: 2.2rem;
-            }
-            
-            .chapter-title {
-                font-size: 1.6rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .page-header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .constitution-title {
-                font-size: 2rem;
-            }
-            
-            .chapter {
-                padding: 30px 20px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .page-header p {
-                font-size: 1rem;
-            }
-            
-            .constitution-section {
-                padding: 70px 5%;
-            }
-            
-            .chapter-title {
-                font-size: 1.4rem;
-            }
-            
-            .article-title {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Mobile Menu */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -572,9 +257,9 @@
             width: 80%;
             max-width: 320px;
             height: 100%;
-            background: rgba(10, 38, 71, 0.98);
+            background: rgba(26, 9, 51, 0.98);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -587,24 +272,6 @@
 
         .mobile-menu.active {
             left: 0;
-        }
-
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
         }
 
         .mobile-menu-close {
@@ -659,7 +326,7 @@
         }
 
         .mobile-menu-links a:hover {
-            color: #8ab4f8;
+            color: #b8a2e6;
             transform: translateX(10px);
         }
 
@@ -686,403 +353,806 @@
             text-align: center;
         }
 
-        /* 菜单打开时禁止背景滚动 */
-        body.no-scroll {
+        /* Page Header */
+        .page-header {
+            height: 50vh; /* 稍微减小高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
             overflow: hidden;
+            margin-top: 80px; /* 考虑固定头部 */
+            background: linear-gradient(135deg, rgba(26, 9, 51, 0.85), rgba(58, 42, 106, 0.85));
         }
 
-        /* 移动菜单按钮样式优化 */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 24px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
+        .page-header-content {
+            max-width: 900px; /* 稍微增大 */
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-size: 3rem; /* 稍微减小 */
+            margin-bottom: 20px;
+            /* 使用与 index.html 相同的渐变文字 */
+            background: linear-gradient(90deg, #fff, #b8a2e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .page-header p {
+            font-size: 1.1rem; /* 稍微减小 */
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Constitution Section */
+        .constitution-section {
+            padding: 80px 5%; /* 调整内边距 */
+            position: relative;
+        }
+
+        .constitution-container {
+            max-width: 1100px; /* 稍微减小最大宽度以提高可读性 */
+            margin: 0 auto;
+            background: rgba(20, 10, 40, 0.4); /* 整体容器背景 */
+            border-radius: 8px; /* 减少圆角 */
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .constitution-title {
+            text-align: center;
+            margin-bottom: 50px; /* 增加间距 */
+            font-size: 2.3rem; /* 稍微减小 */
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #b8a2e6; /* 使用主题紫色 */
+        }
+
+        .constitution-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* 固定宽度 */
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+
+        .chapter {
+            margin-bottom: 50px; /* 增加章节间距 */
+            background: var(--chapter-bg);
+            border-radius: 6px; /* 减少圆角 */
+            padding: 35px; /* 调整内边距 */
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter:hover {
+            background: rgba(40, 30, 60, 0.7); /* 悬停时稍亮 */
+            transform: translateY(-3px); /* 减少悬停位移 */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .chapter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px; /* 稍微减小 */
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
+        }
+
+        .chapter-title {
+            font-size: 1.6rem; /* 稍微减小 */
+            margin-bottom: 25px; /* 增加间距 */
+            color: #b8a2e6; /* 使用主题紫色 */
+            position: relative;
+            padding-left: 20px;
+            font-weight: 600; /* 稍粗 */
+        }
+
+        .chapter-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .article {
+            margin-bottom: 25px; /* 增加条款间距 */
+            padding-left: 35px; /* 增加左侧内边距 */
+            position: relative;
+            background: var(--article-bg);
+            border-radius: 4px;
+            padding: 20px 20px 20px 45px; /* 调整内边距 */
+            border-left: 2px solid var(--accent-purple); /* 左侧边框 */
+        }
+
+        .article:hover .article-number {
+            transform: scale(1.1); /* 减少悬停放大 */
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .article-number {
+            position: absolute;
+            left: -10px; /* 调整位置 */
+            top: 20px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color); /* 添加边框 */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem; /* 稍小字体 */
+            transition: all 0.3s ease;
+            color: var(--text-light);
+        }
+
+        .article-title {
+            font-size: 1.2rem; /* 稍微减小 */
+            margin-bottom: 15px;
+            color: #a892d6; /* 稍微柔和的紫色 */
+            font-weight: 500; /* 稍细 */
+        }
+
+        .article-content {
+            line-height: 1.7; /* 保持行高 */
+        }
+
+        .article-content p {
+            margin-bottom: 15px;
+            color: var(--text-muted); /* 使用更柔和的文本色 */
+        }
+
+        .article-content ul {
+            margin-left: 25px; /* 增加缩进 */
+            margin-bottom: 15px;
+            padding-left: 0;
+        }
+
+        .article-content li {
+            margin-bottom: 12px; /* 增加列表项间距 */
+            position: relative;
+            padding-left: 25px; /* 增加左侧内边距 */
+            color: var(--text-muted); /* 使用更柔和的文本色 */
+        }
+
+        .article-content li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 7px; /* 稍微减小 */
+            height: 7px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        /* Footer (复用 index.html 样式) */
+        footer {
+            background: rgba(26, 9, 51, 0.95);
+            padding: 60px 5% 30px;
+            position: relative;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: #b8a2e6;
+        }
+
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-blue);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, color 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: #b8a2e6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to Top Button (复用 index.html 样式) */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            border: none;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            .constitution-title {
+                font-size: 2rem;
+            }
+            .chapter-title {
+                font-size: 1.4rem;
+            }
+            .constitution-container {
+                padding: 30px 20px;
+            }
+            .chapter {
+                padding: 25px;
+            }
         }
 
         @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
             .mobile-menu-btn {
                 display: flex;
-                justify-content: center;
-                align-items: center;
             }
-            
-            .mobile-menu-btn:hover {
-                background: rgba(255, 255, 255, 0.1);
+            .page-header h1 {
+                font-size: 2.2rem;
             }
-            
-            .nav-links {
-                display: none;
+            .page-header p {
+                font-size: 1rem;
+            }
+            .constitution-title {
+                font-size: 1.8rem;
+            }
+            .chapter-title {
+                font-size: 1.3rem;
+            }
+            .article-title {
+                font-size: 1.1rem;
+            }
+            .footer-content {
+                gap: 30px;
             }
         }
 
-        /* Language Toggle */
-        .en {
-            display: none;
+        @media (max-width: 576px) {
+            .page-header {
+                height: 40vh;
+                padding: 0 3%;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .constitution-section {
+                padding: 50px 3%;
+            }
+            .constitution-container {
+                padding: 20px 15px;
+            }
+            .constitution-title {
+                font-size: 1.6rem;
+            }
+            .chapter {
+                padding: 20px 15px;
+                margin-bottom: 30px;
+            }
+            .chapter-title {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+            .article {
+                padding: 15px 15px 15px 40px;
+                margin-bottom: 20px;
+            }
+            .article-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+                left: -8px;
+            }
+            .article-title {
+                font-size: 1rem;
+            }
         }
+
+         /* RTL Support for Arabic */
+        body[dir="rtl"] {
+            direction: rtl;
+        }
+        body[dir="rtl"] nav ul li {
+             margin-left: 0;
+             margin-right: 25px;
+        }
+        body[dir="rtl"] .logo {
+             margin-right: 0;
+             margin-left: 15px;
+        }
+        body[dir="rtl"] .logo-container {
+             flex-direction: row-reverse;
+        }
+        body[dir="rtl"] .chapter::before {
+             left: auto;
+             right: 0;
+        }
+        body[dir="rtl"] .chapter-title {
+             padding-left: 0;
+             padding-right: 20px;
+        }
+        body[dir="rtl"] .chapter-title::before {
+             left: auto;
+             right: 0;
+        }
+        body[dir="rtl"] .article {
+             padding-left: 20px;
+             padding-right: 45px;
+             border-left: none;
+             border-right: 2px solid var(--accent-purple);
+        }
+        body[dir="rtl"] .article-number {
+             left: auto;
+             right: -10px;
+        }
+        body[dir="rtl"] .article-content li {
+             padding-left: 0;
+             padding-right: 25px;
+        }
+        body[dir="rtl"] .article-content li::before {
+             left: auto;
+             right: 0;
+        }
+        body[dir="rtl"] .constitution-title::after,
+        body[dir="rtl"] .footer-links h3::after {
+            left: auto;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        body[dir="rtl"] nav ul li a::after {
+             left: auto;
+             right: 0;
+        }
+        body[dir="rtl"] .mobile-menu-links a::before {
+            left: auto;
+            right: -15px;
+        }
+        body[dir="rtl"] .mobile-menu-links a:hover {
+            transform: translateX(-10px);
+        }
+        body[dir="rtl"] .footer-content,
+        body[dir="rtl"] .social-links,
+        body[dir="rtl"] .footer-links ul {
+            direction: rtl;
+        }
+        body[dir="rtl"] .footer-content {
+             text-align: right;
+        }
+
     </style>
 </head>
 <body>
+    <!-- Dynamic Background Canvas -->
+    <canvas id="backgroundCanvas"></canvas>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-bar">
-            <div class="loading-progress"></div>
+            <div class="loading-progress" id="loadingProgress"></div>
         </div>
     </div>
 
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" class="logo">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
         </div>
         <nav>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
-                <li><a href="index.html#about" class="nav-link zh">关于我们</a><a href="index.html#about" class="nav-link en">About</a></li>
-                <li><a href="index.html#mission" class="nav-link zh">使命愿景</a><a href="index.html#mission" class="nav-link en">Mission</a></li>
-                <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Programs</a></li>
-                <li><a href="index.html#partners" class="nav-link zh">合作伙伴</a><a href="index.html#partners" class="nav-link en">Partners</a></li>
-                <li><a href="index.html#contact" class="nav-link zh">联系我们</a><a href="index.html#contact" class="nav-link en">Contact</a></li>
-                <li><a href="sp.html" class="nav-link zh">环保视频</a><a href="sp.html" class="nav-link en">Videos</a></li>
-                <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
+            <ul>
+                <li><a href="index.html" data-i18n="nav.home"></a></li>
+                <li><a href="index.html#about" data-i18n="nav.about"></a></li>
+                <li><a href="index.html#mission" data-i18n="nav.mission"></a></li>
+                <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+                <li><a href="index.html#partners" data-i18n="nav.partners"></a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+                <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+                <li><a href="jz.html" data-i18n="nav.donate"></a></li>
             </ul>
         </nav>
-        <div class="language-switcher">
-            <button class="language-btn" id="languageBtn">EN</button>
+        <div class="header-actions">
+            <div class="language-switcher">
+                <button class="language-btn" id="languageBtn">
+                    <span data-i18n="lang.current"></span>
+                    <span>▼</span>
+                </button>
+                <ul class="language-dropdown" id="languageDropdown">
+                    <li data-lang="zh-CN">中文 (简体)</li>
+                    <li data-lang="en">English</li>
+                    <li data-lang="es">Español</li>
+                    <li data-lang="fr">Français</li>
+                    <li data-lang="ru">Русский</li>
+                    <li data-lang="ar">العربية</li>
+                </ul>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
     </header>
 
-    <!-- 移动菜单 -->
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose">×</button>
         <ul class="mobile-menu-links">
-            <li><a href="index.html" class="nav-link zh">首页</a><a href="index.html" class="nav-link en">Home</a></li>
-            <li><a href="index.html#about" class="nav-link zh">关于我们</a><a href="index.html#about" class="nav-link en">About</a></li>
-            <li><a href="index.html#mission" class="nav-link zh">使命愿景</a><a href="index.html#mission" class="nav-link en">Mission</a></li>
-            <li><a href="hbxm.html" class="nav-link zh">环保项目</a><a href="hbxm.html" class="nav-link en">Programs</a></li>
-            <li><a href="index.html#partners" class="nav-link zh">合作伙伴</a><a href="index.html#partners" class="nav-link en">Partners</a></li>
-            <li><a href="index.html#contact" class="nav-link zh">联系我们</a><a href="index.html#contact" class="nav-link en">Contact</a></li>
-            <li><a href="sp.html" class="nav-link zh">环保视频</a><a href="sp.html" class="nav-link en">Videos</a></li>
-            <li><a href="jz.html" class="nav-link zh">捐赠支持</a><a href="jz.html" class="nav-link en">Donate</a></li>
+            <li><a href="index.html" data-i18n="nav.home"></a></li>
+            <li><a href="index.html#about" data-i18n="nav.about"></a></li>
+            <li><a href="index.html#mission" data-i18n="nav.mission"></a></li>
+            <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+            <li><a href="index.html#partners" data-i18n="nav.partners"></a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+            <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+            <li><a href="jz.html" data-i18n="nav.donate"></a></li>
         </ul>
         <div class="mobile-language-switcher">
-            <button class="language-btn" id="mobileLanguageBtn">EN</button>
+            <div class="language-switcher">
+                <button class="language-btn" id="mobileLanguageBtn">
+                    <span data-i18n="lang.current"></span>
+                    <span>▼</span>
+                </button>
+                <ul class="language-dropdown" id="mobileLanguageDropdown">
+                    <li data-lang="zh-CN">中文 (简体)</li>
+                    <li data-lang="en">English</li>
+                    <li data-lang="es">Español</li>
+                    <li data-lang="fr">Français</li>
+                    <li data-lang="ru">Русский</li>
+                    <li data-lang="ar">العربية</li>
+                </ul>
+            </div>
         </div>
     </div>
-
-    <!-- 添加遮罩层 -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
     <!-- Page Header -->
     <section class="page-header">
         <div class="page-header-content">
-            <h1 class="zh">组织章程</h1>
-            <h1 class="en">Constitution</h1>
-            <p class="zh">世界环境保护组织的根本制度文件，规定了组织的宗旨、结构、运作方式和成员权利义务</p>
-            <p class="en">The fundamental document of WEPO, defining the organization's purpose, structure, operations, and members' rights and obligations</p>
+            <h1 data-i18n="hero.title"></h1>
+            <p data-i18n="hero.description"></p>
         </div>
     </section>
 
     <!-- Constitution Section -->
     <section class="constitution-section">
         <div class="constitution-container">
-            <h2 class="constitution-title zh">世界环境保护组织章程</h2>
-            <h2 class="constitution-title en">Constitution of World Environmental Protection Organization</h2>
-            
+            <h2 class="constitution-title" data-i18n="constitution.title"></h2>
+
             <!-- 第一章 -->
             <div class="chapter animate-on-scroll">
-                <h3 class="chapter-title zh">第一章 总则</h3>
-                <h3 class="chapter-title en">Chapter 1 General Provisions</h3>
-                
+                <h3 class="chapter-title" data-i18n="chapter1.title"></h3>
                 <div class="article">
                     <div class="article-number">1</div>
-                    <h4 class="article-title zh">名称与性质</h4>
-                    <h4 class="article-title en">Name and Nature</h4>
+                    <h4 class="article-title" data-i18n="article1_1.title"></h4>
                     <div class="article-content">
-                        <p class="zh">本组织名称为"世界环境保护组织"（World Environmental Protection Organization，简称WEPO），是一个非政府、非营利性的国际环保组织。</p>
-                        <p class="en">The organization shall be named "World Environmental Protection Organization" (abbreviated as WEPO), a non-governmental, non-profit international environmental organization.</p>
+                        <p data-i18n="article1_1.content"></p>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">2</div>
-                    <h4 class="article-title zh">宗旨</h4>
-                    <h4 class="article-title en">Purpose</h4>
+                    <h4 class="article-title" data-i18n="article1_2.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO的宗旨是通过科学研究、政策倡导和公众教育，推动全球环境保护事业，应对气候变化，保护生物多样性，促进可持续发展。</p>
-                        <p class="en">The purpose of WEPO is to promote global environmental protection through scientific research, policy advocacy, and public education, addressing climate change, protecting biodiversity, and fostering sustainable development.</p>
+                        <p data-i18n="article1_2.content"></p>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">3</div>
-                    <h4 class="article-title zh">总部</h4>
-                    <h4 class="article-title en">Headquarters</h4>
+                    <h4 class="article-title" data-i18n="article1_3.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO总部设在中国重庆市，可在全球各地设立分支机构或代表处。</p>
-                        <p class="en">The headquarters of WEPO is located in Chongqing, China, and may establish branches or representative offices worldwide.</p>
+                        <p data-i18n="article1_3.content"></p>
                     </div>
                 </div>
             </div>
-            
+
             <!-- 第二章 -->
             <div class="chapter animate-on-scroll">
-                <h3 class="chapter-title zh">第二章 会员</h3>
-                <h3 class="chapter-title en">Chapter 2 Membership</h3>
-                
+                <h3 class="chapter-title" data-i18n="chapter2.title"></h3>
                 <div class="article">
                     <div class="article-number">4</div>
-                    <h4 class="article-title zh">会员资格</h4>
-                    <h4 class="article-title en">Membership Eligibility</h4>
+                    <h4 class="article-title" data-i18n="article2_1.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO会员分为个人会员和团体会员：</p>
-                        <p class="en">WEPO membership consists of individual members and institutional members:</p>
+                        <p data-i18n="article2_1.intro"></p>
                         <ul>
-                            <li class="zh">个人会员：年满18周岁，认同本组织宗旨，愿意为环境保护事业贡献力量的自然人</li>
-                            <li class="en">Individual members: Natural persons aged 18 or above who endorse the organization's purpose and are willing to contribute to environmental protection</li>
-                            <li class="zh">团体会员：依法成立的法人或其他组织，认同本组织宗旨，愿意参与环境保护活动</li>
-                            <li class="en">Institutional members: Legally established legal entities or other organizations that endorse the organization's purpose and are willing to participate in environmental protection activities</li>
+                            <li data-i18n="article2_1.li1"></li>
+                            <li data-i18n="article2_1.li2"></li>
                         </ul>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">5</div>
-                    <h4 class="article-title zh">会员权利</h4>
-                    <h4 class="article-title en">Membership Rights</h4>
+                    <h4 class="article-title" data-i18n="article2_2.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO会员享有以下权利：</p>
-                        <p class="en">WEPO members enjoy the following rights:</p>
+                        <p data-i18n="article2_2.intro"></p>
                         <ul>
-                            <li class="zh">参与本组织的各项活动</li>
-                            <li class="en">Participate in all activities of the organization</li>
-                            <li class="zh">获得本组织提供的服务和信息</li>
-                            <li class="en">Receive services and information provided by the organization</li>
-                            <li class="zh">对本组织工作提出建议和意见</li>
-                            <li class="en">Provide suggestions and opinions on the organization's work</li>
-                            <li class="zh">选举和被选举为理事会成员</li>
-                            <li class="en">Elect and be elected as members of the Council</li>
-                            <li class="zh">自愿退会的权利</li>
-                            <li class="en">The right to voluntarily withdraw from membership</li>
+                            <li data-i18n="article2_2.li1"></li>
+                            <li data-i18n="article2_2.li2"></li>
+                            <li data-i18n="article2_2.li3"></li>
+                            <li data-i18n="article2_2.li4"></li>
+                            <li data-i18n="article2_2.li5"></li>
                         </ul>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">6</div>
-                    <h4 class="article-title zh">会员义务</h4>
-                    <h4 class="article-title en">Membership Obligations</h4>
+                    <h4 class="article-title" data-i18n="article2_3.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO会员应履行以下义务：</p>
-                        <p class="en">WEPO members shall fulfill the following obligations:</p>
+                        <p data-i18n="article2_3.intro"></p>
                         <ul>
-                            <li class="zh">遵守本组织章程和各项规章制度</li>
-                            <li class="en">Comply with the organization's constitution and regulations</li>
-                            <li class="zh">维护本组织的声誉和利益</li>
-                            <li class="en">Safeguard the reputation and interests of the organization</li>
-                            <li class="zh">积极参与本组织的活动</li>
-                            <li class="en">Actively participate in the organization's activities</li>
-                            <li class="zh">按时缴纳会费</li>
-                            <li class="en">Pay membership fees on time</li>
-                            <li class="zh">履行理事会规定的其他义务</li>
-                            <li class="en">Fulfill other obligations stipulated by the Council</li>
+                            <li data-i18n="article2_3.li1"></li>
+                            <li data-i18n="article2_3.li2"></li>
+                            <li data-i18n="article2_3.li3"></li>
+                            <li data-i18n="article2_3.li4"></li>
+                            <li data-i18n="article2_3.li5"></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
+
             <!-- 第三章 -->
             <div class="chapter animate-on-scroll">
-                <h3 class="chapter-title zh">第三章 组织机构</h3>
-                <h3 class="chapter-title en">Chapter 3 Organizational Structure</h3>
-                
+                <h3 class="chapter-title" data-i18n="chapter3.title"></h3>
                 <div class="article">
                     <div class="article-number">7</div>
-                    <h4 class="article-title zh">会员大会</h4>
-                    <h4 class="article-title en">General Assembly</h4>
+                    <h4 class="article-title" data-i18n="article3_1.title"></h4>
                     <div class="article-content">
-                        <p class="zh">会员大会是WEPO的最高权力机构，由全体会员组成，每年召开一次会议。会员大会的职责包括：</p>
-                        <p class="en">The General Assembly is the supreme authority of WEPO, composed of all members, and convenes once a year. The responsibilities of the General Assembly include:</p>
+                        <p data-i18n="article3_1.intro"></p>
                         <ul>
-                            <li class="zh">制定和修改章程</li>
-                            <li class="en">Formulating and amending the constitution</li>
-                            <li class="zh">选举和罢免理事会成员</li>
-                            <li class="en">Electing and dismissing Council members</li>
-                            <li class="zh">审议理事会工作报告和财务报告</li>
-                            <li class="en">Reviewing the Council's work reports and financial reports</li>
-                            <li class="zh">决定本组织的重大事项</li>
-                            <li class="en">Deciding on major matters of the organization</li>
+                            <li data-i18n="article3_1.li1"></li>
+                            <li data-i18n="article3_1.li2"></li>
+                            <li data-i18n="article3_1.li3"></li>
+                            <li data-i18n="article3_1.li4"></li>
                         </ul>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">8</div>
-                    <h4 class="article-title zh">理事会</h4>
-                    <h4 class="article-title en">Council</h4>
+                    <h4 class="article-title" data-i18n="article3_2.title"></h4>
                     <div class="article-content">
-                        <p class="zh">理事会是WEPO的执行机构，由会员大会选举产生，任期三年，可连选连任。理事会设主席一人，副主席若干人，秘书长一人。理事会的主要职责包括：</p>
-                        <p class="en">The Council is the executive body of WEPO, elected by the General Assembly for a term of three years and eligible for re-election. The Council consists of one Chairperson, several Vice-Chairpersons, and one Secretary-General. The main responsibilities of the Council include:</p>
+                        <p data-i18n="article3_2.intro"></p>
                         <ul>
-                            <li class="zh">执行会员大会的决议</li>
-                            <li class="en">Implementing resolutions of the General Assembly</li>
-                            <li class="zh">制定本组织的工作计划和预算</li>
-                            <li class="en">Formulating the organization's work plans and budgets</li>
-                            <li class="zh">管理本组织的日常事务</li>
-                            <li class="en">Managing the organization's daily affairs</li>
-                            <li class="zh">决定分支机构的设立和撤销</li>
-                            <li class="en">Deciding on the establishment and dissolution of branches</li>
-                            <li class="zh">任命和罢免秘书长</li>
-                            <li class="en">Appointing and dismissing the Secretary-General</li>
+                            <li data-i18n="article3_2.li1"></li>
+                            <li data-i18n="article3_2.li2"></li>
+                            <li data-i18n="article3_2.li3"></li>
+                            <li data-i18n="article3_2.li4"></li>
+                            <li data-i18n="article3_2.li5"></li>
                         </ul>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">9</div>
-                    <h4 class="article-title zh">秘书处</h4>
-                    <h4 class="article-title en">Secretariat</h4>
+                    <h4 class="article-title" data-i18n="article3_3.title"></h4>
                     <div class="article-content">
-                        <p class="zh">秘书处是WEPO的常设办事机构，由秘书长领导，负责处理本组织的日常事务。秘书处的主要职责包括：</p>
-                        <p class="en">The Secretariat is the permanent administrative body of WEPO, led by the Secretary-General, responsible for handling the organization's daily affairs. The main responsibilities of the Secretariat include:</p>
+                        <p data-i18n="article3_3.intro"></p>
                         <ul>
-                            <li class="zh">执行理事会的决议</li>
-                            <li class="en">Implementing resolutions of the Council</li>
-                            <li class="zh">协调各部门和各分支机构的工作</li>
-                            <li class="en">Coordinating the work of various departments and branches</li>
-                            <li class="zh">管理本组织的财务和资产</li>
-                            <li class="en">Managing the organization's finances and assets</li>
-                            <li class="zh">组织各类活动和项目</li>
-                            <li class="en">Organizing various activities and projects</li>
-                            <li class="zh">处理会员事务</li>
-                            <li class="en">Handling membership affairs</li>
+                            <li data-i18n="article3_3.li1"></li>
+                            <li data-i18n="article3_3.li2"></li>
+                            <li data-i18n="article3_3.li3"></li>
+                            <li data-i18n="article3_3.li4"></li>
+                            <li data-i18n="article3_3.li5"></li>
                         </ul>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">10</div>
-                    <h4 class="article-title zh">专业委员会</h4>
-                    <h4 class="article-title en">Special Committees</h4>
+                    <h4 class="article-title" data-i18n="article3_4.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO可根据工作需要设立专业委员会，如科学委员会、政策委员会、教育委员会等。各专业委员会由相关领域的专家组成，负责提供专业咨询和建议。</p>
-                        <p class="en">WEPO may establish Special Committees as needed, such as the Science Committee, Policy Committee, Education Committee, etc. Each Special Committee consists of experts in relevant fields, responsible for providing professional advice and recommendations.</p>
+                        <p data-i18n="article3_4.content"></p>
                     </div>
                 </div>
             </div>
-            
+
             <!-- 第四章 -->
             <div class="chapter animate-on-scroll">
-                <h3 class="chapter-title zh">第四章 财务管理</h3>
-                <h3 class="chapter-title en">Chapter 4 Financial Management</h3>
-                
+                <h3 class="chapter-title" data-i18n="chapter4.title"></h3>
                 <div class="article">
                     <div class="article-number">11</div>
-                    <h4 class="article-title zh">资金来源</h4>
-                    <h4 class="article-title en">Funding Sources</h4>
+                    <h4 class="article-title" data-i18n="article4_1.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO的资金来源包括：</p>
-                        <p class="en">WEPO's funding sources include:</p>
+                        <p data-i18n="article4_1.intro"></p>
                         <ul>
-                            <li class="zh">会员会费</li>
-                            <li class="en">Membership fees</li>
-                            <li class="zh">社会捐赠</li>
-                            <li class="en">Social donations</li>
-                            <li class="zh">政府资助</li>
-                            <li class="en">Government grants</li>
-                            <li class="zh">项目收入</li>
-                            <li class="en">Project income</li>
-                            <li class="zh">其他合法收入</li>
-                            <li class="en">Other lawful income</li>
+                            <li data-i18n="article4_1.li1"></li>
+                            <li data-i18n="article4_1.li2"></li>
+                            <li data-i18n="article4_1.li3"></li>
+                            <li data-i18n="article4_1.li4"></li>
+                            <li data-i18n="article4_1.li5"></li>
                         </ul>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">12</div>
-                    <h4 class="article-title zh">资金使用</h4>
-                    <h4 class="article-title en">Use of Funds</h4>
+                    <h4 class="article-title" data-i18n="article4_2.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO的资金必须用于本章程规定的业务范围和事业发展，不得在会员中分配。本组织的资产管理必须执行国家规定的财务管理制度，接受会员大会和财政部门的监督。</p>
-                        <p class="en">WEPO's funds must be used for the business scope and development as stipulated in this constitution and shall not be distributed among members. The organization's asset management must comply with the financial management system stipulated by the state and be subject to supervision by the General Assembly and financial departments.</p>
+                        <p data-i18n="article4_2.content"></p>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">13</div>
-                    <h4 class="article-title zh">财务监督</h4>
-                    <h4 class="article-title en">Financial Supervision</h4>
+                    <h4 class="article-title" data-i18n="article4_3.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO设立监事会，负责监督本组织的财务活动。监事会由会员大会选举产生，任期三年。监事会的职责包括：</p>
-                        <p class="en">WEPO establishes a Supervisory Board responsible for supervising the organization's financial activities. The Supervisory Board is elected by the General Assembly for a term of three years. The responsibilities of the Supervisory Board include:</p>
+                        <p data-i18n="article4_3.intro"></p>
                         <ul>
-                            <li class="zh">监督理事会和秘书处的财务活动</li>
-                            <li class="en">Supervising the financial activities of the Council and Secretariat</li>
-                            <li class="zh">审查本组织的财务报告</li>
-                            <li class="en">Reviewing the organization's financial reports</li>
-                            <li class="zh">向会员大会报告监督情况</li>
-                            <li class="en">Reporting supervision results to the General Assembly</li>
-                            <li class="zh">提出改进财务管理的建议</li>
-                            <li class="en">Providing recommendations for improving financial management</li>
+                            <li data-i18n="article4_3.li1"></li>
+                            <li data-i18n="article4_3.li2"></li>
+                            <li data-i18n="article4_3.li3"></li>
+                            <li data-i18n="article4_3.li4"></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
+
             <!-- 第五章 -->
             <div class="chapter animate-on-scroll">
-                <h3 class="chapter-title zh">第五章 章程修改与终止</h3>
-                <h3 class="chapter-title en">Chapter 5 Amendments and Termination</h3>
-                
+                <h3 class="chapter-title" data-i18n="chapter5.title"></h3>
                 <div class="article">
                     <div class="article-number">14</div>
-                    <h4 class="article-title zh">章程修改</h4>
-                    <h4 class="article-title en">Amendments</h4>
+                    <h4 class="article-title" data-i18n="article5_1.title"></h4>
                     <div class="article-content">
-                        <p class="zh">本章程的修改须经会员大会三分之二以上会员表决通过，并报相关部门备案后生效。</p>
-                        <p class="en">Amendments to this constitution must be approved by more than two-thirds of the members at the General Assembly and shall take effect after being filed with relevant authorities.</p>
+                        <p data-i18n="article5_1.content"></p>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">15</div>
-                    <h4 class="article-title zh">组织终止</h4>
-                    <h4 class="article-title en">Termination</h4>
+                    <h4 class="article-title" data-i18n="article5_2.title"></h4>
                     <div class="article-content">
-                        <p class="zh">WEPO完成宗旨或自行解散或由于分立、合并等原因需要注销的，由理事会提出终止动议，经会员大会表决通过，并报相关部门审查同意后，按国家有关规定处理剩余财产。</p>
-                        <p class="en">If WEPO completes its purpose, voluntarily dissolves, or needs to be terminated due to division, merger, or other reasons, the Council shall propose a termination motion, which shall be approved by the General Assembly and reviewed and agreed upon by relevant authorities. The remaining assets shall be handled according to relevant national regulations.</p>
+                        <p data-i18n="article5_2.content"></p>
                     </div>
                 </div>
             </div>
-            
+
             <!-- 第六章 -->
             <div class="chapter animate-on-scroll">
-                <h3 class="chapter-title zh">第六章 附则</h3>
-                <h3 class="chapter-title en">Chapter 6 Supplementary Provisions</h3>
-                
+                <h3 class="chapter-title" data-i18n="chapter6.title"></h3>
                 <div class="article">
                     <div class="article-number">16</div>
-                    <h4 class="article-title zh">生效日期</h4>
-                    <h4 class="article-title en">Effective Date</h4>
+                    <h4 class="article-title" data-i18n="article6_1.title"></h4>
                     <div class="article-content">
-                        <p class="zh">本章程自2021年5月22日起生效。</p>
-                        <p class="en">This constitution shall take effect from May 22, 2021.</p>
+                        <p data-i18n="article6_1.content"></p>
                     </div>
                 </div>
-                
                 <div class="article">
                     <div class="article-number">17</div>
-                    <h4 class="article-title zh">解释权</h4>
-                    <h4 class="article-title en">Interpretation</h4>
+                    <h4 class="article-title" data-i18n="article6_2.title"></h4>
                     <div class="article-content">
-                        <p class="zh">本章程的解释权属于WEPO理事会。</p>
-                        <p class="en">The interpretation of this constitution belongs to the WEPO Council.</p>
+                        <p data-i18n="article6_2.content"></p>
                     </div>
                 </div>
             </div>
@@ -1094,50 +1164,45 @@
         <div class="footer-content">
             <div class="footer-about">
                 <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
-                <p class="zh">世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。</p>
-                <p class="en">World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.</p>
+                <p data-i18n="footer.about"></p>
                 <div class="social-links">
-                    <a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank">T</a>
-                    <a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank">K</a>
-                    <a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank">W</a>
+                    <a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank" rel="noopener noreferrer">T</a>
+                    <a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank" rel="noopener noreferrer">K</a>
+                    <a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank" rel="noopener noreferrer">W</a>
                 </div>
             </div>
             <div class="footer-links">
-                <h3 class="zh">快速链接</h3>
-                <h3 class="en">Quick Links</h3>
+                <h3 data-i18n="footer.links_title"></h3>
                 <ul>
-                    <li><a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a></li>
-                    <li><a href="index.html#about" class="zh">关于我们</a><a href="index.html#about" class="en">About</a></li>
-                    <li><a href="index.html#mission" class="zh">使命愿景</a><a href="index.html#mission" class="en">Mission</a></li>
-                    <li><a href="hbxm.html" class="zh">环保项目</a><a href="hbxm.html" class="en">Programs</a></li>
-                    <li><a href="index.html#partners" class="zh">合作伙伴</a><a href="index.html#partners" class="en">Partners</a></li>
-                    <li><a href="index.html#contact" class="zh">联系我们</a><a href="index.html#contact" class="en">Contact</a></li>
-                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
-                    <li><a href="jz.html" class="zh">捐赠支持</a><a href="jz.html" class="en">Donate</a></li>
+                    <li><a href="index.html" data-i18n="nav.home"></a></li>
+                    <li><a href="index.html#about" data-i18n="nav.about"></a></li>
+                    <li><a href="index.html#mission" data-i18n="nav.mission"></a></li>
+                    <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+                    <li><a href="index.html#partners" data-i18n="nav.partners"></a></li>
+                    <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+                    <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+                    <li><a href="jz.html" data-i18n="nav.donate"></a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h3 class="zh">组织架构</h3>
-                <h3 class="en">Organization</h3>
+                <h3 data-i18n="footer.org_title"></h3>
                 <ul>
-                    <li><a href="crlsh.html" class="zh">理事会</a><a href="crlsh.html" class="en">Council</a></li>
-                    <li><a href="zyz.html" class="zh">志愿者网络</a><a href="zyz.html" class="en">Volunteers</a></li>
-                    <li><a href="zc.html" class="zh">组织章程</a><a href="zc.html" class="en">Constitution</a></li>
+                    <li><a href="crlsh.html" data-i18n="footer.council"></a></li>
+                    <li><a href="zyz.html" data-i18n="footer.volunteers"></a></li>
+                    <li><a href="zc.html" data-i18n="nav.constitution"></a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h3 class="zh">资源中心</h3>
-                <h3 class="en">Resources</h3>
+                <h3 data-i18n="footer.resources_title"></h3>
                 <ul>
-                    <li><a href="ndbg.html" class="zh">年度报告</a><a href="ndbg.html" class="en">Annual Reports</a></li>
-                    <li><a href="yjbg.html" class="zh">研究报告</a><a href="yjbg.html" class="en">Research Papers</a></li>
-                    <li><a href="sp.html" class="zh">环保视频</a><a href="sp.html" class="en">Videos</a></li>
+                    <li><a href="ndbg.html" data-i18n="footer.reports"></a></li>
+                    <li><a href="yjbg.html" data-i18n="footer.papers"></a></li>
+                    <li><a href="sp.html" data-i18n="nav.videos"></a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="zh">© 2021-2025 世界环境保护组织 版权所有</p>
-            <p class="en">© 2021-2025 World Environmental Protection Organization. All Rights Reserved.</p>
+            <p>&copy; <span id="currentYear"></span> <span data-i18n="footer.copyright"></span></p>
         </div>
     </footer>
 
@@ -1145,96 +1210,835 @@
     <div class="scroll-top" id="scrollTop">↑</div>
 
     <script>
-        // Loading Screen
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                }, 500);
-            }, 500);
+        // --- 多语言支持 (与 index.html 保持一致) ---
+        const translations = {
+            "zh-CN": {
+                "lang.current": "中文",
+                "nav.home": "首页",
+                "nav.about": "关于我们",
+                "nav.mission": "使命愿景",
+                "nav.programs": "环保项目",
+                "nav.partners": "合作伙伴",
+                "nav.contact": "联系我们",
+                "nav.council": "常任理事会",
+                "nav.videos": "环保视频",
+                "nav.donate": "捐赠支持",
+                "nav.constitution": "组织章程",
+                "nav.support": "客服支持",
+                "page.title": "WEPO - 组织章程",
+                "hero.title": "组织章程",
+                "hero.description": "世界环境保护组织的根本制度文件，规定了组织的宗旨、结构、运作方式和成员权利义务",
+                "constitution.title": "世界环境保护组织章程",
+                "chapter1.title": "第一章 总则",
+                "article1_1.title": "名称与性质",
+                "article1_1.content": "本组织名称为\"世界环境保护组织\"（World Environmental Protection Organization，简称WEPO），是一个非政府、非营利性的国际环保组织。",
+                "article1_2.title": "宗旨",
+                "article1_2.content": "WEPO的宗旨是通过科学研究、政策倡导和公众教育，推动全球环境保护事业，应对气候变化，保护生物多样性，促进可持续发展。",
+                "article1_3.title": "总部",
+                "article1_3.content": "WEPO总部设在中国重庆市，可在全球各地设立分支机构或代表处。",
+                "chapter2.title": "第二章 会员",
+                "article2_1.title": "会员资格",
+                "article2_1.intro": "WEPO会员分为个人会员和团体会员：",
+                "article2_1.li1": "个人会员：年满18周岁，认同本组织宗旨，愿意为环境保护事业贡献力量的自然人",
+                "article2_1.li2": "团体会员：依法成立的法人或其他组织，认同本组织宗旨，愿意参与环境保护活动",
+                "article2_2.title": "会员权利",
+                "article2_2.intro": "WEPO会员享有以下权利：",
+                "article2_2.li1": "参与本组织的各项活动",
+                "article2_2.li2": "获得本组织提供的服务和信息",
+                "article2_2.li3": "对本组织工作提出建议和意见",
+                "article2_2.li4": "选举和被选举为理事会成员",
+                "article2_2.li5": "自愿退会的权利",
+                "article2_3.title": "会员义务",
+                "article2_3.intro": "WEPO会员应履行以下义务：",
+                "article2_3.li1": "遵守本组织章程和各项规章制度",
+                "article2_3.li2": "维护本组织的声誉和利益",
+                "article2_3.li3": "积极参与本组织的活动",
+                "article2_3.li4": "按时缴纳会费",
+                "article2_3.li5": "履行理事会规定的其他义务",
+                "chapter3.title": "第三章 组织机构",
+                "article3_1.title": "会员大会",
+                "article3_1.intro": "会员大会是WEPO的最高权力机构，由全体会员组成，每年召开一次会议。会员大会的职责包括：",
+                "article3_1.li1": "制定和修改章程",
+                "article3_1.li2": "选举和罢免理事会成员",
+                "article3_1.li3": "审议理事会工作报告和财务报告",
+                "article3_1.li4": "决定本组织的重大事项",
+                "article3_2.title": "理事会",
+                "article3_2.intro": "理事会是WEPO的执行机构，由会员大会选举产生，任期三年，可连选连任。理事会设主席一人，副主席若干人，秘书长一人。理事会的主要职责包括：",
+                "article3_2.li1": "执行会员大会的决议",
+                "article3_2.li2": "制定本组织的工作计划和预算",
+                "article3_2.li3": "管理本组织的日常事务",
+                "article3_2.li4": "决定分支机构的设立和撤销",
+                "article3_2.li5": "任命和罢免秘书长",
+                "article3_3.title": "秘书处",
+                "article3_3.intro": "秘书处是WEPO的常设办事机构，由秘书长领导，负责处理本组织的日常事务。秘书处的主要职责包括：",
+                "article3_3.li1": "执行理事会的决议",
+                "article3_3.li2": "协调各部门和各分支机构的工作",
+                "article3_3.li3": "管理本组织的财务和资产",
+                "article3_3.li4": "组织各类活动和项目",
+                "article3_3.li5": "处理会员事务",
+                "article3_4.title": "专业委员会",
+                "article3_4.content": "WEPO可根据工作需要设立专业委员会，如科学委员会、政策委员会、教育委员会等。各专业委员会由相关领域的专家组成，负责提供专业咨询和建议。",
+                "chapter4.title": "第四章 财务管理",
+                "article4_1.title": "资金来源",
+                "article4_1.intro": "WEPO的资金来源包括：",
+                "article4_1.li1": "会员会费",
+                "article4_1.li2": "社会捐赠",
+                "article4_1.li3": "政府资助",
+                "article4_1.li4": "项目收入",
+                "article4_1.li5": "其他合法收入",
+                "article4_2.title": "资金使用",
+                "article4_2.content": "WEPO的资金必须用于本章程规定的业务范围和事业发展，不得在会员中分配。本组织的资产管理必须执行国家规定的财务管理制度，接受会员大会和财政部门的监督。",
+                "article4_3.title": "财务监督",
+                "article4_3.intro": "WEPO设立监事会，负责监督本组织的财务活动。监事会由会员大会选举产生，任期三年。监事会的职责包括：",
+                "article4_3.li1": "监督理事会和秘书处的财务活动",
+                "article4_3.li2": "审查本组织的财务报告",
+                "article4_3.li3": "向会员大会报告监督情况",
+                "article4_3.li4": "提出改进财务管理的建议",
+                "chapter5.title": "第五章 章程修改与终止",
+                "article5_1.title": "章程修改",
+                "article5_1.content": "本章程的修改须经会员大会三分之二以上会员表决通过，并报相关部门备案后生效。",
+                "article5_2.title": "组织终止",
+                "article5_2.content": "WEPO完成宗旨或自行解散或由于分立、合并等原因需要注销的，由理事会提出终止动议，经会员大会表决通过，并报相关部门审查同意后，按国家有关规定处理剩余财产。",
+                "chapter6.title": "第六章 附则",
+                "article6_1.title": "生效日期",
+                "article6_1.content": "本章程自2021年5月22日起生效。",
+                "article6_2.title": "解释权",
+                "article6_2.content": "本章程的解释权属于WEPO理事会。",
+                "footer.about": "世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。",
+                "footer.links_title": "快速链接",
+                "footer.org_title": "组织架构",
+                "footer.council": "理事会",
+                "footer.volunteers": "志愿者网络",
+                "footer.resources_title": "资源中心",
+                "footer.reports": "年度报告",
+                "footer.papers": "研究报告",
+                "footer.copyright": "世界环境保护组织. 版权所有."
+            },
+            "en": {
+                "lang.current": "EN",
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.mission": "Mission",
+                "nav.programs": "Programs",
+                "nav.partners": "Partners",
+                "nav.contact": "Contact",
+                "nav.council": "Council",
+                "nav.videos": "Videos",
+                "nav.donate": "Donate",
+                "nav.constitution": "Constitution",
+                "nav.support": "Customer Support",
+                "page.title": "WEPO - Constitution",
+                "hero.title": "Constitution",
+                "hero.description": "The fundamental document of WEPO, defining the organization's purpose, structure, operations, and members' rights and obligations",
+                "constitution.title": "Constitution of World Environmental Protection Organization",
+                "chapter1.title": "Chapter 1 General Provisions",
+                "article1_1.title": "Name and Nature",
+                "article1_1.content": "The organization shall be named \"World Environmental Protection Organization\" (abbreviated as WEPO), a non-governmental, non-profit international environmental organization.",
+                "article1_2.title": "Purpose",
+                "article1_2.content": "The purpose of WEPO is to promote global environmental protection through scientific research, policy advocacy, and public education, addressing climate change, protecting biodiversity, and fostering sustainable development.",
+                "article1_3.title": "Headquarters",
+                "article1_3.content": "The headquarters of WEPO is located in Chongqing, China, and may establish branches or representative offices worldwide.",
+                "chapter2.title": "Chapter 2 Membership",
+                "article2_1.title": "Membership Eligibility",
+                "article2_1.intro": "WEPO membership consists of individual members and institutional members:",
+                "article2_1.li1": "Individual members: Natural persons aged 18 or above who endorse the organization's purpose and are willing to contribute to environmental protection",
+                "article2_1.li2": "Institutional members: Legally established legal entities or other organizations that endorse the organization's purpose and are willing to participate in environmental protection activities",
+                "article2_2.title": "Membership Rights",
+                "article2_2.intro": "WEPO members enjoy the following rights:",
+                "article2_2.li1": "Participate in all activities of the organization",
+                "article2_2.li2": "Receive services and information provided by the organization",
+                "article2_2.li3": "Provide suggestions and opinions on the organization's work",
+                "article2_2.li4": "Elect and be elected as members of the Council",
+                "article2_2.li5": "The right to voluntarily withdraw from membership",
+                "article2_3.title": "Membership Obligations",
+                "article2_3.intro": "WEPO members shall fulfill the following obligations:",
+                "article2_3.li1": "Comply with the organization's constitution and regulations",
+                "article2_3.li2": "Safeguard the reputation and interests of the organization",
+                "article2_3.li3": "Actively participate in the organization's activities",
+                "article2_3.li4": "Pay membership fees on time",
+                "article2_3.li5": "Fulfill other obligations stipulated by the Council",
+                "chapter3.title": "Chapter 3 Organizational Structure",
+                "article3_1.title": "General Assembly",
+                "article3_1.intro": "The General Assembly is the supreme authority of WEPO, composed of all members, and convenes once a year. The responsibilities of the General Assembly include:",
+                "article3_1.li1": "Formulating and amending the constitution",
+                "article3_1.li2": "Electing and dismissing Council members",
+                "article3_1.li3": "Reviewing the Council's work reports and financial reports",
+                "article3_1.li4": "Deciding on major matters of the organization",
+                "article3_2.title": "Council",
+                "article3_2.intro": "The Council is the executive body of WEPO, elected by the General Assembly for a term of three years and eligible for re-election. The Council consists of one Chairperson, several Vice-Chairpersons, and one Secretary-General. The main responsibilities of the Council include:",
+                "article3_2.li1": "Implementing resolutions of the General Assembly",
+                "article3_2.li2": "Formulating the organization's work plans and budgets",
+                "article3_2.li3": "Managing the organization's daily affairs",
+                "article3_2.li4": "Deciding on the establishment and dissolution of branches",
+                "article3_2.li5": "Appointing and dismissing the Secretary-General",
+                "article3_3.title": "Secretariat",
+                "article3_3.intro": "The Secretariat is the permanent administrative body of WEPO, led by the Secretary-General, responsible for handling the organization's daily affairs. The main responsibilities of the Secretariat include:",
+                "article3_3.li1": "Implementing resolutions of the Council",
+                "article3_3.li2": "Coordinating the work of various departments and branches",
+                "article3_3.li3": "Managing the organization's finances and assets",
+                "article3_3.li4": "Organizing various activities and projects",
+                "article3_3.li5": "Handling membership affairs",
+                "article3_4.title": "Special Committees",
+                "article3_4.content": "WEPO may establish Special Committees as needed, such as the Science Committee, Policy Committee, Education Committee, etc. Each Special Committee consists of experts in relevant fields, responsible for providing professional advice and recommendations.",
+                "chapter4.title": "Chapter 4 Financial Management",
+                "article4_1.title": "Funding Sources",
+                "article4_1.intro": "WEPO's funding sources include:",
+                "article4_1.li1": "Membership fees",
+                "article4_1.li2": "Social donations",
+                "article4_1.li3": "Government grants",
+                "article4_1.li4": "Project income",
+                "article4_1.li5": "Other lawful income",
+                "article4_2.title": "Use of Funds",
+                "article4_2.content": "WEPO's funds must be used for the business scope and development as stipulated in this constitution and shall not be distributed among members. The organization's asset management must comply with the financial management system stipulated by the state and be subject to supervision by the General Assembly and financial departments.",
+                "article4_3.title": "Financial Supervision",
+                "article4_3.intro": "WEPO establishes a Supervisory Board responsible for supervising the organization's financial activities. The Supervisory Board is elected by the General Assembly for a term of three years. The responsibilities of the Supervisory Board include:",
+                "article4_3.li1": "Supervising the financial activities of the Council and Secretariat",
+                "article4_3.li2": "Reviewing the organization's financial reports",
+                "article4_3.li3": "Reporting supervision results to the General Assembly",
+                "article4_3.li4": "Providing recommendations for improving financial management",
+                "chapter5.title": "Chapter 5 Amendments and Termination",
+                "article5_1.title": "Amendments",
+                "article5_1.content": "Amendments to this constitution must be approved by more than two-thirds of the members at the General Assembly and shall take effect after being filed with relevant authorities.",
+                "article5_2.title": "Termination",
+                "article5_2.content": "If WEPO completes its purpose, voluntarily dissolves, or needs to be terminated due to division, merger, or other reasons, the Council shall propose a termination motion, which shall be approved by the General Assembly and reviewed and agreed upon by relevant authorities. The remaining assets shall be handled according to relevant national regulations.",
+                "chapter6.title": "Chapter 6 Supplementary Provisions",
+                "article6_1.title": "Effective Date",
+                "article6_1.content": "This constitution shall take effect from May 22, 2021.",
+                "article6_2.title": "Interpretation",
+                "article6_2.content": "The interpretation of this constitution belongs to the WEPO Council.",
+                "footer.about": "The World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.",
+                "footer.links_title": "Quick Links",
+                "footer.org_title": "Organization",
+                "footer.council": "Council",
+                "footer.volunteers": "Volunteers",
+                "footer.resources_title": "Resources",
+                "footer.reports": "Annual Reports",
+                "footer.papers": "Research Papers",
+                "footer.copyright": "World Environmental Protection Organization. All Rights Reserved."
+            },
+             "es": {
+                "lang.current": "ES",
+                "nav.home": "Inicio",
+                "nav.about": "Acerca de",
+                "nav.mission": "Misión",
+                "nav.programs": "Programas",
+                "nav.partners": "Socios",
+                "nav.contact": "Contacto",
+                "nav.council": "Consejo",
+                "nav.videos": "Videos",
+                "nav.donate": "Donar",
+                "nav.constitution": "Carta",
+                "nav.support": "Soporte al Cliente",
+                "page.title": "WEPO - Carta",
+                "hero.title": "Carta",
+                "hero.description": "El documento fundamental de WEPO, que define el propósito, la estructura, las operaciones y los derechos y obligaciones de los miembros de la organización.",
+                "constitution.title": "Carta de la Organización Mundial para la Protección del Medio Ambiente",
+                "chapter1.title": "Capítulo 1 Disposiciones Generales",
+                "article1_1.title": "Nombre y Naturaleza",
+                "article1_1.content": "La organización se denominará \"Organización Mundial para la Protección del Medio Ambiente\" (abreviada como WEPO), una organización ambiental internacional no gubernamental y sin fines de lucro.",
+                "article1_2.title": "Propósito",
+                "article1_2.content": "El propósito de WEPO es promover la protección ambiental global a través de la investigación científica, la defensa de políticas y la educación pública, abordando el cambio climático, protegiendo la biodiversidad y fomentando el desarrollo sostenible.",
+                "article1_3.title": "Sede",
+                "article1_3.content": "La sede de WEPO está ubicada en Chongqing, China, y puede establecer sucursales u oficinas representativas en todo el mundo.",
+                "chapter2.title": "Capítulo 2 Membresía",
+                "article2_1.title": "Elegibilidad para la Membresía",
+                "article2_1.intro": "La membresía de WEPO se compone de miembros individuales y miembros institucionales:",
+                "article2_1.li1": "Miembros individuales: Personas naturales mayores de 18 años que aprueben el propósito de la organización y estén dispuestas a contribuir a la causa de la protección ambiental.",
+                "article2_1.li2": "Miembros institucionales: Entidades legales u otras organizaciones constituidas legalmente que aprueben el propósito de la organización y estén dispuestas a participar en actividades de protección ambiental.",
+                "article2_2.title": "Derechos de los Miembros",
+                "article2_2.intro": "Los miembros de WEPO disfrutan de los siguientes derechos:",
+                "article2_2.li1": "Participar en todas las actividades de la organización.",
+                "article2_2.li2": "Recibir servicios e información proporcionados por la organización.",
+                "article2_2.li3": "Presentar sugerencias y opiniones sobre el trabajo de la organización.",
+                "article2_2.li4": "Elegir y ser elegido como miembros del Consejo.",
+                "article2_2.li5": "El derecho a retirarse voluntariamente de la membresía.",
+                "article2_3.title": "Obligaciones de los Miembros",
+                "article2_3.intro": "Los miembros de WEPO deben cumplir con las siguientes obligaciones:",
+                "article2_3.li1": "Cumplir con la carta y los reglamentos de la organización.",
+                "article2_3.li2": "Salvaguardar la reputación y los intereses de la organización.",
+                "article2_3.li3": "Participar activamente en las actividades de la organización.",
+                "article2_3.li4": "Pagar las cuotas de membresía a tiempo.",
+                "article2_3.li5": "Cumplir con otras obligaciones estipuladas por el Consejo.",
+                "chapter3.title": "Capítulo 3 Estructura Organizativa",
+                "article3_1.title": "Asamblea General",
+                "article3_1.intro": "La Asamblea General es la autoridad suprema de WEPO, compuesta por todos los miembros, y se reúne una vez al año. Las responsabilidades de la Asamblea General incluyen:",
+                "article3_1.li1": "Formular y enmendar la carta.",
+                "article3_1.li2": "Elegir y destituir a los miembros del Consejo.",
+                "article3_1.li3": "Revisar los informes de trabajo y financieros del Consejo.",
+                "article3_1.li4": "Decidir sobre asuntos importantes de la organización.",
+                "article3_2.title": "Consejo",
+                "article3_2.intro": "El Consejo es el órgano ejecutivo de WEPO, elegido por la Asamblea General por un período de tres años y elegible para la reelección. El Consejo consta de un Presidente, varios Vicepresidentes y un Secretario General. Las principales responsabilidades del Consejo incluyen:",
+                "article3_2.li1": "Implementar las resoluciones de la Asamblea General.",
+                "article3_2.li2": "Formular los planes de trabajo y presupuestos de la organización.",
+                "article3_2.li3": "Administrar los asuntos diarios de la organización.",
+                "article3_2.li4": "Decidir sobre el establecimiento y disolución de sucursales.",
+                "article3_2.li5": "Nombrar y destituir al Secretario General.",
+                "article3_3.title": "Secretaría",
+                "article3_3.intro": "La Secretaría es el órgano administrativo permanente de WEPO, dirigido por el Secretario General, responsable de manejar los asuntos diarios de la organización. Las principales responsabilidades de la Secretaría incluyen:",
+                "article3_3.li1": "Implementar las resoluciones del Consejo.",
+                "article3_3.li2": "Coordinar el trabajo de los diversos departamentos y sucursales.",
+                "article3_3.li3": "Administrar las finanzas y activos de la organización.",
+                "article3_3.li4": "Organizar diversas actividades y proyectos.",
+                "article3_3.li5": "Manejar asuntos de membresía.",
+                "article3_4.title": "Comités Especializados",
+                "article3_4.content": "WEPO puede establecer Comités Especializados según sea necesario, como el Comité Científico, el Comité de Políticas, el Comité de Educación, etc. Cada Comité Especializado está compuesto por expertos en campos relevantes, responsables de proporcionar asesoramiento y recomendaciones profesionales.",
+                "chapter4.title": "Capítulo 4 Gestión Financiera",
+                "article4_1.title": "Fuentes de Financiación",
+                "article4_1.intro": "Las fuentes de financiación de WEPO incluyen:",
+                "article4_1.li1": "Cuotas de membresía.",
+                "article4_1.li2": "Donaciones sociales.",
+                "article4_1.li3": "Subvenciones gubernamentales.",
+                "article4_1.li4": "Ingresos por proyectos.",
+                "article4_1.li5": "Otros ingresos legales.",
+                "article4_2.title": "Uso de los Fondos",
+                "article4_2.content": "Los fondos de WEPO deben utilizarse para el alcance de actividades y el desarrollo estipulados en esta carta y no se distribuirán entre los miembros. La gestión de activos de la organización debe cumplir con el sistema de gestión financiera estipulado por el estado y estar sujeta a la supervisión de la Asamblea General y los departamentos financieros.",
+                "article4_3.title": "Supervisión Financiera",
+                "article4_3.intro": "WEPO establece una Junta Supervisora responsable de supervisar las actividades financieras de la organización. La Junta Supervisora es elegida por la Asamblea General por un período de tres años. Las responsabilidades de la Junta Supervisora incluyen:",
+                "article4_3.li1": "Supervisar las actividades financieras del Consejo y la Secretaría.",
+                "article4_3.li2": "Revisar los informes financieros de la organización.",
+                "article4_3.li3": "Informar los resultados de la supervisión a la Asamblea General.",
+                "article4_3.li4": "Presentar recomendaciones para mejorar la gestión financiera.",
+                "chapter5.title": "Capítulo 5 Enmiendas y Disolución",
+                "article5_1.title": "Enmiendas",
+                "article5_1.content": "Las enmiendas a esta carta deben ser aprobadas por más de dos tercios de los miembros en la Asamblea General y entrarán en vigor después de ser registradas ante las autoridades pertinentes.",
+                "article5_2.title": "Disolución",
+                "article5_2.content": "Si WEPO completa su propósito, se disuelve voluntariamente o necesita ser disuelta debido a divisiones, fusiones u otras razones, el Consejo presentará una moción de disolución, que deberá ser aprobada por la Asamblea General y revisada y aprobada por las autoridades pertinentes. Los activos restantes se gestionarán según las regulaciones nacionales pertinentes.",
+                "chapter6.title": "Capítulo 6 Disposiciones Suplementarias",
+                "article6_1.title": "Fecha de Entrada en Vigor",
+                "article6_1.content": "Esta carta entrará en vigor a partir del 22 de mayo de 2021.",
+                "article6_2.title": "Interpretación",
+                "article6_2.content": "La interpretación de esta carta corresponde al Consejo de WEPO.",
+                "footer.about": "La Organización Mundial para la Protección del Medio Ambiente (WEPO) es una organización internacional sin fines de lucro dedicada a la protección ambiental global, promoviendo el desarrollo sostenible a través de la investigación científica, la defensa de políticas y la educación pública.",
+                "footer.links_title": "Enlaces Rápidos",
+                "footer.org_title": "Organización",
+                "footer.council": "Consejo",
+                "footer.volunteers": "Red de Voluntarios",
+                "footer.resources_title": "Centro de Recursos",
+                "footer.reports": "Informes Anuales",
+                "footer.papers": "Documentos de Investigación",
+                "footer.copyright": "Organización Mundial para la Protección del Medio Ambiente. Todos los derechos reservados."
+            },
+            "fr": {
+                "lang.current": "FR",
+                "nav.home": "Accueil",
+                "nav.about": "À propos",
+                "nav.mission": "Mission",
+                "nav.programs": "Programmes",
+                "nav.partners": "Partenaires",
+                "nav.contact": "Contact",
+                "nav.council": "Conseil",
+                "nav.videos": "Vidéos",
+                "nav.donate": "Faire un don",
+                "nav.constitution": "Charte",
+                "nav.support": "Support Client",
+                "page.title": "WEPO - Charte",
+                "hero.title": "Charte",
+                "hero.description": "Le document fondamental de WEPO, définissant l'objectif, la structure, les opérations et les droits et obligations des membres de l'organisation.",
+                "constitution.title": "Charte de l'Organisation Mondiale de Protection de l'Environnement",
+                "chapter1.title": "Chapitre 1 Dispositions Générales",
+                "article1_1.title": "Nom et Nature",
+                "article1_1.content": "L'organisation sera dénommée « Organisation Mondiale de Protection de l'Environnement » (abrégée en WEPO), une organisation environnementale internationale non gouvernementale et à but non lucratif.",
+                "article1_2.title": "Objectif",
+                "article1_2.content": "L'objectif de WEPO est de promouvoir la protection environnementale mondiale par la recherche scientifique, la défense des politiques et l'éducation du public, en s'attaquant au changement climatique, en protégeant la biodiversité et en favorisant le développement durable.",
+                "article1_3.title": "Siège",
+                "article1_3.content": "Le siège de WEPO est situé à Chongqing, en Chine, et peut établir des succursales ou des bureaux de représentation dans le monde entier.",
+                "chapter2.title": "Chapitre 2 Adhésion",
+                "article2_1.title": "Éligibilité à l'Adhésion",
+                "article2_1.intro": "L'adhésion à WEPO se compose de membres individuels et de membres institutionnels :",
+                "article2_1.li1": "Membres individuels : Personnes physiques âgées de 18 ans ou plus qui approuvent l'objectif de l'organisation et sont disposées à contribuer à la cause de la protection de l'environnement.",
+                "article2_1.li2": "Membres institutionnels : Entités juridiques ou autres organisations légalement constituées qui approuvent l'objectif de l'organisation et sont disposées à participer aux activités de protection de l'environnement.",
+                "article2_2.title": "Droits des Membres",
+                "article2_2.intro": "Les membres de WEPO jouissent des droits suivants :",
+                "article2_2.li1": "Participer à toutes les activités de l'organisation.",
+                "article2_2.li2": "Recevoir les services et informations fournis par l'organisation.",
+                "article2_2.li3": "Présenter des suggestions et des opinions sur le travail de l'organisation.",
+                "article2_2.li4": "Élire et être élu comme membres du Conseil.",
+                "article2_2.li5": "Le droit de se retirer volontairement de l'adhésion.",
+                "article2_3.title": "Obligations des Membres",
+                "article2_3.intro": "Les membres de WEPO doivent s'acquitter des obligations suivantes :",
+                "article2_3.li1": "Se conformer à la charte et aux règlements de l'organisation.",
+                "article2_3.li2": "Sauvegarder la réputation et les intérêts de l'organisation.",
+                "article2_3.li3": "Participer activement aux activités de l'organisation.",
+                "article2_3.li4": "Payer les cotisations à temps.",
+                "article2_3.li5": "S'acquitter des autres obligations stipulées par le Conseil.",
+                "chapter3.title": "Chapitre 3 Structure Organisationnelle",
+                "article3_1.title": "Assemblée Générale",
+                "article3_1.intro": "L'Assemblée Générale est l'autorité suprême de WEPO, composée de tous les membres, et se réunit une fois par an. Les responsabilités de l'Assemblée Générale comprennent :",
+                "article3_1.li1": "Formuler et modifier la charte.",
+                "article3_1.li2": "Élire et destituer les membres du Conseil.",
+                "article3_1.li3": "Examiner les rapports de travail et financiers du Conseil.",
+                "article3_1.li4": "Décider des questions importantes de l'organisation.",
+                "article3_2.title": "Conseil",
+                "article3_2.intro": "Le Conseil est l'organe exécutif de WEPO, élu par l'Assemblée Générale pour un mandat de trois ans et éligible au renouvellement. Le Conseil comprend un Président, plusieurs Vice-présidents et un Secrétaire général. Les principales responsabilités du Conseil comprennent :",
+                "article3_2.li1": "Mettre en œuvre les résolutions de l'Assemblée Générale.",
+                "article3_2.li2": "Formuler les plans de travail et les budgets de l'organisation.",
+                "article3_2.li3": "Gérer les affaires courantes de l'organisation.",
+                "article3_2.li4": "Décider de la création et de la dissolution des succursales.",
+                "article3_2.li5": "Nommer et destituer le Secrétaire général.",
+                "article3_3.title": "Secrétariat",
+                "article3_3.intro": "Le Secrétariat est l'organe administratif permanent de WEPO, dirigé par le Secrétaire général, responsable de la gestion des affaires courantes de l'organisation. Les principales responsabilités du Secrétariat comprennent :",
+                "article3_3.li1": "Mettre en œuvre les résolutions du Conseil.",
+                "article3_3.li2": "Coordonner le travail des différents départements et succursales.",
+                "article3_3.li3": "Gérer les finances et les actifs de l'organisation.",
+                "article3_3.li4": "Organiser diverses activités et projets.",
+                "article3_3.li5": "Gérer les affaires d'adhésion.",
+                "article3_4.title": "Comités Spécialisés",
+                "article3_4.content": "WEPO peut créer des Comités Spécialisés selon les besoins, tels que le Comité Scientifique, le Comité des Politiques, le Comité de l'Éducation, etc. Chaque Comité Spécialisé est composé d'experts dans des domaines pertinents, chargés de fournir des conseils et des recommandations professionnels.",
+                "chapter4.title": "Chapitre 4 Gestion Financière",
+                "article4_1.title": "Sources de Financement",
+                "article4_1.intro": "Les sources de financement de WEPO comprennent :",
+                "article4_1.li1": "Cotisations des membres.",
+                "article4_1.li2": "Dons sociaux.",
+                "article4_1.li3": "Subventions gouvernementales.",
+                "article4_1.li4": "Revenus des projets.",
+                "article4_1.li5": "Autres revenus licites.",
+                "article4_2.title": "Utilisation des Fonds",
+                "article4_2.content": "Les fonds de WEPO doivent être utilisés pour le champ d'activité et le développement stipulés dans cette charte et ne doivent pas être distribués entre les membres. La gestion des actifs de l'organisation doit respecter le système de gestion financière stipulé par l'État et être soumise à la supervision de l'Assemblée Générale et des départements financiers.",
+                "article4_3.title": "Surveillance Financière",
+                "article4_3.intro": "WEPO constitue un Conseil de Surveillance chargé de superviser les activités financières de l'organisation. Le Conseil de Surveillance est élu par l'Assemblée Générale pour un mandat de trois ans. Les responsabilités du Conseil de Surveillance comprennent :",
+                "article4_3.li1": "Surveiller les activités financières du Conseil et du Secrétariat.",
+                "article4_3.li2": "Examiner les rapports financiers de l'organisation.",
+                "article4_3.li3": "Rapporter les résultats de la surveillance à l'Assemblée Générale.",
+                "article4_3.li4": "Proposer des recommandations pour améliorer la gestion financière.",
+                "chapter5.title": "Chapitre 5 Amendements et Dissolution",
+                "article5_1.title": "Amendements",
+                "article5_1.content": "Les amendements à cette charte doivent être approuvés par plus des deux tiers des membres à l'Assemblée Générale et entrent en vigueur après avoir été déposés auprès des autorités compétentes.",
+                "article5_2.title": "Dissolution",
+                "article5_2.content": "Si WEPO accomplit son objectif, se dissout volontairement ou doit être dissoute en raison de divisions, de fusions ou d'autres raisons, le Conseil soumettra une motion de dissolution, qui devra être approuvée par l'Assemblée Générale et examinée et approuvée par les autorités compétentes. Les actifs restants seront gérés conformément aux réglementations nationales pertinentes.",
+                "chapter6.title": "Chapitre 6 Dispositions Supplémentaires",
+                "article6_1.title": "Date d'Entrée en Vigueur",
+                "article6_1.content": "Cette charte entre en vigueur à partir du 22 mai 2021.",
+                "article6_2.title": "Interprétation",
+                "article6_2.content": "L'interprétation de cette charte appartient au Conseil de WEPO.",
+                "footer.about": "L'Organisation Mondiale de Protection de l'Environnement (WEPO) est une organisation internationale à but non lucratif dédiée à la protection environnementale mondiale, promouvant le développement durable par la recherche scientifique, la défense des politiques et l'éducation du public.",
+                "footer.links_title": "Liens Rapides",
+                "footer.org_title": "Organisation",
+                "footer.council": "Conseil",
+                "footer.volunteers": "Réseau de Bénévoles",
+                "footer.resources_title": "Centre de Ressources",
+                "footer.reports": "Rapports Annuels",
+                "footer.papers": "Documents de Recherche",
+                "footer.copyright": "Organisation Mondiale de Protection de l'Environnement. Tous droits réservés."
+            },
+            "ru": {
+                "lang.current": "RU",
+                "nav.home": "Главная",
+                "nav.about": "О нас",
+                "nav.mission": "Миссия",
+                "nav.programs": "Программы",
+                "nav.partners": "Партнеры",
+                "nav.contact": "Контакты",
+                "nav.council": "Совет",
+                "nav.videos": "Видео",
+                "nav.donate": "Пожертвовать",
+                "nav.constitution": "Устав",
+                "nav.support": "Поддержка клиентов",
+                "page.title": "WEPO - Устав",
+                "hero.title": "Устав",
+                "hero.description": "Основной документ WEPO, определяющий цели, структуру, операции и права и обязанности членов организации.",
+                "constitution.title": "Устав Всемирной организации по охране окружающей среды",
+                "chapter1.title": "Глава 1 Общие положения",
+                "article1_1.title": "Наименование и характер",
+                "article1_1.content": "Организация называется «Всемирная организация по охране окружающей среды» (сокращенно WEPO), неправительственная некоммерческая международная экологическая организация.",
+                "article1_2.title": "Цель",
+                "article1_2.content": "Цель WEPO - содействовать глобальной охране окружающей среды посредством научных исследований, продвижения политики и просвещения общественности, решая проблемы изменения климата, защищая биоразнообразие и способствуя устойчивому развитию.",
+                "article1_3.title": "Штаб-квартира",
+                "article1_3.content": "Штаб-квартира WEPO расположена в городе Чунцин, Китай, и может создавать филиалы или представительства по всему миру.",
+                "chapter2.title": "Глава 2 Членство",
+                "article2_1.title": "Право на членство",
+                "article2_1.intro": "Членство WEPO состоит из индивидуальных и институциональных членов:",
+                "article2_1.li1": "Индивидуальные члены: физические лица старше 18 лет, поддерживающие цели организации и желающие внести вклад в дело охраны окружающей среды.",
+                "article2_1.li2": "Институциональные члены: юридические лица или другие организации, созданные в соответствии с законом, поддерживающие цели организации и желающие участвовать в мероприятиях по охране окружающей среды.",
+                "article2_2.title": "Права членов",
+                "article2_2.intro": "Члены WEPO обладают следующими правами:",
+                "article2_2.li1": "Участвовать во всех мероприятиях организации.",
+                "article2_2.li2": "Получать услуги и информацию, предоставляемые организацией.",
+                "article2_2.li3": "Высказывать предложения и мнения по работе организации.",
+                "article2_2.li4": "Избирать и быть избранным членами Совета.",
+                "article2_2.li5": "Право добровольно выйти из состава членов.",
+                "article2_3.title": "Обязанности членов",
+                "article2_3.intro": "Члены WEPO должны выполнять следующие обязанности:",
+                "article2_3.li1": "Соблюдать устав и правила организации.",
+                "article2_3.li2": "Защищать репутацию и интересы организации.",
+                "article2_3.li3": "Активно участвовать в деятельности организации.",
+                "article2_3.li4": "Своевременно платить членские взносы.",
+                "article2_3.li5": "Выполнять другие обязанности, установленные Советом.",
+                "chapter3.title": "Глава 3 Организационная структура",
+                "article3_1.title": "Общее собрание",
+                "article3_1.intro": "Общее собрание является высшим органом управления WEPO, состоит из всех членов и собирается один раз в год. Обязанности Общего собрания включают:",
+                "article3_1.li1": "Разработка и внесение изменений в устав.",
+                "article3_1.li2": "Выборы и отстранение членов Совета.",
+                "article3_1.li3": "Рассмотрение отчетов о работе и финансовой отчетности Совета.",
+                "article3_1.li4": "Принятие решений по важнейшим вопросам организации.",
+                "article3_2.title": "Совет",
+                "article3_2.intro": "Совет является исполнительным органом WEPO, избирается Общим собранием сроком на три года и может переизбираться. Совет состоит из одного Председателя, нескольких Заместителей Председателя и одного Генерального секретаря. Основные обязанности Совета включают:",
+                "article3_2.li1": "Осуществление решений Общего собрания.",
+                "article3_2.li2": "Разработка планов работы и бюджетов организации.",
+                "article3_2.li3": "Управление текущими делами организации.",
+                "article3_2.li4": "Принятие решений о создании и ликвидации филиалов.",
+                "article3_2.li5": "Назначение и отстранение Генерального секретаря.",
+                "article3_3.title": "Секретариат",
+                "article3_3.intro": "Секретариат является постоянным административным органом WEPO, возглавляется Генеральным секретарем и отвечает за ведение текущих дел организации. Основные обязанности Секретариата включают:",
+                "article3_3.li1": "Осуществление решений Совета.",
+                "article3_3.li2": "Координация работы различных департаментов и филиалов.",
+                "article3_3.li3": "Управление финансами и активами организации.",
+                "article3_3.li4": "Организация различных мероприятий и проектов.",
+                "article3_3.li5": "Обработка вопросов членства.",
+                "article3_4.title": "Специальные комитеты",
+                "article3_4.content": "WEPO может создавать Специальные комитеты по мере необходимости, такие как Научный комитет, Комитет по политике, Комитет по образованию и т. д. Каждый Специальный комитет состоит из экспертов в соответствующих областях, ответственных за предоставление профессиональных консультаций и рекомендаций.",
+                "chapter4.title": "Глава 4 Финансовое управление",
+                "article4_1.title": "Источники финансирования",
+                "article4_1.intro": "Источники финансирования WEPO включают:",
+                "article4_1.li1": "Членские взносы.",
+                "article4_1.li2": "Общественные пожертвования.",
+                "article4_1.li3": "Государственные гранты.",
+                "article4_1.li4": "Доходы от проектов.",
+                "article4_1.li5": "Другие законные доходы.",
+                "article4_2.title": "Использование средств",
+                "article4_2.content": "Средства WEPO должны использоваться в рамках деятельности и развития, предусмотренных настоящим уставом, и не могут распределяться между членами. Управление активами организации должно соответствовать системе финансового управления, установленной государством, и находиться под надзором Общего собрания и финансовых департаментов.",
+                "article4_3.title": "Финансовый надзор",
+                "article4_3.intro": "WEPO создает Совет по надзору, ответственный за надзор за финансовыми операциями организации. Совет по надзору избирается Общим собранием сроком на три года. Обязанности Совета по надзору включают:",
+                "article4_3.li1": "Надзор за финансовыми операциями Совета и Секретариата.",
+                "article4_3.li2": "Проверка финансовой отчетности организации.",
+                "article4_3.li3": "Представление результатов надзора на Общее собрание.",
+                "article4_3.li4": "Представление рекомендаций по улучшению финансового управления.",
+                "chapter5.title": "Глава 5 Поправки и прекращение",
+                "article5_1.title": "Поправки",
+                "article5_1.content": "Поправки к настоящему уставу должны быть одобрены более чем двумя третями членов на Общем собрании и вступают в силу после регистрации в соответствующих органах.",
+                "article5_2.title": "Прекращение",
+                "article5_2.content": "Если WEPO выполняет свою цель, добровольно распускается или должна быть распущена по причине разделения, слияния или других причин, Совет представляет предложение о прекращении, которое должно быть одобрено Общим собранием и рассмотрено и одобрено соответствующими органами. Оставшиеся активы будут управляться в соответствии с соответствующими национальными нормативными актами.",
+                "chapter6.title": "Глава 6 Заключительные положения",
+                "article6_1.title": "Дата вступления в силу",
+                "article6_1.content": "Настоящий устав вступает в силу с 22 мая 2021 года.",
+                "article6_2.title": "Интерпретация",
+                "article6_2.content": "Интерпретация настоящего устава принадлежит Совету WEPO.",
+                "footer.about": "Всемирная организация по охране окружающей среды (WEPO) - это некоммерческая международная организация, посвященная глобальной охране окружающей среды, способствуя устойчивому развитию посредством научных исследований, продвижения политики и просвещения общественности.",
+                "footer.links_title": "Быстрые ссылки",
+                "footer.org_title": "Организация",
+                "footer.council": "Совет",
+                "footer.volunteers": "Сеть волонтеров",
+                "footer.resources_title": "Центр ресурсов",
+                "footer.reports": "Годовые отчеты",
+                "footer.papers": "Исследовательские работы",
+                "footer.copyright": "Всемирная организация по охране окружающей среды. Все права защищены."
+            },
+            "ar": {
+                "lang.current": "AR",
+                "nav.home": "الرئيسية",
+                "nav.about": "معلومات عنا",
+                "nav.mission": "الرسالة والرؤية",
+                "nav.programs": "البرامج البيئية",
+                "nav.partners": "الشركاء",
+                "nav.contact": "اتصل بنا",
+                "nav.council": "المجلس",
+                "nav.videos": "الفيديوهات",
+                "nav.donate": "تبرع",
+                "nav.constitution": "النظام الأساسي",
+                "nav.support": "دعم العملاء",
+                "page.title": "WEPO - النظام الأساسي",
+                "hero.title": "النظام الأساسي",
+                "hero.description": "الوثيقة الأساسية لمنظمة WEPO، تحدد غرض المنظمة وبنائها وهياكلها التشغيلية وحقوق والتزامات الأعضاء.",
+                "constitution.title": "النظام الأساسي لمنظمة حماية البيئة العالمية",
+                "chapter1.title": "الفصل الأول الأحكام العامة",
+                "article1_1.title": "الاسم والطبيعة",
+                "article1_1.content": "تُسمى المنظمة \"منظمة حماية البيئة العالمية\" (ويرمز إليها اختصاراً بـ WEPO)، وهي منظمة بيئية دولية غير حكومية وغير ربحية.",
+                "article1_2.title": "الغرض",
+                "article1_2.content": "الغرض من WEPO هو تعزيز حماية البيئة العالمية من خلال البحث العلمي والدعوة للسياسات والتوعية العامة، والتصدي لتغير المناخ، وحماية التنوع البيولوجي، وتعزيز التنمية المستدامة.",
+                "article1_3.title": "المقر الرئيسي",
+                "article1_3.content": "مقر WEPO الرئيسي في مدينة تشونغتشينغ بالصين، ويمكنها إنشاء فروع أو مكاتب تمثيلية في جميع أنحاء العالم.",
+                "chapter2.title": "الفصل الثاني العضوية",
+                "article2_1.title": "أهلية العضوية",
+                "article2_1.intro": "تتألف عضوية WEPO من الأعضاء الأفراد والأعضاء المؤسسيين:",
+                "article2_1.li1": "الأعضاء الأفراد: الأشخاص الطبيعيون الذين تجاوزوا الثامنة عشرة من العمر، والمؤيدون لغرض المنظمة، والراغبون في المساهمة في قضية حماية البيئة.",
+                "article2_1.li2": "الأعضاء المؤسسيون: الكيانات القانونية أو المنظمات الأخرى المنشأة قانونياً، والمؤيدة لغرض المنظمة، والراغبة في المشاركة في الأنشطة البيئية.",
+                "article2_2.title": "حقوق الأعضاء",
+                "article2_2.intro": "يستفيد أعضاء WEPO من الحقوق التالية:",
+                "article2_2.li1": "المشاركة في جميع أنشطة المنظمة.",
+                "article2_2.li2": "تلقي الخدمات والمعلومات المقدمة من المنظمة.",
+                "article2_2.li3": "تقديم الاقتراحات والآراء حول عمل المنظمة.",
+                "article2_2.li4": "انتخاب وانتخاب كأعضاء في المجلس.",
+                "article2_2.li5": "حق الانسحاب الطوعي من العضوية.",
+                "article2_3.title": "التزامات الأعضاء",
+                "article2_3.intro": "على أعضاء WEPO الوفاء بالالتزامات التالية:",
+                "article2_3.li1": "الامتثال للنظام الأساسي ولائحة المنظمة.",
+                "article2_3.li2": "حماية سمعة المنظمة ومصالحها.",
+                "article2_3.li3": "المشاركة الفعالة في أنشطة المنظمة.",
+                "article2_3.li4": "دفع رسوم العضوية في الوقت المحدد.",
+                "article2_3.li5": "الوفاء بالالتزامات الأخرى التي ينص عليها المجلس.",
+                "chapter3.title": "الفصل الثالث الهيكل التنظيمي",
+                "article3_1.title": "الجمعية العمومية",
+                "article3_1.intro": "الجمعية العمومية هي السلطة العليا في WEPO، وتتألف من جميع الأعضاء، وتعقد اجتماعاً مرة واحدة في السنة. تشمل مسؤوليات الجمعية العمومية:",
+                "article3_1.li1": "وضع وتعديل النظام الأساسي.",
+                "article3_1.li2": "انتخاب وعزل أعضاء المجلس.",
+                "article3_1.li3": "مراجعة تقارير عمل المجلس والتقارير المالية.",
+                "article3_1.li4": "اتخاذ القرارات بشأن الأمور الهامة في المنظمة.",
+                "article3_2.title": "المجلس",
+                "article3_2.intro": "المجلس هو الجهاز التنفيذي ل WEPO، ويتم انتخابه من قبل الجمعية العمومية لمدة ثلاث سنوات، ويمكن إعادة انتخابه. يتكون المجلس من رئيس واحد، وعدة نواب للرئيس، وسكرتير عام واحد. تشمل المسؤوليات الرئيسية للمجلس:",
+                "article3_2.li1": "تنفيذ قرارات الجمعية العمومية.",
+                "article3_2.li2": "وضع خطط عمل المنظمة وميزانياتها.",
+                "article3_2.li3": "إدارة الشؤون اليومية للمنظمة.",
+                "article3_2.li4": "اتخاذ القرارات بشأن إنشاء وحل الفروع.",
+                "article3_2.li5": "تعيين وإقالة السكرتير العام.",
+                "article3_3.title": "السكرتارية",
+                "article3_3.intro": "السكرتارية هي الجهاز الإداري الدائم ل WEPO، تحت قيادة السكرتير العام، وهي مسؤولة عن التعامل مع الشؤون اليومية للمنظمة. تشمل المسؤوليات الرئيسية للسكرتارية:",
+                "article3_3.li1": "تنفيذ قرارات المجلس.",
+                "article3_3.li2": "تنسيق عمل الأقسام المختلفة والفروع.",
+                "article3_3.li3": "إدارة مالية المنظمة وأصولها.",
+                "article3_3.li4": "تنظيم الأنشطة والمشاريع المختلفة.",
+                "article3_3.li5": "التعامل مع شؤون العضوية.",
+                "article3_4.title": "اللجان المتخصصة",
+                "article3_4.content": "يمكن ل WEPO إنشاء لجان متخصصة حسب الحاجة، مثل اللجنة العلمية، واللجنة السياسية، ولجنة التعليم، وما إلى ذلك. تتكون كل لجنة متخصصة من خبراء في مجالات ذات صلة، وهم مسؤولون عن تقديم الاستشارات والتوصيات المهنية.",
+                "chapter4.title": "الفصل الرابع الإدارة المالية",
+                "article4_1.title": "مصادر التمويل",
+                "article4_1.intro": "تشمل مصادر تمويل WEPO:",
+                "article4_1.li1": "رسوم العضوية.",
+                "article4_1.li2": "التبرعات الاجتماعية.",
+                "article4_1.li3": "المنح الحكومية.",
+                "article4_1.li4": "دخل المشاريع.",
+                "article4_1.li5": "مصادر دخل أخرى مشروعة.",
+                "article4_2.title": "استخدام الأموال",
+                "article4_2.content": "يجب استخدام أموال WEPO في نطاق الأنشطة والتطوير المنصوص عليه في هذا النظام الأساسي، ولا يجوز توزيعها بين الأعضاء. يجب أن تتوافق إدارة أصول المنظمة مع نظام الإدارة المالية المنصوص عليه من قبل الدولة، وأن تخضع لرقابة الجمعية العمومية والإدارات المالية.",
+                "article4_3.title": "الرقابة المالية",
+                "article4_3.intro": "تُنشئ WEPO مجلس رقابة مسؤول عن الإشراف على الأنشطة المالية للمنظمة. يتم انتخاب مجلس الرقابة من قبل الجمعية العمومية لمدة ثلاث سنوات. تشمل مسؤوليات مجلس الرقابة:",
+                "article4_3.li1": "الإشراف على الأنشطة المالية للمجلس والسكرتارية.",
+                "article4_3.li2": "مراجعة التقارير المالية للمنظمة.",
+                "article4_3.li3": "تقديم تقارير نتائج الرقابة إلى الجمعية العمومية.",
+                "article4_3.li4": "تقديم التوصيات لتحسين الإدارة المالية.",
+                "chapter5.title": "الفصل الخامس التعديلات والإنهاء",
+                "article5_1.title": "التعديلات",
+                "article5_1.content": "يجب أن تتم الموافقة على تعديلات هذا النظام الأساسي من قبل أكثر من ثلثي الأعضاء في الجمعية العمومية، وأن تدخل حيز التنفيذ بعد تسجيلها لدى الجهات المختصة.",
+                "article5_2.title": "الإنهاء",
+                "article5_2.content": "إذا أكملت WEPO غرضها، أو انحلت طواعية، أو كان يجب إنهاؤها بسبب الانقسام أو الاندماج أو أسباب أخرى، فإن المجلس يقدم اقتراح إنهاء، والذي يجب أن تصادق عليه الجمعية العمومية، ويتم مراجعته والموافقة عليه من قبل الجهات المختصة. سيتم التعامل مع الأصول المتبقية وفقاً للوائح الوطنية ذات الصلة.",
+                "chapter6.title": "الفصل السادس الأحكام التكميلية",
+                "article6_1.title": "تاريخ النفاذ",
+                "article6_1.content": "يدخل هذا النظام الأساسي حيز النفاذ من 22 مايو 2021.",
+                "article6_2.title": "التفسير",
+                "article6_2.content": "تفسير هذا النظام الأساسي يعود إلى مجلس WEPO.",
+                "footer.about": "منظمة حماية البيئة العالمية (WEPO) هي منظمة دولية غير ربحية مكرسة لحماية البيئة العالمية، وتعمل على تعزيز التنمية المستدامة من خلال البحث العلمي والدعوة للسياسات والتوعية العامة.",
+                "footer.links_title": "روابط سريعة",
+                "footer.org_title": "المنظمة",
+                "footer.council": "المجلس",
+                "footer.volunteers": "شبكة المتطوعين",
+                "footer.resources_title": "مركز الموارد",
+                "footer.reports": "التقارير السنوية",
+                "footer.papers": "الأوراق البحثية",
+                "footer.copyright": "منظمة حماية البيئة العالمية. جميع الحقوق محفوظة."
+            }
+        };
+
+        let currentLang = 'zh-CN';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            document.querySelectorAll('[data-i18n="lang.current"]').forEach(el => {
+                el.textContent = translations[lang]["lang.current"];
+            });
+
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('selectedLanguage', lang);
+            // 更新页面标题
+            document.title = translations[lang]["page.title"] || document.title;
+        }
+
+        const savedLang = localStorage.getItem('selectedLanguage');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        } else {
+            setLanguage(currentLang);
+        }
+
+        document.getElementById('languageBtn').addEventListener('click', function(e) {
+             e.stopPropagation();
+             const dropdown = document.getElementById('languageDropdown');
+             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+        document.getElementById('mobileLanguageBtn').addEventListener('click', function(e) {
+             e.stopPropagation();
+             const dropdown = document.getElementById('mobileLanguageDropdown');
+             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Mobile Menu Toggle
+        document.querySelectorAll('#languageDropdown li, #mobileLanguageDropdown li').forEach(item => {
+            item.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                setLanguage(selectedLang);
+                document.getElementById('languageDropdown').style.display = 'none';
+                document.getElementById('mobileLanguageDropdown').style.display = 'none';
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-switcher')) {
+                document.getElementById('languageDropdown').style.display = 'none';
+                document.getElementById('mobileLanguageDropdown').style.display = 'none';
+            }
+        });
+
+        // --- 动态背景 Canvas (与 index.html 保持一致) ---
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.3; // 更小的粒子
+                this.speedX = Math.random() * 0.5 - 0.25; // 更慢的速度
+                this.speedY = Math.random() * 0.5 - 0.25;
+                // 使用与主题更匹配的颜色，透明度更低
+                this.color = `rgba(${Math.floor(Math.random() * 50 + 100)}, ${Math.floor(Math.random() * 50 + 100)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.random() * 0.3 + 0.05})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = [];
+        const numberOfParticles = 80; // 减少粒子数量以降低“活泼度”
+
+        function initParticles() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            const maxDistance = 80; // 减小连线距离
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        const opacity = (1 - distance / maxDistance) * 0.1; // 降低连线不透明度
+                        ctx.strokeStyle = `rgba(200, 200, 255, ${opacity})`;
+                        ctx.lineWidth = 0.3; // 减小线宽
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 使用更暗、更透明的背景层，创造运动模糊效果
+            ctx.fillStyle = 'rgba(26, 9, 51, 0.03)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            connectParticles();
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+        // --- 加载屏幕 ---
+        window.addEventListener('load', function() {
+             const loadingScreen = document.getElementById('loadingScreen');
+             const loadingProgress = document.getElementById('loadingProgress');
+
+             // 模拟加载进度 (实际项目中应由资源加载事件驱动)
+             let progress = 0;
+             const interval = setInterval(() => {
+                 progress += Math.random() * 15;
+                 if (progress >= 100) {
+                     progress = 100;
+                     clearInterval(interval);
+                     setTimeout(() => {
+                         loadingScreen.style.opacity = '0';
+                         setTimeout(() => {
+                             loadingScreen.style.display = 'none';
+                         }, 500);
+                     }, 300); // 短暂延迟后隐藏
+                 }
+                 loadingProgress.style.width = progress + '%';
+             }, 50);
+
+        });
+
+        // --- 移动端菜单 (复用 index.html 逻辑) ---
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenuClose = document.getElementById('mobileMenuClose');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
         const body = document.body;
 
-        // 打开菜单
         function openMenu() {
             mobileMenu.classList.add('active');
             mobileMenuOverlay.classList.add('active');
             body.classList.add('no-scroll');
         }
 
-        // 关闭菜单
         function closeMenu() {
             mobileMenu.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
             body.classList.remove('no-scroll');
+            // 关闭语言下拉
+            document.getElementById('mobileLanguageDropdown').style.display = 'none';
         }
 
-        // 事件监听
         mobileMenuBtn.addEventListener('click', openMenu);
         mobileMenuClose.addEventListener('click', closeMenu);
         mobileMenuOverlay.addEventListener('click', closeMenu);
 
-        // 点击菜单链接后关闭菜单
         document.querySelectorAll('.mobile-menu-links a').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
-        // 防止菜单内容点击触发 overlay 关闭事件
         mobileMenu.addEventListener('click', function(e) {
             e.stopPropagation();
         });
 
-        // ESC键关闭菜单
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 closeMenu();
             }
         });
 
-        // Language Toggle
-        const languageBtn = document.getElementById('languageBtn');
-        const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
-        let currentLanguage = 'zh';
-
-        function toggleLanguage() {
-            const zhElements = document.querySelectorAll('.zh');
-            const enElements = document.querySelectorAll('.en');
-            
-            if (currentLanguage === 'zh') {
-                zhElements.forEach(el => el.style.display = 'none');
-                enElements.forEach(el => el.style.display = 'block');
-                languageBtn.textContent = '中文';
-                mobileLanguageBtn.textContent = '中文';
-                currentLanguage = 'en';
-            } else {
-                zhElements.forEach(el => el.style.display = 'block');
-                enElements.forEach(el => el.style.display = 'none');
-                languageBtn.textContent = 'EN';
-                mobileLanguageBtn.textContent = 'EN';
-                currentLanguage = 'zh';
-            }
-        }
-
-        languageBtn.addEventListener('click', toggleLanguage);
-        mobileLanguageBtn.addEventListener('click', toggleLanguage);
-
-        // Initially hide English content
-        document.querySelectorAll('.en').forEach(el => el.style.display = 'none');
-
-        // Scroll Animation
+        // --- 滚动动画 ---
         function animateOnScroll() {
             const elements = document.querySelectorAll('.animate-on-scroll');
             elements.forEach(element => {
                 const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
+                const screenPosition = window.innerHeight / 1.3;
                 if (elementPosition < screenPosition) {
                     element.classList.add('animated');
                 }
@@ -1242,31 +2046,26 @@
         }
 
         window.addEventListener('scroll', animateOnScroll);
-        animateOnScroll(); // Trigger on initial load
+        // 页面加载时也触发一次，以动画化已在视口中的元素
+        window.addEventListener('load', animateOnScroll);
 
-        // Smooth Scrolling for Anchor Links
+        // --- 平滑滚动 ---
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    mobileMenu.classList.remove('active');
-                }
+                // ... (平滑滚动逻辑，如果页面内有锚点)
+                // 这个页面没有内部锚点，所以这部分可以简化或省略
+                // 但如果链接到其他部分（如页脚链接），可能需要
+                // const targetId = this.getAttribute('href');
+                // const targetElement = document.querySelector(targetId);
+                // if (targetElement) {
+                //     ...
+                // }
             });
         });
 
-        // Scroll to Top Button
+        // --- 滚动到顶部按钮 ---
         const scrollTopBtn = document.getElementById('scrollTop');
-        
         window.addEventListener('scroll', function() {
             if (window.pageYOffset > 300) {
                 scrollTopBtn.classList.add('active');
@@ -1274,7 +2073,6 @@
                 scrollTopBtn.classList.remove('active');
             }
         });
-        
         scrollTopBtn.addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
@@ -1282,11 +2080,9 @@
             });
         });
 
-        // Logo Change Functionality
-        function updateLogo(newLogoUrl) {
-            document.querySelector('.logo').src = newLogoUrl;
-            document.querySelector('.footer-logo').src = newLogoUrl;
-        }
+        // --- 页脚年份 ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
     </script>
 </body>
 </html>
