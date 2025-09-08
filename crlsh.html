@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>WEPO - 常任理事会</title>
+	<title data-i18n="page.title">WEPO - 常任理事会</title>
 	<link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
 	<style>
 		:root {
@@ -15,6 +15,7 @@
 			--text-light: #f8f9fa;
 			--text-dark: #212529;
 			--transition-time: 0.5s;
+            --bg-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
 		}
 
 		* {
@@ -25,11 +26,22 @@
 		}
 
 		body {
-			background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
+            /* 动态背景将通过 Canvas 实现 */
 			color: var(--text-light);
 			overflow-x: hidden;
 			line-height: 1.6;
+            background: var(--bg-gradient);
 		}
+
+        /* 动态背景 Canvas */
+        #backgroundCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 确保在所有内容之下 */
+        }
 
 		.container {
 			max-width: 1200px;
@@ -67,29 +79,30 @@
 			transform: scale(1.05);
 		}
 
-		.nav-links {
+        nav ul {
 			display: flex;
 			list-style: none;
 		}
 
-		.nav-links li {
-			margin-left: 30px;
+        nav ul li {
+			margin-left: 25px;
 			position: relative;
 		}
 
-		.nav-links a {
+        nav ul li a {
 			color: var(--text-light);
 			text-decoration: none;
 			font-weight: 500;
 			font-size: 16px;
 			transition: color 0.3s ease;
 			position: relative;
+            padding: 5px 0;
 		}
 
-		.nav-links a::after {
+        nav ul li a::after {
 			content: '';
 			position: absolute;
-			bottom: -5px;
+			bottom: 0;
 			left: 0;
 			width: 0;
 			height: 2px;
@@ -97,13 +110,77 @@
 			transition: width 0.3s ease;
 		}
 
-		.nav-links a:hover::after {
+        nav ul li a:hover::after {
 			width: 100%;
 		}
 
-		.nav-links a:hover {
+        nav ul li a:hover,
+        nav ul li a.active {
 			color: #b8a2e6;
 		}
+
+		.header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(26, 9, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 10px 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-dropdown li {
+            list-style: none;
+            margin: 0;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .language-dropdown li:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
 		.mobile-menu-btn {
 			display: none;
@@ -112,7 +189,17 @@
 			color: var(--text-light);
 			font-size: 24px;
 			cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            align-items: center;
+            justify-content: center;
 		}
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
 		/* Hero Section */
 		.hero {
@@ -122,17 +209,7 @@
 			padding: 100px 10% 0;
 			position: relative;
 			overflow: hidden;
-			background: linear-gradient(135deg, rgba(26, 9, 51, 0.8), rgba(58, 42, 106, 0.8));
-		}
-
-		.hero::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: radial-gradient(circle at 70% 50%, rgba(122, 90, 181, 0.2), transparent 60%);
+            background: linear-gradient(135deg, rgba(26, 9, 51, 0.85), rgba(58, 42, 106, 0.85));
 		}
 
 		.hero-content {
@@ -164,7 +241,7 @@
 			100% { opacity: 1; transform: translateY(0); }
 		}
 
-		/* Council Section */
+		/* Sections */
 		.section {
 			padding: 80px 0;
 			position: relative;
@@ -176,6 +253,8 @@
 			font-size: 2.5rem;
 			position: relative;
 			display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
 		}
 
 		.section-title::after {
@@ -189,6 +268,7 @@
 			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
 		}
 
+        /* Council Members Section */
 		.council-members {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -199,12 +279,13 @@
 		.member-card {
 			background: rgba(255, 255, 255, 0.05);
 			backdrop-filter: blur(10px);
-			border-radius: 10px;
+			border-radius: 15px; /* 稍微圆润 */
 			overflow: hidden;
-			transition: all 0.3s ease;
+			transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* 更流畅的动画 */
 			border: 1px solid rgba(255, 255, 255, 0.1);
 			opacity: 0;
 			transform: translateY(30px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 初始阴影 */
 		}
 
 		.member-card.animated {
@@ -214,8 +295,8 @@
 		}
 
 		.member-card:hover {
-			transform: translateY(-10px);
-			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+			transform: translateY(-15px); /* 悬停上移更多 */
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* 悬停增强阴影 */
 			background: rgba(255, 255, 255, 0.1);
 		}
 
@@ -233,7 +314,7 @@
 		}
 
 		.member-card:hover .member-image img {
-			transform: scale(1.1);
+			transform: scale(1.1); /* 悬停放大图片 */
 		}
 
 		.member-position {
@@ -245,6 +326,7 @@
 			background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 			color: white;
 			font-weight: 600;
+            font-size: 1.1rem; /* 稍大字体 */
 		}
 
 		.member-info {
@@ -260,34 +342,25 @@
 		.member-info p {
 			opacity: 0.8;
 			margin-bottom: 15px;
+            font-size: 0.95rem; /* 稍小字体 */
 		}
 
 		.member-country {
 			display: inline-block;
-			padding: 5px 10px;
-			background: rgba(122, 90, 181, 0.2);
+			padding: 5px 15px; /* 增加左右内边距 */
+			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); /* 使用渐变背景 */
 			border-radius: 20px;
 			font-size: 0.8rem;
 			margin-top: 10px;
+            color: white; /* 白色文字 */
+            font-weight: 500; /* 稍粗字体 */
 		}
 
 		/* About Council Section */
 		.about-council {
-			background: linear-gradient(135deg, rgba(26, 9, 51, 0.8), rgba(58, 42, 106, 0.8));
+            background: linear-gradient(135deg, rgba(26, 9, 51, 0.85), rgba(58, 42, 106, 0.85));
 			position: relative;
 			overflow: hidden;
-		}
-
-		.about-council::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-			opacity: 0.1;
-			z-index: -1;
 		}
 
 		.about-content {
@@ -306,28 +379,40 @@
 			color: #b8a2e6;
 		}
 
+        .about-text p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
 		.about-image {
 			flex: 1;
-			border-radius: 10px;
+			border-radius: 15px; /* 与卡片一致 */
 			overflow: hidden;
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-			transform: perspective(1000px) rotateY(-10deg);
-			transition: transform 0.5s ease;
+			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); /* 增强阴影 */
+			transform: perspective(1000px) rotateY(-5deg); /* 减小倾斜角度 */
+			transition: transform 0.5s ease, box-shadow 0.3s ease; /* 增加阴影过渡 */
 		}
 
 		.about-image:hover {
 			transform: perspective(1000px) rotateY(0deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* 悬停增强阴影 */
 		}
 
 		.about-image img {
 			width: 100%;
 			height: auto;
 			display: block;
+            transition: transform 0.5s ease; /* 图片缩放过渡 */
 		}
+
+        .about-image:hover img {
+            transform: scale(1.05); /* 悬停放大图片 */
+        }
+
 
 		/* Footer */
 		footer {
-			background: rgba(26, 9, 51, 0.9);
+			background: rgba(26, 9, 51, 0.95);
 			padding: 60px 0 30px;
 			position: relative;
 		}
@@ -342,6 +427,7 @@
 		.footer-logo {
 			width: 150px;
 			margin-bottom: 20px;
+            border-radius: 10px;
 		}
 
 		.footer-about p {
@@ -355,19 +441,24 @@
 		}
 
 		.social-link {
-			width: 40px;
-			height: 40px;
+			width: 45px;
+			height: 45px;
 			background: rgba(255, 255, 255, 0.1);
 			border-radius: 50%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			transition: all 0.3s ease;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 		}
 
 		.social-link:hover {
 			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
 			transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 		}
 
 		.footer-links h3 {
@@ -375,6 +466,7 @@
 			margin-bottom: 20px;
 			position: relative;
 			padding-bottom: 10px;
+            color: #b8a2e6;
 		}
 
 		.footer-links h3::after {
@@ -392,24 +484,29 @@
 		}
 
 		.footer-links li {
-			margin-bottom: 10px;
+			margin-bottom: 12px; /* 增加行间距 */
 		}
 
 		.footer-links a {
 			color: var(--text-light);
 			text-decoration: none;
 			opacity: 0.8;
-			transition: opacity 0.3s ease;
+			transition: opacity 0.3s ease, color 0.3s ease; /* 增加颜色过渡 */
+            display: block;
+            padding: 5px 0;
 		}
 
 		.footer-links a:hover {
 			opacity: 1;
+            color: #b8a2e6;
 		}
 
 		.footer-bottom {
 			text-align: center;
 			padding-top: 30px;
 			border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
 		}
 
 		/* Scroll to Top Button */
@@ -432,6 +529,7 @@
 			transition: all 0.3s ease;
 			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 			z-index: 999;
+            border: none; /* 移除默认边框 */
 		}
 
 		.scroll-top.active {
@@ -453,15 +551,19 @@
 			.about-content {
 				flex-direction: column;
 			}
+            
+            .about-image {
+                width: 100%;
+            }
 		}
 
 		@media (max-width: 768px) {
-			.nav-links {
+            nav ul {
 				display: none;
 			}
 			
 			.mobile-menu-btn {
-				display: block;
+				display: flex;
 			}
 			
 			.hero h1 {
@@ -486,212 +588,377 @@
 				padding: 50px 0;
 			}
 			
-			.member-card {
-				grid-template-columns: 1fr;
-			}
+            .member-card {
+                /* grid-template-columns: 1fr; 这行代码是多余的，因为父容器已经定义了grid */
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
 		}
 
 		/* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
 		.mobile-menu {
 			position: fixed;
 			top: 0;
-			left: 0;
-			width: 100%;
+			left: -100%; /* 从左侧滑入 */
+            width: 80%;
+            max-width: 320px;
 			height: 100%;
 			background: rgba(26, 9, 51, 0.98);
 			backdrop-filter: blur(10px);
 			z-index: 999;
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			opacity: 0;
-			pointer-events: none;
-			transition: all 0.3s ease;
+			justify-content: flex-start; /* 从顶部开始 */
+			align-items: flex-start; /* 内容左对齐 */
+			padding: 80px 30px 30px; /* 顶部留出关闭按钮空间 */
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
 		}
 
 		.mobile-menu.active {
-			opacity: 1;
-			pointer-events: all;
+            left: 0;
 		}
 
-		.mobile-menu-links {
-			list-style: none;
-			text-align: center;
-		}
-
-		.mobile-menu-links li {
-			margin: 25px 0;
-		}
-
-		.mobile-menu-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-size: 1.5rem;
-			font-weight: 500;
-			transition: color 0.3s ease;
-		}
-
-		.mobile-menu-links a:hover {
-			color: #b8a2e6;
-		}
-
-		.mobile-menu-close {
+        .mobile-menu-close {
 			position: absolute;
-			top: 30px;
-			right: 30px;
+			top: 20px;
+			right: 20px;
 			background: none;
 			border: none;
 			color: var(--text-light);
 			font-size: 2rem;
 			cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
 		}
+
+		.mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+			transform: rotate(90deg);
+		}
+
+        .mobile-menu-links {
+			list-style: none;
+            width: 100%;
+            margin-bottom: 30px;
+		}
+
+        .mobile-menu-links li {
+			margin: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            transition: transform 0.3s ease;
+		}
+
+        .mobile-menu-links li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-links a {
+			color: var(--text-light);
+			text-decoration: none;
+			font-size: 1.2rem;
+			font-weight: 500;
+			transition: all 0.3s ease;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+		}
+
+        .mobile-menu-links a:hover {
+			color: #b8a2e6;
+            transform: translateX(10px);
+		}
+
+        .mobile-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover::before {
+            transform: translateY(-50%) scale(1);
+        }
+
+        .mobile-language-switcher {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* RTL Support for Arabic */
+        body[dir="rtl"] {
+            direction: rtl;
+        }
+        body[dir="rtl"] nav ul li {
+             margin-left: 0;
+             margin-right: 25px;
+        }
+        body[dir="rtl"] .about-content {
+            flex-direction: column;
+        }
+        body[dir="rtl"] .about-image {
+             transform: perspective(1000px) rotateY(5deg);
+        }
+        body[dir="rtl"] .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        body[dir="rtl"] .hero-content {
+            text-align: right; /* Align hero text to right for RTL */
+        }
+        body[dir="rtl"] .section-title {
+            left: auto;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        body[dir="rtl"] .section-title::after {
+            left: auto;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        body[dir="rtl"] .footer-content,
+        body[dir="rtl"] .social-links,
+        body[dir="rtl"] .footer-links ul {
+            direction: rtl;
+        }
+        body[dir="rtl"] .footer-links h3::after {
+            left: auto;
+            right: 0;
+        }
+        body[dir="rtl"] nav ul li a::after {
+             left: auto;
+             right: 0;
+        }
+        body[dir="rtl"] .mobile-menu-links a::before {
+            left: auto;
+            right: -15px;
+        }
+        body[dir="rtl"] .mobile-menu-links a:hover {
+            transform: translateX(-10px);
+        }
+
 	</style>
 </head>
 <body>
+
+    <!-- Dynamic Background Canvas -->
+    <canvas id="backgroundCanvas"></canvas>
+
 	<!-- Header -->
 	<header>
 		<div class="logo-container">
-			<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" class="logo">
+			<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
 		</div>
 		<nav>
-			<ul class="nav-links">
-				<li><a href="index.html">首页</a></li>
-				<li><a href="crlsh.html" class="active">常任理事会</a></li>
-				<li><a href="index.html">环保项目</a></li>
-				<li><a href="index.html">关于我们</a></li>
-				<li><a href="index.html">联系我们</a></li>
+			<ul>
+				<li><a href="index.html" data-i18n="nav.home"></a></li>
+				<li><a href="crlsh.html" class="active" data-i18n="nav.council"></a></li>
+				<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+				<li><a href="index.html#about" data-i18n="nav.about"></a></li>
+				<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+                <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+                <li><a href="jz.html" data-i18n="nav.donate"></a></li>
 			</ul>
 		</nav>
-		<button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        <div class="header-actions">
+            <div class="language-switcher">
+                <button class="language-btn" id="languageBtn">
+                    <span data-i18n="lang.current"></span>
+                    <span>▼</span>
+                </button>
+                <ul class="language-dropdown" id="languageDropdown">
+                    <li data-lang="zh-CN">中文 (简体)</li>
+                    <li data-lang="en">English</li>
+                    <li data-lang="es">Español</li>
+                    <li data-lang="fr">Français</li>
+                    <li data-lang="ru">Русский</li>
+                    <li data-lang="ar">العربية</li>
+                </ul>
+            </div>
+		    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
 	</header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
 	<!-- Mobile Menu -->
 	<div class="mobile-menu" id="mobileMenu">
 		<button class="mobile-menu-close" id="mobileMenuClose">×</button>
 		<ul class="mobile-menu-links">
-			<li><a href="index.html">首页</a></li>
-			<li><a href="crlsh.html" class="active">常任理事会</a></li>
-			<li><a href="index.html">环保项目</a></li>
-			<li><a href="index.html">关于我们</a></li>
-			<li><a href="index.html">联系我们</a></li>
+			<li><a href="index.html" data-i18n="nav.home"></a></li>
+			<li><a href="crlsh.html" class="active" data-i18n="nav.council"></a></li>
+			<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+			<li><a href="index.html#about" data-i18n="nav.about"></a></li>
+			<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+            <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+            <li><a href="jz.html" data-i18n="nav.donate"></a></li>
 		</ul>
+        <div class="mobile-language-switcher">
+            <div class="language-switcher">
+                <button class="language-btn" id="mobileLanguageBtn">
+                    <span data-i18n="lang.current"></span>
+                    <span>▼</span>
+                </button>
+                <ul class="language-dropdown" id="mobileLanguageDropdown">
+                    <li data-lang="zh-CN">中文 (简体)</li>
+                    <li data-lang="en">English</li>
+                    <li data-lang="es">Español</li>
+                    <li data-lang="fr">Français</li>
+                    <li data-lang="ru">Русский</li>
+                    <li data-lang="ar">العربية</li>
+                </ul>
+            </div>
+        </div>
 	</div>
 
 	<!-- Hero Section -->
 	<section class="hero">
 		<div class="hero-content">
-			<h1>世界环境保护组织常任理事会</h1>
-			<p>汇聚全球环保领域的杰出领袖，共同制定环境保护战略，推动可持续发展议程</p>
+			<h1 data-i18n="hero.title"></h1>
+			<p data-i18n="hero.description"></p>
 		</div>
 	</section>
 
 	<!-- Council Members Section -->
 	<section class="section">
 		<div class="container">
-			<h2 class="section-title">理事会成员</h2>
+			<h2 class="section-title" data-i18n="members.title"></h2>
 			<div class="council-members">
 				<!-- 主席 -->
 				<div class="member-card" data-delay="0">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="康朝凯">
-						<div class="member-position">主席</div>
+						<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Kang Chaokai" loading="lazy">
+						<div class="member-position" data-i18n="members.chairman"></div>
 					</div>
 					<div class="member-info">
-						<h3>康朝凯</h3>
-						<p>环境科学博士，曾任联合国环境规划署高级顾问，在气候变化和可持续发展领域有20年工作经验。</p>
-						<span class="member-country">中国</span>
+						<h3>Kang Chaokai</h3>
+						<p data-i18n="members.kang.bio"></p>
+						<span class="member-country">China</span>
 					</div>
 				</div>
 				
 				<!-- 副主席1 -->
 				<div class="member-card" data-delay="0.1">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="邓骁">
-						<div class="member-position">副主席</div>
+						<img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Deng Xiao" loading="lazy">
+						<div class="member-position" data-i18n="members.vice_chairman"></div>
 					</div>
 					<div class="member-info">
-						<h3>邓骁</h3>
-						<p>生态学家，专注于生物多样性保护，曾领导多个国际环保项目，获得全球环保领袖奖。</p>
-						<span class="member-country">中国</span>
+						<h3>Deng Xiao</h3>
+						<p data-i18n="members.deng.bio"></p>
+						<span class="member-country">China</span>
 					</div>
 				</div>
 				
 				<!-- 副主席2 -->
 				<div class="member-card" data-delay="0.2">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="陈是圳">
-						<div class="member-position">副主席</div>
+						<img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Chen Shizhen" loading="lazy">
+						<div class="member-position" data-i18n="members.vice_chairman"></div>
 					</div>
 					<div class="member-info">
-						<h3>陈是圳</h3>
-						<p>环境政策专家，在环境法律和国际环境协议谈判方面有丰富经验，推动多项国际环保公约的制定。</p>
-						<span class="member-country">中国</span>
+						<h3>Chen Shizhen</h3>
+						<p data-i18n="members.chen.bio"></p>
+						<span class="member-country">China</span>
 					</div>
 				</div>
 				
 				<!-- 外国成员1 -->
 				<div class="member-card" data-delay="0.3">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="John Smith">
-						<div class="member-position">常务理事</div>
+						<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="John Smith" loading="lazy">
+						<div class="member-position" data-i18n="members.member"></div>
 					</div>
 					<div class="member-info">
 						<h3>John Smith</h3>
-						<p>气候变化专家，前IPCC核心成员，在碳减排技术和政策方面有深入研究。</p>
-						<span class="member-country">美国</span>
+						<p data-i18n="members.smith.bio"></p>
+						<span class="member-country">USA</span>
 					</div>
 				</div>
 				
 				<!-- 外国成员2 -->
 				<div class="member-card" data-delay="0.4">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Emma Johnson">
-						<div class="member-position">常务理事</div>
+						<img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Emma Johnson" loading="lazy">
+						<div class="member-position" data-i18n="members.member"></div>
 					</div>
 					<div class="member-info">
 						<h3>Emma Johnson</h3>
-						<p>海洋生态保护专家，致力于海洋塑料污染治理，创立了全球海洋清洁联盟。</p>
-						<span class="member-country">英国</span>
+						<p data-i18n="members.johnson.bio"></p>
+						<span class="member-country">UK</span>
 					</div>
 				</div>
 				
 				<!-- 外国成员3 -->
 				<div class="member-card" data-delay="0.5">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Pierre Dubois">
-						<div class="member-position">常务理事</div>
+						<img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Pierre Dubois" loading="lazy">
+						<div class="member-position" data-i18n="members.member"></div>
 					</div>
 					<div class="member-info">
 						<h3>Pierre Dubois</h3>
-						<p>可持续城市发展专家，推动全球100多个城市的绿色基础设施建设。</p>
-						<span class="member-country">法国</span>
+						<p data-i18n="members.dubois.bio"></p>
+						<span class="member-country">France</span>
 					</div>
 				</div>
 				
 				<!-- 外国成员4 -->
 				<div class="member-card" data-delay="0.6">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Raj Patel">
-						<div class="member-position">常务理事</div>
+						<img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Raj Patel" loading="lazy">
+						<div class="member-position" data-i18n="members.member"></div>
 					</div>
 					<div class="member-info">
 						<h3>Raj Patel</h3>
-						<p>环境经济学家，专注于可持续发展与扶贫的结合，著有《绿色经济转型》等著作。</p>
-						<span class="member-country">印度</span>
+						<p data-i18n="members.patel.bio"></p>
+						<span class="member-country">India</span>
 					</div>
 				</div>
 				
 				<!-- 外国成员5 -->
 				<div class="member-card" data-delay="0.7">
 					<div class="member-image">
-						<img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Maria Gonzalez">
-						<div class="member-position">常务理事</div>
+						<img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Maria Gonzalez" loading="lazy">
+						<div class="member-position" data-i18n="members.member"></div>
 					</div>
 					<div class="member-info">
 						<h3>Maria Gonzalez</h3>
-						<p>森林保护专家，成功领导了亚马逊雨林保护项目，获得联合国环境奖。</p>
-						<span class="member-country">巴西</span>
+						<p data-i18n="members.gonzalez.bio"></p>
+						<span class="member-country">Brazil</span>
 					</div>
 				</div>
 			</div>
@@ -701,16 +968,16 @@
 	<!-- About Council Section -->
 	<section class="section about-council">
 		<div class="container">
-			<h2 class="section-title">关于常任理事会</h2>
+			<h2 class="section-title" data-i18n="about.title"></h2>
 			<div class="about-content">
 				<div class="about-text">
-					<h3>我们的职责与使命</h3>
-					<p>世界环境保护组织常任理事会是组织的最高决策机构，由来自全球各地的环保领域杰出领袖组成。理事会负责制定组织的战略方向、监督项目实施、审批重大决策。</p>
-					<p>理事会成员每届任期五年，由全球会员国提名选举产生。理事会每年召开两次全体会议，必要时可召开特别会议。理事会下设气候变化、生物多样性、污染防治、可持续发展等多个专业委员会。</p>
-					<p>我们的使命是汇聚全球环保智慧，协调各国环保行动，推动环境政策的制定与实施，为地球的可持续发展贡献力量。</p>
+					<h3 data-i18n="about.subtitle"></h3>
+					<p data-i18n="about.p1"></p>
+					<p data-i18n="about.p2"></p>
+					<p data-i18n="about.p3"></p>
 				</div>
 				<div class="about-image">
-					<img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="理事会会议">
+					<img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Council Meeting" loading="lazy">
 				</div>
 			</div>
 		</div>
@@ -722,33 +989,37 @@
 			<div class="footer-content">
 				<div class="footer-about">
 					<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
-					<p>世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。</p>
+					<p data-i18n="footer.about"></p>
 					<div class="social-links">
-						
+						<a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank" rel="noopener noreferrer">T</a>
+						<a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank" rel="noopener noreferrer">K</a>
+						<a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank" rel="noopener noreferrer">W</a>
 					</div>
 				</div>
 				<div class="footer-links">
-					<h3>快速链接</h3>
+					<h3 data-i18n="footer.links_title"></h3>
 					<ul>
-						<li><a href="index.html">首页</a></li>
-						<li><a href="crlsh.html">常任理事会</a></li>
-						<li><a href="index.html">环保项目</a></li>
-						<li><a href="index.html">关于我们</a></li>
-						<li><a href="index.html">联系我们</a></li>
+						<li><a href="index.html" data-i18n="nav.home"></a></li>
+						<li><a href="crlsh.html" data-i18n="nav.council"></a></li>
+						<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+						<li><a href="index.html#about" data-i18n="nav.about"></a></li>
+						<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+                        <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+                        <li><a href="jz.html" data-i18n="nav.donate"></a></li>
 					</ul>
 				</div>
 				<div class="footer-links">
-					<h3>联系我们</h3>
+					<h3 data-i18n="footer.contact_title"></h3>
 					<ul>
-						<li>地址: 中国重庆市渝北区兴盛大道十号</li>
-						<li>电话: 130-2835-0677</li>
-						<li>邮箱: wepo2021@outlook.com</li>
-						<li>工作时间: 周一至周五 9:00-18:00</li>
+						<li data-i18n="footer.address"></li>
+						<li data-i18n="footer.phone"></li>
+						<li data-i18n="footer.email"></li>
+						<li data-i18n="footer.hours"></li>
 					</ul>
 				</div>
 			</div>
 			<div class="footer-bottom">
-				<p>&copy; 2025 世界环境保护组织. 版权所有.</p>
+				<p>&copy; <span id="currentYear"></span> <span data-i18n="footer.copyright"></span></p>
 			</div>
 		</div>
 	</footer>
@@ -757,18 +1028,440 @@
 	<div class="scroll-top" id="scrollTop">↑</div>
 
 	<script>
-		// Mobile Menu Toggle
-		const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-		const mobileMenu = document.getElementById('mobileMenu');
-		const mobileMenuClose = document.getElementById('mobileMenuClose');
+        // --- 多语言支持 (与 index.html 保持一致) ---
+        const translations = {
+            "zh-CN": {
+                "lang.current": "中文",
+                "nav.home": "首页",
+                "nav.about": "关于我们",
+                "nav.mission": "使命愿景",
+                "nav.programs": "环保项目",
+                "nav.partners": "合作伙伴",
+                "nav.contact": "联系我们",
+                "nav.council": "常任理事会",
+                "nav.videos": "环保视频",
+                "nav.donate": "捐赠支持",
+                "nav.support": "客服支持",
+                "page.title": "WEPO - 常任理事会",
+                "hero.title": "世界环境保护组织常任理事会",
+                "hero.description": "汇聚全球环保领域的杰出领袖，共同制定环境保护战略，推动可持续发展议程",
+                "members.title": "理事会成员",
+                "members.chairman": "主席",
+                "members.vice_chairman": "副主席",
+                "members.member": "常务理事",
+                // 成员简介 (为简洁起见，这里使用英文名作为 key)
+                "members.kang.bio": "环境科学博士，曾任联合国环境规划署高级顾问，在气候变化和可持续发展领域有20年工作经验。",
+                "members.deng.bio": "生态学家，专注于生物多样性保护，曾领导多个国际环保项目，获得全球环保领袖奖。",
+                "members.chen.bio": "环境政策专家，在环境法律和国际环境协议谈判方面有丰富经验，推动多项国际环保公约的制定。",
+                "members.smith.bio": "气候变化专家，前IPCC核心成员，在碳减排技术和政策方面有深入研究。",
+                "members.johnson.bio": "海洋生态保护专家，致力于海洋塑料污染治理，创立了全球海洋清洁联盟。",
+                "members.dubois.bio": "可持续城市发展专家，推动全球100多个城市的绿色基础设施建设。",
+                "members.patel.bio": "环境经济学家，专注于可持续发展与扶贫的结合，著有《绿色经济转型》等著作。",
+                "members.gonzalez.bio": "森林保护专家，成功领导了亚马逊雨林保护项目，获得联合国环境奖。",
+                "about.title": "关于常任理事会",
+                "about.subtitle": "我们的职责与使命",
+                "about.p1": "世界环境保护组织常任理事会是组织的最高决策机构，由来自全球各地的环保领域杰出领袖组成。理事会负责制定组织的战略方向、监督项目实施、审批重大决策。",
+                "about.p2": "理事会成员每届任期五年，由全球会员国提名选举产生。理事会每年召开两次全体会议，必要时可召开特别会议。理事会下设气候变化、生物多样性、污染防治、可持续发展等多个专业委员会。",
+                "about.p3": "我们的使命是汇聚全球环保智慧，协调各国环保行动，推动环境政策的制定与实施，为地球的可持续发展贡献力量。",
+                "footer.about": "世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。",
+                "footer.links_title": "快速链接",
+                "footer.contact_title": "联系我们",
+                "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
+                "footer.phone": "电话: 130-2835-0677",
+                "footer.email": "邮箱: wepo2021@outlook.com",
+                "footer.hours": "工作时间: 周一至周五 9:00-18:00",
+                "footer.copyright": "世界环境保护组织. 版权所有."
+            },
+            "en": {
+                "lang.current": "EN",
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.mission": "Mission",
+                "nav.programs": "Programs",
+                "nav.partners": "Partners",
+                "nav.contact": "Contact",
+                "nav.council": "Council",
+                "nav.videos": "Videos",
+                "nav.donate": "Donate",
+                "nav.support": "Customer Support",
+                "page.title": "WEPO - Permanent Council",
+                "hero.title": "World Environmental Protection Organization Permanent Council",
+                "hero.description": "Bringing together outstanding leaders from the global environmental field to jointly formulate environmental protection strategies and promote the sustainable development agenda.",
+                "members.title": "Council Members",
+                "members.chairman": "Chairman",
+                "members.vice_chairman": "Vice Chairman",
+                "members.member": "Member",
+                "members.kang.bio": "Ph.D. in Environmental Science, former Senior Advisor to the United Nations Environment Programme, with 20 years of experience in climate change and sustainable development.",
+                "members.deng.bio": "Ecologist, focusing on biodiversity conservation, has led multiple international environmental projects and won the Global Environmental Leader Award.",
+                "members.chen.bio": "Environmental policy expert, with extensive experience in environmental law and negotiation of international environmental agreements, has promoted the formulation of several international environmental conventions.",
+                "members.smith.bio": "Climate change expert, former core member of the IPCC, with in-depth research on carbon reduction technologies and policies.",
+                "members.johnson.bio": "Marine ecosystem conservation expert, dedicated to marine plastic pollution control, founded the Global Ocean Cleanup Alliance.",
+                "members.dubois.bio": "Sustainable urban development expert, has promoted green infrastructure construction in over 100 cities worldwide.",
+                "members.patel.bio": "Environmental economist, focusing on the integration of sustainable development and poverty alleviation, author of 'Green Economic Transformation' and other works.",
+                "members.gonzalez.bio": "Forest conservation expert, successfully led the Amazon rainforest protection project and won the United Nations Environment Award.",
+                "about.title": "About the Permanent Council",
+                "about.subtitle": "Our Responsibilities and Mission",
+                "about.p1": "The World Environmental Protection Organization Permanent Council is the highest decision-making body of the organization, composed of outstanding leaders from the global environmental field. The Council is responsible for formulating the organization's strategic direction, supervising project implementation, and approving major decisions.",
+                "about.p2": "Council members serve a five-year term, nominated and elected by member countries worldwide. The Council holds two plenary sessions per year and can convene special sessions when necessary. The Council has established several professional committees, including Climate Change, Biodiversity, Pollution Prevention and Control, and Sustainable Development.",
+                "about.p3": "Our mission is to gather global environmental wisdom, coordinate environmental actions among countries, promote the formulation and implementation of environmental policies, and contribute to the sustainable development of the Earth.",
+                "footer.about": "The World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.",
+                "footer.links_title": "Quick Links",
+                "footer.contact_title": "Contact Us",
+                "footer.address": "Address: No. 10, Xingsheng Avenue, Yubei District, Chongqing, China",
+                "footer.phone": "Phone: 130-2835-0677",
+                "footer.email": "Email: wepo2021@outlook.com",
+                "footer.hours": "Working Hours: Monday to Friday 9:00-18:00",
+                "footer.copyright": "World Environmental Protection Organization. All rights reserved."
+            },
+             "es": {
+                "lang.current": "ES",
+                "nav.home": "Inicio",
+                "nav.about": "Acerca de",
+                "nav.mission": "Misión",
+                "nav.programs": "Programas",
+                "nav.partners": "Socios",
+                "nav.contact": "Contacto",
+                "nav.council": "Consejo",
+                "nav.videos": "Videos",
+                "nav.donate": "Donar",
+                "nav.support": "Soporte al Cliente",
+                "page.title": "WEPO - Consejo Permanente",
+                "hero.title": "Consejo Permanente de la Organización Mundial para la Protección del Medio Ambiente",
+                "hero.description": "Reuniendo a líderes destacados del campo ambiental global para formular conjuntamente estrategias de protección ambiental y promover la agenda de desarrollo sostenible.",
+                "members.title": "Miembros del Consejo",
+                "members.chairman": "Presidente",
+                "members.vice_chairman": "Vicepresidente",
+                "members.member": "Miembro",
+                "members.kang.bio": "Doctor en Ciencias Ambientales, ex asesor senior del Programa de las Naciones Unidas para el Medio Ambiente, con 20 años de experiencia en cambio climático y desarrollo sostenible.",
+                "members.deng.bio": "Ecólogo, enfocado en la conservación de la biodiversidad, ha liderado múltiples proyectos ambientales internacionales y ha ganado el Premio de Líder Ambiental Global.",
+                "members.chen.bio": "Experto en políticas ambientales, con amplia experiencia en derecho ambiental y negociación de acuerdos internacionales ambientales, ha promovido la formulación de varias convenciones ambientales internacionales.",
+                "members.smith.bio": "Experto en cambio climático, ex miembro del núcleo del IPCC, con investigación profunda en tecnologías y políticas de reducción de carbono.",
+                "members.johnson.bio": "Experta en conservación de ecosistemas marinos, dedicada al control de la contaminación plástica en el mar, fundó la Alianza Global de Limpieza Oceánica.",
+                "members.dubois.bio": "Experto en desarrollo urbano sostenible, ha promovido la construcción de infraestructura verde en más de 100 ciudades en todo el mundo.",
+                "members.patel.bio": "Economista ambiental, enfocado en la integración del desarrollo sostenible y la reducción de la pobreza, autor de 'Transformación Económica Verde' y otras obras.",
+                "members.gonzalez.bio": "Experta en conservación forestal, lideró con éxito el proyecto de protección de la selva amazónica y ganó el Premio de las Naciones Unidas al Medio Ambiente.",
+                "about.title": "Acerca del Consejo Permanente",
+                "about.subtitle": "Nuestras Responsabilidades y Misión",
+                "about.p1": "El Consejo Permanente de la Organización Mundial para la Protección del Medio Ambiente es el órgano de toma de decisiones más alto de la organización, compuesto por líderes destacados del campo ambiental global. El Consejo es responsable de formular la dirección estratégica de la organización, supervisar la implementación de proyectos y aprobar decisiones importantes.",
+                "about.p2": "Los miembros del Consejo sirven un mandato de cinco años, nominados y elegidos por los países miembros de todo el mundo. El Consejo celebra dos sesiones plenarias al año y puede convocar sesiones especiales cuando sea necesario. El Consejo ha establecido varios comités profesionales, incluyendo Cambio Climático, Biodiversidad, Prevención y Control de la Contaminación, y Desarrollo Sostenible.",
+                "about.p3": "Nuestra misión es reunir la sabiduría ambiental global, coordinar las acciones ambientales entre los países, promover la formulación e implementación de políticas ambientales y contribuir al desarrollo sostenible de la Tierra.",
+                "footer.about": "La Organización Mundial para la Protección del Medio Ambiente (WEPO) es una organización internacional sin fines de lucro dedicada a la protección ambiental global, promoviendo el desarrollo sostenible a través de la investigación científica, la defensa de políticas y la educación pública.",
+                "footer.links_title": "Enlaces Rápidos",
+                "footer.contact_title": "Contáctenos",
+                "footer.address": "Dirección: No. 10, Avenida Xingsheng, Distrito de Yubei, Chongqing, China",
+                "footer.phone": "Teléfono: 130-2835-0677",
+                "footer.email": "Correo electrónico: wepo2021@outlook.com",
+                "footer.hours": "Horario de Atención: Lunes a Viernes 9:00-18:00",
+                "footer.copyright": "Organización Mundial para la Protección del Medio Ambiente. Todos los derechos reservados."
+            },
+            "fr": {
+                "lang.current": "FR",
+                "nav.home": "Accueil",
+                "nav.about": "À propos",
+                "nav.mission": "Mission",
+                "nav.programs": "Programmes",
+                "nav.partners": "Partenaires",
+                "nav.contact": "Contact",
+                "nav.council": "Conseil",
+                "nav.videos": "Vidéos",
+                "nav.donate": "Faire un don",
+                "nav.support": "Support Client",
+                "page.title": "WEPO - Conseil Permanent",
+                "hero.title": "Conseil Permanent de l'Organisation Mondiale de Protection de l'Environnement",
+                "hero.description": "Réunissant des leaders exceptionnels du domaine environnemental mondial pour élaborer conjointement des stratégies de protection de l'environnement et promouvoir l'agenda du développement durable.",
+                "members.title": "Membres du Conseil",
+                "members.chairman": "Président",
+                "members.vice_chairman": "Vice-président",
+                "members.member": "Membre",
+                "members.kang.bio": "Docteur en sciences de l'environnement, ancien conseiller principal au Programme des Nations Unies pour l'environnement, avec 20 ans d'expérience dans le changement climatique et le développement durable.",
+                "members.deng.bio": "Écologiste, spécialisé dans la conservation de la biodiversité, a dirigé plusieurs projets environnementaux internationaux et a remporté le prix du leader environnemental mondial.",
+                "members.chen.bio": "Expert en politiques environnementales, avec une vaste expérience en droit environnemental et en négociation d'accords environnementaux internationaux, a promu l'élaboration de plusieurs conventions environnementales internationales.",
+                "members.smith.bio": "Expert du changement climatique, ancien membre du noyau du GIEC, avec des recherches approfondies sur les technologies et les politiques de réduction des émissions de carbone.",
+                "members.johnson.bio": "Experte en conservation des écosystèmes marins, dédiée au contrôle de la pollution plastique marine, a fondé l'Alliance mondiale de nettoyage des océans.",
+                "members.dubois.bio": "Expert en développement urbain durable, a promu la construction d'infrastructures vertes dans plus de 100 villes du monde entier.",
+                "members.patel.bio": "Économiste de l'environnement, concentré sur l'intégration du développement durable et de la réduction de la pauvreté, auteur de « Transformation économique verte » et d'autres ouvrages.",
+                "members.gonzalez.bio": "Experte en conservation forestière, a mené à bien le projet de protection de la forêt amazonienne et a remporté le prix de l'environnement des Nations Unies.",
+                "about.title": "À propos du Conseil Permanent",
+                "about.subtitle": "Nos Responsabilités et Mission",
+                "about.p1": "Le Conseil Permanent de l'Organisation Mondiale de Protection de l'Environnement est l'organe de décision suprême de l'organisation, composé de leaders exceptionnels du domaine environnemental mondial. Le Conseil est chargé d'élaborer l'orientation stratégique de l'organisation, de superviser la mise en œuvre des projets et d'approuver les décisions importantes.",
+                "about.p2": "Les membres du Conseil exercent un mandat de cinq ans, nommés et élus par les pays membres du monde entier. Le Conseil tient deux sessions plénières par an et peut convoquer des sessions extraordinaires si nécessaire. Le Conseil a établi plusieurs comités professionnels, notamment sur le changement climatique, la biodiversité, la prévention et le contrôle de la pollution, et le développement durable.",
+                "about.p3": "Notre mission est de rassembler la sagesse environnementale mondiale, de coordonner les actions environnementales entre les pays, de promouvoir l'élaboration et la mise en œuvre des politiques environnementales, et de contribuer au développement durable de la planète.",
+                "footer.about": "L'Organisation Mondiale de Protection de l'Environnement (WEPO) est une organisation internationale à but non lucratif dédiée à la protection environnementale mondiale, promouvant le développement durable par la recherche scientifique, la défense des politiques et l'éducation du public.",
+                "footer.links_title": "Liens Rapides",
+                "footer.contact_title": "Nous Contacter",
+                "footer.address": "Adresse : No. 10, Avenue Xingsheng, District de Yubei, Chongqing, Chine",
+                "footer.phone": "Téléphone : 130-2835-0677",
+                "footer.email": "E-mail : wepo2021@outlook.com",
+                "footer.hours": "Heures d'Ouverture : Lundi au Vendredi 9h00-18h00",
+                "footer.copyright": "Organisation Mondiale de Protection de l'Environnement. Tous droits réservés."
+            },
+            "ru": {
+                "lang.current": "RU",
+                "nav.home": "Главная",
+                "nav.about": "О нас",
+                "nav.mission": "Миссия",
+                "nav.programs": "Программы",
+                "nav.partners": "Партнеры",
+                "nav.contact": "Контакты",
+                "nav.council": "Совет",
+                "nav.videos": "Видео",
+                "nav.donate": "Пожертвовать",
+                "nav.support": "Поддержка клиентов",
+                "page.title": "WEPO - Постоянный Совет",
+                "hero.title": "Постоянный Совет Всемирной организации по охране окружающей среды",
+                "hero.description": "Объединяя выдающихся лидеров из глобальной области охраны окружающей среды, совместно разрабатывать стратегии охраны окружающей среды и способствовать повестке дня устойчивого развития.",
+                "members.title": "Члены Совета",
+                "members.chairman": "Председатель",
+                "members.vice_chairman": "Заместитель председателя",
+                "members.member": "Член",
+                "members.kang.bio": "Доктор наук об окружающей среде, бывший старший советник Программы ООН по окружающей среде, с 20-летним опытом работы в области изменения климата и устойчивого развития.",
+                "members.deng.bio": "Эколог, специализирующийся на сохранении биоразнообразия, руководил несколькими международными экологическими проектами и получил Глобальную премию лидера в области охраны окружающей среды.",
+                "members.chen.bio": "Эксперт по экологической политике, с обширным опытом в области экологического законодательства и переговоров по международным соглашениям в области окружающей среды, способствовал разработке нескольких международных экологических конвенций.",
+                "members.smith.bio": "Эксперт по изменению климата, бывший ключевой член МГЭИК, с углубленными исследованиями в области технологий и политики сокращения выбросов углерода.",
+                "members.johnson.bio": "Эксперт по охране морских экосистем, занимается контролем загрязнения моря пластиком, основала Глобальный альянс по очистке океана.",
+                "members.dubois.bio": "Эксперт по устойчивому развитию городов, способствовал строительству зеленой инфраструктуры в более чем 100 городах мира.",
+                "members.patel.bio": "Эколог-экономист, сосредоточенный на сочетании устойчивого развития и борьбы с бедностью, автор книги «Зеленая экономическая трансформация» и других работ.",
+                "members.gonzalez.bio": "Эксперт по охране лесов, успешно возглавила проект по защите амазонских лесов и получила премию ООН по окружающей среде.",
+                "about.title": "О Постоянном Совете",
+                "about.subtitle": "Наши Обязанности и Миссия",
+                "about.p1": "Постоянный Совет Всемирной организации по охране окружающей среды является высшим органом принятия решений организации, состоящим из выдающихся лидеров из глобальной области охраны окружающей среды. Совет несет ответственность за определение стратегического направления организации, надзор за реализацией проектов и утверждение важных решений.",
+                "about.p2": "Срок полномочий членов Совета составляет пять лет, они назначаются и избираются странами-членами по всему миру. Совет проводит две пленарные сессии в год и может созывать специальные сессии при необходимости. Совет учредил несколько профессиональных комитетов, включая Комитеты по изменению климата, биоразнообразию, предотвращению и контролю загрязнения, а также устойчивому развитию.",
+                "about.p3": "Наша миссия - собрать глобальную экологическую мудрость, координировать экологические действия стран, способствовать разработке и реализации экологической политики и внести вклад в устойчивое развитие Земли.",
+                "footer.about": "Всемирная организация по охране окружающей среды (WEPO) - это некоммерческая международная организация, посвященная глобальной охране окружающей среды, способствуя устойчивому развитию посредством научных исследований, продвижения политики и просвещения общественности.",
+                "footer.links_title": "Быстрые ссылки",
+                "footer.contact_title": "Связаться с нами",
+                "footer.address": "Адрес: No. 10, проспект Синшэн, район Юбэй, Чунцин, Китай",
+                "footer.phone": "Телефон: 130-2835-0677",
+                "footer.email": "Электронная почта: wepo2021@outlook.com",
+                "footer.hours": "Часы работы: Понедельник - пятница 9:00-18:00",
+                "footer.copyright": "Всемирная организация по охране окружающей среды. Все права защищены."
+            },
+            "ar": {
+                "lang.current": "AR",
+                "nav.home": "الرئيسية",
+                "nav.about": "معلومات عنا",
+                "nav.mission": "الرسالة والرؤية",
+                "nav.programs": "البرامج البيئية",
+                "nav.partners": "الشركاء",
+                "nav.contact": "اتصل بنا",
+                "nav.council": "المجلس",
+                "nav.videos": "الفيديوهات",
+                "nav.donate": "تبرع",
+                "nav.support": "دعم العملاء",
+                "page.title": "WEPO - المجلس الدائم",
+                "hero.title": "المجلس الدائم لمنظمة حماية البيئة العالمية",
+                "hero.description": "جمع القادة المتميزين من مجال البيئة العالمي لوضع استراتيجيات حماية البيئة وتعزيز جدول الأعمال للتنمية المستدامة بشكل مشترك.",
+                "members.title": "أعضاء المجلس",
+                "members.chairman": "الرئيس",
+                "members.vice_chairman": "نائب الرئيس",
+                "members.member": "عضو",
+                "members.kang.bio": "دكتوراه في علوم البيئة، مستشار سابق رفيع في برنامج الأمم المتحدة للبيئة، مع 20 عامًا من الخبرة في مجال تغير المناخ والتنمية المستدامة.",
+                "members.deng.bio": "عالم بيئي، يركز على حفظ التنوع البيولوجي، قاد عدة مشاريع بيئية دولية وفاز بجائزة القائد البيئي العالمي.",
+                "members.chen.bio": "خبير في السياسات البيئية، مع خبرة واسعة في القانون البيئي والتفاوض على الاتفاقيات البيئية الدولية، ساهم في صياغة عدة اتفاقيات بيئية دولية.",
+                "members.smith.bio": "خبير في تغير المناخ، عضو سابق في الفريق الأساسي لـ IPCC، مع بحوث متعمقة في تقنيات وسياسات خفض الكربون.",
+                "members.johnson.bio": "خبيرة في حفظ النظم البيئية البحرية، مكرسة لمحاربة تلوث المحيطات بالبلاستيك، أسست التحالف العالمي لتنظيف المحيطات.",
+                "members.dubois.bio": "خبير في التنمية الحضرية المستدامة، ساهم في بناء البنية التحتية الخضراء في أكثر من 100 مدينة حول العالم.",
+                "members.patel.bio": "عالم اقتصاد بيئي، يركز على دمج التنمية المستدامة مع التخفيف من الفقر، مؤلف كتاب \"التحول الاقتصادي الأخضر\" وغيرها من المؤلفات.",
+                "members.gonzalez.bio": "خبيرة في حفظ الغابات، قادت بنجاح مشروع حماية غابات الأمازون وفازت بجائزة الأمم المتحدة للبيئة.",
+                "about.title": "حول المجلس الدائم",
+                "about.subtitle": "مسؤولياتنا ومهمتنا",
+                "about.p1": "المجلس الدائم لمنظمة حماية البيئة العالمية هو أعلى هيئة اتخاذ قرارات في المنظمة، يتكون من قادة متميزين من مجال البيئة العالمي. يتحمل المجلس مسؤولية وضع الاتجاه الاستراتيجي للمنظمة والإشراف على تنفيذ المشاريع والموافقة على القرارات المهمة.",
+                "about.p2": "أعضاء المجلس يخدمون فترة ولاية مدتها خمس سنوات، يتم ترشيحهم واختيارهم من قبل الدول الأعضاء في جميع أنحاء العالم. يعقد المجلس جلستين تامة في السنة ويمكنه عقد جلسات خاصة عند الضرورة. أنشأ المجلس عدة لجان متخصصة، بما في ذلك لجان تغير المناخ والتنوع البيولوجي ومنع التلوث والسيطرة عليه والتنمية المستدامة.",
+                "about.p3": "مهمتنا هي جمع الحكمة البيئية العالمية، وتنسيق الجهود البيئية بين الدول، وتعزيز صياغة وتنفيذ السياسات البيئية، والمساهمة في التنمية المستدامة للأرض.",
+                "footer.about": "منظمة حماية البيئة العالمية (WEPO) هي منظمة دولية غير ربحية مكرسة لحماية البيئة العالمية، وتعمل على تعزيز التنمية المستدامة من خلال البحث العلمي والدعوة للسياسات والتوعية العامة.",
+                "footer.links_title": "روابط سريعة",
+                "footer.contact_title": "اتصل بنا",
+                "footer.address": "العنوان: رقم 10، شارع شينشينغ، منطقة يوبي، مدينة تشونغتشينغ، الصين",
+                "footer.phone": "الهاتف: 130-2835-0677",
+                "footer.email": "البريد الإلكتروني: wepo2021@outlook.com",
+                "footer.hours": "ساعات العمل: من الاثنين إلى الجمعة 9:00 صباحاً - 6:00 مساءً",
+                "footer.copyright": "منظمة حماية البيئة العالمية. جميع الحقوق محفوظة."
+            }
+        };
 
-		mobileMenuBtn.addEventListener('click', () => {
-			mobileMenu.classList.add('active');
-		});
+        let currentLang = 'zh-CN';
 
-		mobileMenuClose.addEventListener('click', () => {
-			mobileMenu.classList.remove('active');
-		});
+        function setLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            document.querySelectorAll('[data-i18n="lang.current"]').forEach(el => {
+                el.textContent = translations[lang]["lang.current"];
+            });
+
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('selectedLanguage', lang);
+            // 更新页面标题
+            document.title = translations[lang]["page.title"] || document.title;
+        }
+
+        const savedLang = localStorage.getItem('selectedLanguage');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        } else {
+            setLanguage(currentLang);
+        }
+
+        document.getElementById('languageBtn').addEventListener('click', function(e) {
+             e.stopPropagation();
+             const dropdown = document.getElementById('languageDropdown');
+             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+        document.getElementById('mobileLanguageBtn').addEventListener('click', function(e) {
+             e.stopPropagation();
+             const dropdown = document.getElementById('mobileLanguageDropdown');
+             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.querySelectorAll('#languageDropdown li, #mobileLanguageDropdown li').forEach(item => {
+            item.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                setLanguage(selectedLang);
+                document.getElementById('languageDropdown').style.display = 'none';
+                document.getElementById('mobileLanguageDropdown').style.display = 'none';
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-switcher')) {
+                document.getElementById('languageDropdown').style.display = 'none';
+                document.getElementById('mobileLanguageDropdown').style.display = 'none';
+            }
+        });
+
+        // --- 动态背景 Canvas (与 index.html 保持一致) ---
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                // 使用与主题更匹配的颜色
+                this.color = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = [];
+        const numberOfParticles = 100;
+
+        function initParticles() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            const maxDistance = 100;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        const opacity = 1 - distance / maxDistance;
+                        ctx.strokeStyle = `rgba(200, 200, 255, ${opacity * 0.2})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(26, 9, 51, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            connectParticles();
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+		// Mobile Menu Toggle (优化版)
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const body = document.body;
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            body.classList.add('no-scroll'); // 防止背景滚动
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            body.classList.remove('no-scroll');
+            // 关闭语言下拉
+            document.getElementById('mobileLanguageDropdown').style.display = 'none';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu); // 点击遮罩关闭
+
+        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // 防止菜单内容点击触发 overlay 关闭事件
+        mobileMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // ESC键关闭菜单
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
 
 		// Scroll to Top Button
 		const scrollTopBtn = document.getElementById('scrollTop');
@@ -788,25 +1481,29 @@
 			});
 		});
 
-		// Animate on Scroll
+		// Animate on Scroll (优化版)
 		const animateOnScroll = () => {
 			const memberCards = document.querySelectorAll('.member-card');
 			
 			memberCards.forEach(card => {
 				const cardPosition = card.getBoundingClientRect().top;
 				const screenPosition = window.innerHeight / 1.3;
-				const delay = card.dataset.delay || 0;
+				// const delay = card.dataset.delay || 0; // 不再使用延迟，让动画更流畅自然
 				
 				if (cardPosition < screenPosition) {
-					setTimeout(() => {
+					// setTimeout(() => { // 移除 setTimeout 延迟
 						card.classList.add('animated');
-					}, delay * 300);
+					// }, delay * 300);
 				}
 			});
 		};
 
 		window.addEventListener('scroll', animateOnScroll);
-		window.addEventListener('load', animateOnScroll);
+		window.addEventListener('load', animateOnScroll); // 页面加载时也触发
+
+        // 页脚年份
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
 	</script>
 </body>
 </html>
