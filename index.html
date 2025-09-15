@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="robots" content="noindex, nofollow">
+	<title>人机验证 - wepo.top</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			-webkit-touch-callout: none;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #0c1445, #2a0b45);
+			height: 100vh;
+			width: 100vw;
+			overflow: hidden;
+			position: relative;
+			color: white;
+		}
+
+		/* 动态背景 */
+		.background-animation {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			overflow: hidden;
+		}
+
+		.bg-particle {
+			position: absolute;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.1);
+			pointer-events: none;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			padding: 20px;
+			position: relative;
+			z-index: 10;
+		}
+
+		.logo {
+			font-size: 28px;
+			font-weight: 600;
+			margin-bottom: 30px;
+			background: linear-gradient(to right, #a855f7, #3b82f6);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			letter-spacing: 1px;
+		}
+
+		.verification-container {
+			width: 100%;
+			max-width: 420px;
+			background: rgba(255, 255, 255, 0.08);
+			backdrop-filter: blur(10px);
+			border-radius: 20px;
+			padding: 30px;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			position: relative;
+		}
+
+		.title {
+			font-size: 22px;
+			font-weight: 600;
+			margin-bottom: 25px;
+			text-align: center;
+			color: #e0e0ff;
+		}
+
+		.instruction {
+			font-size: 14px;
+			color: #c0c0ff;
+			margin-bottom: 25px;
+			text-align: center;
+			line-height: 1.6;
+		}
+
+		.path-container {
+			width: 100%;
+			height: 220px;
+			background: rgba(0, 0, 0, 0.2);
+			border-radius: 15px;
+			position: relative;
+			margin-bottom: 25px;
+			overflow: hidden;
+		}
+
+		#path-canvas {
+			width: 100%;
+			height: 100%;
+			border-radius: 15px;
+		}
+
+		.slider-handle {
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			background: rgba(255, 255, 255, 0.9);
+			border-radius: 50%;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+			transition: transform 0.2s ease;
+			z-index: 10;
+			pointer-events: none; /* 防止干扰canvas事件 */
+		}
+
+		.slider-handle::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 100%);
+			border-radius: 50%;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+
+		.slider-handle.active::before {
+			opacity: 1;
+		}
+
+		.slider-handle:active {
+			transform: scale(0.95);
+		}
+
+		.liquid-glass-btn {
+			width: 100%;
+			height: 50px;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(15px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 15px;
+			color: white;
+			font-size: 16px;
+			font-weight: 500;
+			cursor: pointer;
+			position: relative;
+			overflow: hidden;
+			transition: all 0.3s ease;
+			margin-top: 10px;
+		}
+
+		.liquid-glass-btn::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+			transition: left 0.7s ease;
+		}
+
+		.liquid-glass-btn:hover::before {
+			left: 100%;
+		}
+
+		.liquid-glass-btn:hover {
+			background: rgba(255, 255, 255, 0.15);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+		}
+
+		.liquid-glass-btn:active {
+			transform: translateY(0);
+		}
+
+		.status-message {
+			margin-top: 15px;
+			font-size: 14px;
+			text-align: center;
+			min-height: 20px;
+			color: #a0a0ff;
+			transition: all 0.3s ease;
+		}
+
+		.status-message.error {
+			color: #ff6b6b;
+			animation: shake 0.5s ease-in-out;
+		}
+
+		.status-message.success {
+			color: #4ade80;
+		}
+
+		@keyframes shake {
+			0%, 100% { transform: translateX(0); }
+			10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+			20%, 40%, 60%, 80% { transform: translateX(5px); }
+		}
+
+		.progress-bar {
+			width: 100%;
+			height: 4px;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 2px;
+			margin-top: 15px;
+			overflow: hidden;
+		}
+
+		.progress-fill {
+			height: 100%;
+			width: 0%;
+			background: linear-gradient(to right, #3b82f6, #a855f7);
+			border-radius: 2px;
+			transition: width 0.3s ease;
+		}
+
+		/* 移动端适配 */
+		@media (max-width: 480px) {
+			.verification-container {
+				padding: 20px;
+				margin: 0 10px;
+			}
+			
+			.path-container {
+				height: 180px;
+			}
+			
+			.slider-handle {
+				width: 35px;
+				height: 35px;
+			}
+		}
+
+		/* 加载动画 */
+		.loading {
+			display: none;
+			width: 40px;
+			height: 40px;
+			margin: 20px auto;
+			border: 3px solid rgba(255, 255, 255, 0.3);
+			border-radius: 50%;
+			border-top: 3px solid #a855f7;
+			animation: spin 1s linear infinite;
+			margin-top: 20px;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+	</style>
+</head>
+<body>
+	<div class="background-animation" id="background-animation"></div>
+	
+	<div class="container">
+		<div class="logo">wepo.top</div>
+		
+		<div class="verification-container">
+			<h2 class="title">人机验证</h2>
+			<p class="instruction">请按住并严格沿着白色路径拖动圆点至终点<br>只有精确跟随路径才能验证成功</p>
+			
+			<div class="path-container" id="path-container">
+				<canvas id="path-canvas"></canvas>
+				<div class="slider-handle" id="slider-handle">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="12" cy="12" r="6" fill="#4F46E5"/>
+					</svg>
+				</div>
+			</div>
+			
+			<div class="progress-bar">
+				<div class="progress-fill" id="progress-fill"></div>
+			</div>
+			
+			<div class="status-message" id="status-message">请开始拖动圆点沿路径移动</div>
+			
+			<div class="loading" id="loading"></div>
+			
+			<button class="liquid-glass-btn" id="refresh-btn">刷新验证</button>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// 初始化动态背景
+			initBackgroundAnimation();
+			
+			// 初始化验证系统
+			setTimeout(initVerificationSystem, 500);
+		});
+
+		// 动态背景动画
+		function initBackgroundAnimation() {
+			const container = document.getElementById('background-animation');
+			const particleCount = 30;
+			
+			for (let i = 0; i < particleCount; i++) {
+				const particle = document.createElement('div');
+				particle.classList.add('bg-particle');
+				
+				// 随机大小
+				const size = Math.random() * 60 + 20;
+				particle.style.width = `${size}px`;
+				particle.style.height = `${size}px`;
+				
+				// 随机位置
+				particle.style.left = `${Math.random() * 100}%`;
+				particle.style.top = `${Math.random() * 100}%`;
+				
+				// 随机动画
+				const duration = Math.random() * 60 + 40;
+				const delay = Math.random() * 10;
+				particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+				
+				// 添加关键帧动画
+				const existingStyle = document.getElementById('float-animation');
+				if (!existingStyle) {
+					const style = document.createElement('style');
+					style.id = 'float-animation';
+					style.textContent = `
+						@keyframes float {
+							0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+							25% { transform: translateY(-20px) translateX(15px) rotate(180deg); }
+							50% { transform: translateY(0) translateX(-15px) rotate(360deg); }
+							75% { transform: translateY(20px) translateX(15px) rotate(180deg); }
+						}
+					`;
+					document.head.appendChild(style);
+				}
+				
+				container.appendChild(particle);
+			}
+		}
+
+		// 验证系统
+		function initVerificationSystem() {
+			const canvas = document.getElementById('path-canvas');
+			const ctx = canvas.getContext('2d');
+			const sliderHandle = document.getElementById('slider-handle');
+			const pathContainer = document.getElementById('path-container');
+			const progressBar = document.getElementById('progress-fill');
+			const statusMessage = document.getElementById('status-message');
+			const refreshBtn = document.getElementById('refresh-btn');
+			const loading = document.getElementById('loading');
+			
+			let pathPoints = [];
+			let isDragging = false;
+			let currentIndex = 0;
+			let verificationPassed = false;
+			let tolerance = 25; // 路径容差值（像素）
+			let containerRect = null;
+			
+			// 设置canvas大小
+			function resizeCanvas() {
+				containerRect = pathContainer.getBoundingClientRect();
+				canvas.width = containerRect.width;
+				canvas.height = containerRect.height;
+				
+				// 生成路径
+				generateRandomPath();
+			}
+			
+			// 生成随机路径
+			function generateRandomPath() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				
+				// 清空之前的路径点
+				pathPoints = [];
+				
+				// 确保canvas有尺寸
+				if (canvas.width <= 0 || canvas.height <= 0) {
+					console.error('Canvas尺寸无效');
+					return;
+				}
+				
+				// 生成随机曲线路径
+				const pointCount = 25 + Math.floor(Math.random() * 15); // 25-40个点
+				const margin = 40;
+				const startX = margin;
+				const endX = canvas.width - margin;
+				const startY = canvas.height / 2;
+				const endY = canvas.height / 2 + (Math.random() > 0.5 ? 1 : -1) * (canvas.height * 0.2);
+				
+				// 添加起始点
+				pathPoints.push({ x: startX, y: startY });
+				
+				// 生成中间点
+				for (let i = 1; i < pointCount - 1; i++) {
+					const t = i / (pointCount - 1);
+					const x = startX + t * (endX - startX);
+					
+					// 使用正弦波+随机扰动生成自然曲线
+					const baseY = startY + Math.sin(t * Math.PI * (2 + Math.random())) * (canvas.height * 0.3);
+					const randomOffset = (Math.random() - 0.5) * canvas.height * 0.15;
+					const y = baseY + randomOffset;
+					
+					// 确保点在画布内
+					const boundedY = Math.max(margin, Math.min(y, canvas.height - margin));
+					pathPoints.push({ x, y: boundedY });
+				}
+				
+				// 添加终点
+				pathPoints.push({ x: endX, y: Math.max(margin, Math.min(endY, canvas.height - margin)) });
+				
+				// 绘制路径
+				drawPath();
+				
+				// 重置滑块位置
+				resetSlider();
+			}
+			
+			// 绘制路径
+			function drawPath() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				
+				// 绘制路径线
+				ctx.beginPath();
+				ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+				
+				for (let i = 1; i < pathPoints.length; i++) {
+					ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+				}
+				
+				ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+				ctx.lineWidth = 4;
+				ctx.stroke();
+				
+				// 绘制起点标记
+				ctx.beginPath();
+				ctx.arc(pathPoints[0].x, pathPoints[0].y, 10, 0, Math.PI * 2);
+				ctx.fillStyle = '#3b82f6';
+				ctx.fill();
+				
+				// 绘制终点标记
+				ctx.beginPath();
+				ctx.arc(pathPoints[pathPoints.length - 1].x, pathPoints[pathPoints.length - 1].y, 10, 0, Math.PI * 2);
+				ctx.fillStyle = '#a855f7';
+				ctx.fill();
+				
+				// 初始位置放置滑块
+				if (pathPoints.length > 0) {
+					const start = pathPoints[0];
+					sliderHandle.style.left = (start.x - 20) + 'px';
+					sliderHandle.style.top = (start.y - 20) + 'px';
+				}
+			}
+			
+			// 重置滑块
+			function resetSlider() {
+				if (pathPoints.length === 0) return;
+				
+				const startPoint = pathPoints[0];
+				sliderHandle.style.left = (startPoint.x - 20) + 'px';
+				sliderHandle.style.top = (startPoint.y - 20) + 'px';
+				
+				currentIndex = 0;
+				verificationPassed = false;
+				progressBar.style.width = '0%';
+				statusMessage.textContent = '请开始拖动圆点沿路径移动';
+				statusMessage.className = 'status-message';
+				sliderHandle.classList.remove('active');
+			}
+			
+			// 计算点到线段的距离
+			function distanceToSegment(px, py, x1, y1, x2, y2) {
+				const A = px - x1;
+				const B = py - y1;
+				const C = x2 - x1;
+				const D = y2 - y1;
+				
+				const dot = A * C + B * D;
+				const lenSq = C * C + D * D;
+				let param = -1;
+				
+				if (lenSq !== 0) {
+					param = dot / lenSq;
+				}
+				
+				let xx, yy;
+				
+				if (param < 0) {
+					xx = x1;
+					yy = y1;
+				} else if (param > 1) {
+					xx = x2;
+					yy = y2;
+				} else {
+					xx = x1 + param * C;
+					yy = y1 + param * D;
+				}
+				
+				const dx = px - xx;
+				const dy = py - yy;
+				
+				return Math.sqrt(dx * dx + dy * dy);
+			}
+			
+			// 检查点是否在路径附近
+			function isPointOnPath(x, y) {
+				if (currentIndex >= pathPoints.length - 1) return true;
+				
+				// 检查是否接近当前或下一个路径段
+				const searchRange = Math.min(5, pathPoints.length - 1 - currentIndex);
+				for (let i = currentIndex; i < currentIndex + searchRange; i++) {
+					const distance = distanceToSegment(
+						x, y,
+						pathPoints[i].x, pathPoints[i].y,
+						pathPoints[i + 1].x, pathPoints[i + 1].y
+					);
+					
+					if (distance <= tolerance) {
+						// 更新当前索引
+						currentIndex = i;
+						return true;
+					}
+				}
+				
+				return false;
+			}
+			
+			// 计算沿路径的进度
+			function calculateProgress(x, y) {
+				if (pathPoints.length < 2) return 0;
+				
+				// 计算总路径长度
+				let totalLength = 0;
+				for (let i = 0; i < pathPoints.length - 1; i++) {
+					const dx = pathPoints[i + 1].x - pathPoints[i].x;
+					const dy = pathPoints[i + 1].y - pathPoints[i].y;
+					totalLength += Math.sqrt(dx * dx + dy * dy);
+				}
+				
+				// 计算当前已走路径长度
+				let currentLength = 0;
+				for (let i = 0; i < currentIndex; i++) {
+					const dx = pathPoints[i + 1].x - pathPoints[i].x;
+					const dy = pathPoints[i + 1].y - pathPoints[i].y;
+					currentLength += Math.sqrt(dx * dx + dy * dy);
+				}
+				
+				// 加上当前线段的部分
+				if (currentIndex < pathPoints.length - 1) {
+					const dx = x - pathPoints[currentIndex].x;
+					const dy = y - pathPoints[currentIndex].y;
+					currentLength += Math.sqrt(dx * dx + dy * dy);
+				}
+				
+				return Math.min(100, (currentLength / totalLength) * 100);
+			}
+			
+			// 验证完成
+			function completeVerification() {
+				verificationPassed = true;
+				progressBar.style.width = '100%';
+				statusMessage.textContent = '验证成功！';
+				statusMessage.className = 'status-message success';
+				
+				// 显示加载动画
+				loading.style.display = 'block';
+				
+				// 延迟跳转
+				setTimeout(() => {
+					window.location.href = 'sy.html';
+				}, 1500);
+			}
+			
+			// 检查是否到达终点
+			function checkIfAtEnd(x, y) {
+				if (pathPoints.length === 0) return false;
+				
+				const endPoint = pathPoints[pathPoints.length - 1];
+				const distance = Math.sqrt(
+					Math.pow(x - endPoint.x, 2) + 
+					Math.pow(y - endPoint.y, 2)
+				);
+				
+				return distance < 30; // 30像素内算到达终点
+			}
+			
+			// 事件处理 - 在canvas上监听
+			function handleCanvasStart(e) {
+				e.preventDefault();
+				
+				// 获取点击位置
+				const rect = canvas.getBoundingClientRect();
+				let clientX, clientY;
+				
+				if (e.type === 'touchstart') {
+					clientX = e.touches[0].clientX;
+					clientY = e.touches[0].clientY;
+				} else {
+					clientX = e.clientX;
+					clientY = e.clientY;
+				}
+				
+				const x = clientX - rect.left;
+				const y = clientY - rect.top;
+				
+				// 检查是否点击在滑块或起点附近
+				const sliderRect = sliderHandle.getBoundingClientRect();
+				const sliderCenterX = sliderRect.left + sliderRect.width / 2 - rect.left;
+				const sliderCenterY = sliderRect.top + sliderRect.height / 2 - rect.top;
+				
+				const distanceToSlider = Math.sqrt(
+					Math.pow(x - sliderCenterX, 2) + Math.pow(y - sliderCenterY, 2)
+				);
+				
+				// 如果点击在滑块或起点附近，开始拖拽
+				if (distanceToSlider < 40 || 
+					(Math.sqrt(Math.pow(x - pathPoints[0].x, 2) + Math.pow(y - pathPoints[0].y, 2)) < 30)) {
+					isDragging = true;
+					sliderHandle.classList.add('active');
+					
+					// 如果在起点，重置
+					if (Math.sqrt(Math.pow(x - pathPoints[0].x, 2) + Math.pow(y - pathPoints[0].y, 2)) < 30) {
+						resetSlider();
+					}
+				}
+			}
+			
+			function handleCanvasMove(e) {
+				if (!isDragging) return;
+				e.preventDefault();
+				
+				// 获取当前位置
+				const rect = canvas.getBoundingClientRect();
+				let clientX, clientY;
+				
+				if (e.type === 'touchmove') {
+					clientX = e.touches[0].clientX;
+					clientY = e.touches[0].clientY;
+				} else {
+					clientX = e.clientX;
+					clientY = e.clientY;
+				}
+				
+				const x = clientX - rect.left;
+				const y = clientY - rect.top;
+				
+				// 检查是否在路径上
+				if (isPointOnPath(x, y)) {
+					// 更新滑块位置
+					sliderHandle.style.left = (x - 20) + 'px';
+					sliderHandle.style.top = (y - 20) + 'px';
+					
+					// 更新进度
+					const progress = calculateProgress(x, y);
+					progressBar.style.width = `${progress}%`;
+					
+					// 检查是否到达终点
+					if (checkIfAtEnd(x, y)) {
+						completeVerification();
+					}
+				} else {
+					// 如果偏离路径，显示错误
+					statusMessage.textContent = '请严格沿着白色路径拖动';
+					statusMessage.className = 'status-message error';
+				}
+			}
+			
+			function handleCanvasEnd() {
+				if (!isDragging) return;
+				isDragging = false;
+				sliderHandle.classList.remove('active');
+				
+				if (!verificationPassed && pathPoints.length > 0) {
+					// 获取当前滑块位置
+					const sliderRect = sliderHandle.getBoundingClientRect();
+					const containerRect = pathContainer.getBoundingClientRect();
+					
+					const currentPos = {
+						x: sliderRect.left + sliderRect.width / 2 - containerRect.left,
+						y: sliderRect.top + sliderRect.height / 2 - containerRect.top
+					};
+					
+					// 检查是否在路径上
+					if (!isPointOnPath(currentPos.x, currentPos.y)) {
+						resetSlider();
+						statusMessage.textContent = '偏离路径，请从起点重新开始';
+						statusMessage.className = 'status-message error';
+					}
+				}
+			}
+			
+			// 绑定事件到canvas
+			canvas.addEventListener('mousedown', handleCanvasStart);
+			canvas.addEventListener('touchstart', handleCanvasStart);
+			
+			document.addEventListener('mousemove', handleCanvasMove);
+			document.addEventListener('touchmove', handleCanvasMove, { passive: false });
+			
+			document.addEventListener('mouseup', handleCanvasEnd);
+			document.addEventListener('touchend', handleCanvasEnd);
+			
+			// 刷新按钮
+			refreshBtn.addEventListener('click', function() {
+				generateRandomPath();
+				statusMessage.textContent = '已刷新，请重新沿路径拖动';
+				statusMessage.className = 'status-message';
+			});
+			
+			// 初始化
+			window.addEventListener('resize', resizeCanvas);
+			
+			// 确保DOM完全加载后再设置尺寸
+			setTimeout(() => {
+				resizeCanvas();
+			}, 100);
+		}
+	</script>
+</body>
+</html>
