@@ -358,7 +358,6 @@
 			background: rgba(255, 255, 255, 0.1);
 			border-color: rgba(255, 255, 255, 0.5);
 		}
-
 		/* Featured Video Section */
 		.featured-video-section {
 			padding: 40px 10%;
@@ -374,7 +373,6 @@
 			margin: 0 auto;
 			max-width: 1200px;
 		}
-
 		/* Sections */
 		.section {
 			padding: 100px 10%;
@@ -765,6 +763,107 @@
 			transform: translateY(-5px);
 			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 		}
+
+		/* --- Cookie Consent Banner Styles --- */
+		.cookie-consent-banner {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: rgba(10, 38, 71, 0.95);
+			backdrop-filter: blur(15px);
+			color: var(--text-light);
+			padding: 20px 5%;
+			z-index: 1002;
+			transform: translateY(100%);
+			opacity: 0;
+			transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+			box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+		}
+		.cookie-consent-banner.show {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		.cookie-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+		.cookie-text {
+			flex: 1;
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+		.cookie-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 15px;
+			margin-top: 5px;
+		}
+		.cookie-link {
+			color: #8ab4f8;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 0.9rem;
+			transition: color 0.3s ease;
+		}
+		.cookie-link:hover {
+			color: #bbd6ff;
+			text-decoration: underline;
+		}
+		.cookie-buttons {
+			display: flex;
+			gap: 15px;
+			margin-top: 10px;
+			justify-content: flex-end;
+		}
+		.cookie-btn {
+			padding: 12px 25px; /* 增加了内边距 */
+			border-radius: 8px; /* 使用矩形圆角 */
+			font-weight: 600;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			cursor: pointer;
+			border: none;
+			font-size: 0.95rem;
+			/* 与网站按钮样式一致 */
+			border: 2px solid transparent;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+		}
+		.cookie-btn.accept {
+			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+			color: white;
+		}
+		.cookie-btn.accept:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 15px rgba(42, 116, 179, 0.6);
+		}
+		.cookie-btn.decline {
+			background: rgba(200, 50, 50, 0.1); /* 更柔和的背景 */
+			color: #ff6b6b;
+			border-color: rgba(255, 107, 107, 0.3); /* 添加边框 */
+		}
+		.cookie-btn.decline:hover {
+			background: rgba(200, 50, 50, 0.2);
+			border-color: rgba(255, 107, 107, 0.5);
+			transform: translateY(-2px); /* 添加悬停效果 */
+			box-shadow: 0 6px 15px rgba(200, 50, 50, 0.3); /* 添加阴影 */
+		}
+		/* Responsive for Cookie Banner */
+		@media (max-width: 768px) {
+			.cookie-content {
+				flex-direction: column;
+			}
+			.cookie-buttons {
+				justify-content: center;
+			}
+		}
+		/* -------------------------------------- */
+
+
 		/* Responsive Styles */
 		@media (max-width: 992px) {
 			.hero h1 {
@@ -990,7 +1089,6 @@
 			</div>
 		</div>
 	</section>
-
 	<!-- Featured Video Section (完整显示，不裁剪) -->
 	<section class="featured-video-section">
 		<video 
@@ -1002,7 +1100,6 @@
 			Your browser does not support the video tag.
 		</video>
 	</section>
-
 	<!-- About Section -->
 	<section class="section" id="about">
 		<h2 class="section-title" data-i18n="about.title"></h2>
@@ -1221,6 +1318,25 @@
 	</footer>
 	<!-- Scroll to Top Button -->
 	<button class="scroll-top" id="scrollTop">↑</button>
+
+	<!-- --- Cookie Consent Banner HTML --- -->
+	<div class="cookie-consent-banner" id="cookieConsentBanner">
+		<div class="cookie-content">
+			<div class="cookie-text">
+				我们使用必要的 Cookie 以确保网站正常运行。我们还希望使用额外的 Cookie 来了解用户如何与网站互动，以便改进体验。您可以通过下方链接查看我们的隐私条款和用户协议。若不同意，您将被重定向到外部网站。
+				<div class="cookie-links">
+					<a href="ystk.html" target="_blank" rel="noopener noreferrer" class="cookie-link">隐私条款</a>
+					<a href="yhxy.html" target="_blank" rel="noopener noreferrer" class="cookie-link">用户协议</a>
+				</div>
+			</div>
+			<div class="cookie-buttons">
+				<button class="cookie-btn decline" id="declineCookieBtn">退出网站</button>
+				<button class="cookie-btn accept" id="acceptCookieBtn">同意</button>
+			</div>
+		</div>
+	</div>
+	<!-- ------------------------------------- -->
+
 	<script>
 		// --- 多语言支持 ---
 		const translations = {
@@ -1906,6 +2022,34 @@
 		});
 		// --- 页脚年份 ---
 		document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+		// --- Cookie Consent Banner Script ---
+		const cookieBanner = document.getElementById('cookieConsentBanner');
+		const acceptBtn = document.getElementById('acceptCookieBtn');
+		const declineBtn = document.getElementById('declineCookieBtn');
+
+		// Check if user has already consented
+		if (!localStorage.getItem('cookieConsent')) {
+			// Show the banner after a short delay to allow other animations to start
+			setTimeout(() => {
+				cookieBanner.classList.add('show');
+			}, 1000); // 1 second delay
+		}
+
+		acceptBtn.addEventListener('click', function() {
+			// Set consent in localStorage
+			localStorage.setItem('cookieConsent', 'true');
+			// Hide the banner
+			cookieBanner.classList.remove('show');
+		});
+
+		declineBtn.addEventListener('click', function() {
+			// Optionally, you can still store the decline decision if needed for analytics
+			// localStorage.setItem('cookieConsent', 'false');
+			// Redirect to an external website (e.g., Google)
+			window.location.href = 'https://cn.bing.com';
+		});
+		// ------------------------------------
 	</script>
 </body>
 </html>
