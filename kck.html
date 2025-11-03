@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康朝凯 - 维基百科，自由的百科全书</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3366cc;
+            --secondary-color: #f8f9fa;
+            --border-color: #a2a9b1;
+            --text-color: #202122;
+            --link-color: #0645ad;
+            --background-color: #ffffff;
+            --header-bg: #f8f9fa;
+            --footer-bg: #f8f9fa;
+            --table-header-bg: #eaecf0;
+            --table-border: #a2a9b1;
+            --infobox-bg: #f8f9fa;
+            --infobox-border: #a2a9b1;
+            --warning-bg: #fef6e7;
+            --warning-border: #fc3;
+        }
+
+        .dark-mode {
+            --primary-color: #58a6ff;
+            --secondary-color: #0d1117;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --link-color: #58a6ff;
+            --background-color: #0d1117;
+            --header-bg: #161b22;
+            --footer-bg: #161b22;
+            --table-header-bg: #161b22;
+            --table-border: #30363d;
+            --infobox-bg: #161b22;
+            --infobox-border: #30363d;
+            --warning-bg: #1c2128;
+            --warning-border: #8b949e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Lato, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding-top: 60px;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部导航 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 2px 0 0 2px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .search-bar button {
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions a {
+            margin-left: 15px;
+            font-size: 14px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 15px;
+        }
+
+        .language-selector {
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .language-selector select {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 5px;
+            border-radius: 2px;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-nav {
+            background-color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            padding: 10px 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            padding: 5px 15px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            color: var(--text-color);
+        }
+
+        .sidebar-nav a:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .article-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: 28px;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        .article-subtitle {
+            font-size: 14px;
+            color: #54595d;
+        }
+
+        .infobox {
+            width: 280px;
+            border: 1px solid var(--infobox-border);
+            background-color: var(--infobox-bg);
+            padding: 15px;
+            margin: 0 0 20px 20px;
+            float: right;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        .infobox-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .infobox-image.dark-mode {
+            background-color: #2d2d2d;
+        }
+
+        .infobox-row {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .infobox-label {
+            font-weight: bold;
+            width: 40%;
+        }
+
+        .infobox-data {
+            width: 60%;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: normal;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .section-content {
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+        }
+
+        .references {
+            font-size: 14px;
+        }
+
+        .references ol {
+            margin-left: 20px;
+        }
+
+        .references li {
+            margin-bottom: 5px;
+        }
+
+        .warning-box {
+            background-color: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            border: 1px solid var(--table-border);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: var(--table-header-bg);
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 12px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-links a {
+            margin-right: 10px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-bar {
+                margin: 10px 0;
+                max-width: 100%;
+            }
+            
+            .user-actions {
+                margin-top: 10px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .infobox {
+                float: none;
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-text">维基百科</div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="搜索维基百科" id="searchInput">
+                <button onclick="searchWikipedia()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <a href="https://www.wikipedia.org/" target="_blank">首页</a>
+                <a href="https://www.wikipedia.org/" target="_blank">登录</a>
+                <a href="https://www.wikipedia.org/" target="_blank">注册</a>
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                <div class="language-selector">
+                    <select id="languageSelect">
+                        <option value="zh">中文</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                        <option value="fr">Français</option>
+                        <option value="es">Español</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="container main-content">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">分类索引</a></li>
+                    <li><a href="#">特色内容</a></li>
+                    <li><a href="#">最近更改</a></li>
+                    <li><a href="#">随机条目</a></li>
+                    <li><a href="#">帮助</a></li>
+                    <li><a href="#">关于维基百科</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 文章内容 -->
+        <main class="content">
+            <!-- 中文内容 -->
+            <div class="language-content active" id="content-zh">
+                <header class="article-header">
+                    <h1 class="article-title">康朝凯</h1>
+                    <div class="article-subtitle">维基百科，自由的百科全书</div>
+                </header>
+
+                <div class="warning-box">
+                    <p><strong>提示：</strong>此条目的主题不是其他同名人物。</p>
+                </div>
+
+                <aside class="infobox fade-in">
+                    <div class="infobox-title">康朝凯</div>
+                    <div class="infobox-image">
+                        <span>暂无</span>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">出生</div>
+                        <div class="infobox-data">2009年9月<br>中国重庆市垫江县</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">国籍</div>
+                        <div class="infobox-data">中国🇨🇳</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">职业</div>
+                        <div class="infobox-data">环保行动者、科技创新者</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">知名于</div>
+                        <div class="infobox-data">世界环境保护组织创始人</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">组织</div>
+                        <div class="infobox-data">
+                            <a href="#" target="_blank">世界环境保护组织</a><br>
+                            <a href="#" target="_blank">清蓝世行</a>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="section">
+                    <h2 class="section-title">早年生活与教育背景</h2>
+                    <div class="section-content">
+                        <p>康朝凯的小学和初中教育阶段展现出了对自然科学和技术的浓厚兴趣。在垫江县桂溪小学就读期间，他积极参与学校的科技兴趣小组，动手制作各类模型，并开始接触简单的编程知识。进入重庆外国语学校初中后，康朝凯在完成学业的同时，进一步拓展了在物理、计算机以及环境保护方面的探索。他善于将理论知识应用于实践，例如尝试编写程序来监测分析简单的环境数据，并利用航模进行初步的环境观察。这些早期的实践为他日后在环保科技领域的深入探索埋下了种子。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">环保行动与科技创新</h2>
+                    <div class="section-content">
+                        <p>康朝凯的环保实践与科技创新紧密结合。他认识到技术手段在解决环境问题中的潜力，并积极将编程、航模等技术应用于环境保护的具体场景。</p>
+                        
+                        <h3>创立世界环境保护组织（WEPO）与清蓝世行</h3>
+                        <p>出于对全球环境问题的深切关注以及利用技术推动环保的信念，康朝凯发起成立了世界环境保护组织（WEPO）。该组织旨在汇聚全球青年力量，关注并行动于气候变化、生物多样性保护、污染防治等议题。同时，他创立了清蓝世行（重庆）环保科技有限公司，尝试以社会企业的模式运营，探索环保技术的研发与商业化应用，推动创新环保解决方案的落地。</p>
+                        
+                        <h3>编程与科技赋能环保</h3>
+                        <p>作为Python程序开发者和HTML前端工程师，康朝凯注重利用技术手段服务环保事业。他曾尝试开发或参与开发用于环境数据监测与分析的小程序或网页工具，例如可能涉及空气质量数据可视化、垃圾分类推广助手、河流水质变化趋势模拟等，旨在通过技术提升环保工作的效率和公众参与度。在航模科技方面，他探索将航模改装用于环境监测，例如尝试在航模上搭载传感器，用于特定区域的大气污染物浓度初步探测或生态状况巡查，为环保研究提供了一种低成本的辅助数据采集思路。</p>
+                        
+                        <h3>航拍摄影记录自然与变迁</h3>
+                        <p>康朝凯精通航拍摄影，他利用无人机镜头从空中视角记录自然生态的壮美与脆弱，也关注环境变迁的痕迹。他的航拍作品不仅用于艺术表达和环境教育，也服务于环保项目的调研与监测，通过影像的力量唤起公众对环境保护的重视。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">参与国际事务与公益实践</h2>
+                    <div class="section-content">
+                        <p>康朝凯积极参与国际环保事务和各类公益志愿活动，展现了中国青年在全球议题中的责任感与行动力。</p>
+                        
+                        <h3>亮相国际舞台</h3>
+                        <p>作为<a href="https://www.unep.org/zh-hans" target="_blank">联合国环境规划署</a>青年成员，康朝凯参加了2020年联合国气候大会，在国际舞台上发声，呼吁关注气候变化，并分享青年一代在环保方面的创新实践与思考。他还获得了联合国环境规划署颁发的贡献证书以及联合国儿童基金会的捐赠证书，这些国际认可体现了其在这一领域的努力和影响力。</p>
+                        
+                        <h3>深耕志愿服务</h3>
+                        <p>康朝凯是<a href="https://www.sczyz.org/" target="_blank">重庆山城志愿者协会</a>的积极参与者。他投身于各类线下环保公益活动，如社区垃圾分类宣传、河流垃圾清理、植树造林、环保知识普及等，用实际行动践行环保理念，影响和带动身边人参与生态保护。</p>
+                        
+                        <h3>多元身份与跨界交流</h3>
+                        <p>作为门萨（Mensa）协会成员，康朝凯在高智商社群中与其他成员进行跨领域交流，激发创新思维。他同时也是<a href="https://www.worldwildlife.org/" target="_blank">世界自然基金会</a>（WWF）的成员（"熊猫客"），支持并参与生物多样性保护工作。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">主要荣誉与奖项</h2>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>年份</th>
+                                    <th>奖项名称</th>
+                                    <th>颁发机构</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2020年</td>
+                                    <td>联合国环境规划署贡献证书</td>
+                                    <td>联合国环境规划署</td>
+                                </tr>
+                                <tr>
+                                    <td>2020年</td>
+                                    <td>联合国儿童基金会捐赠证书</td>
+                                    <td>联合国儿童基金会</td>
+                                </tr>
+                                <tr>
+                                    <td>2019年</td>
+                                    <td>垫江县创意构型科技大赛第一名</td>
+                                    <td>垫江县教育局</td>
+                                </tr>
+                                <tr>
+                                    <td>2019年</td>
+                                    <td>重庆市创意构型科技大赛第一名</td>
+                                    <td>重庆市教育局</td>
+                                </tr>
+                                <tr>
+                                    <td>2018年</td>
+                                    <td>重庆市中学生物理论文一等奖</td>
+                                    <td>重庆市教育局</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">社会影响与未来展望</h2>
+                    <div class="section-content">
+                        <p>康朝凯作为新一代中国青年的代表，其经历展现了年轻一代将个人兴趣、专业技能与社会责任、全球议题相结合的可能性。他不仅在环保科技领域进行积极探索，更通过实际行动和国际国内的参与，努力扩大影响力，激励更多年轻人关注并投身于可持续发展事业。展望未来，康朝凯有望在环保技术研发、青年气候行动、国际环保合作等方面持续深耕，为构建人与自然和谐共生的未来贡献更多力量。</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">参考资料</h2>
+                    <div class="section-content references">
+                        <ol>
+                            <li>联合国环境规划署. <a href="https://www.unep.org/zh-hans" target="_blank">官方网站</a>.</li>
+                            <li>世界自然基金会. <a href="https://www.worldwildlife.org/" target="_blank">官方网站</a>.</li>
+                            <li>重庆山城志愿者协会. <a href="https://www.sczyz.org/" target="_blank">官方网站</a>.</li>
+                            <li>《垫江县创意构型科技大赛获奖名单》. 垫江县教育局, 2019.</li>
+                            <li>《重庆市中学生物理论文竞赛获奖名单》. 重庆市教育局, 2018.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 英文内容 -->
+            <div class="language-content" id="content-en">
+                <header class="article-header">
+                    <h1 class="article-title">Kang Chaokai</h1>
+                    <div class="article-subtitle">From Wikipedia, the free encyclopedia</div>
+                </header>
+
+                <div class="warning-box">
+                    <p><strong>Note:</strong> This article is about the environmental activist, not other people with the same name.</p>
+                </div>
+
+                <aside class="infobox fade-in">
+                    <div class="infobox-title">Kang Chaokai</div>
+                    <div class="infobox-image">
+                        <span>No Image</span>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">Born</div>
+                        <div class="infobox-data">September 16, 2009<br>Dianjiang County, Chongqing, China</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">Nationality</div>
+                        <div class="infobox-data">Chinese</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">Occupation</div>
+                        <div class="infobox-data">Environmental Activist, Tech Innovator</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">Known for</div>
+                        <div class="infobox-data">Founder of World Environmental Protection Organization</div>
+                    </div>
+                    <div class="infobox-row">
+                        <div class="infobox-label">Organizations</div>
+                        <div class="infobox-data">
+                            <a href="#" target="_blank">World Environmental Protection Organization</a><br>
+                            <a href="#" target="_blank">Qinglan Shixing</a>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="section">
+                    <h2 class="section-title">Early Life and Education</h2>
+                    <div class="section-content">
+                        <p>Kang Chaokai showed a strong interest in natural sciences and technology during his primary and middle school education. While attending Guixi Primary School in Dianjiang County, he actively participated in the school's technology interest group, created various models, and began learning basic programming knowledge. After entering Chongqing Foreign Language School for middle school, Kang further expanded his exploration in physics, computer science, and environmental protection while completing his studies. He excelled at applying theoretical knowledge to practice, such as attempting to write programs to monitor and analyze simple environmental data and using model aircraft for preliminary environmental observation. These early practices planted the seeds for his future in-depth exploration in the field of environmental technology.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Environmental Action and Technological Innovation</h2>
+                    <div class="section-content">
+                        <p>Kang Chaokai's environmental practices are closely integrated with technological innovation. He recognizes the potential of technical means in solving environmental problems and actively applies programming, model aircraft technology, and other technologies to specific environmental protection scenarios.</p>
+                        
+                        <h3>Founding WEPO and Qinglan Shixing</h3>
+                        <p>Out of deep concern for global environmental issues and the belief in using technology to promote environmental protection, Kang initiated the establishment of the World Environmental Protection Organization (WEPO). The organization aims to gather young people worldwide to focus on and take action on issues such as climate change, biodiversity protection, and pollution prevention. At the same time, he founded Qinglan Shixing (Chongqing) Environmental Technology Co., Ltd., attempting to operate in a social enterprise model, exploring the research and development and commercial application of environmental protection technologies, and promoting the implementation of innovative environmental protection solutions.</p>
+                        
+                        <h3>Programming and Technology Empowering Environmental Protection</h3>
+                        <p>As a Python developer and HTML front-end engineer, Kang focuses on using technical means to serve environmental protection. He has attempted to develop or participate in the development of small programs or web tools for environmental data monitoring and analysis, such as air quality data visualization, waste sorting promotion assistants, and river water quality change trend simulations, aiming to improve the efficiency of environmental protection work and public participation through technology. In the field of model aircraft technology, he explores the use of modified model aircraft for environmental monitoring, such as attempting to equip model aircraft with sensors for preliminary detection of atmospheric pollutant concentrations in specific areas or ecological condition inspections, providing a low-cost auxiliary data collection idea for environmental research.</p>
+                        
+                        <h3>Aerial Photography Recording Nature and Changes</h3>
+                        <p>Kang is proficient in aerial photography. He uses drone lenses to record the magnificence and fragility of natural ecology from an aerial perspective and also pays attention to traces of environmental changes. His aerial photography works are not only used for artistic expression and environmental education but also serve the research and monitoring of environmental protection projects, arousing public attention to environmental protection through the power of images.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">International Engagement and Public Service</h2>
+                    <div class="section-content">
+                        <p>Kang Chaokai actively participates in international environmental affairs and various public welfare volunteer activities, demonstrating the sense of responsibility and action of Chinese youth in global issues.</p>
+                        
+                        <h3>Appearance on the International Stage</h3>
+                        <p>As a youth member of the <a href="https://www.unep.org/zh-hans" target="_blank">United Nations Environment Programme</a>, Kang participated in the 2020 United Nations Climate Change Conference, speaking out on the international stage, calling for attention to climate change, and sharing the innovative practices and thoughts of the younger generation in environmental protection. He also received a contribution certificate from the United Nations Environment Programme and a donation certificate from UNICEF. These international recognitions reflect his efforts and influence in this field.</p>
+                        
+                        <h3>Deep Engagement in Volunteer Service</h3>
+                        <p>Kang is an active participant in the <a href="https://www.sczyz.org/" target="_blank">Chongqing Mountain City Volunteer Association</a>. He engages in various offline environmental public welfare activities, such as community waste sorting promotion, river garbage cleaning, tree planting, and environmental knowledge popularization, practicing environmental protection concepts with practical actions and influencing and driving people around him to participate in ecological protection.</p>
+                        
+                        <h3>Multiple Identities and Cross-Disciplinary Communication</h3>
+                        <p>As a member of the Mensa Association, Kang engages in cross-disciplinary communication with other members in the high-IQ community, stimulating innovative thinking. He is also a member of the <a href="https://www.worldwildlife.org/" target="_blank">World Wildlife Fund</a> (WWF) ("Panda Guest"), supporting and participating in biodiversity protection work.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Major Honors and Awards</h2>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Award Name</th>
+                                    <th>Issuing Organization</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2020</td>
+                                    <td>UNEP Contribution Certificate</td>
+                                    <td>United Nations Environment Programme</td>
+                                </tr>
+                                <tr>
+                                    <td>2020</td>
+                                    <td>UNICEF Donation Certificate</td>
+                                    <td>United Nations Children's Fund</td>
+                                </tr>
+                                <tr>
+                                    <td>2019</td>
+                                    <td>First Prize, Dianjiang County Creative Configuration Technology Competition</td>
+                                    <td>Dianjiang County Education Bureau</td>
+                                </tr>
+                                <tr>
+                                    <td>2019</td>
+                                    <td>First Prize, Chongqing Creative Configuration Technology Competition</td>
+                                    <td>Chongqing Education Bureau</td>
+                                </tr>
+                                <tr>
+                                    <td>2018</td>
+                                    <td>First Prize, Chongqing Middle School Physics Paper Competition</td>
+                                    <td>Chongqing Education Bureau</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Social Impact and Future Outlook</h2>
+                    <div class="section-content">
+                        <p>As a representative of the new generation of Chinese youth, Kang Chaokai's experience demonstrates the possibility for young people to combine personal interests, professional skills, social responsibility, and global issues. He not only actively explores the field of environmental technology but also strives to expand his influence through practical actions and participation at home and abroad, inspiring more young people to pay attention to and engage in sustainable development. Looking forward, Kang is expected to continue to deepen his efforts in environmental technology research and development, youth climate action, and international environmental cooperation, contributing more to building a future where humans and nature coexist in harmony.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">References</h2>
+                    <div class="section-content references">
+                        <ol>
+                            <li>United Nations Environment Programme. <a href="https://www.unep.org/zh-hans" target="_blank">Official Website</a>.</li>
+                            <li>World Wildlife Fund. <a href="https://www.worldwildlife.org/" target="_blank">Official Website</a>.</li>
+                            <li>Chongqing Mountain City Volunteer Association. <a href="https://www.sczyz.org/" target="_blank">Official Website</a>.</li>
+                            <li>"Dianjiang County Creative Configuration Technology Competition Winners List." Dianjiang County Education Bureau, 2019.</li>
+                            <li>"Chongqing Middle School Physics Paper Competition Winners List." Chongqing Education Bureau, 2018.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他语言内容区域（日语、法语、西班牙语） -->
+            <div class="language-content" id="content-ja">
+                <!-- 日语内容 -->
+                <header class="article-header">
+                    <h1 class="article-title">康朝凱</h1>
+                    <div class="article-subtitle">ウィキペディア、フリー百科事典</div>
+                </header>
+                <div class="section">
+                    <h2 class="section-title">概要</h2>
+                    <div class="section-content">
+                        <p>康朝凱（2009年9月16日 - ）は、中国重慶市墊江県出身の環境保護活動家、技術革新者です。世界環境保護機構（WEPO）の創設者兼会長、清藍世行（重慶）環保科技有限公司の董事長を務めています。</p>
+                    </div>
+                </div>
+                <!-- 其他日语内容... -->
+            </div>
+
+            <div class="language-content" id="content-fr">
+                <!-- 法语内容 -->
+                <header class="article-header">
+                    <h1 class="article-title">Kang Chaokai</h1>
+                    <div class="article-subtitle">Wikipédia, l'encyclopédie libre</div>
+                </header>
+                <div class="section">
+                    <h2 class="section-title">Aperçu</h2>
+                    <div class="section-content">
+                        <p>Kang Chaokai (né le 16 septembre 2009) est un militant écologiste et innovateur technologique chinois, fondateur et président de l'Organisation mondiale pour la protection de l'environnement (OMPE).</p>
+                    </div>
+                </div>
+                <!-- 其他法语内容... -->
+            </div>
+
+            <div class="language-content" id="content-es">
+                <!-- 西班牙语内容 -->
+                <header class="article-header">
+                    <h1 class="article-title">Kang Chaokai</h1>
+                    <div class="article-subtitle">Wikipedia, la enciclopedia libre</div>
+                </header>
+                <div class="section">
+                    <h2 class="section-title">Resumen</h2>
+                    <div class="section-content">
+                        <p>Kang Chaokai (16 de septiembre de 2009) es un activista ambiental e innovador tecnológico chino, fundador y presidente de la Organización Mundial de Protección Ambiental (OMPA).</p>
+                    </div>
+                </div>
+                <!-- 其他西班牙语内容... -->
+            </div>
+        </main>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="#">隐私政策</a>
+                <a href="#">关于维基百科</a>
+                <a href="#">免责声明</a>
+                <a href="#">行为准则</a>
+                <a href="#">开发者</a>
+                <a href="#">统计</a>
+                <a href="#">Cookie声明</a>
+            </div>
+            <div class="footer-copyright">
+                <p>维基百科®和维基媒体基金会标志是维基媒体基金会的注册商标；维基™是维基媒体基金会的商标。</p>
+                <p>维基媒体基金会是按美国国内税收法501(c)(3)登记的非营利慈善机构。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // 语言切换功能
+        const languageSelect = document.getElementById('languageSelect');
+        languageSelect.addEventListener('change', () => {
+            const selectedLanguage = languageSelect.value;
+            // 隐藏所有语言内容
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // 显示选中的语言内容
+            document.getElementById(`content-${selectedLanguage}`).classList.add('active');
+        });
+
+        // 搜索功能
+        function searchWikipedia() {
+            const searchTerm = document.getElementById('searchInput').value;
+            if (searchTerm.trim() !== '') {
+                window.open(`https://www.wikipedia.org/wiki/${encodeURIComponent(searchTerm)}`, '_blank');
+            }
+        }
+
+        // 回车键搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchWikipedia();
+            }
+        });
+
+        // 添加淡入动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.section, .infobox');
+            elements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+                element.classList.add('fade-in');
+            });
+        });
+    </script>
+</body>
+</html>
