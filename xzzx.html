@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻中心 - 世界环境保护组织 (WEPO)</title>
+    <link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
+    <style>
+        :root {
+            --primary-dark: #0a2647;
+            --primary-medium: #144272;
+            --primary-light: #205295;
+            --accent-blue: #2C74B3;
+            --accent-purple: #6a3093;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --bg-light: #ffffff;
+            --bg-dark: #1a1a1a;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --dark-glass-bg: rgba(30, 30, 30, 0.6);
+            --dark-glass-border: rgba(255, 255, 255, 0.1);
+            --transition-time: 0.5s;
+            --font-size-base: 16px;
+        }
+
+        [data-theme="dark"] {
+            --text-light: #e0e0e0;
+            --text-dark: #f8f9fa;
+            --bg-light: #121212;
+            --bg-dark: #0d0d0d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent-purple));
+            color: var(--text-light);
+            min-height: 100vh;
+            transition: background var(--transition-time);
+            font-size: var(--font-size-base);
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #0d1b2a, #1a1a2e);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        [data-theme="dark"] header {
+            background: var(--dark-glass-bg);
+            border: 1px solid var(--dark-glass-border);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(44, 116, 179, 0.3);
+        }
+
+        [data-theme="dark"] .search-input {
+            background: rgba(30, 30, 30, 0.9);
+            color: var(--text-light);
+        }
+
+        .search-button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .home-button {
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        [data-theme="dark"] .home-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle, .font-size-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 8px 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .toggle-btn {
+            background: var(--dark-glass-bg);
+            border: 1px solid var(--dark-glass-border);
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        [data-theme="dark"] .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .news-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.4s ease;
+            animation: fadeIn 0.6s ease-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        [data-theme="dark"] .news-card {
+            background: var(--dark-glass-bg);
+            border: 1px solid var(--dark-glass-border);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        [data-theme="dark"] .news-image {
+            border-bottom: 1px solid var(--dark-glass-border);
+        }
+
+        .news-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: #adb5bd;
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .news-date {
+            color: #6c757d;
+        }
+
+        .news-excerpt {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .news-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .news-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-purple);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo-img">
+                <div class="logo-text">世界环境保护组织 (WEPO)</div>
+            </div>
+            <h1>新闻中心</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="搜索新闻标题、内容或关键词...">
+                <button class="search-button" onclick="performSearch()">搜索</button>
+            </div>
+        </header>
+
+        <div class="controls">
+            <a href="index.html" class="home-button">返回首页</a>
+            <div class="theme-toggle">
+                <button class="toggle-btn" onclick="toggleTheme()">切换深色/浅色模式</button>
+            </div>
+            <div class="font-size-control">
+                <label for="fontSizeSlider">字体大小: </label>
+                <input type="range" id="fontSizeSlider" min="14" max="20" value="16" onchange="changeFontSize(this.value)">
+            </div>
+        </div>
+
+        <div class="news-grid" id="newsGrid">
+            <!-- 示例新闻卡片 -->
+            <div class="news-card" data-tags="考察,云南,大理,康朝凯,WEPO">
+                <img src="https://xiaoiwg.dongfeng-nissan.com.cn/aicc-workbench/res/download/default/temp/images/20251105/c40d30ee2cd3322810db0cc190045d8ecb2e0a15.png" alt="康朝凯主席考察" class="news-image">
+                <div class="news-content">
+                    <h3 class="news-title">WEPO主席康朝凯率团赴云南大理考察</h3>
+                    <div class="news-date">2025-11-05</div>
+                    <p class="news-excerpt">世界环境保护组织常任理事会主席康朝凯与其他部分常任理事会成员赴云南大理进行实地考察，深入了解当地生态环境保护工作...</p>
+                    <a href="xw1.html" class="news-link">阅读更多</a>
+                </div>
+            </div>
+            <!-- 更多新闻卡片可以按此格式添加 -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 世界环境保护组织 (WEPO). 版权所有。</p>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        function toggleTheme() {
+            const body = document.documentElement;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme); // 保存主题到本地存储
+        }
+
+        // 从本地存储加载主题
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const savedFontSize = localStorage.getItem('fontSize') || 16;
+            document.getElementById('fontSizeSlider').value = savedFontSize;
+            changeFontSize(savedFontSize);
+        }
+
+        // 字体大小调整功能
+        function changeFontSize(size) {
+            document.documentElement.style.setProperty('--font-size-base', size + 'px');
+            localStorage.setItem('fontSize', size); // 保存字体大小到本地存储
+        }
+
+        // 搜索功能
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const newsCards = document.querySelectorAll('.news-card');
+
+            let hasVisibleCard = false;
+
+            newsCards.forEach(card => {
+                const title = card.querySelector('.news-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.news-excerpt').textContent.toLowerCase();
+                const tags = card.getAttribute('data-tags').toLowerCase();
+
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm) || tags.includes(searchTerm)) {
+                    card.style.display = 'flex'; // 使用 flex 保持布局
+                    hasVisibleCard = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // 如果没有匹配的新闻，显示提示信息
+            const noResultsDiv = document.querySelector('.no-results');
+            if (noResultsDiv) {
+                noResultsDiv.remove();
+            }
+
+            if (!hasVisibleCard && searchTerm) {
+                const noResultsDiv = document.createElement('div');
+                noResultsDiv.className = 'no-results';
+                noResultsDiv.textContent = '未找到匹配的新闻。';
+                document.getElementById('newsGrid').appendChild(noResultsDiv);
+            }
+        }
+
+        // 支持回车键搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+    </script>
+</body>
+</html>
