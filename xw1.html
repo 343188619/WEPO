@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="世界环境保护组织常任理事会主席康朝凯、副主席邓骁、副主席陈是圳及其他成员赴云南大理考察生态保护工作">
+    <meta name="keywords" content="世界环境保护组织,康朝凯,邓骁,陈是圳,大理,生态保护,可持续发展,环境保护">
+    <title>世界环境保护组织考察云南大理生态保护工作 - WEPO</title>
+    <style>
+        :root {
+            --primary-color: #1a5276;
+            --secondary-color: #2e86c1;
+            --accent-color: #17a589;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --footer-bg: #1b4f72;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        .dark-mode {
+            --primary-color: #3498db;
+            --secondary-color: #5dade2;
+            --accent-color: #2ecc71;
+            --text-color: #ecf0f1;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.9);
+            --footer-bg: #0d1b2a;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glass-bg: rgba(30, 30, 30, 0.3);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .language-toggle {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .language-toggle button {
+            border: none;
+            background: transparent;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .language-toggle button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .font-size-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .font-size-control label {
+            font-size: 0.9rem;
+        }
+
+        .font-size-control input {
+            width: 120px;
+        }
+
+        /* 主内容区域 */
+        .hero {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .date-author {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* 玻璃态效果卡片 */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        /* 图片和视频区域 */
+        .media-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .media-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* 内容区域 */
+        .content-section {
+            margin: 40px 0;
+        }
+
+        .content-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .quote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: var(--secondary-color);
+        }
+
+        /* 代表团成员 */
+        .delegation-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .member-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .member-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .member-card .position {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .member-card .country {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-links {
+                margin-bottom: 15px;
+            }
+
+            .nav-links li {
+                margin: 0 10px;
+            }
+
+            .controls {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img id="logo-img" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="世界环境保护组织标志">
+                    <h1>世界环境保护组织</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="https://wepo.top/" class="nav-link" data-en="Home">首页</a></li>
+                    <li><a href="https://wepo.top/#about" class="nav-link" data-en="About">关于我们</a></li>
+                    <li><a href="https://wepo.top/#programs" class="nav-link" data-en="Projects">项目</a></li>
+                    <li><a href="https://wepo.top/#contact" class="nav-link" data-en="Contact">联系我们</a></li>
+                </ul>
+                <div class="controls">
+                    <div class="language-toggle">
+                        <button id="lang-zh" class="active">中文</button>
+                        <button id="lang-en">English</button>
+                    </div>
+                    <div class="theme-toggle" id="theme-toggle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="font-size-control">
+                        <label for="font-size" class="font-size-label" data-en="Font Size">字体大小</label>
+                        <input type="range" id="font-size" min="12" max="24" value="16">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main>
+        <!-- 英雄区域 -->
+        <section class="hero" style="background-image: url('https://xiaoiwg.dongfeng-nissan.com.cn/aicc-workbench/res/download/default/temp/images/20251105/c40d30ee2cd3322810db0cc190045d8ecb2e0a15.png'); background-size: cover; background-position: center;">
+            <div class="hero-content">
+                <h1 class="animate" id="hero-title">世界环境保护组织考察云南大理生态保护工作</h1>
+                <p class="animate delay-1" id="hero-subtitle">康朝凯主席、邓骁副主席、陈是圳副主席率团深入调研洱海保护与可持续发展实践</p>
+                <div class="date-author animate delay-2">
+                    <span id="publish-date">发布日期: 2025年11月5日</span> | 
+                    <span id="author">作者: 世界环境保护组织新闻办公室</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- 代表团成员 -->
+            <section class="glass-card animate">
+                <h2 id="delegation-title">代表团成员</h2>
+                <div class="delegation-members">
+                    <div class="member-card">
+                        <h3>康朝凯</h3>
+                        <div class="position">常任理事会主席</div>
+                        <div class="country">中国</div>
+                    </div>
+                    <div class="member-card">
+                        <h3>邓骁</h3>
+                        <div class="position">常任理事会副主席</div>
+                        <div class="country">中国</div>
+                    </div>
+                    <div class="member-card">
+                        <h3>陈是圳</h3>
+                        <div class="position">常任理事会副主席</div>
+                        <div class="country">中国</div>
+                    </div>
+                    <div class="member-card">
+                        <h3>约翰·史密斯</h3>
+                        <div class="position">常任理事</div>
+                        <div class="country">美国</div>
+                    </div>
+                    <div class="member-card">
+                        <h3>玛丽亚·席尔瓦</h3>
+                        <div class="position">常任理事</div>
+                        <div class="country">巴西</div>
+                    </div>
+                    <div class="member-card">
+                        <h3>山田健一</h3>
+                        <div class="position">常任理事</div>
+                        <div class="country">日本</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 媒体区域 -->
+            <section class="media-section">
+                <div class="media-item animate">
+                    <img id="img-1" src="https://xiaoiwg.dongfeng-nissan.com.cn/aicc-workbench/res/download/default/temp/images/20251105/c40d30ee2cd3322810db0cc190045d8ecb2e0a15.png" alt="康朝凯主席在大理考察">
+                    <div class="media-caption" id="caption-1">康朝凯主席与当地环保工作者交流</div>
+                </div>
+                <div class="media-item animate delay-1">
+                    <img id="img-2" src="https://e3f49eaa46b57.cdn.sohucs.com/2025/11/5/16/58/MTAwMTE0XzE3NjIzMzMwOTIwNDY=.png" alt="大理洱海生态保护">
+                    <div class="media-caption" id="caption-2">大理洱海生态保护成果显著</div>
+                </div>
+                <div class="media-item animate delay-2">
+                    <img id="img-3" src="https://yanfa-upload.oss-cn-zhangjiakou.aliyuncs.com/images/20251105/1762332899_wqbs_tpzb.png" alt="世界环境保护组织代表团">
+                    <div class="media-caption" id="caption-3">世界环境保护组织代表团在大理</div>
+                </div>
+            </section>
+
+            <!-- 视频区域 -->
+            <section class="glass-card animate delay-1">
+                <h2 id="video-title" style="margin-bottom: 20px;">考察活动视频记录</h2>
+                <div class="media-item">
+                    <video id="video-player" controls poster="https://xiaoiwg.dongfeng-nissan.com.cn/aicc-workbench/res/download/default/temp/images/20251105/c40d30ee2cd3322810db0cc190045d8ecb2e0a15.png">
+                        <source id="video-source" src="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1762332801995_qdqqd_tysnim.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div class="media-caption" id="video-caption">世界环境保护组织大理考察活动纪实</div>
+                </div>
+            </section>
+
+            <!-- 内容区域 -->
+            <section class="content-section">
+                <div class="glass-card animate">
+                    <h2 id="content-title-1">考察背景与目的</h2>
+                    <p id="content-1-1">2025年11月，世界环境保护组织（WEPO）常任理事会主席康朝凯、副主席邓骁、副主席陈是圳率领高级代表团前往中国云南省大理白族自治州，开展为期五天的生态保护与可持续发展考察工作。此次高级别考察旨在深入了解大理在生态文明建设、生物多样性保护以及应对气候变化方面的创新实践与成果。</p>
+                    <p id="content-1-2">代表团成员包括来自美国、日本、巴西、德国、肯尼亚和澳大利亚的常任理事国代表，以及WEPO秘书处的资深环境专家。考察期间，代表团实地走访了大理古城、洱海流域、苍山自然保护区等多个生态保护重点区域，并与当地政府官员、环保工作者、社区代表和科研人员进行了深入交流。</p>
+                    <div class="quote" id="quote-1">
+                        "大理的生态保护实践为全球生态文明建设提供了宝贵经验。我们将把这些成功案例纳入WEPO的全球环境治理知识库，为其他地区提供参考。" —— 康朝凯主席
+                    </div>
+                </div>
+
+                <div class="glass-card animate delay-1">
+                    <h2 id="content-title-2">洱海保护：从污染治理到生态修复的典范</h2>
+                    <p id="content-2-1">洱海作为大理的"母亲湖"，其保护成效是此次考察的重点。在过去十年中，大理州实施了系统的洱海保护治理行动，包括流域截污治污、农业面源污染控制、湿地生态修复等一系列措施。这些努力使洱海水质从曾经的Ⅳ类提升至Ⅱ类，部分区域达到Ⅰ类标准。</p>
+                    <p id="content-2-2">代表团详细考察了洱海生态廊道建设情况。这条全长129公里的廊道不仅有效隔离了人类活动对湖泊的直接干扰，还为生物提供了栖息地，成为人与自然和谐共生的典范。邓骁副主席对廊道建设中的社区参与模式表示高度赞赏，认为这种"政府主导、企业支持、社区参与"的模式值得在全球推广。</p>
+                    <p id="content-2-3">此外，代表团还关注了大理在农业面源污染控制方面的创新实践。通过推广生态农业、建设湿地净化系统、实施农田退水循环利用等措施，大理成功将农业生产与环境保护有机结合，实现了经济效益与生态效益的双赢。陈是圳副主席特别指出："大理的经验表明，环境保护与经济发展并非对立关系，而是可以相互促进的。"</p>
+                </div>
+
+                <div class="glass-card animate delay-2">
+                    <h2 id="content-title-3">苍山生物多样性保护与社区共管</h2>
+                    <p id="content-3-1">苍山自然保护区以其丰富的生物多样性而闻名，是横断山脉生物多样性热点区域的重要组成部分。代表团深入苍山腹地，考察了高山生态系统保护、珍稀物种保育以及社区共管机制的运行情况。</p>
+                    <p id="content-3-2">在考察过程中，代表团对苍山自然保护区实施的"社区共管"模式表现出浓厚兴趣。该模式通过赋予周边社区一定的资源使用权和管理责任，将当地居民从保护的旁观者转变为参与者，有效缓解了保护与发展的矛盾。</p>
+                    <p id="content-3-3">日本代表山田健一教授指出："苍山的社区共管模式为解决全球保护地普遍面临的人兽冲突问题提供了新思路。当地居民通过参与生态旅游、林下经济等可持续生计项目，既保护了生态环境，又改善了生活条件，这种双赢模式具有重要的借鉴意义。"</p>
+                </div>
+
+                <div class="glass-card animate delay-3">
+                    <h2 id="content-title-4">应对气候变化的"大理实践"</h2>
+                    <p id="content-4-1">作为全球气候变化敏感区域，大理在应对气候变化方面积累了丰富经验。代表团重点考察了大理在可再生能源利用、低碳城市建设、气候韧性农业等领域的创新实践。</p>
+                    <p id="content-4-2">大理州充分利用当地丰富的风能、太阳能资源，大力发展清洁能源产业。目前，全州可再生能源发电量已占总用电量的85%以上，远高于全国平均水平。同时，大理古城通过建筑节能改造、绿色交通推广等措施，正逐步向"近零碳排放"目标迈进。</p>
+                    <p id="content-4-3">巴西代表玛丽亚·席尔瓦博士评价道："大理在应对气候变化方面的综合实践表明，发展中国家完全可以在保持经济增长的同时，走出一条低碳、可持续的发展道路。这些经验对于面临类似挑战的其他地区具有重要参考价值。"</p>
+                    <div class="quote" id="quote-2">
+                        "大理的实践证明，生态环境保护与经济社会发展可以相辅相成。我们将把大理的经验纳入WEPO的全球环境治理框架，推动更多地区实现绿色转型。" —— 康朝凯主席
+                    </div>
+                </div>
+
+                <div class="glass-card animate">
+                    <h2 id="content-title-5">未来合作方向与全球意义</h2>
+                    <p id="content-5-1">考察结束后，WEPO代表团与大理州政府举行了工作会议，就未来合作方向达成多项共识。WEPO将支持大理申报"联合国可持续发展目标实践示范区"，并推动建立"全球高原湖泊保护网络"，将洱海保护经验推广到其他类似生态系统的地区。</p>
+                    <p id="content-5-2">此外，WEPO计划在大理设立"全球生态文明国际培训中心"，为发展中国家培训生态保护与可持续发展领域的专业人才。康朝凯主席表示，这一中心将汇聚全球顶尖专家，分享各国在生态文明建设方面的成功经验，推动实现联合国2030年可持续发展目标。</p>
+                    <p id="content-5-3">此次考察不仅加深了WEPO对中国生态文明建设实践的理解，也为全球环境治理提供了新的思路和模式。大理的成功经验表明，通过科学规划、系统治理和全民参与，人类完全可以在保护地球家园的同时，实现经济社会的可持续发展。邓骁副主席总结道："此次考察收获颇丰，我们将把大理的经验带回WEPO总部，为全球环境治理提供中国智慧和中国方案。"</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 id="footer-about">关于我们</h3>
+                    <ul>
+                        <li><a href="https://wepo.top/#mission" id="footer-mission">组织使命</a></li>
+                        <li><a href="https://wepo.top/crlsh.html" id="footer-leadership">理事会</a></li>
+
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 id="footer-resources">资源中心</h3>
+                    <ul>
+                        <li><a href="https://wepo.top/ndbg.html" id="footer-publications">年度报告</a></li>
+                        <li><a href="https://wepo.top/yjbg.html" id="footer-data">研究报告</a></li>
+                        <li><a href="https://wepo.top/sp.html" id="footer-education">环保视频</a></li>
+                        <li><a href="https://wepo.top/zc.html" id="footer-media">组织章程</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 id="footer-contact">联系我们</h3>
+                    <ul>
+                        <li id="footer-address">地址: 中国重庆市渝北区兴盛大道十号</li>
+                        <li id="footer-email">邮箱:xcb@wepo.top<li>
+                        <li id="footer-phone">电话: +86 13028350677</li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p id="copyright-text">© 2025 世界环境保护组织。保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 语言切换功能
+        document.getElementById('lang-zh').addEventListener('click', function() {
+            setLanguage('zh');
+            document.getElementById('lang-zh').classList.add('active');
+            document.getElementById('lang-en').classList.remove('active');
+        });
+
+        document.getElementById('lang-en').addEventListener('click', function() {
+            setLanguage('en');
+            document.getElementById('lang-en').classList.add('active');
+            document.getElementById('lang-zh').classList.remove('active');
+        });
+
+        // 主题切换功能
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            // 切换图标
+            const icon = this.querySelector('svg');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+            } else {
+                icon.innerHTML = `<path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4.93 4.93L6.34 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.66 17.66L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+            }
+        });
+
+        // 字体大小调整功能
+        document.getElementById('font-size').addEventListener('input', function() {
+            document.body.style.fontSize = this.value + 'px';
+        });
+
+        // 滚动动画
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate, .delay-1, .delay-2, .delay-3');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // 语言内容
+        const content = {
+            zh: {
+                // 导航
+                "nav-home": "首页",
+                "nav-about": "关于我们",
+                "nav-projects": "项目",
+                "nav-news": "新闻",
+                "nav-contact": "联系我们",
+                
+                // 控制面板
+                "font-size": "字体大小",
+                
+                // 英雄区域
+                "hero-title": "世界环境保护组织考察云南大理生态保护工作",
+                "hero-subtitle": "康朝凯主席、邓骁副主席、陈是圳副主席率团深入调研洱海保护与可持续发展实践",
+                "publish-date": "发布日期: 2025年11月5日",
+                "author": "作者: 世界环境保护组织新闻办公室",
+                
+                // 代表团
+                "delegation-title": "代表团成员",
+                
+                // 媒体说明
+                "caption-1": "康朝凯主席与当地环保工作者交流",
+                "caption-2": "大理洱海生态保护成果显著",
+                "caption-3": "世界环境保护组织代表团在大理",
+                "video-title": "考察活动视频记录",
+                "video-caption": "世界环境保护组织大理考察活动纪实",
+                
+                // 内容区域
+                "content-title-1": "考察背景与目的",
+                "content-1-1": "2025年11月，世界环境保护组织（WEPO）常任理事会主席康朝凯、副主席邓骁、副主席陈是圳率领高级代表团前往中国云南省大理白族自治州，开展为期五天的生态保护与可持续发展考察工作。此次高级别考察旨在深入了解大理在生态文明建设、生物多样性保护以及应对气候变化方面的创新实践与成果。",
+                "content-1-2": "代表团成员包括来自美国、日本、巴西、德国、肯尼亚和澳大利亚的常任理事国代表，以及WEPO秘书处的资深环境专家。考察期间，代表团实地走访了大理古城、洱海流域、苍山自然保护区等多个生态保护重点区域，并与当地政府官员、环保工作者、社区代表和科研人员进行了深入交流。",
+                "quote-1": "\"大理的生态保护实践为全球生态文明建设提供了宝贵经验。我们将把这些成功案例纳入WEPO的全球环境治理知识库，为其他地区提供参考。\" —— 康朝凯主席",
+                
+                "content-title-2": "洱海保护：从污染治理到生态修复的典范",
+                "content-2-1": "洱海作为大理的\"母亲湖\"，其保护成效是此次考察的重点。在过去十年中，大理州实施了系统的洱海保护治理行动，包括流域截污治污、农业面源污染控制、湿地生态修复等一系列措施。这些努力使洱海水质从曾经的Ⅳ类提升至Ⅱ类，部分区域达到Ⅰ类标准。",
+                "content-2-2": "代表团详细考察了洱海生态廊道建设情况。这条全长129公里的廊道不仅有效隔离了人类活动对湖泊的直接干扰，还为生物提供了栖息地，成为人与自然和谐共生的典范。邓骁副主席对廊道建设中的社区参与模式表示高度赞赏，认为这种\"政府主导、企业支持、社区参与\"的模式值得在全球推广。",
+                "content-2-3": "此外，代表团还关注了大理在农业面源污染控制方面的创新实践。通过推广生态农业、建设湿地净化系统、实施农田退水循环利用等措施，大理成功将农业生产与环境保护有机结合，实现了经济效益与生态效益的双赢。陈是圳副主席特别指出：\"大理的经验表明，环境保护与经济发展并非对立关系，而是可以相互促进的。\"",
+                
+                "content-title-3": "苍山生物多样性保护与社区共管",
+                "content-3-1": "苍山自然保护区以其丰富的生物多样性而闻名，是横断山脉生物多样性热点区域的重要组成部分。代表团深入苍山腹地，考察了高山生态系统保护、珍稀物种保育以及社区共管机制的运行情况。",
+                "content-3-2": "在考察过程中，代表团对苍山自然保护区实施的\"社区共管\"模式表现出浓厚兴趣。该模式通过赋予周边社区一定的资源使用权和管理责任，将当地居民从保护的旁观者转变为参与者，有效缓解了保护与发展的矛盾。",
+                "content-3-3": "日本代表山田健一教授指出：\"苍山的社区共管模式为解决全球保护地普遍面临的人兽冲突问题提供了新思路。当地居民通过参与生态旅游、林下经济等可持续生计项目，既保护了生态环境，又改善了生活条件，这种双赢模式具有重要的借鉴意义。\"",
+                
+                "content-title-4": "应对气候变化的\"大理实践\"",
+                "content-4-1": "作为全球气候变化敏感区域，大理在应对气候变化方面积累了丰富经验。代表团重点考察了大理在可再生能源利用、低碳城市建设、气候韧性农业等领域的创新实践。",
+                "content-4-2": "大理州充分利用当地丰富的风能、太阳能资源，大力发展清洁能源产业。目前，全州可再生能源发电量已占总用电量的85%以上，远高于全国平均水平。同时，大理古城通过建筑节能改造、绿色交通推广等措施，正逐步向\"近零碳排放\"目标迈进。",
+                "content-4-3": "巴西代表玛丽亚·席尔瓦博士评价道：\"大理在应对气候变化方面的综合实践表明，发展中国家完全可以在保持经济增长的同时，走出一条低碳、可持续的发展道路。这些经验对于面临类似挑战的其他地区具有重要参考价值。\"",
+                "quote-2": "\"大理的实践证明，生态环境保护与经济社会发展可以相辅相成。我们将把大理的经验纳入WEPO的全球环境治理框架，推动更多地区实现绿色转型。\" —— 康朝凯主席",
+                
+                "content-title-5": "未来合作方向与全球意义",
+                "content-5-1": "考察结束后，WEPO代表团与大理州政府举行了工作会议，就未来合作方向达成多项共识。WEPO将支持大理申报\"联合国可持续发展目标实践示范区\"，并推动建立\"全球高原湖泊保护网络\"，将洱海保护经验推广到其他类似生态系统的地区。",
+                "content-5-2": "此外，WEPO计划在大理设立\"全球生态文明国际培训中心\"，为发展中国家培训生态保护与可持续发展领域的专业人才。康朝凯主席表示，这一中心将汇聚全球顶尖专家，分享各国在生态文明建设方面的成功经验，推动实现联合国2030年可持续发展目标。",
+                "content-5-3": "此次考察不仅加深了WEPO对中国生态文明建设实践的理解，也为全球环境治理提供了新的思路和模式。大理的成功经验表明，通过科学规划、系统治理和全民参与，人类完全可以在保护地球家园的同时，实现经济社会的可持续发展。邓骁副主席总结道：\"此次考察收获颇丰，我们将把大理的经验带回WEPO总部，为全球环境治理提供中国智慧和中国方案。\"",
+                
+                // 页脚
+                "footer-about": "关于我们",
+                "footer-mission": "组织使命",
+                "footer-history": "发展历程",
+                "footer-leadership": "领导团队",
+                "footer-members": "成员国",
+                "footer-projects": "项目与倡议",
+                "footer-climate": "气候变化",
+                "footer-biodiversity": "生物多样性",
+                "footer-oceans": "海洋保护",
+                "footer-sustainability": "可持续发展",
+                "footer-resources": "资源中心",
+                "footer-publications": "年度报告",
+                "footer-data": "研究报告",
+                "footer-education": "环保视频",
+                "footer-media": "组织章程",
+                "footer-contact": "联系我们",
+                "footer-address": "地址: 重庆市渝北区兴盛大道10号",
+                "footer-email": "邮箱: xcb@wepo.top",
+                "footer-phone": "电话: +86 13028350677",
+            
+                "copyright-text": "© 2025 世界环境保护组织。保留所有权利。"
+            },
+            en: {
+                // 导航
+                "nav-home": "Home",
+                "nav-about": "About Us",
+                "nav-projects": "Projects",
+                "nav-news": "News",
+                "nav-contact": "Contact",
+                
+                // 控制面板
+                "font-size": "Font Size",
+                
+                // 英雄区域
+                "hero-title": "WEPO Delegation Inspects Ecological Protection Efforts in Dali, Yunnan",
+                "hero-subtitle": "Chairman Kang Chaokai, Vice Chairmen Deng Xiao and Chen Shizhen Lead Delegation in In-depth Research on Erhai Lake Protection and Sustainable Development Practices",
+                "publish-date": "Published: November 5, 2025",
+                "author": "Author: WEPO Press Office",
+                
+                // 代表团
+                "delegation-title": "Delegation Members",
+                
+                // 媒体说明
+                "caption-1": "Chairman Kang Chaokai exchanges with local environmental workers",
+                "caption-2": "Significant achievements in ecological protection of Dali's Erhai Lake",
+                "caption-3": "WEPO delegation in Dali",
+                "video-title": "Inspection Activity Video Record",
+                "video-caption": "Documentary of WEPO's inspection activities in Dali",
+                
+                // 内容区域
+                "content-title-1": "Background and Purpose of the Inspection",
+                "content-1-1": "In November 2025, World Environmental Protection Organization (WEPO) Standing Council Chairman Kang Chaokai, Vice Chairmen Deng Xiao and Chen Shizhen led a high-level delegation to Dali Bai Autonomous Prefecture in Yunnan Province, China, for a five-day inspection of ecological protection and sustainable development work. This high-level inspection aimed to gain an in-depth understanding of Dali's innovative practices and achievements in ecological civilization construction, biodiversity protection, and climate change response.",
+                "content-1-2": "The delegation included representatives from permanent member countries including the United States, Japan, Brazil, Germany, Kenya, and Australia, as well as senior environmental experts from the WEPO Secretariat. During the inspection, the delegation visited several key ecological protection areas including Dali Ancient City, the Erhai Lake basin, and the Cangshan Nature Reserve, and engaged in in-depth exchanges with local government officials, environmental workers, community representatives, and researchers.",
+                "quote-1": "\"Dali's ecological protection practices provide valuable experience for global ecological civilization construction. We will incorporate these successful cases into WEPO's global environmental governance knowledge base to provide references for other regions.\" —— Chairman Kang Chaokai",
+                
+                "content-title-2": "Erhai Lake Protection: A Model from Pollution Control to Ecological Restoration",
+                "content-2-1": "As Dali's \"Mother Lake,\" the protection effectiveness of Erhai Lake was a key focus of this inspection. Over the past decade, Dali Prefecture has implemented systematic Erhai Lake protection and governance actions, including watershed pollution interception and treatment, agricultural non-point source pollution control, wetland ecological restoration, and a series of other measures. These efforts have improved Erhai Lake's water quality from the previous Class IV to Class II, with some areas reaching Class I standards.",
+                "content-2-2": "The delegation conducted a detailed inspection of the Erhai Lake ecological corridor construction. This 129-kilometer-long corridor not only effectively isolates direct human interference with the lake but also provides habitat for organisms, becoming a model of harmonious coexistence between humans and nature. Vice Chairman Deng Xiao highly appreciated the community participation model in corridor construction, believing that this \"government-led, enterprise-supported, community-participated\" model is worth promoting globally.",
+                "content-2-3": "Additionally, the delegation focused on Dali's innovative practices in agricultural non-point source pollution control. Through promoting ecological agriculture, constructing wetland purification systems, and implementing farmland drainage recycling measures, Dali has successfully integrated agricultural production with environmental protection, achieving a win-win situation for both economic and ecological benefits. Vice Chairman Chen Shizhen particularly pointed out: \"Dali's experience shows that environmental protection and economic development are not opposing relationships but can mutually promote each other.\"",
+                
+                "content-title-3": "Cangshan Biodiversity Protection and Community Co-management",
+                "content-3-1": "The Cangshan Nature Reserve is renowned for its rich biodiversity and is an important component of the biodiversity hotspot region in the Hengduan Mountains. The delegation ventured deep into the Cangshan mountains to inspect alpine ecosystem protection, rare species conservation, and the operation of community co-management mechanisms.",
+                "content-3-2": "During the inspection process, the delegation showed strong interest in the \"community co-management\" model implemented in the Cangshan Nature Reserve. This model, by granting surrounding communities certain resource use rights and management responsibilities, transforms local residents from bystanders of protection into participants, effectively alleviating the conflict between protection and development.",
+                "content-3-3": "Japanese representative Professor Kenichi Yamada noted: \"The community co-management model in Cangshan provides new ideas for solving the human-wildlife conflict problems commonly faced by protected areas worldwide. Local residents, by participating in sustainable livelihood projects such as ecotourism and understory economy, both protect the ecological environment and improve living conditions. This win-win model has important reference significance.\"",
+                
+                "content-title-4": "Dali's Practice in Addressing Climate Change",
+                "content-4-1": "As a region sensitive to global climate change, Dali has accumulated rich experience in addressing climate change. The delegation focused on inspecting Dali's innovative practices in renewable energy utilization, low-carbon city construction, and climate-resilient agriculture.",
+                "content-4-2": "Dali Prefecture fully utilizes its abundant local wind and solar energy resources to vigorously develop clean energy industries. Currently, renewable energy generation in the entire prefecture accounts for over 85% of total electricity consumption, far above the national average. Meanwhile, Dali Ancient City is gradually moving toward the goal of \"near-zero carbon emissions\" through building energy-saving renovations and green transportation promotion.",
+                "content-4-3": "Brazilian representative Dr. Maria Silva commented: \"Dali's comprehensive practices in addressing climate change show that developing countries can completely follow a low-carbon, sustainable development path while maintaining economic growth. These experiences have important reference value for other regions facing similar challenges.\"",
+                "quote-2": "\"Dali's practice proves that ecological environmental protection and economic social development can complement each other. We will incorporate Dali's experience into WEPO's global environmental governance framework to promote green transformation in more regions.\" —— Chairman Kang Chaokai",
+                
+                "content-title-5": "Future Cooperation Directions and Global Significance",
+                "content-5-1": "After the inspection, the WEPO delegation held a working meeting with the Dali Prefecture government and reached multiple consensuses on future cooperation directions. WEPO will support Dali's application for \"UN Sustainable Development Goals Practice Demonstration Zone\" and promote the establishment of a \"Global Plateau Lake Protection Network\" to extend Erhai Lake protection experience to other regions with similar ecosystems.",
+                "content-5-2": "Additionally, WEPO plans to establish a \"Global Ecological Civilization International Training Center\" in Dali to train professionals in ecological protection and sustainable development for developing countries. Chairman Kang Chaokai stated that this center will bring together global top experts to share successful experiences in ecological civilization construction from various countries, promoting the achievement of the UN 2030 Sustainable Development Goals.",
+                "content-5-3": "This inspection not only deepened WEPO's understanding of China's ecological civilization construction practices but also provided new ideas and models for global environmental governance. Dali's successful experience shows that through scientific planning, systematic governance, and public participation, humanity can completely achieve sustainable economic and social development while protecting the Earth's home. Vice Chairman Deng Xiao concluded: \"This inspection has been highly rewarding. We will bring Dali's experience back to WEPO headquarters to provide Chinese wisdom and Chinese solutions for global environmental governance.\"",
+                
+                // 页脚
+                "footer-about": "About Us",
+                "footer-mission": "Our Mission",
+                "footer-history": "History",
+                "footer-leadership": "Leadership",
+                "footer-members": "Member States",
+                "footer-projects": "Projects & Initiatives",
+                "footer-climate": "Climate Change",
+                "footer-biodiversity": "Biodiversity",
+                "footer-oceans": "Ocean Protection",
+                "footer-sustainability": "Sustainable Development",
+                "footer-resources": "Resource Center",
+                "footer-publications": "Publications",
+                "footer-data": "Data & Statistics",
+                "footer-education": "Educational Materials",
+                "footer-media": "Media Center",
+                "footer-contact": "Contact Us",
+                "footer-address": "Address: WEPO Headquarters, Geneva, Switzerland",
+                "footer-email": "Email: info@wepo.org",
+                "footer-phone": "Phone: +41 22 999 9999",
+                "footer-careers": "Career Opportunities",
+                "copyright-text": "© 2025 World Environmental Protection Organization. All rights reserved."
+            }
+        };
+
+        // 设置语言
+        function setLanguage(lang) {
+            // 更新导航链接
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const key = link.getAttribute('data-en');
+                if (content[lang][`nav-${key.toLowerCase()}`]) {
+                    link.textContent = content[lang][`nav-${key.toLowerCase()}`];
+                }
+            });
+
+            // 更新控制面板
+            document.querySelector('.font-size-label').textContent = content[lang]['font-size'];
+
+            // 更新页面内容
+            Object.keys(content[lang]).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = content[lang][key];
+                }
+            });
+        }
+
+        // 初始化页面
+        window.addEventListener('DOMContentLoaded', function() {
+            setLanguage('zh');
+        });
+    </script>
+</body>
+</html>
