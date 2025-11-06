@@ -1,3 +1,78 @@
 User-agent: *
-Sitemap: https://WEPO.top/sitemap.xml
 Allow: /
+
+# 特别指定各大搜索引擎和AI爬虫
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# AI和机器学习爬虫
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: OAI-Google
+Allow: /
+
+User-agent: Facebook-AI
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Alexa
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+# 通用允许所有其他爬虫
+User-agent: *
+Allow: /
+Disallow:
+
+# 网站地图位置
+Sitemap: https://wepo.top/sitemap.xml
