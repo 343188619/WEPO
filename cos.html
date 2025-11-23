@@ -932,7 +932,7 @@
         function preloadBackgrounds() {
             for (let i = 0; i < 5; i++) {
                 const img = new Image();
-                img.src = `https://acg.yaohud.cn/dm/acg.php?return=img&t=${Date.now() + i}`;
+                img.src = `=img&t=${Date.now() + i}`;
                 img.className = 'bg-image';
                 bgContainer.appendChild(img);
                 bgUrls.push(img);
@@ -959,7 +959,7 @@
             
             // 如果图片加载失败，尝试重新加载
             if (!bgUrls[currentBgIndex].complete || bgUrls[currentBgIndex].naturalHeight === 0) {
-                bgUrls[currentBgIndex].src = `https://acg.yaohud.cn/dm/acg.php?return=img&t=${Date.now()}`;
+                bgUrls[currentBgIndex].src = `h.php?return=img&t=${Date.now()}`;
             }
         }
         
