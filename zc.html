@@ -1,1236 +1,482 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title data-i18n="page.title">WEPO - 组织章程</title>
-	<link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
-	<style>
-		:root {
-			--primary-dark: #1a0933;
-			--primary-medium: #2a1a4a;
-			--primary-light: #3a2a6a;
-			--accent-blue: #4a3a8a;
-			--accent-purple: #7d5ab5;
-			--text-light: #f8f9fa;
-			--text-dark: #212529;
-			--text-regular: #e0e0e0;
-			--text-muted: #b0b0b0;
-			--transition-time: 0.5s;
-			--bg-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
-			--chapter-bg: rgba(30, 20, 50, 0.6);
-			--article-bg: rgba(40, 30, 60, 0.4);
-			--border-color: rgba(255, 255, 255, 0.15);
-		}
-
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		}
-
-		body {
-			color: var(--text-regular);
-			overflow-x: hidden;
-			line-height: 1.7;
-			background: var(--bg-gradient);
-		}
-
-		#backgroundCanvas {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: -1;
-		}
-
-		.loading-screen {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: var(--primary-dark);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			z-index: 9999;
-			transition: opacity 0.5s ease, visibility 0.5s ease;
-		}
-
-		.loading-bar {
-			width: 200px;
-			height: 6px;
-			background: rgba(255, 255, 255, 0.1);
-			border-radius: 3px;
-			overflow: hidden;
-		}
-
-		.loading-progress {
-			height: 100%;
-			width: 0%;
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-			border-radius: 3px;
-			transition: width 0.2s ease-in-out;
-		}
-
-		header {
-			background: rgba(26, 9, 51, 0.9);
-			backdrop-filter: blur(10px);
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			padding: 15px 5%;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			z-index: 1000;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-		}
-
-		.logo-container {
-			display: flex;
-			align-items: center;
-		}
-
-		.logo {
-			height: 50px;
-			transition: transform 0.3s ease;
-		}
-
-		.logo:hover {
-			transform: scale(1.05);
-		}
-
-		nav ul {
-			display: flex;
-			list-style: none;
-		}
-
-		nav ul li {
-			margin-left: 25px;
-			position: relative;
-		}
-
-		nav ul li a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-weight: 500;
-			font-size: 16px;
-			transition: color 0.3s ease;
-			position: relative;
-			padding: 5px 0;
-		}
-
-		nav ul li a::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 0;
-			height: 2px;
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-			transition: width 0.3s ease;
-		}
-
-		nav ul li a:hover::after {
-			width: 100%;
-		}
-
-		nav ul li a:hover,
-		nav ul li a.active {
-			color: #b8a2e6;
-		}
-
-		.header-actions {
-			display: flex;
-			align-items: center;
-			gap: 20px;
-		}
-
-		.language-switcher {
-			position: relative;
-		}
-
-		.language-btn {
-			background: rgba(255, 255, 255, 0.1);
-			border: none;
-			color: var(--text-light);
-			padding: 8px 15px;
-			border-radius: 20px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			font-weight: 500;
-			display: flex;
-			align-items: center;
-			gap: 5px;
-		}
-
-		.language-btn:hover {
-			background: rgba(255, 255, 255, 0.2);
-		}
-
-		.language-dropdown {
-			position: absolute;
-			top: 100%;
-			right: 0;
-			background: rgba(26, 9, 51, 0.95);
-			backdrop-filter: blur(10px);
-			border-radius: 5px;
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-			padding: 10px 0;
-			min-width: 150px;
-			opacity: 0;
-			visibility: hidden;
-			transform: translateY(10px);
-			transition: all 0.3s ease;
-			z-index: 1001;
-		}
-
-		.language-switcher:hover .language-dropdown {
-			opacity: 1;
-			visibility: visible;
-			transform: translateY(0);
-		}
-
-		.language-dropdown li {
-			list-style: none;
-			margin: 0;
-			padding: 8px 15px;
-			cursor: pointer;
-			transition: background 0.2s ease;
-		}
-
-		.language-dropdown li:hover {
-			background: rgba(255, 255, 255, 0.1);
-		}
-
-		.mobile-menu-btn {
-			display: none;
-			background: none;
-			border: none;
-			color: var(--text-light);
-			font-size: 24px;
-			cursor: pointer;
-			width: 40px;
-			height: 40px;
-			border-radius: 4px;
-			transition: all 0.3s ease;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.mobile-menu-btn:hover {
-			background: rgba(255, 255, 255, 0.1);
-		}
-
-		.mobile-menu-overlay {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0, 0, 0, 0.5);
-			z-index: 998;
-			opacity: 0;
-			visibility: hidden;
-			transition: all 0.3s ease;
-		}
-
-		.mobile-menu-overlay.active {
-			opacity: 1;
-			visibility: visible;
-		}
-
-		.mobile-menu {
-			position: fixed;
-			top: 0;
-			left: -100%;
-			width: 80%;
-			max-width: 320px;
-			height: 100%;
-			background: rgba(26, 9, 51, 0.98);
-			backdrop-filter: blur(10px);
-			z-index: 999;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-			align-items: flex-start;
-			padding: 80px 30px 30px;
-			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-			box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
-			overflow-y: auto;
-		}
-
-		.mobile-menu.active {
-			left: 0;
-		}
-
-		.mobile-menu-close {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			background: none;
-			border: none;
-			color: var(--text-light);
-			font-size: 2rem;
-			cursor: pointer;
-			width: 40px;
-			height: 40px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border-radius: 50%;
-			transition: all 0.3s ease;
-		}
-
-		.mobile-menu-close:hover {
-			background: rgba(255, 255, 255, 0.1);
-			transform: rotate(90deg);
-		}
-
-		.mobile-menu-links {
-			list-style: none;
-			width: 100%;
-			margin-bottom: 30px;
-		}
-
-		.mobile-menu-links li {
-			margin: 15px 0;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-			padding-bottom: 15px;
-			transition: transform 0.3s ease;
-		}
-
-		.mobile-menu-links li:last-child {
-			border-bottom: none;
-		}
-
-		.mobile-menu-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-size: 1.2rem;
-			font-weight: 500;
-			transition: all 0.3s ease;
-			display: block;
-			padding: 8px 0;
-			position: relative;
-		}
-
-		.mobile-menu-links a:hover {
-			color: #b8a2e6;
-			transform: translateX(10px);
-		}
-
-		.mobile-menu-links a::before {
-			content: '';
-			position: absolute;
-			left: -15px;
-			top: 50%;
-			width: 8px;
-			height: 8px;
-			background: var(--accent-blue);
-			border-radius: 50%;
-			transform: translateY(-50%) scale(0);
-			transition: transform 0.3s ease;
-		}
-
-		.mobile-menu-links a:hover::before {
-			transform: translateY(-50%) scale(1);
-		}
-
-		.mobile-language-switcher {
-			margin-top: auto;
-			width: 100%;
-			text-align: center;
-		}
-
-		.page-header {
-			height: 50vh;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			padding: 0 5%;
-			position: relative;
-			overflow: hidden;
-			margin-top: 80px;
-			background: linear-gradient(135deg, rgba(26, 9, 51, 0.85), rgba(58, 42, 106, 0.85));
-		}
-
-		.page-header-content {
-			max-width: 900px;
-			z-index: 1;
-		}
-
-		.page-header h1 {
-			font-size: 3rem;
-			margin-bottom: 20px;
-			background: linear-gradient(90deg, #fff, #b8a2e6);
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-			line-height: 1.2;
-			animation: fadeInUp 1s ease-out 0.5s forwards;
-			opacity: 0;
-		}
-
-		.page-header p {
-			font-size: 1.1rem;
-			margin-bottom: 30px;
-			opacity: 0.9;
-			animation: fadeInUp 1s ease-out 0.7s forwards;
-			opacity: 0;
-		}
-
-		@keyframes fadeInUp {
-			0% { opacity: 0; transform: translateY(20px); }
-			100% { opacity: 1; transform: translateY(0); }
-		}
-
-		.constitution-section {
-			padding: 80px 5%;
-			position: relative;
-		}
-
-		.constitution-container {
-			max-width: 1100px;
-			margin: 0 auto;
-			background: rgba(20, 10, 40, 0.4);
-			border-radius: 8px;
-			padding: 40px;
-			border: 1px solid var(--border-color);
-			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-		}
-
-		.constitution-title {
-			text-align: center;
-			margin-bottom: 50px;
-			font-size: 2.3rem;
-			position: relative;
-			display: inline-block;
-			left: 50%;
-			transform: translateX(-50%);
-			color: #b8a2e6;
-		}
-
-		.constitution-title::after {
-			content: '';
-			position: absolute;
-			bottom: -10px;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 100px;
-			height: 3px;
-			background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-		}
-
-		.chapter {
-			margin-bottom: 50px;
-			background: var(--chapter-bg);
-			border-radius: 6px;
-			padding: 35px;
-			border: 1px solid var(--border-color);
-			transition: all 0.3s ease;
-			position: relative;
-			overflow: hidden;
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		}
-
-		.chapter:hover {
-			background: rgba(40, 30, 60, 0.7);
-			transform: translateY(-3px);
-			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-		}
-
-		.chapter::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 4px;
-			height: 100%;
-			background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
-		}
-
-		.chapter-title {
-			font-size: 1.6rem;
-			margin-bottom: 25px;
-			color: #b8a2e6;
-			position: relative;
-			padding-left: 20px;
-			font-weight: 600;
-		}
-
-		.chapter-title::before {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			width: 10px;
-			height: 10px;
-			background: var(--accent-blue);
-			border-radius: 50%;
-		}
-
-		.article {
-			margin-bottom: 25px;
-			padding-left: 35px;
-			position: relative;
-			background: var(--article-bg);
-			border-radius: 4px;
-			padding: 20px 20px 20px 45px;
-			border-left: 2px solid var(--accent-purple);
-		}
-
-		.article:hover .article-number {
-			transform: scale(1.1);
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-		}
-
-		.article-number {
-			position: absolute;
-			left: -10px;
-			top: 20px;
-			width: 28px;
-			height: 28px;
-			background: rgba(255, 255, 255, 0.1);
-			border: 1px solid var(--border-color);
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-weight: bold;
-			font-size: 0.9rem;
-			transition: all 0.3s ease;
-			color: var(--text-light);
-		}
-
-		.article-title {
-			font-size: 1.2rem;
-			margin-bottom: 15px;
-			color: #a892d6;
-			font-weight: 500;
-		}
-
-		.article-content {
-			line-height: 1.7;
-		}
-
-		.article-content p {
-			margin-bottom: 15px;
-			color: var(--text-muted);
-		}
-
-		.article-content ul {
-			margin-left: 25px;
-			margin-bottom: 15px;
-			padding-left: 0;
-		}
-
-		.article-content li {
-			margin-bottom: 12px;
-			position: relative;
-			padding-left: 25px;
-			color: var(--text-muted);
-		}
-
-		.article-content li::before {
-			content: '';
-			position: absolute;
-			left: 0;
-			top: 10px;
-			width: 7px;
-			height: 7px;
-			background: var(--accent-blue);
-			border-radius: 50%;
-		}
-
-		.download-section {
-			text-align: center;
-			margin: 50px 0;
-			padding: 30px;
-			background: rgba(40, 30, 60, 0.4);
-			border-radius: 8px;
-			border: 1px solid var(--border-color);
-		}
-
-		.download-btn {
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			color: white;
-			border: none;
-			padding: 15px 30px;
-			font-size: 1.1rem;
-			font-weight: 600;
-			border-radius: 8px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-		}
-
-		.download-btn:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-			background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
-		}
-
-		.download-btn:active {
-			transform: translateY(1px);
-		}
-
-		footer {
-			background: rgba(26, 9, 51, 0.95);
-			padding: 60px 5% 30px;
-			position: relative;
-			width: 100%;
-			margin-top: 40px;
-		}
-
-		.footer-content {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 50px;
-			margin-bottom: 40px;
-		}
-
-		.footer-logo {
-			width: 150px;
-			margin-bottom: 20px;
-			border-radius: 10px;
-		}
-
-		.footer-about p {
-			margin-bottom: 20px;
-			opacity: 0.8;
-		}
-
-		.social-links {
-			display: flex;
-			gap: 15px;
-		}
-
-		.social-link {
-			width: 45px;
-			height: 45px;
-			background: rgba(255, 255, 255, 0.1);
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			transition: all 0.3s ease;
-			color: var(--text-light);
-			text-decoration: none;
-			font-weight: bold;
-			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		}
-
-		.social-link:hover {
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			transform: translateY(-5px);
-			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-		}
-
-		.footer-links h3 {
-			font-size: 1.3rem;
-			margin-bottom: 20px;
-			position: relative;
-			padding-bottom: 10px;
-			color: #b8a2e6;
-		}
-
-		.footer-links h3::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 40px;
-			height: 2px;
-			background: var(--accent-blue);
-		}
-
-		.footer-links ul {
-			list-style: none;
-		}
-
-		.footer-links li {
-			margin-bottom: 12px;
-		}
-
-		.footer-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			opacity: 0.8;
-			transition: opacity 0.3s ease, color 0.3s ease;
-			display: block;
-			padding: 5px 0;
-		}
-
-		.footer-links a:hover {
-			opacity: 1;
-			color: #b8a2e6;
-		}
-
-		.footer-bottom {
-			text-align: center;
-			padding-top: 30px;
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
-			opacity: 0.7;
-			font-size: 0.9rem;
-		}
-
-		.scroll-top {
-			position: fixed;
-			bottom: 30px;
-			right: 30px;
-			width: 50px;
-			height: 50px;
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			color: white;
-			font-size: 20px;
-			cursor: pointer;
-			opacity: 0;
-			visibility: hidden;
-			transition: all 0.3s ease;
-			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-			z-index: 999;
-			border: none;
-		}
-
-		.scroll-top.active {
-			opacity: 1;
-			visibility: visible;
-		}
-
-		.scroll-top:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-		}
-
-		.animate-on-scroll {
-			opacity: 0;
-			transform: translateY(30px);
-			transition: all 0.6s ease;
-		}
-
-		.animate-on-scroll.animated {
-			opacity: 1;
-			transform: translateY(0);
-		}
-
-		@media (max-width: 992px) {
-			.page-header h1 {
-				font-size: 2.5rem;
-			}
-			.constitution-title {
-				font-size: 2rem;
-			}
-			.chapter-title {
-				font-size: 1.4rem;
-			}
-			.constitution-container {
-				padding: 30px 20px;
-			}
-			.chapter {
-				padding: 25px;
-			}
-		}
-
-		@media (max-width: 768px) {
-			nav ul {
-				display: none;
-			}
-			.mobile-menu-btn {
-				display: flex;
-			}
-			.page-header h1 {
-				font-size: 2.2rem;
-			}
-			.page-header p {
-				font-size: 1rem;
-			}
-			.constitution-title {
-				font-size: 1.8rem;
-			}
-			.chapter-title {
-				font-size: 1.3rem;
-			}
-			.article-title {
-				font-size: 1.1rem;
-			}
-			.footer-content {
-				gap: 30px;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.page-header {
-				height: 40vh;
-				padding: 0 3%;
-			}
-			.page-header h1 {
-				font-size: 1.8rem;
-			}
-			.constitution-section {
-				padding: 50px 3%;
-			}
-			.constitution-container {
-				padding: 20px 15px;
-			}
-			.constitution-title {
-				font-size: 1.6rem;
-			}
-			.chapter {
-				padding: 20px 15px;
-				margin-bottom: 30px;
-			}
-			.chapter-title {
-				font-size: 1.2rem;
-				margin-bottom: 20px;
-			}
-			.article {
-				padding: 15px 15px 15px 40px;
-				margin-bottom: 20px;
-			}
-			.article-number {
-				width: 24px;
-				height: 24px;
-				font-size: 0.8rem;
-				left: -8px;
-			}
-			.article-title {
-				font-size: 1rem;
-			}
-			.download-btn {
-				padding: 12px 25px;
-				font-size: 1rem;
-			}
-		}
-
-		body[dir="rtl"] {
-			direction: rtl;
-		}
-		body[dir="rtl"] nav ul li {
-			 margin-left: 0;
-			 margin-right: 25px;
-		}
-		body[dir="rtl"] .logo {
-			 margin-right: 0;
-			 margin-left: 15px;
-		}
-		body[dir="rtl"] .logo-container {
-			 flex-direction: row-reverse;
-		}
-		body[dir="rtl"] .chapter::before {
-			 left: auto;
-			 right: 0;
-		}
-		body[dir="rtl"] .chapter-title {
-			 padding-left: 0;
-			 padding-right: 20px;
-		}
-		body[dir="rtl"] .chapter-title::before {
-			 left: auto;
-			 right: 0;
-		}
-		body[dir="rtl"] .article {
-			 padding-left: 20px;
-			 padding-right: 45px;
-			 border-left: none;
-			 border-right: 2px solid var(--accent-purple);
-		}
-		body[dir="rtl"] .article-number {
-			 left: auto;
-			 right: -10px;
-		}
-		body[dir="rtl"] .article-content li {
-			 padding-left: 0;
-			 padding-right: 25px;
-		}
-		body[dir="rtl"] .article-content li::before {
-			 left: auto;
-			 right: 0;
-		}
-		body[dir="rtl"] .constitution-title::after,
-		body[dir="rtl"] .footer-links h3::after {
-			left: auto;
-			right: 50%;
-			transform: translateX(50%);
-		}
-		body[dir="rtl"] nav ul li a::after {
-			 left: auto;
-			 right: 0;
-		}
-		body[dir="rtl"] .mobile-menu-links a::before {
-			left: auto;
-			right: -15px;
-		}
-		body[dir="rtl"] .mobile-menu-links a:hover {
-			transform: translateX(-10px);
-		}
-		body[dir="rtl"] .footer-content,
-		body[dir="rtl"] .social-links,
-		body[dir="rtl"] .footer-links ul {
-			direction: rtl;
-		}
-		body[dir="rtl"] .footer-content {
-			 text-align: right;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">Constitution | WEPO - 世界环境保护组织</title>
+    <meta name="description" content="The Constitution of the World Environmental Protection Organization (WEPO).">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-void: #080808;
+            --text-primary: #f2f2f2;
+            --text-secondary: #888888;
+            --accent-gold: #d4af37;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+            cursor: default;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Noise Texture */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--noise-url);
+            pointer-events: none; z-index: 9999; opacity: 0.4;
+        }
+
+        /* Cursor Spotlight */
+        #cursor-spotlight {
+            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
+            transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
+            transition: transform 0.1s linear;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
+        ul { list-style: none; }
+
+        /* --- Header --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 25px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            background: rgba(8,8,8,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo { height: 45px; transition: transform 0.4s; }
+        .logo:hover { transform: scale(1.05); }
+
+        nav ul { display: flex; gap: 40px; }
+        nav ul li a {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
+            position: relative; padding: 5px 0;
+        }
+        nav ul li a::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--accent-gold); transition: width 0.4s var(--easing);
+        }
+        nav ul li a:hover { color: var(--text-primary); }
+        nav ul li a:hover::before { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        
+        .language-switcher { position: relative; }
+        .language-btn {
+            background: transparent; border: 1px solid var(--border-glass);
+            color: var(--text-primary); padding: 8px 18px;
+            border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .language-dropdown {
+            position: absolute; top: 120%; right: 0;
+            background: #0f0f0f; border: 1px solid var(--border-glass);
+            border-radius: 8px; padding: 10px 0;
+            min-width: max-content;
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s var(--easing);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 1002;
+        }
+        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .language-dropdown li {
+            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
+            white-space: nowrap; text-align: right;
+        }
+        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+
+        /* --- Hero Section --- */
+        .page-hero {
+            padding: 180px 5% 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .page-hero p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 30px;
+            background: transparent; color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            border-radius: 2px;
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .download-btn:hover { background: var(--accent-gold); color: #000; }
+
+        /* --- Constitution Content --- */
+        .constitution-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .chapter {
+            margin-bottom: 60px;
+            padding-left: 20px;
+            border-left: 1px solid var(--border-glass);
+        }
+
+        .chapter-title {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .chapter-title::before {
+            content: ''; position: absolute; left: -25px; top: 10px;
+            width: 9px; height: 9px; background: var(--accent-gold);
+            border-radius: 50%;
+        }
+
+        .article {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-glass);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .article:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+
+        .article-header {
+            display: flex; align-items: baseline; gap: 15px; margin-bottom: 15px;
+        }
+        .article-num {
+            font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--accent-gold);
+            opacity: 0.5;
+        }
+        .article-title {
+            font-size: 1.1rem; font-weight: 600; color: var(--text-primary);
+        }
+
+        .article-content {
+            color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;
+        }
+        .article-content ul {
+            list-style: disc; padding-left: 20px; margin-top: 10px;
+        }
+        .article-content li { margin-bottom: 5px; }
+
+        /* --- Footer --- */
+        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); margin-top: auto; }
+        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
+        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
+        .footer-navs { display: flex; gap: 80px; }
+        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
+        .footer-col a:hover { color: var(--accent-gold); }
+        .footer-btm { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; color: #444; font-size: 0.8rem; flex-wrap: wrap; gap: 20px; }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        .mobile-menu {
+            position: fixed; inset: 0; background: #080808; z-index: 1001;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: all; }
+        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
+        .mobile-menu a.active { color: #fff; }
+        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .chapter { padding-left: 15px; border-left: none; }
+            .chapter-title::before { display: none; }
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-navs { flex-wrap: wrap; gap: 30px; width: 100%; justify-content: space-between; }
+        }
+    </style>
 </head>
 <body>
-	<canvas id="backgroundCanvas"></canvas>
 
-	<div class="loading-screen" id="loadingScreen">
-		<div class="loading-bar">
-			<div class="loading-progress" id="loadingProgress"></div>
-		</div>
-	</div>
+    <div id="cursor-spotlight"></div>
 
-	<header>
-		<div class="logo-container">
-			<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-		</div>
-		<nav>
-			<ul>
-				<li><a href="index.html" data-i18n="nav.home"></a></li>
-				<li><a href="index.html#about" data-i18n="nav.about"></a></li>
-				<li><a href="index.html#mission" data-i18n="nav.mission"></a></li>
-				<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-				<li><a href="index.html#partners" data-i18n="nav.partners"></a></li>
-				<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-				<li><a href="sp.html" data-i18n="nav.videos"></a></li>
-				<li><a href="jz.html" data-i18n="nav.donate"></a></li>
-			</ul>
-		</nav>
-		<div class="header-actions">
-			<div class="language-switcher">
-				<button class="language-btn" id="languageBtn">
-					<span data-i18n="lang.current"></span>
-					<span>▼</span>
-				</button>
-				<ul class="language-dropdown" id="languageDropdown">
-					<li data-lang="zh-CN">中文 (简体)</li>
-					<li data-lang="en">English</li>
-					<li data-lang="es">Español</li>
-					<li data-lang="fr">Français</li>
-					<li data-lang="ru">Русский</li>
-					<li data-lang="ar">العربية</li>
-				</ul>
-			</div>
-			<button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-		</div>
-	</header>
+    <header id="header">
+        <a href="index.html" class="logo-container">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html" data-i18n="nav.home"></a></li>
+                <li><a href="crlsh.html" data-i18n="nav.council"></a></li>
+                <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+                <li><a href="index.html#about" data-i18n="nav.about"></a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+                <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+                <li><a href="jz.html" data-i18n="nav.donate"></a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="language-switcher">
+                <button class="language-btn" id="langBtn">
+                    <span data-i18n="lang.current"></span> ▾
+                </button>
+                <ul class="language-dropdown">
+                    <li data-lang="zh-CN">中文 (简体)</li>
+                    <li data-lang="en">English</li>
+                    <li data-lang="es">Español</li>
+                    <li data-lang="fr">Français</li>
+                    <li data-lang="ru">Русский</li>
+                    <li data-lang="ar">العربية</li>
+                </ul>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
 
-	<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav.home"></a>
+        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="nav.council"></a>
+        <a href="index.html#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs"></a>
+        <a href="index.html#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
+        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
+        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos"></a>
+        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate"></a>
+    </div>
 
-	<div class="mobile-menu" id="mobileMenu">
-		<button class="mobile-menu-close" id="mobileMenuClose">×</button>
-		<ul class="mobile-menu-links">
-			<li><a href="index.html" data-i18n="nav.home"></a></li>
-			<li><a href="index.html#about" data-i18n="nav.about"></a></li>
-			<li><a href="index.html#mission" data-i18n="nav.mission"></a></li>
-			<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-			<li><a href="index.html#partners" data-i18n="nav.partners"></a></li>
-			<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-			<li><a href="sp.html" data-i18n="nav.videos"></a></li>
-			<li><a href="jz.html" data-i18n="nav.donate"></a></li>
-		</ul>
-		<div class="mobile-language-switcher">
-			<div class="language-switcher">
-				<button class="language-btn" id="mobileLanguageBtn">
-					<span data-i18n="lang.current"></span>
-					<span>▼</span>
-				</button>
-				<ul class="language-dropdown" id="mobileLanguageDropdown">
-					<li data-lang="zh-CN">中文 (简体)</li>
-					<li data-lang="en">English</li>
-					<li data-lang="es">Español</li>
-					<li data-lang="fr">Français</li>
-					<li data-lang="ru">Русский</li>
-					<li data-lang="ar">العربية</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <section class="page-hero">
+        <h1 data-i18n="hero.title">Organization Charter</h1>
+        <p data-i18n="hero.subtitle">Understanding our organizational structure, mission, and operational principles.</p>
+        <a href="https://s3plus.meituan.net/opapisdk/op_ticket_885190757_1758645338184_qdqqd_so4rzn.pdf" target="_blank" class="download-btn">
+            <span data-i18n="hero.download">Download Full PDF</span> ↓
+        </a>
+    </section>
 
-	<section class="page-header">
-		<div class="page-header-content">
-			<h1 data-i18n="hero.title">组织章程</h1>
-			<p data-i18n="hero.description">了解我们的组织架构、使命和运作原则</p>
-		</div>
-	</section>
+    <div class="constitution-section">
+        <!-- Chapter 1 -->
+        <div class="chapter">
+            <h3 class="chapter-title" data-i18n="ch1.title">Chapter 1: General Provisions</h3>
+            
+            <div class="article">
+                <div class="article-header">
+                    <span class="article-num">01</span>
+                    <h4 class="article-title" data-i18n="art1.title">Name</h4>
+                </div>
+                <div class="article-content">
+                    <p data-i18n="art1.content">The official name of the organization is "World Environmental Protection Organization" (WEPO).</p>
+                </div>
+            </div>
 
-	<section class="constitution-section">
-		<div class="constitution-container">
-			<h2 class="constitution-title" data-i18n="constitution.title">组织章程</h2>
+            <div class="article">
+                <div class="article-header">
+                    <span class="article-num">02</span>
+                    <h4 class="article-title" data-i18n="art2.title">Nature</h4>
+                </div>
+                <div class="article-content">
+                    <p data-i18n="art2.content">WEPO is a non-profit, non-governmental international environmental organization dedicated to global environmental protection and sustainable development.</p>
+                </div>
+            </div>
 
-			<div class="download-section">
-				<button class="download-btn" id="downloadBtn">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-						<polyline points="7 10 12 15 17 10"></polyline>
-						<line x1="12" y1="15" x2="12" y2="3"></line>
-					</svg>
-					下载完整章程PDF
-				</button>
-			</div>
+            <div class="article">
+                <div class="article-header">
+                    <span class="article-num">03</span>
+                    <h4 class="article-title" data-i18n="art3.title">Mission</h4>
+                </div>
+                <div class="article-content">
+                    <p data-i18n="art3.content">The mission is to promote global environmental awareness, advance eco-friendly technologies, coordinate international actions, and protect Earth's ecosystems.</p>
+                </div>
+            </div>
+        </div>
 
-			<div class="chapter animate-on-scroll">
-				<h3 class="chapter-title" data-i18n="chapter1.title">第一章 总则</h3>
-				<div class="article">
-					<div class="article-number">1</div>
-					<h4 class="article-title" data-i18n="article1_1.title">组织名称</h4>
-					<div class="article-content">
-						<p data-i18n="article1_1.content">本组织正式名称为世界环境保护组织（World Environmental Protection Organization，简称WEPO）。</p>
-					</div>
-				</div>
-				<div class="article">
-					<div class="article-number">2</div>
-					<h4 class="article-title" data-i18n="article1_2.title">组织性质</h4>
-					<div class="article-content">
-						<p data-i18n="article1_2.content">本组织是一个非营利性、非政府性的国际环境保护组织，致力于全球环境保护与可持续发展事业。</p>
-					</div>
-				</div>
-				<div class="article">
-					<div class="article-number">3</div>
-					<h4 class="article-title" data-i18n="article1_3.title">组织宗旨</h4>
-					<div class="article-content">
-						<p data-i18n="article1_3.content">本组织的宗旨是促进全球环境保护意识，推动环境友好型技术发展，协调各国环保行动，保护地球生态系统，实现人与自然和谐共生。</p>
-					</div>
-				</div>
-			</div>
+        <!-- Chapter 2 -->
+        <div class="chapter">
+            <h3 class="chapter-title" data-i18n="ch2.title">Chapter 2: Membership</h3>
+            
+            <div class="article">
+                <div class="article-header">
+                    <span class="article-num">04</span>
+                    <h4 class="article-title" data-i18n="art4.title">Eligibility</h4>
+                </div>
+                <div class="article-content">
+                    <p data-i18n="art4.intro">Individuals or organizations who agree with our mission and are willing to participate may apply:</p>
+                    <ul>
+                        <li data-i18n="art4.li1">Individual Member: Natural persons aged 18 or above with full civil capacity.</li>
+                        <li data-i18n="art4.li2">Organization Member: Legally established enterprises, institutions, and social groups.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-			<div class="chapter animate-on-scroll">
-				<h3 class="chapter-title" data-i18n="chapter2.title">第二章 会员</h3>
-				<div class="article">
-					<div class="article-number">4</div>
-					<h4 class="article-title" data-i18n="article2_1.title">会员资格</h4>
-					<div class="article-content">
-						<p data-i18n="article2_1.intro">凡认同本组织宗旨，愿意遵守本章程，并积极参与环保活动的个人或组织，均可申请成为本组织会员：</p>
-						<ul>
-							<li data-i18n="article2_1.li1">个人会员：年满18周岁，具有完全民事行为能力的自然人。</li>
-							<li data-i18n="article2_1.li2">团体会员：依法成立的企事业单位、社会团体及其他组织。</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="Logo">
+                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+            </div>
+            <div class="footer-navs">
+                <div class="footer-col">
+                    <h5 data-i18n="footer.links_title">Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
+                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 data-i18n="footer.contact_title">Contact</h5>
+                    <ul>
+                         <li data-i18n="footer.address">Address: No. 10 Xingsheng Ave, Chongqing, CN</li>
+                         <li><a href="mailto:xcb@wepo.top" data-i18n="footer.email">Email: xcb@wepo.top</a></li>
+                         <li data-i18n="footer.phone">Phone: (+86) 02386161804</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-btm">
+            <p>&copy; <span id="year"></span> <span data-i18n="footer.copyright">WEPO. All rights reserved.</span></p>
+        </div>
+    </footer>
 
-	<footer>
-		<div class="footer-content">
-			<div class="footer-about">
-				<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
-				<p>世界环境保护组织致力于全球环境保护与可持续发展，通过教育、科研、政策倡导和实际行动，推动环境保护事业向前发展。</p>
-				<div class="social-links">
-					<a href="#" class="social-link">FB</a>
-					<a href="#" class="social-link">TW</a>
-					<a href="#" class="social-link">IG</a>
-					<a href="#" class="social-link">YT</a>
-				</div>
-			</div>
-			<div class="footer-links">
-				<h3>快速链接</h3>
-				<ul>
-					<li><a href="index.html">首页</a></li>
-					<li><a href="index.html#about">关于我们</a></li>
-					<li><a href="index.html#mission">我们的使命</a></li>
-					<li><a href="index.html#programs">项目计划</a></li>
-					<li><a href="index.html#partners">合作伙伴</a></li>
-				</ul>
-			</div>
-			<div class="footer-links">
-				<h3>支持我们</h3>
-				<ul>
-					<li><a href="jz.html">捐赠支持</a></li>
-					<li><a href="#">志愿者申请</a></li>
-					<li><a href="#">企业合作</a></li>
-					<li><a href="sp.html">宣传视频</a></li>
-					<li><a href="#">常见问题</a></li>
-				</ul>
-			</div>
-			<div class="footer-links">
-				<h3>联系我们</h3>
-				<ul>
-					<li><a href="mailto:info@wepo.org">info@wepo.org</a></li>
-					<li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
-					<li><a href="#">总部地址</a></li>
-					<li><a href="#">分支机构</a></li>
-					<li><a href="#">媒体联系</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			&copy; 2023 世界环境保护组织. 保留所有权利.
-		</div>
-	</footer>
+    <script>
+        // --- Translations ---
+        const translations = {
+            "zh-CN": {
+                "lang.current": "中文",
+                "nav.home": "首页", "nav.about": "关于我们", "nav.mission": "使命愿景", "nav.programs": "环保项目", "nav.partners": "合作伙伴", "nav.contact": "联系我们", "nav.council": "常任理事会", "nav.videos": "环保视频", "nav.donate": "捐赠支持",
+                "page.title": "组织章程 | WEPO",
+                "hero.title": "组织章程",
+                "hero.subtitle": "了解我们的组织架构、使命和运作原则。",
+                "hero.download": "下载完整PDF",
+                "ch1.title": "第一章 总则",
+                "art1.title": "组织名称", "art1.content": "本组织正式名称为世界环境保护组织（WEPO）。",
+                "art2.title": "组织性质", "art2.content": "本组织是一个非营利性、非政府性的国际环境保护组织，致力于全球环境保护与可持续发展事业。",
+                "art3.title": "组织宗旨", "art3.content": "本组织的宗旨是促进全球环境保护意识，推动环境友好型技术发展，协调各国环保行动，保护地球生态系统，实现人与自然和谐共生。",
+                "ch2.title": "第二章 会员",
+                "art4.title": "会员资格", "art4.intro": "凡认同本组织宗旨，愿意遵守本章程，并积极参与环保活动的个人或组织，均可申请成为本组织会员：",
+                "art4.li1": "个人会员：年满18周岁，具有完全民事行为能力的自然人。",
+                "art4.li2": "团体会员：依法成立的企事业单位、社会团体及其他组织。",
+                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
+                "footer.links_title": "快速链接", "footer.contact_title": "联系我们",
+                "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
+                "footer.phone": "电话: (+86) 02386161804",
+                "footer.email": "邮箱: xcb@wepo.top",
+                "footer.copyright": "世界环境保护组织. 版权所有."
+            },
+            "en": {
+                "lang.current": "EN",
+                "nav.home": "Home", "nav.about": "About", "nav.mission": "Mission", "nav.programs": "Programs", "nav.partners": "Partners", "nav.contact": "Contact", "nav.council": "Council", "nav.videos": "Videos", "nav.donate": "Donate",
+                "page.title": "Constitution | WEPO",
+                "hero.title": "Organization Charter",
+                "hero.subtitle": "Understanding our organizational structure, mission, and operational principles.",
+                "hero.download": "Download Full PDF",
+                "ch1.title": "Chapter 1: General Provisions",
+                "art1.title": "Name", "art1.content": "The official name of the organization is 'World Environmental Protection Organization' (WEPO).",
+                "art2.title": "Nature", "art2.content": "WEPO is a non-profit, non-governmental international environmental organization dedicated to global environmental protection and sustainable development.",
+                "art3.title": "Mission", "art3.content": "The mission is to promote global environmental awareness, advance eco-friendly technologies, coordinate international actions, and protect Earth's ecosystems.",
+                "ch2.title": "Chapter 2: Membership",
+                "art4.title": "Eligibility", "art4.intro": "Individuals or organizations who agree with our mission and are willing to participate may apply:",
+                "art4.li1": "Individual Member: Natural persons aged 18 or above with full civil capacity.",
+                "art4.li2": "Organization Member: Legally established enterprises, institutions, and social groups.",
+                "footer.about": "WEPO is dedicated to global environmental protection.",
+                "footer.links_title": "Quick Links", "footer.contact_title": "Contact",
+                "footer.address": "Address: No. 10 Xingsheng Ave, Chongqing, CN",
+                "footer.phone": "Phone: (+86) 02386161804",
+                "footer.email": "Email: xcb@wepo.top",
+                "footer.copyright": "WEPO. All rights reserved."
+            }
+        };
 
-	<button class="scroll-top" id="scrollTopBtn">↑</button>
+        // --- Logic ---
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
 
-	<script>
-		// Background Canvas Animation
-		const canvas = document.getElementById('backgroundCanvas');
-		const ctx = canvas.getContext('2d');
-		
-		function resizeCanvas() {
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
-		}
-		
-		window.addEventListener('resize', resizeCanvas);
-		resizeCanvas();
-		
-		const particles = [];
-		const particleCount = 100;
-		
-		for (let i = 0; i < particleCount; i++) {
-			particles.push({
-				x: Math.random() * canvas.width,
-				y: Math.random() * canvas.height,
-				radius: Math.random() * 2 + 1,
-				color: `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`,
-				speedX: Math.random() * 0.5 - 0.25,
-				speedY: Math.random() * 0.5 - 0.25
-			});
-		}
-		
-		function drawParticles() {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			
-			for (let i = 0; i < particles.length; i++) {
-				const p = particles[i];
-				
-				ctx.beginPath();
-				ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-				ctx.fillStyle = p.color;
-				ctx.fill();
-				
-				p.x += p.speedX;
-				p.y += p.speedY;
-				
-				if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-				if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-			}
-			
-			requestAnimationFrame(drawParticles);
-		}
-		
-		drawParticles();
-		
-		// Loading Screen
-		let progress = 0;
-		const loadingProgress = document.getElementById('loadingProgress');
-		const loadingScreen = document.getElementById('loadingScreen');
-		
-		const loadingInterval = setInterval(() => {
-			progress += Math.random() * 15;
-			if (progress >= 100) {
-				progress = 100;
-				clearInterval(loadingInterval);
-				setTimeout(() => {
-					loadingScreen.style.opacity = '0';
-					setTimeout(() => {
-						loadingScreen.style.display = 'none';
-					}, 500);
-				}, 300);
-			}
-			loadingProgress.style.width = progress + '%';
-		}, 200);
-		
-		// Scroll Animations
-		const animateElements = document.querySelectorAll('.animate-on-scroll');
-		
-		function checkScroll() {
-			const windowHeight = window.innerHeight;
-			
-			animateElements.forEach(element => {
-				const elementTop = element.getBoundingClientRect().top;
-				if (elementTop < windowHeight - 100) {
-					element.classList.add('animated');
-				}
-			});
-			
-			// Scroll to top button
-			const scrollTopBtn = document.getElementById('scrollTopBtn');
-			if (window.scrollY > 300) {
-				scrollTopBtn.classList.add('active');
-			} else {
-				scrollTopBtn.classList.remove('active');
-			}
-		}
-		
-		window.addEventListener('scroll', checkScroll);
-		window.addEventListener('load', checkScroll);
-		
-		// Scroll to top functionality
-		document.getElementById('scrollTopBtn').addEventListener('click', () => {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		});
-		
-		// Mobile menu toggle
-		const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-		const mobileMenuClose = document.getElementById('mobileMenuClose');
-		const mobileMenu = document.getElementById('mobileMenu');
-		const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-		
-		mobileMenuBtn.addEventListener('click', () => {
-			mobileMenu.classList.add('active');
-			mobileMenuOverlay.classList.add('active');
-			document.body.style.overflow = 'hidden';
-		});
-		
-		mobileMenuClose.addEventListener('click', () => {
-			mobileMenu.classList.remove('active');
-			mobileMenuOverlay.classList.remove('active');
-			document.body.style.overflow = 'auto';
-		});
-		
-		mobileMenuOverlay.addEventListener('click', () => {
-			mobileMenu.classList.remove('active');
-			mobileMenuOverlay.classList.remove('active');
-			document.body.style.overflow = 'auto';
-		});
-		
-		// Language switcher
-		const languageBtn = document.getElementById('languageBtn');
-		const languageDropdown = document.getElementById('languageDropdown');
-		const mobileLanguageBtn = document.getElementById('mobileLanguageBtn');
-		const mobileLanguageDropdown = document.getElementById('mobileLanguageDropdown');
-		
-		// Download button functionality
-		document.getElementById('downloadBtn').addEventListener('click', () => {
-			const link = document.createElement('a');
-			link.href = 'https://s3plus.meituan.net/opapisdk/op_ticket_885190757_1758645338184_qdqqd_so4rzn.pdf';
-			link.download = 'WEPO-组织章程.pdf';
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-		});
-		
-		// Initialize with some content if i18n is not implemented
-		document.querySelectorAll('[data-i18n="nav.home"]').forEach(el => el.textContent = '首页');
-		document.querySelectorAll('[data-i18n="nav.about"]').forEach(el => el.textContent = '关于我们');
-		document.querySelectorAll('[data-i18n="nav.mission"]').forEach(el => el.textContent = '我们的使命');
-		document.querySelectorAll('[data-i18n="nav.programs"]').forEach(el => el.textContent = '项目计划');
-		document.querySelectorAll('[data-i18n="nav.partners"]').forEach(el => el.textContent = '合作伙伴');
-		document.querySelectorAll('[data-i18n="nav.contact"]').forEach(el => el.textContent = '联系我们');
-		document.querySelectorAll('[data-i18n="nav.videos"]').forEach(el => el.textContent = '宣传视频');
-		document.querySelectorAll('[data-i18n="nav.donate"]').forEach(el => el.textContent = '捐赠支持');
-		document.querySelectorAll('[data-i18n="lang.current"]').forEach(el => el.textContent = '中文');
-	</script>
+        function setLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('lang', lang);
+        }
+
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        } else {
+            setLanguage('zh-CN');
+        }
+
+        document.querySelectorAll('.language-dropdown li').forEach(li => {
+            li.addEventListener('click', () => setLanguage(li.getAttribute('data-lang')));
+        });
+
+        // Spotlight
+        const spot = document.getElementById('cursor-spotlight');
+        document.addEventListener('mousemove', (e) => {
+            spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
