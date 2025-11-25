@@ -1,12 +1,23 @@
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>页面未找到 - 世界环境保护组织</title>
+    <title>404 - Nature Not Found | WEPO</title>
     <link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 引入优雅的衬线体和干净的无衬线体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --text-color: #ffffff;
+            --overlay-color: rgba(12, 28, 25, 0.3); /* 深森林绿遮罩 */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --accent-green: #a7d129; /* 嫩芽绿 */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,494 +25,428 @@
         }
 
         body {
-            color: #fff;
-            min-height: 100vh;
+            background: #0f1c18;
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
         }
 
-        /* 视频背景 */
-        .video-background {
+        /* --- 沉浸式背景 --- */
+        .bg-layer {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
-            overflow: hidden;
+            z-index: 0;
         }
 
-        .video-background video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        #bgVideo {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            /* 稍微放大防止边缘漏光 */
+            transform: scale(1.05); 
+            filter: brightness(0.9) contrast(1.1);
         }
 
-        /* 背景遮罩 */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 46, 56, 0.7);
-            z-index: 2;
-        }
-
-        /* 主容器 */
-        .container {
-            max-width: 800px;
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            z-index: 3;
-            padding: 2rem;
-            opacity: 0;
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-
-        /* 进入动画 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Logo样式 */
-        .logo-container {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: logoFloat 6s ease-in-out infinite;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-        }
-
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .logo-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(79, 172, 254, 0.4) 0%, rgba(0, 242, 254, 0.2) 70%, transparent 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,15,10,0.6) 100%);
             z-index: 1;
-            animation: pulse 4s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        /* 404数字样式 */
-        .error-code {
-            font-size: 8rem;
-            font-weight: 800;
-            margin: 1rem 0;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            font-family: 'Playfair Display', serif;
-            position: relative;
-            display: inline-block;
-        }
-
-        .error-code::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #4facfe, transparent);
-            border-radius: 50%;
-        }
-
-        /* 错误信息 */
-        .error-message {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.4;
-            font-weight: 600;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .error-description {
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            max-width: 600px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        /* 返回按钮 */
-        .home-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            letter-spacing: 1px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .home-button::before {
-            content: '';
+        /* --- Canvas 粒子层 (模拟孢子/气泡) --- */
+        #spore-canvas {
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.6s ease;
-        }
-
-        .home-button:hover::before {
-            left: 100%;
-        }
-
-        .home-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        /* 语言选择器 */
-        .language-selector {
-            margin-top: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .lang-btn:hover, .lang-btn.active {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 6rem;
-            }
-            
-            .error-message {
-                font-size: 1.5rem;
-            }
-            
-            .error-description {
-                font-size: 1rem;
-            }
-            
-            .logo {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .logo-glow {
-                width: 150px;
-                height: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .error-code {
-                font-size: 4.5rem;
-            }
-            
-            .error-message {
-                font-size: 1.3rem;
-            }
-            
-            .home-button {
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-            }
-            
-            .language-selector {
-                gap: 0.3rem;
-            }
-            
-            .lang-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* 装饰元素 */
-        .floating-elements {
-            position: absolute;
+            left: 0;
             width: 100%;
             height: 100%;
             z-index: 2;
             pointer-events: none;
         }
 
-        .floating-element {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            opacity: 0.7;
-            animation: floatElement 15s linear infinite;
-            z-index: 1;
+        /* --- 主内容容器 (极简主义设计) --- */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            width: 90%;
+            padding: 4rem 2rem;
+            
+            /* 磨砂玻璃效果 - 极致轻薄 */
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 4px; /* 较小的圆角，更显严谨 */
+            
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: fadeInUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        .floating-element:nth-child(1) {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234facfe"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c-.01.02 8.33-5.36 10.34-11.7z"/></svg>');
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        /* LOGO */
+        .logo-area {
+            margin-bottom: 2rem;
+        }
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
-        .floating-element:nth-child(2) {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2300f2fe"><circle cx="12" cy="12" r="10"/></svg>');
-            top: 70%;
-            left: 80%;
-            animation-delay: -5s;
+        /* 文字排版 */
+        .status-code {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 8rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+            /* 文字渐变，模拟光照 */
+            background: linear-gradient(135deg, #fff 30%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .floating-element:nth-child(3) {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234facfe"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>');
-            top: 30%;
-            left: 85%;
-            animation-delay: -10s;
+        .main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        @keyframes floatElement {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+        .description {
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+        }
+
+        /* 分割线 */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--accent-green);
+            margin: 2rem auto;
+            opacity: 0.8;
+        }
+
+        /* --- 按钮样式 (优雅、纤细) --- */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 12px 40px;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .home-btn:hover {
+            background: white;
+            color: #0f1c18;
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* --- 语言选择器 --- */
+        .lang-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            padding: 5px;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            color: #fff;
+        }
+
+        .lang-btn.active {
+            border-bottom: 1px solid var(--accent-green);
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .status-code { font-size: 5rem; }
+            .main-title { font-size: 1.8rem; }
+            .description { font-size: 0.9rem; padding: 0 1rem; }
+            .main-container { padding: 3rem 1.5rem; width: 95%; }
         }
     </style>
 </head>
 <body>
-    <!-- 视频背景 -->
-    <div class="video-background">
+
+    <!-- 背景层 -->
+    <div class="bg-layer">
+        <div class="overlay"></div>
+        <!-- 使用更柔和、更自然的视频（如森林、水流） -->
         <video id="bgVideo" autoplay muted loop playsinline>
+            <!-- 替换为用户的视频链接 -->
             <source src="https://coss.yupoo.com/upchat/2025-09-25/1758794842595.mp4" type="video/mp4">
-            您的浏览器不支持视频标签。
         </video>
     </div>
-    
-    <!-- 背景遮罩 -->
-    <div class="overlay"></div>
-    
-    <!-- 装饰元素 -->
-    <div class="floating-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-    </div>
-    
-    <!-- 主内容区域 -->
-    <div class="container">
-        <div class="logo-container">
-            <div class="logo-glow"></div>
-            <div class="logo">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="世界环境保护组织 Logo">
-            </div>
+
+    <!-- 粒子特效 Canvas -->
+    <canvas id="spore-canvas"></canvas>
+
+    <!-- 主卡片 -->
+    <div class="main-container">
+        <div class="logo-area">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo-img">
         </div>
+
+        <h1 class="status-code">404</h1>
         
-        <h1 class="error-code">404</h1>
+        <h2 class="main-title" id="txt-title">Lost in Nature</h2>
         
-        <h2 class="error-message" id="error-message">页面未找到</h2>
-        
-        <p class="error-description" id="error-description">
-            抱歉，您要查找的页面不存在。它可能已被移动、删除或您输入了错误的URL。
+        <div class="divider"></div>
+
+        <p class="description" id="txt-desc">
+            The page you are looking for has returned to the earth. 
+            Like a fallen leaf in a vast forest, some paths are meant to fade.
         </p>
-        
-        <a href="https://wepo.top" class="home-button" id="home-button">返回主页</a>
-        
-        <!-- 语言选择器 -->
-        <div class="language-selector">
-            <button class="lang-btn active" data-lang="zh">中文 (简体)</button>
-            <button class="lang-btn" data-lang="en">English</button>
-            <button class="lang-btn" data-lang="es">Español</button>
+
+        <div class="btn-group">
+            <a href="https://wepo.top" class="home-btn" id="txt-btn">Return to Homepage</a>
+        </div>
+
+        <!-- 7种语言 -->
+        <div class="lang-container">
+            <button class="lang-btn active" data-lang="en">English</button>
+            <button class="lang-btn" data-lang="zh">中文</button>
             <button class="lang-btn" data-lang="fr">Français</button>
+            <button class="lang-btn" data-lang="es">Español</button>
             <button class="lang-btn" data-lang="ru">Русский</button>
             <button class="lang-btn" data-lang="ar">العربية</button>
+            <button class="lang-btn" data-lang="de">Deutsch</button>
         </div>
     </div>
 
     <script>
-        // 确保视频自动播放
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('bgVideo');
-            
-            // 尝试播放视频
-            const playVideo = () => {
-                video.play().catch(error => {
-                    console.log('视频自动播放被阻止:', error);
-                    // 如果自动播放被阻止，显示播放按钮
-                    showPlayButton();
-                });
-            };
-            
-            // 显示播放按钮
-            const showPlayButton = () => {
-                const playBtn = document.createElement('button');
-                playBtn.textContent = '播放背景视频';
-                playBtn.style.position = 'fixed';
-                playBtn.style.bottom = '20px';
-                playBtn.style.right = '20px';
-                playBtn.style.zIndex = '10';
-                playBtn.style.padding = '10px 15px';
-                playBtn.style.background = 'rgba(255,255,255,0.2)';
-                playBtn.style.color = 'white';
-                playBtn.style.border = '1px solid rgba(255,255,255,0.3)';
-                playBtn.style.borderRadius = '5px';
-                playBtn.style.cursor = 'pointer';
-                playBtn.style.backdropFilter = 'blur(5px)';
-                
-                playBtn.addEventListener('click', function() {
-                    video.play();
-                    playBtn.remove();
-                });
-                
-                document.body.appendChild(playBtn);
-            };
-            
-            // 监听视频加载完成
-            if (video.readyState >= 3) {
-                playVideo();
-            } else {
-                video.addEventListener('loadeddata', playVideo);
+        // --- 1. 自然粒子系统 (模拟呼吸的孢子/气泡) ---
+        const canvas = document.getElementById('spore-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        let mouse = { x: -100, y: -100 };
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initParticles();
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+                // 初始位置随机
+                this.y = Math.random() * height;
+                this.life = Math.random() * 0.5 + 0.2; // 透明度
             }
-            
-            // 监听视频结束并重新播放（确保循环）
-            video.addEventListener('ended', function() {
-                video.currentTime = 0;
-                video.play();
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 100; // 从底部产生
+                this.speed = Math.random() * 0.5 + 0.1; // 极慢的上升速度，优雅
+                this.size = Math.random() * 2 + 0.5; // 小而精致
+                this.drift = Math.random() * 2 - 1; // 左右微弱漂浮
+                this.baseAlpha = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.y -= this.speed;
+                this.x += Math.sin(this.y * 0.01) * 0.2 + (this.drift * 0.1); // 正弦波飘动
+
+                // 鼠标交互：轻柔的排斥
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                
+                if (distance < 150) {
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let force = (150 - distance) / 150;
+                    
+                    this.x -= forceDirectionX * force * 2;
+                    this.y -= forceDirectionY * force * 2;
+                }
+
+                // 重置
+                if (this.y < -10) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.baseAlpha})`;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            // 粒子数量适中，不喧宾夺主
+            const count = 120;
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
         });
 
-        // 多语言支持
-        const translations = {
-            zh: {
-                message: "页面未找到",
-                description: "抱歉，您要查找的页面不存在。它可能已被移动、删除或您输入了错误的URL。",
-                button: "返回主页"
-            },
+        resize();
+        animate();
+
+        // --- 2. 多语言系统 (7种语言) ---
+        const i18n = {
             en: {
-                message: "Page Not Found",
-                description: "Sorry, the page you are looking for does not exist. It might have been moved, deleted, or you entered a wrong URL.",
-                button: "Back to Home"
+                title: "Lost in Nature",
+                desc: "The page you are looking for has returned to the earth. Like a fallen leaf in a vast forest, some paths are meant to fade.",
+                btn: "Return to Homepage"
             },
-            es: {
-                message: "Página No Encontrada",
-                description: "Lo sentimos, la página que buscas no existe. Es posible que haya sido movida, eliminada o que hayas ingresado una URL incorrecta.",
-                button: "Volver al Inicio"
+            zh: {
+                title: "迷失于自然",
+                desc: "您寻找的页面似乎已回归大地。就像广袤森林中的一片落叶，有些路径注定会消逝在自然的循环中。",
+                btn: "返回主页"
             },
             fr: {
-                message: "Page Non Trouvée",
-                description: "Désolé, la page que vous recherchez n'existe pas. Elle a peut-être été déplacée, supprimée ou vous avez saisi une URL incorrecte.",
-                button: "Retour à l'Accueil"
+                title: "Perdu dans la Nature",
+                desc: "La page que vous recherchez est retournée à la terre. Comme une feuille tombée dans une vaste forêt, certains chemins sont destinés à s'effacer.",
+                btn: "Retour à l'accueil"
+            },
+            es: {
+                title: "Perdido en la Naturaleza",
+                desc: "La página que buscas ha regresado a la tierra. Como una hoja caída en un vasto bosque, algunos caminos están destinados a desvanecerse.",
+                btn: "Volver al Inicio"
             },
             ru: {
-                message: "Страница Не Найдена",
-                description: "Извините, страница, которую вы ищете, не существует. Возможно, она была перемещена, удалена или вы ввели неправильный URL.",
-                button: "Вернуться на Главную"
+                title: "Затерянный в Природе",
+                desc: "Страница, которую вы ищете, вернулась к земле. Как опавший лист в огромном лесу, некоторые пути суждено исчезнуть.",
+                btn: "Вернуться на главную"
             },
             ar: {
-                message: "الصفحة غير موجودة",
-                description: "عذرًا، الصفحة التي تبحث عنها غير موجودة. ربما تم نقلها أو حذفها أو قمت بإدخال عنوان URL خاطئ.",
-                button: "العودة إلى الصفحة الرئيسية"
+                title: "ضائع في الطبيعة",
+                desc: "الصفحة التي تبحث عنها عادت إلى الأرض. مثل ورقة شجر سقطت في غابة واسعة، بعض المسارات مقدر لها أن تتلاشى.",
+                btn: "العودة إلى الصفحة الرئيسية"
+            },
+            de: {
+                title: "Verloren in der Natur",
+                desc: "Die Seite, die Sie suchen, ist zur Erde zurückgekehrt. Wie ein gefallenes Blatt in einem riesigen Wald sind manche Wege dazu bestimmt, zu verblassen.",
+                btn: "Zur Startseite zurückkehren"
             }
         };
 
-        // 语言切换功能
-        document.querySelectorAll('.lang-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // 更新活动按钮
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
+        const domTitle = document.getElementById('txt-title');
+        const domDesc = document.getElementById('txt-desc');
+        const domBtn = document.getElementById('txt-btn');
+        const buttons = document.querySelectorAll('.lang-btn');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 样式切换
+                buttons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                
-                // 获取选择的语言
+
+                // 语言切换
                 const lang = this.getAttribute('data-lang');
-                
-                // 更新文本内容
-                document.getElementById('error-message').textContent = translations[lang].message;
-                document.getElementById('error-description').textContent = translations[lang].description;
-                document.getElementById('home-button').textContent = translations[lang].button;
-                
-                // 对于阿拉伯语，调整文本方向
-                if (lang === 'ar') {
-                    document.body.style.direction = 'rtl';
-                } else {
-                    document.body.style.direction = 'ltr';
-                }
+                const data = i18n[lang];
+
+                // 淡入淡出动画效果
+                const elements = [domTitle, domDesc, domBtn];
+                elements.forEach(el => el.style.opacity = 0);
+
+                setTimeout(() => {
+                    domTitle.textContent = data.title;
+                    domDesc.textContent = data.desc;
+                    domBtn.textContent = data.btn;
+                    
+                    // 阿拉伯语特殊处理
+                    if(lang === 'ar') {
+                        document.querySelector('.main-container').style.direction = 'rtl';
+                    } else {
+                        document.querySelector('.main-container').style.direction = 'ltr';
+                    }
+
+                    elements.forEach(el => el.style.opacity = 1);
+                    // 重新应用淡入动画
+                    elements.forEach(el => el.style.transition = "opacity 0.5s ease");
+                }, 300);
             });
+        });
+
+        // 确保视频播放
+        const v = document.getElementById('bgVideo');
+        v.addEventListener('loadeddata', () => {
+            v.play().catch(() => {});
         });
     </script>
 </body>
