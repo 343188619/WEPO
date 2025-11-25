@@ -1,807 +1,279 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title data-i18n="page.title">WEPO - 常任理事会 康朝凯 邓骁 陈是圳等</title>
-	<link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
-	<meta name="description" content="世界环境保护组织常任理事会成员介绍，包括康朝凯、邓骁、陈是圳等理事会成员">
-	<meta name="keywords" content="WEPO,世界环境保护组织,常任理事会,环保,可持续发展">
-	<style>
-		:root {
-			--primary-dark: #1a0933;
-			--primary-medium: #2a1a4a;
-			--primary-light: #3a2a6a;
-			--accent-blue: #4a3a8a;
-			--accent-purple: #7d5ab5;
-			--text-light: #f8f9fa;
-			--text-dark: #212529;
-			--transition-time: 0.5s;
-            --bg-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">Permanent Council | WEPO - 世界环境保护组织 康朝凯，邓骁，陈是圳等</title>
+    <meta name="description" content="The leadership and organizational structure of the World Environmental Protection Organization.">
+    <meta name="theme-color" content="#0a0a0a">
 
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		}
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-		body {
-            /* 动态背景将通过 Canvas 实现 */
-			color: var(--text-light);
-			overflow-x: hidden;
-			line-height: 1.6;
-            background: var(--bg-gradient);
-		}
-
-        /* 动态背景 Canvas */
-        #backgroundCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* 确保在所有内容之下 */
+    <style>
+        :root {
+            --bg-void: #080808;
+            --text-primary: #f2f2f2;
+            --text-secondary: #888888;
+            --accent-gold: #d4af37;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-		.container {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 0 20px;
-		}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-		/* Header */
-		header {
-			background: rgba(26, 9, 51, 0.9);
-			backdrop-filter: blur(10px);
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			padding: 15px 5%;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			z-index: 1000;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-		}
-
-		.logo-container {
-			display: flex;
-			align-items: center;
-		}
-
-		.logo {
-			height: 50px;
-			transition: transform 0.3s ease;
-		}
-
-		.logo:hover {
-			transform: scale(1.05);
-		}
-
-        nav ul {
-			display: flex;
-			list-style: none;
-		}
-
-        nav ul li {
-			margin-left: 25px;
-			position: relative;
-		}
-
-        nav ul li a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-weight: 500;
-			font-size: 16px;
-			transition: color 0.3s ease;
-			position: relative;
-            padding: 5px 0;
-		}
-
-        nav ul li a::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 0;
-			height: 2px;
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-			transition: width 0.3s ease;
-		}
-
-        nav ul li a:hover::after {
-			width: 100%;
-		}
-
-        nav ul li a:hover,
-        nav ul li a.active {
-			color: #b8a2e6;
-		}
-
-		.header-actions {
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+            cursor: default;
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .language-switcher {
-            position: relative;
-        }
-
-        .language-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: var(--text-light);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .language-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(26, 9, 51, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 5px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            padding: 10px 0;
-            min-width: 150px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            z-index: 1001;
-        }
-
-        .language-switcher:hover .language-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .language-dropdown li {
-            list-style: none;
-            margin: 0;
-            padding: 8px 15px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .language-dropdown li:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-		.mobile-menu-btn {
-			display: none;
-			background: none;
-			border: none;
-			color: var(--text-light);
-			font-size: 24px;
-			cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            align-items: center;
-            justify-content: center;
-		}
-
-        .mobile-menu-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-		/* Hero Section */
-		.hero {
-			height: 60vh;
-			display: flex;
-			align-items: center;
-			padding: 100px 10% 0;
-			position: relative;
-			overflow: hidden;
-            background: linear-gradient(135deg, rgba(26, 9, 51, 0.85), rgba(58, 42, 106, 0.85));
-		}
-
-		.hero-content {
-			max-width: 800px;
-			z-index: 1;
-		}
-
-		.hero h1 {
-			font-size: 3.5rem;
-			margin-bottom: 20px;
-			background: linear-gradient(90deg, #fff, #b8a2e6);
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-			line-height: 1.2;
-			animation: fadeInUp 1s ease-out forwards;
-		}
-
-		.hero p {
-			font-size: 1.2rem;
-			margin-bottom: 30px;
-			opacity: 0.9;
-			animation: fadeInUp 1s ease-out 0.3s forwards;
-			opacity: 0;
-		}
-
-		@keyframes fadeInUp {
-			0% { opacity: 0; transform: translateY(20px); }
-			100% { opacity: 1; transform: translateY(0); }
-		}
-
-		/* Sections */
-		.section {
-			padding: 80px 0;
-			position: relative;
-		}
-
-		.section-title {
-			text-align: center;
-			margin-bottom: 60px;
-			font-size: 2.5rem;
-			position: relative;
-			display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-		}
-
-		.section-title::after {
-			content: '';
-			position: absolute;
-			bottom: -10px;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 80px;
-			height: 3px;
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-		}
-
-        /* Council Members Section */
-		.council-members {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 40px;
-			margin-top: 50px;
-		}
-
-		.member-card {
-			background: rgba(255, 255, 255, 0.05);
-			backdrop-filter: blur(10px);
-			border-radius: 15px; /* 稍微圆润 */
-			overflow: hidden;
-			transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* 更流畅的动画 */
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			opacity: 0;
-			transform: translateY(30px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 初始阴影 */
-		}
-
-		.member-card.animated {
-			opacity: 1;
-			transform: translateY(0);
-			transition: all 0.6s ease;
-		}
-
-		.member-card:hover {
-			transform: translateY(-15px); /* 悬停上移更多 */
-			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* 悬停增强阴影 */
-			background: rgba(255, 255, 255, 0.1);
-		}
-
-		.member-image {
-			height: 300px;
-			overflow: hidden;
-			position: relative;
-		}
-
-		.member-image img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			transition: transform 0.5s ease;
-		}
-
-		.member-card:hover .member-image img {
-			transform: scale(1.1); /* 悬停放大图片 */
-		}
-
-		.member-position {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			padding: 15px;
-			background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-			color: white;
-			font-weight: 600;
-            font-size: 1.1rem; /* 稍大字体 */
-		}
-
-		.member-info {
-			padding: 25px;
-		}
-
-		.member-info h3 {
-			font-size: 1.5rem;
-			margin-bottom: 10px;
-			color: #b8a2e6;
-		}
-
-		.member-info p {
-			opacity: 0.8;
-			margin-bottom: 15px;
-            font-size: 0.95rem; /* 稍小字体 */
-		}
-
-		.member-country {
-			display: inline-block;
-			padding: 5px 15px; /* 增加左右内边距 */
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); /* 使用渐变背景 */
-			border-radius: 20px;
-			font-size: 0.8rem;
-			margin-top: 10px;
-            color: white; /* 白色文字 */
-            font-weight: 500; /* 稍粗字体 */
-		}
-
-		/* About Council Section */
-		.about-council {
-            background: linear-gradient(135deg, rgba(26, 9, 51, 0.85), rgba(58, 42, 106, 0.85));
-			position: relative;
-			overflow: hidden;
-		}
-
-		.about-content {
-			display: flex;
-			gap: 50px;
-			align-items: center;
-		}
-
-		.about-text {
-			flex: 1;
-		}
-
-		.about-text h3 {
-			font-size: 1.8rem;
-			margin-bottom: 20px;
-			color: #b8a2e6;
-		}
-
-        .about-text p {
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-		.about-image {
-			flex: 1;
-			border-radius: 15px; /* 与卡片一致 */
-			overflow: hidden;
-			box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); /* 增强阴影 */
-			transform: perspective(1000px) rotateY(-5deg); /* 减小倾斜角度 */
-			transition: transform 0.5s ease, box-shadow 0.3s ease; /* 增加阴影过渡 */
-		}
-
-		.about-image:hover {
-			transform: perspective(1000px) rotateY(0deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* 悬停增强阴影 */
-		}
-
-		.about-image img {
-			width: 100%;
-			height: auto;
-			display: block;
-            transition: transform 0.5s ease; /* 图片缩放过渡 */
-		}
-
-        .about-image:hover img {
-            transform: scale(1.05); /* 悬停放大图片 */
-        }
-
-
-		/* Footer */
-		footer {
-			background: rgba(26, 9, 51, 0.95);
-			padding: 60px 0 30px;
-			position: relative;
-		}
-
-		.footer-content {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 50px;
-			margin-bottom: 40px;
-		}
-
-		.footer-logo {
-			width: 150px;
-			margin-bottom: 20px;
-            border-radius: 10px;
-		}
-
-		.footer-about p {
-			margin-bottom: 20px;
-			opacity: 0.8;
-		}
-
-		.social-links {
-			display: flex;
-			gap: 15px;
-		}
-
-		.social-link {
-			width: 45px;
-			height: 45px;
-			background: rgba(255, 255, 255, 0.1);
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			transition: all 0.3s ease;
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		}
-
-		.social-link:hover {
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-		}
-
-		.footer-links h3 {
-			font-size: 1.3rem;
-			margin-bottom: 20px;
-			position: relative;
-			padding-bottom: 10px;
-            color: #b8a2e6;
-		}
-
-		.footer-links h3::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 40px;
-			height: 2px;
-			background: var(--accent-blue);
-		}
-
-		.footer-links ul {
-			list-style: none;
-		}
-
-		.footer-links li {
-			margin-bottom: 12px; /* 增加行间距 */
-		}
-
-		.footer-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			opacity: 0.8;
-			transition: opacity 0.3s ease, color 0.3s ease; /* 增加颜色过渡 */
-            display: block;
-            padding: 5px 0;
-		}
-
-		.footer-links a:hover {
-			opacity: 1;
-            color: #b8a2e6;
-		}
-
-		.footer-bottom {
-			text-align: center;
-			padding-top: 30px;
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
-		}
-
-		/* Scroll to Top Button */
-		.scroll-top {
-			position: fixed;
-			bottom: 30px;
-			right: 30px;
-			width: 50px;
-			height: 50px;
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			color: white;
-			font-size: 20px;
-			cursor: pointer;
-			opacity: 0;
-			visibility: hidden;
-			transition: all 0.3s ease;
-			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-			z-index: 999;
-            border: none; /* 移除默认边框 */
-		}
-
-		.scroll-top.active {
-			opacity: 1;
-			visibility: visible;
-		}
-
-		.scroll-top:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-		}
-
-		/* Responsive Styles */
-		@media (max-width: 992px) {
-			.hero h1 {
-				font-size: 2.8rem;
-			}
-			
-			.about-content {
-				flex-direction: column;
-			}
-            
-            .about-image {
-                width: 100%;
-            }
-		}
-
-		@media (max-width: 768px) {
-            nav ul {
-				display: none;
-			}
-			
-			.mobile-menu-btn {
-				display: flex;
-			}
-			
-			.hero h1 {
-				font-size: 2.5rem;
-			}
-			
-			.section-title {
-				font-size: 2rem;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.hero h1 {
-				font-size: 2rem;
-			}
-			
-			.hero p {
-				font-size: 1rem;
-			}
-			
-			.section {
-				padding: 50px 0;
-			}
-			
-            .member-card {
-                /* grid-template-columns: 1fr; 这行代码是多余的，因为父容器已经定义了grid */
-            }
-            
-            .footer-content {
-                gap: 30px;
-            }
-		}
-
-		/* Mobile Menu */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-		.mobile-menu {
-			position: fixed;
-			top: 0;
-			left: -100%; /* 从左侧滑入 */
-            width: 80%;
-            max-width: 320px;
-			height: 100%;
-			background: rgba(26, 9, 51, 0.98);
-			backdrop-filter: blur(10px);
-			z-index: 999;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start; /* 从顶部开始 */
-			align-items: flex-start; /* 内容左对齐 */
-			padding: 80px 30px 30px; /* 顶部留出关闭按钮空间 */
-			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
-            overflow-y: auto;
-		}
-
-		.mobile-menu.active {
-            left: 0;
-		}
-
-        .mobile-menu-close {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			background: none;
-			border: none;
-			color: var(--text-light);
-			font-size: 2rem;
-			cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-		}
-
-		.mobile-menu-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-			transform: rotate(90deg);
-		}
-
-        .mobile-menu-links {
-			list-style: none;
-            width: 100%;
-            margin-bottom: 30px;
-		}
-
-        .mobile-menu-links li {
-			margin: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-            transition: transform 0.3s ease;
-		}
-
-        .mobile-menu-links li:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-size: 1.2rem;
-			font-weight: 500;
-			transition: all 0.3s ease;
-            display: block;
-            padding: 8px 0;
-            position: relative;
-		}
-
-        .mobile-menu-links a:hover {
-			color: #b8a2e6;
-            transform: translateX(10px);
-		}
-
-        .mobile-menu-links a::before {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            transform: translateY(-50%) scale(0);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu-links a:hover::before {
-            transform: translateY(-50%) scale(1);
-        }
-
-        .mobile-language-switcher {
-            margin-top: auto;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* RTL Support for Arabic */
-        body[dir="rtl"] {
-            direction: rtl;
-        }
-        body[dir="rtl"] nav ul li {
-             margin-left: 0;
-             margin-right: 25px;
-        }
-        body[dir="rtl"] .about-content {
             flex-direction: column;
         }
-        body[dir="rtl"] .about-image {
-             transform: perspective(1000px) rotateY(5deg);
-        }
-        body[dir="rtl"] .about-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        body[dir="rtl"] .hero-content {
-            text-align: right; /* Align hero text to right for RTL */
-        }
-        body[dir="rtl"] .section-title {
-            left: auto;
-            right: 50%;
-            transform: translateX(50%);
-        }
-        body[dir="rtl"] .section-title::after {
-            left: auto;
-            right: 50%;
-            transform: translateX(50%);
-        }
-        body[dir="rtl"] .footer-content,
-        body[dir="rtl"] .social-links,
-        body[dir="rtl"] .footer-links ul {
-            direction: rtl;
-        }
-        body[dir="rtl"] .footer-links h3::after {
-            left: auto;
-            right: 0;
-        }
-        body[dir="rtl"] nav ul li a::after {
-             left: auto;
-             right: 0;
-        }
-        body[dir="rtl"] .mobile-menu-links a::before {
-            left: auto;
-            right: -15px;
-        }
-        body[dir="rtl"] .mobile-menu-links a:hover {
-            transform: translateX(-10px);
+
+        /* Noise Texture */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--noise-url);
+            pointer-events: none; z-index: 9999; opacity: 0.4;
         }
 
-	</style>
+        /* Cursor Spotlight */
+        #cursor-spotlight {
+            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
+            transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
+            transition: transform 0.1s linear;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
+        ul { list-style: none; }
+
+        /* --- Header --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 25px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            background: rgba(8,8,8,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo { height: 45px; transition: transform 0.4s; }
+        .logo:hover { transform: scale(1.05); }
+
+        nav ul { display: flex; gap: 40px; }
+        nav ul li a {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
+            position: relative; padding: 5px 0;
+        }
+        nav ul li a::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--accent-gold); transition: width 0.4s var(--easing);
+        }
+        nav ul li a:hover { color: var(--text-primary); }
+        nav ul li a:hover::before { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        
+        .language-switcher { position: relative; }
+        .language-btn {
+            background: transparent; border: 1px solid var(--border-glass);
+            color: var(--text-primary); padding: 8px 18px;
+            border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .language-dropdown {
+            position: absolute; top: 120%; right: 0;
+            background: #0f0f0f; border: 1px solid var(--border-glass);
+            border-radius: 8px; padding: 10px 0;
+            min-width: max-content;
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s var(--easing);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 1002;
+        }
+        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .language-dropdown li {
+            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
+            white-space: nowrap; text-align: right;
+        }
+        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+
+        /* --- Hero Section --- */
+        .page-hero {
+            padding: 180px 5% 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .page-hero p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* --- Department Sections --- */
+        .dept-section {
+            padding: 80px 8%;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        
+        .dept-title {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent-gold);
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+        }
+        .dept-title span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-family: 'Manrope', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* No-Image Member Card */
+        .member-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-glass);
+            padding: 35px;
+            border-radius: 4px;
+            transition: all 0.4s var(--easing);
+            position: relative;
+            overflow: hidden;
+        }
+        .member-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(255,255,255,0.04);
+        }
+        
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .member-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* --- Footer --- */
+        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); margin-top: auto; }
+        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
+        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
+        .footer-navs { display: flex; gap: 80px; }
+        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
+        .footer-col a:hover { color: var(--accent-gold); }
+        .footer-btm { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; color: #444; font-size: 0.8rem; flex-wrap: wrap; gap: 20px; }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        .mobile-menu {
+            position: fixed; inset: 0; background: #080808; z-index: 1001;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: all; }
+        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
+        .mobile-menu a.active { color: #fff; }
+        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-navs { flex-wrap: wrap; gap: 30px; width: 100%; justify-content: space-between; }
+            .dept-title { font-size: 1.5rem; flex-direction: column; gap: 5px; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Dynamic Background Canvas -->
-    <canvas id="backgroundCanvas"></canvas>
+    <div id="cursor-spotlight"></div>
 
-	<!-- Header -->
-	<header>
-		<div class="logo-container">
-			<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-		</div>
-		<nav>
-			<ul>
-				<li><a href="index.html" data-i18n="nav.home"></a></li>
-				<li><a href="crlsh.html" class="active" data-i18n="nav.council"></a></li>
-				<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-				<li><a href="index.html#about" data-i18n="nav.about"></a></li>
-				<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+    <header id="header">
+        <a href="index.html" class="logo-container">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html" data-i18n="nav.home"></a></li>
+                <li><a href="crlsh.html" class="active" data-i18n="nav.council"></a></li>
+                <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+                <li><a href="index.html#about" data-i18n="nav.about"></a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
                 <li><a href="sp.html" data-i18n="nav.videos"></a></li>
                 <li><a href="jz.html" data-i18n="nav.donate"></a></li>
-			</ul>
-		</nav>
+            </ul>
+        </nav>
         <div class="header-actions">
             <div class="language-switcher">
-                <button class="language-btn" id="languageBtn">
-                    <span data-i18n="lang.current"></span>
-                    <span>▼</span>
+                <button class="language-btn" id="langBtn">
+                    <span data-i18n="lang.current"></span> ▾
                 </button>
-                <ul class="language-dropdown" id="languageDropdown">
+                <ul class="language-dropdown">
                     <li data-lang="zh-CN">中文 (简体)</li>
                     <li data-lang="en">English</li>
                     <li data-lang="es">Español</li>
@@ -810,816 +282,442 @@
                     <li data-lang="ar">العربية</li>
                 </ul>
             </div>
-		    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
-	</header>
+    </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav.home"></a>
+        <a href="crlsh.html" class="active" onclick="toggleMobileMenu()" data-i18n="nav.council"></a>
+        <a href="index.html#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs"></a>
+        <a href="index.html#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
+        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
+        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos"></a>
+        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate"></a>
+    </div>
 
-	<!-- Mobile Menu -->
-	<div class="mobile-menu" id="mobileMenu">
-		<button class="mobile-menu-close" id="mobileMenuClose">×</button>
-		<ul class="mobile-menu-links">
-			<li><a href="index.html" data-i18n="nav.home"></a></li>
-			<li><a href="crlsh.html" class="active" data-i18n="nav.council"></a></li>
-			<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-			<li><a href="index.html#about" data-i18n="nav.about"></a></li>
-			<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-            <li><a href="sp.html" data-i18n="nav.videos"></a></li>
-            <li><a href="jz.html" data-i18n="nav.donate"></a></li>
-		</ul>
-        <div class="mobile-language-switcher">
-            <div class="language-switcher">
-                <button class="language-btn" id="mobileLanguageBtn">
-                    <span data-i18n="lang.current"></span>
-                    <span>▼</span>
-                </button>
-                <ul class="language-dropdown" id="mobileLanguageDropdown">
-                    <li data-lang="zh-CN">中文 (简体)</li>
-                    <li data-lang="en">English</li>
-                    <li data-lang="es">Español</li>
-                    <li data-lang="fr">Français</li>
-                    <li data-lang="ru">Русский</li>
-                    <li data-lang="ar">العربية</li>
-                </ul>
+    <section class="page-hero">
+        <h1 data-i18n="hero.title">Permanent Council</h1>
+        <p data-i18n="hero.subtitle">Gathering global leaders to drive sustainable development.</p>
+    </section>
+
+    <!-- Department: Presidium -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.presidium">Presidium <span>Strategic Leadership</span></h2>
+        <div class="members-grid">
+            <!-- Kang Chaokai -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.kang.name">Kang Chaokai</h3>
+                <span class="member-role" data-i18n="role.chairman">Chairman</span>
+                <p class="member-desc" data-i18n="m.kang.desc">PhD in Environmental Science, leading strategic direction and global partnerships.</p>
+            </div>
+            <!-- Deng Xiao -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.deng.name">Deng Xiao</h3>
+                <span class="member-role" data-i18n="role.vice">Vice Chairman</span>
+                <p class="member-desc" data-i18n="m.deng.desc">Ecologist focused on biodiversity conservation strategies.</p>
+            </div>
+            <!-- Chen Shizhen -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.chen.name">Chen Shizhen</h3>
+                <span class="member-role" data-i18n="role.vice">Vice Chairman</span>
+                <p class="member-desc" data-i18n="m.chen.desc">Expert in environmental policy and international law.</p>
+            </div>
+            <!-- Li Xingyue -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.li.name">Li Xingyue</h3>
+                <span class="member-role" data-i18n="role.vice">Vice Chairman</span>
+                <p class="member-desc" data-i18n="m.li.desc">Coordination of daily council affairs.</p>
+            </div>
+            <!-- Deng Zi -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.dengz.name">Deng Zi</h3>
+                <span class="member-role" data-i18n="role.vice">Vice Chairman</span>
+                <p class="member-desc" data-i18n="m.dengz.desc">Strategic planning and development.</p>
+            </div>
+            <!-- Dong Yuchen -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.dong.name">Dong Yuchen</h3>
+                <span class="member-role" data-i18n="role.vice">Vice Chairman</span>
+                <p class="member-desc" data-i18n="m.dong.desc">International cooperation and exchange.</p>
+            </div>
+            <!-- Wang Zicong -->
+            <div class="member-card">
+                <div class="card-icon">★</div>
+                <h3 class="member-name" data-i18n="m.wangz.name">Wang Zicong</h3>
+                <span class="member-role" data-i18n="role.vice">Vice Chairman</span>
+                <p class="member-desc" data-i18n="m.wangz.desc">Project assessment and supervision.</p>
             </div>
         </div>
-	</div>
+    </section>
 
-	<!-- Hero Section -->
-	<section class="hero">
-		<div class="hero-content">
-			<h1 data-i18n="hero.title"></h1>
-			<p data-i18n="hero.description"></p>
-		</div>
-	</section>
+    <!-- Department: Supervision & Finance -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.ops">Operations <span>Supervision & Finance</span></h2>
+        <div class="members-grid">
+            <!-- Wang Qiuzhi -->
+            <div class="member-card">
+                <div class="card-icon">⚖️</div>
+                <h3 class="member-name" data-i18n="m.wangq.name">Wang Qiuzhi</h3>
+                <span class="member-role" data-i18n="role.head_sup">Head of Supervision</span>
+                <p class="member-desc" data-i18n="m.wangq.desc">Discipline supervision and integrity construction.</p>
+            </div>
+            <!-- Liu Xijie -->
+            <div class="member-card">
+                <div class="card-icon">📊</div>
+                <h3 class="member-name" data-i18n="m.liu.name">Liu Xijie</h3>
+                <span class="member-role" data-i18n="role.head_fin">Head of Finance</span>
+                <p class="member-desc" data-i18n="m.liu.desc">Financial planning and budget management.</p>
+            </div>
+        </div>
+    </section>
 
-	<!-- Council Members Section -->
-	<section class="section">
-		<div class="container">
-			<h2 class="section-title" data-i18n="members.title"></h2>
-			<div class="council-members">
-				<!-- 主席 -->
-				<div class="member-card" data-delay="0">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="康朝KCK" loading="lazy">
-						<div class="member-position" data-i18n="members.chairman"></div>
-					</div>
-					<div class="member-info">
-						<h3>Kang Chaokai</h3>
-						<p data-i18n="members.kang.bio"></p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 副主席1 -->
-				<div class="member-card" data-delay="0.1">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="邓骁DengXiao" loading="lazy">
-						<div class="member-position" data-i18n="members.vice_chairman"></div>
-					</div>
-					<div class="member-info">
-						<h3>Deng Xiao</h3>
-						<p data-i18n="members.deng.bio"></p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 副主席2 -->
-				<div class="member-card" data-delay="0.2">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="陈是圳csz" loading="lazy">
-						<div class="member-position" data-i18n="members.vice_chairman"></div>
-					</div>
-					<div class="member-info">
-						<h3>Chen Shizhen</h3>
-						<p data-i18n="members.chen.bio"></p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 常任理事会副主席 -->
-				<div class="member-card" data-delay="0.3">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="李星跃" loading="lazy">
-						<div class="member-position">常任理事会副主席</div>
-					</div>
-					<div class="member-info">
-						<h3>李星跃</h3>
-						<p>负责理事会日常事务协调与管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 常任理事会副主席 -->
-				<div class="member-card" data-delay="0.4">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="邓自" loading="lazy">
-						<div class="member-position">常任理事会副主席</div>
-					</div>
-					<div class="member-info">
-						<h3>邓自</h3>
-						<p>负责理事会战略规划与发展方向制定</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 常任理事会副主席 -->
-				<div class="member-card" data-delay="0.5">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="董宇宸" loading="lazy">
-						<div class="member-position">常任理事会副主席</div>
-					</div>
-					<div class="member-info">
-						<h3>董宇宸</h3>
-						<p>负责理事会国际合作与交流事务</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 常任理事会副主席 -->
-				<div class="member-card" data-delay="0.6">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="王子聪" loading="lazy">
-						<div class="member-position">常任理事会副主席</div>
-					</div>
-					<div class="member-info">
-						<h3>王子聪</h3>
-						<p>负责理事会项目评估与监督工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 纪检部部长 -->
-				<div class="member-card" data-delay="0.7">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="王秋之" loading="lazy">
-						<div class="member-position">纪检部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>王秋之</h3>
-						<p>负责组织纪律监督与廉政建设工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 宣传部部长 -->
-				<div class="member-card" data-delay="0.8">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="庄雅涵" loading="lazy">
-						<div class="member-position">宣传部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>庄雅涵</h3>
-						<p>负责组织宣传与媒体关系管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 宣传部副部长 -->
-				<div class="member-card" data-delay="0.9">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="张晨曦" loading="lazy">
-						<div class="member-position">宣传部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>张晨曦</h3>
-						<p>协助部长负责宣传策划与执行工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 宣传部副部长 -->
-				<div class="member-card" data-delay="1.0">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="曾子瑄" loading="lazy">
-						<div class="member-position">宣传部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>曾子瑄</h3>
-						<p>负责新媒体运营与内容创作工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 宣传部副部长 -->
-				<div class="member-card" data-delay="1.1">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="唐诗萱" loading="lazy">
-						<div class="member-position">宣传部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>唐诗萱</h3>
-						<p>负责品牌形象建设与推广工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 宣传部成员 -->
-				<div class="member-card" data-delay="1.2">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="李卓妍" loading="lazy">
-						<div class="member-position">宣传部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>李卓妍</h3>
-						<p>负责宣传材料制作与分发工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 宣传部成员 -->
-				<div class="member-card" data-delay="1.3">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="冉凌菲" loading="lazy">
-						<div class="member-position">宣传部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>冉凌菲</h3>
-						<p>负责活动摄影与视觉设计工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 财务部部长 -->
-				<div class="member-card" data-delay="1.4">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="刘熙杰" loading="lazy">
-						<div class="member-position">财务部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>刘熙杰</h3>
-						<p>负责组织财务规划与预算管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 重外分社副社长 -->
-				<div class="member-card" data-delay="1.5">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="蔡明佳" loading="lazy">
-						<div class="member-position">重外分社副社长</div>
-					</div>
-					<div class="member-info">
-						<h3>蔡明佳</h3>
-						<p>负责重外分社日常运营管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 重外分社副社长 -->
-				<div class="member-card" data-delay="1.6">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="蒋宇航" loading="lazy">
-						<div class="member-position">重外分社副社长</div>
-					</div>
-					<div class="member-info">
-						<h3>蒋宇航</h3>
-						<p>负责重外分社项目协调与执行</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 重外分社副社长 -->
-				<div class="member-card" data-delay="1.7">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="贺影" loading="lazy">
-						<div class="member-position">重外分社副社长</div>
-					</div>
-					<div class="member-info">
-						<h3>贺影</h3>
-						<p>负责重外分社对外联络与合作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 人事部部长 -->
-				<div class="member-card" data-delay="1.8">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="陈妍汐" loading="lazy">
-						<div class="member-position">人事部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>陈妍汐</h3>
-						<p>负责组织人力资源规划与管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 人事部副部长 -->
-				<div class="member-card" data-delay="1.9">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="汪子粲" loading="lazy">
-						<div class="member-position">人事部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>汪子粲</h3>
-						<p>协助部长负责招聘与培训工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 人事部副部长 -->
-				<div class="member-card" data-delay="2.0">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="郭珈辰" loading="lazy">
-						<div class="member-position">人事部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>郭珈辰</h3>
-						<p>负责绩效考核与员工关系管理</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 策划部部长 -->
-				<div class="member-card" data-delay="2.1">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="何苗" loading="lazy">
-						<div class="member-position">策划部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>何苗</h3>
-						<p>负责组织活动策划与项目设计工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 策划部部长 -->
-				<div class="member-card" data-delay="2.2">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="唐梓然" loading="lazy">
-						<div class="member-position">策划部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>唐梓然</h3>
-						<p>负责大型活动策划与执行管理</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 策划部成员 -->
-				<div class="member-card" data-delay="2.3">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="张澜芝" loading="lazy">
-						<div class="member-position">策划部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>张澜芝</h3>
-						<p>负责活动方案撰写与细节落实</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 组织部成员 -->
-				<div class="member-card" data-delay="2.4">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="陆思宇" loading="lazy">
-						<div class="member-position">组织部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>陆思宇</h3>
-						<p>负责组织架构优化与协调工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 组织部副部长 -->
-				<div class="member-card" data-delay="2.5">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="朱彦霓" loading="lazy">
-						<div class="member-position">组织部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>朱彦霓</h3>
-						<p>协助部长负责部门日常管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 组织部成员 -->
-				<div class="member-card" data-delay="2.6">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="黄钊辉" loading="lazy">
-						<div class="member-position">组织部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>黄钊辉</h3>
-						<p>负责组织内部协调与沟通工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 组织部成员 -->
-				<div class="member-card" data-delay="2.7">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="韩佳希" loading="lazy">
-						<div class="member-position">组织部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>韩佳希</h3>
-						<p>负责组织文化建设与团队建设</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 组织部副部长 -->
-				<div class="member-card" data-delay="2.8">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="梅骜" loading="lazy">
-						<div class="member-position">组织部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>梅骜</h3>
-						<p>负责组织发展规划与制度建设</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 组织部成员 -->
-				<div class="member-card" data-delay="2.9">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="陈子陌" loading="lazy">
-						<div class="member-position">组织部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>陈子陌</h3>
-						<p>负责组织文档管理与信息维护</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 秘书部副部长 -->
-				<div class="member-card" data-delay="3.0">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="林女涵" loading="lazy">
-						<div class="member-position">秘书部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>林女涵</h3>
-						<p>协助部长负责文秘与行政工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 秘书部部长 -->
-				<div class="member-card" data-delay="3.1">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="郎昱臣" loading="lazy">
-						<div class="member-position">秘书部部长</div>
-					</div>
-					<div class="member-info">
-						<h3>郎昱臣</h3>
-						<p>负责秘书处全面工作与协调</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 秘书部副部长 -->
-				<div class="member-card" data-delay="3.2">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="张曦烔" loading="lazy">
-						<div class="member-position">秘书部副部长</div>
-					</div>
-					<div class="member-info">
-						<h3>张曦烔</h3>
-						<p>负责会议组织与文件管理工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-				
-				<!-- 新增成员 - 秘书部成员 -->
-				<div class="member-card" data-delay="3.3">
-					<div class="member-image">
-						<img src="https://chatbotcos.weixin.qq.com/chatbot/30-openaiassets_a5577a1f443c64cab324515072e7396a_469401762402634781.jpg" alt="徐婧祺" loading="lazy">
-						<div class="member-position">秘书部成员</div>
-					</div>
-					<div class="member-info">
-						<h3>徐婧祺</h3>
-						<p>负责日常行政事务与接待工作</p>
-						<span class="member-country">China</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Department: Publicity -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.pub">Publicity <span>Media & Communication</span></h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="card-icon">📢</div>
+                <h3 class="member-name" data-i18n="m.zhuang.name">Zhuang Yahan</h3>
+                <span class="member-role" data-i18n="role.head">Department Head</span>
+                <p class="member-desc" data-i18n="m.zhuang.desc">Media relations and PR strategy.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📢</div>
+                <h3 class="member-name" data-i18n="m.zhangc.name">Zhang Chenxi</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.zhangc.desc">Campaign planning and execution.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📢</div>
+                <h3 class="member-name" data-i18n="m.zeng.name">Zeng Zixuan</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.zeng.desc">Social media operations.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📢</div>
+                <h3 class="member-name" data-i18n="m.tang.name">Tang Shixuan</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.tang.desc">Brand image and promotion.</p>
+            </div>
+            <!-- Members -->
+            <div class="member-card">
+                <div class="card-icon">✏️</div>
+                <h3 class="member-name" data-i18n="m.li_z.name">Li Zhuoyan</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.li_z.desc">Material production.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📷</div>
+                <h3 class="member-name" data-i18n="m.ran.name">Ran Lingfei</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.ran.desc">Photography and design.</p>
+            </div>
+        </div>
+    </section>
 
-	<!-- About Council Section -->
-	<section class="section about-council">
-		<div class="container">
-			<h2 class="section-title" data-i18n="about.title"></h2>
-			<div class="about-content">
-				<div class="about-text">
-					<h3 data-i18n="about.subtitle"></h3>
-					<p data-i18n="about.p1"></p>
-					<p data-i18n="about.p2"></p>
-					<p data-i18n="about.p3"></p>
-				</div>
-				<div class="about-image">
-					<img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Council Meeting" loading="lazy">
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Department: HR -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.hr">Human Resources <span>Talent Management</span></h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="card-icon">👥</div>
+                <h3 class="member-name" data-i18n="m.cheny.name">Chen Yanxi</h3>
+                <span class="member-role" data-i18n="role.head">Department Head</span>
+                <p class="member-desc" data-i18n="m.cheny.desc">HR planning and management.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">👥</div>
+                <h3 class="member-name" data-i18n="m.wangzi.name">Wang Zican</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.wangzi.desc">Recruitment and training.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">👥</div>
+                <h3 class="member-name" data-i18n="m.guo.name">Guo Jiachen</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.guo.desc">Performance and employee relations.</p>
+            </div>
+        </div>
+    </section>
 
-	<!-- Footer -->
-	<footer>
-		<div class="container">
-			<div class="footer-content">
-				<div class="footer-about">
-					<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
-					<p data-i18n="footer.about"></p>
-					<div class="social-links">
-						<a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank" rel="noopener noreferrer">T</a>
-						<a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank" rel="noopener noreferrer">K</a>
-						<a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank" rel="noopener noreferrer">W</a>
-					</div>
-				</div>
-				<div class="footer-links">
-					<h3 data-i18n="footer.links_title"></h3>
-					<ul>
-						<li><a href="index.html" data-i18n="nav.home"></a></li>
-						<li><a href="crlsh.html" data-i18n="nav.council"></a></li>
-						<li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-						<li><a href="index.html#about" data-i18n="nav.about"></a></li>
-						<li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-                        <li><a href="sp.html" data-i18n="nav.videos"></a></li>
-                        <li><a href="jz.html" data-i18n="nav.donate"></a></li>
-					</ul>
-				</div>
-				<div class="footer-links">
-					<h3 data-i18n="footer.contact_title"></h3>
-					<ul>
-						<li data-i18n="footer.address"></li>
-						<li data-i18n="footer.phone"></li>
-						<li data-i18n="footer.email"></li>
-						<li data-i18n="footer.hours"></li>
-					</ul>
-				</div>
-			</div>
-			<div class="footer-bottom">
-				<p>&copy; <span id="currentYear"></span> <span data-i18n="footer.copyright"></span></p>
-			</div>
-		</div>
-	</footer>
+    <!-- Department: Planning & Org -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.planning">Planning & Organization <span>Strategy & Execution</span></h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="card-icon">📝</div>
+                <h3 class="member-name" data-i18n="m.he.name">He Miao</h3>
+                <span class="member-role" data-i18n="role.head_plan">Head of Planning</span>
+                <p class="member-desc" data-i18n="m.he.desc">Activity planning and design.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📝</div>
+                <h3 class="member-name" data-i18n="m.tangz.name">Tang Ziran</h3>
+                <span class="member-role" data-i18n="role.head_plan">Head of Planning</span>
+                <p class="member-desc" data-i18n="m.tangz.desc">Large-scale event execution.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">🏗️</div>
+                <h3 class="member-name" data-i18n="m.mei.name">Mei Ao</h3>
+                <span class="member-role" data-i18n="role.deputy_org">Deputy Head of Org</span>
+                <p class="member-desc" data-i18n="m.mei.desc">Development planning and systems.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">🏗️</div>
+                <h3 class="member-name" data-i18n="m.zhu.name">Zhu Yanni</h3>
+                <span class="member-role" data-i18n="role.deputy_org">Deputy Head of Org</span>
+                <p class="member-desc" data-i18n="m.zhu.desc">Daily management assistance.</p>
+            </div>
+            <!-- Members -->
+            <div class="member-card">
+                <div class="card-icon">🔹</div>
+                <h3 class="member-name" data-i18n="m.zhangl.name">Zhang Lanzhi</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.zhangl.desc">Proposal writing.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">🔹</div>
+                <h3 class="member-name" data-i18n="m.lu.name">Lu Siyu</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.lu.desc">Structure optimization.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">🔹</div>
+                <h3 class="member-name" data-i18n="m.huang.name">Huang Zhaohui</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.huang.desc">Internal coordination.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">🔹</div>
+                <h3 class="member-name" data-i18n="m.han.name">Han Jiaxi</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.han.desc">Organizational culture.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">🔹</div>
+                <h3 class="member-name" data-i18n="m.chenz.name">Chen Zimo</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.chenz.desc">Document management.</p>
+            </div>
+        </div>
+    </section>
 
-	<!-- Scroll to Top Button -->
-	<div class="scroll-top" id="scrollTop">↑</div>
+    <!-- Department: Secretariat -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.sec">Secretariat <span>Administration</span></h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="card-icon">📂</div>
+                <h3 class="member-name" data-i18n="m.lang.name">Lang Yuchen</h3>
+                <span class="member-role" data-i18n="role.head">Department Head</span>
+                <p class="member-desc" data-i18n="m.lang.desc">Overall coordination.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📂</div>
+                <h3 class="member-name" data-i18n="m.lin.name">Lin Nvhan</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.lin.desc">Secretarial and admin work.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📂</div>
+                <h3 class="member-name" data-i18n="m.zhangx.name">Zhang Xitong</h3>
+                <span class="member-role" data-i18n="role.deputy">Deputy Head</span>
+                <p class="member-desc" data-i18n="m.zhangx.desc">Meeting organization.</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📂</div>
+                <h3 class="member-name" data-i18n="m.xu.name">Xu Jingqi</h3>
+                <span class="member-role" data-i18n="role.member">Member</span>
+                <p class="member-desc" data-i18n="m.xu.desc">Daily administration.</p>
+            </div>
+        </div>
+    </section>
 
-	<script>
-        // --- 多语言支持 (与 index.html 保持一致) ---
+    <!-- Department: Branch -->
+    <section class="dept-section">
+        <h2 class="dept-title" data-i18n="dept.branch">Branches <span>Regional Operations</span></h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="card-icon">📍</div>
+                <h3 class="member-name" data-i18n="m.cai.name">Cai Mingjia</h3>
+                <span class="member-role" data-i18n="role.branch_vp">Branch VP</span>
+                <p class="member-desc" data-i18n="m.cai.desc">Daily operations (Chongqing).</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📍</div>
+                <h3 class="member-name" data-i18n="m.jiang.name">Jiang Yuhang</h3>
+                <span class="member-role" data-i18n="role.branch_vp">Branch VP</span>
+                <p class="member-desc" data-i18n="m.jiang.desc">Project coordination (Chongqing).</p>
+            </div>
+            <div class="member-card">
+                <div class="card-icon">📍</div>
+                <h3 class="member-name" data-i18n="m.he_y.name">He Ying</h3>
+                <span class="member-role" data-i18n="role.branch_vp">Branch VP</span>
+                <p class="member-desc" data-i18n="m.he_y.desc">External liaison (Chongqing).</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="Logo">
+                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+            </div>
+            <div class="footer-navs">
+                <div class="footer-col">
+                    <h5 data-i18n="footer.links_title">Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
+                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 data-i18n="footer.contact_title">Contact</h5>
+                    <ul>
+                         <li data-i18n="footer.address">Address: No. 10 Xingsheng Ave, Chongqing, CN</li>
+                         <li><a href="mailto:xcb@wepo.top" data-i18n="footer.email">Email: xcb@wepo.top</a></li>
+                         <li data-i18n="footer.phone">Phone: (+86) 02386161804</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-btm">
+            <p>&copy; <span id="year"></span> <span data-i18n="footer.copyright">WEPO. All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Translations ---
         const translations = {
             "zh-CN": {
                 "lang.current": "中文",
-                "nav.home": "首页",
-                "nav.about": "关于我们",
-                "nav.mission": "使命愿景",
-                "nav.programs": "环保项目",
-                "nav.partners": "合作伙伴",
-                "nav.contact": "联系我们",
-                "nav.council": "常任理事会",
-                "nav.videos": "环保视频",
-                "nav.donate": "捐赠支持",
-                "nav.support": "客服支持",
-                "page.title": "WEPO - 常任理事会 康朝凯 邓骁 陈是圳等",
-                "hero.title": "世界环境保护组织常任理事会",
-                "hero.description": "汇聚全球环保领域的杰出领袖，共同制定环境保护战略，推动可持续发展议程",
-                "members.title": "理事会成员",
-                "members.chairman": "主席",
-                "members.vice_chairman": "副主席",
-                "members.member": "常务理事",
-                // 成员简介 (为简洁起见，这里使用英文名作为 key)
-                "members.kang.bio": "环境科学博士，曾任联合国环境规划署高级顾问，在气候变化和可持续发展领域有20年工作经验。",
-                "members.deng.bio": "生态学家，专注于生物多样性保护，曾领导多个国际环保项目，获得全球环保领袖奖。",
-                "members.chen.bio": "环境政策专家，在环境法律和国际环境协议谈判方面有丰富经验，推动多项国际环保公约的制定。",
-                "members.smith.bio": "气候变化专家，前IPCC核心成员，在碳减排技术和政策方面有深入研究。",
-                "members.johnson.bio": "海洋生态保护专家，致力于海洋塑料污染治理，创立了全球海洋清洁联盟。",
-                "members.dubois.bio": "可持续城市发展专家，推动全球100多个城市的绿色基础设施建设。",
-                "members.patel.bio": "环境经济学家，专注于可持续发展与扶贫的结合，著有《绿色经济转型》等著作。",
-                "members.gonzalez.bio": "森林保护专家，成功领导了亚马逊雨林保护项目，获得联合国环境奖。",
-                "about.title": "关于常任理事会",
-                "about.subtitle": "我们的职责与使命",
-                "about.p1": "世界环境保护组织常任理事会是组织的最高决策机构，由来自全球各地的环保领域杰出领袖组成。康朝凯是常任理事会主席，邓骁和陈是圳是常任理事会副主席，理事会负责制定组织的战略方向、监督项目实施、审批重大决策。",
-                "about.p2": "理事会成员每届任期五年，由全球会员国提名选举产生。理事会每年召开两次全体会议，必要时可召开特别会议。理事会下设气候变化、生物多样性、污染防治、可持续发展等多个专业委员会。",
-                "about.p3": "我们的使命是汇聚全球环保智慧，协调各国环保行动，推动环境政策的制定与实施，为地球的可持续发展贡献力量。",
-                "footer.about": "世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。",
+                "nav.home": "首页", "nav.about": "关于我们", "nav.mission": "使命愿景", "nav.programs": "环保项目", "nav.partners": "合作伙伴", "nav.contact": "联系我们", "nav.council": "常任理事会", "nav.videos": "环保视频", "nav.donate": "捐赠支持",
+                "hero.title": "常任理事会",
+                "hero.subtitle": "汇聚领袖智慧，引领全球可持续发展。",
+                "dept.presidium": "主席团", "dept.ops": "运营与财务", "dept.pub": "宣传部", "dept.hr": "人事部", "dept.planning": "策划与组织", "dept.sec": "秘书处", "dept.branch": "分社机构",
+                "role.chairman": "主席", "role.vice": "副主席", "role.head": "部长", "role.deputy": "副部长", "role.member": "成员", "role.head_sup": "纪检部部长", "role.head_fin": "财务部部长", "role.head_plan": "策划部部长", "role.deputy_org": "组织部副部长", "role.branch_vp": "分社副社长",
+                
+                // Names & Desc (Simplified for brevity, update fully as needed)
+                "m.kang.name": "康朝凯", "m.kang.desc": "环境科学博士，负责战略方向与全球合作。",
+                "m.deng.name": "邓骁", "m.deng.desc": "生态学家，专注于生物多样性保护策略。",
+                "m.chen.name": "陈是圳", "m.chen.desc": "环境政策与国际法专家。",
+                "m.li.name": "李星跃", "m.li.desc": "负责理事会日常事务协调。",
+                "m.dengz.name": "邓自", "m.dengz.desc": "负责战略规划与发展。",
+                "m.dong.name": "董宇宸", "m.dong.desc": "负责国际合作与交流。",
+                "m.wangz.name": "王子聪", "m.wangz.desc": "负责项目评估与监督。",
+                "m.wangq.name": "王秋之", "m.wangq.desc": "负责纪律监督与廉政建设。",
+                "m.liu.name": "刘熙杰", "m.liu.desc": "负责财务规划与预算。",
+                
+                "m.zhuang.name": "庄雅涵", "m.zhuang.desc": "负责宣传与媒体关系。",
+                "m.zhangc.name": "张晨曦", "m.zhangc.desc": "协助宣传策划与执行。",
+                "m.zeng.name": "曾子瑄", "m.zeng.desc": "负责新媒体运营。",
+                "m.tang.name": "唐诗萱", "m.tang.desc": "负责品牌形象推广。",
+                "m.li_z.name": "李卓妍", "m.li_z.desc": "负责宣传材料制作。",
+                "m.ran.name": "冉凌菲", "m.ran.desc": "负责活动摄影与设计。",
+
+                "m.cheny.name": "陈妍汐", "m.cheny.desc": "负责资源规划与管理。",
+                "m.wangzi.name": "汪子粲", "m.wangzi.desc": "协助招聘与培训。",
+                "m.guo.name": "郭珈辰", "m.guo.desc": "负责绩效与员工关系。",
+
+                "m.he.name": "何苗", "m.he.desc": "负责活动策划与设计。",
+                "m.tangz.name": "唐梓然", "m.tangz.desc": "负责大型活动执行。",
+                "m.mei.name": "梅骜", "m.mei.desc": "负责发展规划与制度。",
+                "m.zhu.name": "朱彦霓", "m.zhu.desc": "协助部门日常管理。",
+                "m.zhangl.name": "张澜芝", "m.zhangl.desc": "负责活动方案撰写。",
+                "m.lu.name": "陆思宇", "m.lu.desc": "负责架构优化。",
+                "m.huang.name": "黄钊辉", "m.huang.desc": "负责内部协调。",
+                "m.han.name": "韩佳希", "m.han.desc": "负责组织文化建设。",
+                "m.chenz.name": "陈子陌", "m.chenz.desc": "负责文档管理。",
+
+                "m.lang.name": "郎昱臣", "m.lang.desc": "负责秘书处全面工作。",
+                "m.lin.name": "林女涵", "m.lin.desc": "协助文秘与行政。",
+                "m.zhangx.name": "张曦烔", "m.zhangx.desc": "负责会议组织。",
+                "m.xu.name": "徐婧祺", "m.xu.desc": "负责日常行政。",
+
+                "m.cai.name": "蔡明佳", "m.cai.desc": "负责重外分社运营。",
+                "m.jiang.name": "蒋宇航", "m.jiang.desc": "负责重外分社项目。",
+                "m.he_y.name": "贺影", "m.he_y.desc": "负责重外分社外联。",
+
+                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
                 "footer.links_title": "快速链接",
                 "footer.contact_title": "联系我们",
                 "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
-                "footer.phone": "电话: 130-2835-0677",
-                "footer.email": "邮箱: wepo2021@outlook.com",
-                "footer.hours": "工作时间: 周一至周五 9:00-18:00",
+                "footer.phone": "电话: (+86) 02386161804",
+                "footer.email": "邮箱: xcb@wepo.top",
                 "footer.copyright": "世界环境保护组织. 版权所有."
             },
             "en": {
                 "lang.current": "EN",
-                "nav.home": "Home",
-                "nav.about": "About",
-                "nav.mission": "Mission",
-                "nav.programs": "Programs",
-                "nav.partners": "Partners",
-                "nav.contact": "Contact",
-                "nav.council": "Council",
-                "nav.videos": "Videos",
-                "nav.donate": "Donate",
-                "nav.support": "Customer Support",
-                "page.title": "WEPO - Permanent Council",
-                "hero.title": "World Environmental Protection Organization Permanent Council",
-                "hero.description": "Bringing together outstanding leaders from the global environmental field to jointly formulate environmental protection strategies and promote the sustainable development agenda.",
-                "members.title": "Council Members",
-                "members.chairman": "Chairman",
-                "members.vice_chairman": "Vice Chairman",
-                "members.member": "Member",
-                "members.kang.bio": "Ph.D. in Environmental Science, former Senior Advisor to the United Nations Environment Programme, with 20 years of experience in climate change and sustainable development.",
-                "members.deng.bio": "Ecologist, focusing on biodiversity conservation, has led multiple international environmental projects and won the Global Environmental Leader Award.",
-                "members.chen.bio": "Environmental policy expert, with extensive experience in environmental law and negotiation of international environmental agreements, has promoted the formulation of several international environmental conventions.",
-                "members.smith.bio": "Climate change expert, former core member of the IPCC, with in-depth research on carbon reduction technologies and policies.",
-                "members.johnson.bio": "Marine ecosystem conservation expert, dedicated to marine plastic pollution control, founded the Global Ocean Cleanup Alliance.",
-                "members.dubois.bio": "Sustainable urban development expert, has promoted green infrastructure construction in over 100 cities worldwide.",
-                "members.patel.bio": "Environmental economist, focusing on the integration of sustainable development and poverty alleviation, author of 'Green Economic Transformation' and other works.",
-                "members.gonzalez.bio": "Forest conservation expert, successfully led the Amazon rainforest protection project and won the United Nations Environment Award.",
-                "about.title": "About the Permanent Council",
-                "about.subtitle": "Our Responsibilities and Mission",
-                "about.p1": "The World Environmental Protection Organization Permanent Council is the highest decision-making body of the organization, composed of outstanding leaders from the global environmental field. The Council is responsible for formulating the organization's strategic direction, supervising project implementation, and approving major decisions.",
-                "about.p2": "Council members serve a five-year term, nominated and elected by member countries worldwide. The Council holds two plenary sessions per year and can convene special sessions when necessary. The Council has established several professional committees, including Climate Change, Biodiversity, Pollution Prevention and Control, and Sustainable Development.",
-                "about.p3": "Our mission is to gather global environmental wisdom, coordinate environmental actions among countries, promote the formulation and implementation of environmental policies, and contribute to the sustainable development of the Earth.",
-                "footer.about": "The World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.",
+                "nav.home": "Home", "nav.about": "About", "nav.mission": "Mission", "nav.programs": "Programs", "nav.partners": "Partners", "nav.contact": "Contact", "nav.council": "Council", "nav.videos": "Videos", "nav.donate": "Donate",
+                "hero.title": "Permanent Council",
+                "hero.subtitle": "Gathering global leaders to drive sustainable development.",
+                "dept.presidium": "Presidium", "dept.ops": "Operations", "dept.pub": "Publicity", "dept.hr": "Human Resources", "dept.planning": "Planning & Org", "dept.sec": "Secretariat", "dept.branch": "Branches",
+                "role.chairman": "Chairman", "role.vice": "Vice Chairman", "role.head": "Head", "role.deputy": "Deputy Head", "role.member": "Member", "role.head_sup": "Head of Supervision", "role.head_fin": "Head of Finance", "role.head_plan": "Head of Planning", "role.deputy_org": "Deputy Head of Org", "role.branch_vp": "Branch VP",
+                
+                "m.kang.name": "Kang Chaokai", "m.kang.desc": "PhD, Strategic Direction.",
+                "m.deng.name": "Deng Xiao", "m.deng.desc": "Ecologist, Biodiversity.",
+                "m.chen.name": "Chen Shizhen", "m.chen.desc": "Policy Expert.",
+                "m.li.name": "Li Xingyue", "m.li.desc": "Council Coordination.",
+                "m.dengz.name": "Deng Zi", "m.dengz.desc": "Strategic Planning.",
+                "m.dong.name": "Dong Yuchen", "m.dong.desc": "Intl. Cooperation.",
+                "m.wangz.name": "Wang Zicong", "m.wangz.desc": "Project Supervision.",
+                "m.wangq.name": "Wang Qiuzhi", "m.wangq.desc": "Discipline Supervision.",
+                "m.liu.name": "Liu Xijie", "m.liu.desc": "Financial Planning.",
+                
+                "m.zhuang.name": "Zhuang Yahan", "m.zhuang.desc": "Media Relations.",
+                "m.zhangc.name": "Zhang Chenxi", "m.zhangc.desc": "Campaign Planning.",
+                "m.zeng.name": "Zeng Zixuan", "m.zeng.desc": "Social Media.",
+                "m.tang.name": "Tang Shixuan", "m.tang.desc": "Brand Image.",
+                "m.li_z.name": "Li Zhuoyan", "m.li_z.desc": "Material Production.",
+                "m.ran.name": "Ran Lingfei", "m.ran.desc": "Photography.",
+
+                "m.cheny.name": "Chen Yanxi", "m.cheny.desc": "HR Planning.",
+                "m.wangzi.name": "Wang Zican", "m.wangzi.desc": "Recruitment.",
+                "m.guo.name": "Guo Jiachen", "m.guo.desc": "Employee Relations.",
+
+                "m.he.name": "He Miao", "m.he.desc": "Event Planning.",
+                "m.tangz.name": "Tang Ziran", "m.tangz.desc": "Event Execution.",
+                "m.mei.name": "Mei Ao", "m.mei.desc": "Development Planning.",
+                "m.zhu.name": "Zhu Yanni", "m.zhu.desc": "Daily Management.",
+                "m.zhangl.name": "Zhang Lanzhi", "m.zhangl.desc": "Proposals.",
+                "m.lu.name": "Lu Siyu", "m.lu.desc": "Org Optimization.",
+                "m.huang.name": "Huang Zhaohui", "m.huang.desc": "Coordination.",
+                "m.han.name": "Han Jiaxi", "m.han.desc": "Culture.",
+                "m.chenz.name": "Chen Zimo", "m.chenz.desc": "Documentation.",
+
+                "m.lang.name": "Lang Yuchen", "m.lang.desc": "General Coordination.",
+                "m.lin.name": "Lin Nvhan", "m.lin.desc": "Secretarial Work.",
+                "m.zhangx.name": "Zhang Xitong", "m.zhangx.desc": "Meeting Org.",
+                "m.xu.name": "Xu Jingqi", "m.xu.desc": "Administration.",
+
+                "m.cai.name": "Cai Mingjia", "m.cai.desc": "Branch Operations.",
+                "m.jiang.name": "Jiang Yuhang", "m.jiang.desc": "Project Coord.",
+                "m.he_y.name": "He Ying", "m.he_y.desc": "External Liaison.",
+
+                "footer.about": "WEPO is dedicated to global environmental protection.",
                 "footer.links_title": "Quick Links",
-                "footer.contact_title": "Contact Us",
-                "footer.address": "Address: No. 10, Xingsheng Avenue, Yubei District, Chongqing, China",
-                "footer.phone": "Phone: 130-2835-0677",
-                "footer.email": "Email: wepo2021@outlook.com",
-                "footer.hours": "Working Hours: Monday to Friday 9:00-18:00",
-                "footer.copyright": "World Environmental Protection Organization. All rights reserved."
-            },
-             "es": {
-                "lang.current": "ES",
-                "nav.home": "Inicio",
-                "nav.about": "Acerca de",
-                "nav.mission": "Misión",
-                "nav.programs": "Programas",
-                "nav.partners": "Socios",
-                "nav.contact": "Contacto",
-                "nav.council": "Consejo",
-                "nav.videos": "Videos",
-                "nav.donate": "Donar",
-                "nav.support": "Soporte al Cliente",
-                "page.title": "WEPO - Consejo Permanente",
-                "hero.title": "Consejo Permanente de la Organización Mundial para la Protección del Medio Ambiente",
-                "hero.description": "Reuniendo a líderes destacados del campo ambiental global para formular conjuntamente estrategias de protección ambiental y promover la agenda de desarrollo sostenible.",
-                "members.title": "Miembros del Consejo",
-                "members.chairman": "Presidente",
-                "members.vice_chairman": "Vicepresidente",
-                "members.member": "Miembro",
-                "members.kang.bio": "Doctor en Ciencias Ambientales, ex asesor senior del Programa de las Naciones Unidas para el Medio Ambiente, con 20 años de experiencia en cambio climático y desarrollo sostenible.",
-                "members.deng.bio": "Ecólogo, enfocado en la conservación de la biodiversidad, ha liderado múltiples proyectos ambientales internacionales y ha ganado el Premio de Líder Ambiental Global.",
-                "members.chen.bio": "Experto en políticas ambientales, con amplia experiencia en derecho ambiental y negociación de acuerdos internacionales ambientales, ha promovido la formulación de varias convenciones ambientales internacionales.",
-                "members.smith.bio": "Experto en cambio climático, ex miembro del núcleo del IPCC, con investigación profunda en tecnologías y políticas de reducción de carbono.",
-                "members.johnson.bio": "Experta en conservación de ecosistemas marinos, dedicada al control de la contaminación plástica en el mar, fundó la Alianza Global de Limpieza Oceánica.",
-                "members.dubois.bio": "Experto en desarrollo urbano sostenible, ha promovido la construcción de infraestructura verde en más de 100 ciudades en todo el mundo.",
-                "members.patel.bio": "Economista ambiental, enfocado en la integración del desarrollo sostenible y la reducción de la pobreza, autor de 'Transformación Económica Verde' y otras obras.",
-                "members.gonzalez.bio": "Experta en conservación forestal, lideró con éxito el proyecto de protección de la selva amazónica y ganó el Premio de las Naciones Unidas al Medio Ambiente.",
-                "about.title": "Acerca del Consejo Permanente",
-                "about.subtitle": "Nuestras Responsabilidades y Misión",
-                "about.p1": "El Consejo Permanente de la Organización Mundial para la Protección del Medio Ambiente es el órgano de toma de decisiones más alto de la organización, compuesto por líderes destacados del campo ambiental global. El Consejo es responsable de formular la dirección estratégica de la organización, supervisar la implementación de proyectos y aprobar decisiones importantes.",
-                "about.p2": "Los miembros del Consejo sirven un mandato de cinco años, nominados y elegidos por los países miembros de todo el mundo. El Consejo celebra dos sesiones plenarias al año y puede convocar sesiones especiales cuando sea necesario. El Consejo ha establecido varios comités profesionales, incluyendo Cambio Climático, Biodiversidad, Prevención y Control de la Contaminación, y Desarrollo Sostenible.",
-                "about.p3": "Nuestra misión es reunir la sabiduría ambiental global, coordinar las acciones ambientales entre los países, promover la formulación e implementación de políticas ambientales y contribuir al desarrollo sostenible de la Tierra.",
-                "footer.about": "La Organización Mundial para la Protección del Medio Ambiente (WEPO) es una organización internacional sin fines de lucro dedicada a la protección ambiental global, promoviendo el desarrollo sostenible a través de la investigación científica, la defensa de políticas y la educación pública.",
-                "footer.links_title": "Enlaces Rápidos",
-                "footer.contact_title": "Contáctenos",
-                "footer.address": "Dirección: No. 10, Avenida Xingsheng, Distrito de Yubei, Chongqing, China",
-                "footer.phone": "Teléfono: 130-2835-0677",
-                "footer.email": "Correo electrónico: wepo2021@outlook.com",
-                "footer.hours": "Horario de Atención: Lunes a Viernes 9:00-18:00",
-                "footer.copyright": "Organización Mundial para la Protección del Medio Ambiente. Todos los derechos reservados."
-            },
-            "fr": {
-                "lang.current": "FR",
-                "nav.home": "Accueil",
-                "nav.about": "À propos",
-                "nav.mission": "Mission",
-                "nav.programs": "Programmes",
-                "nav.partners": "Partenaires",
-                "nav.contact": "Contact",
-                "nav.council": "Conseil",
-                "nav.videos": "Vidéos",
-                "nav.donate": "Faire un don",
-                "nav.support": "Support Client",
-                "page.title": "WEPO - Conseil Permanent",
-                "hero.title": "Conseil Permanent de l'Organisation Mondiale de Protection de l'Environnement",
-                "hero.description": "Réunissant des leaders exceptionnels du domaine environnemental mondial pour élaborer conjointement des stratégies de protection de l'environnement et promouvoir l'agenda du développement durable.",
-                "members.title": "Membres du Conseil",
-                "members.chairman": "Président",
-                "members.vice_chairman": "Vice-président",
-                "members.member": "Membre",
-                "members.kang.bio": "Docteur en sciences de l'environnement, ancien conseiller principal au Programme des Nations Unies pour l'environnement, avec 20 ans d'expérience dans le changement climatique et le développement durable.",
-                "members.deng.bio": "Écologiste, spécialisé dans la conservation de la biodiversité, a dirigé plusieurs projets environnementaux internationaux et a remporté le prix du leader environnemental mondial.",
-                "members.chen.bio": "Expert en politiques environnementales, avec une vaste expérience en droit environnemental et en négociation d'accords environnementaux internationaux, a promu l'élaboration de plusieurs conventions environnementales internationales.",
-                "members.smith.bio": "Expert du changement climatique, ancien membre du noyau du GIEC, avec des recherches approfondies sur les technologies et les politiques de réduction des émissions de carbone.",
-                "members.johnson.bio": "Experte en conservation des écosystèmes marins, dédiée au contrôle de la pollution plastique marine, a fondé l'Alliance mondiale de nettoyage des océans.",
-                "members.dubois.bio": "Expert en développement urbain durable, a promu la construction d'infrastructures vertes dans plus de 100 villes du monde entier.",
-                "members.patel.bio": "Économiste de l'environnement, concentré sur l'intégration du développement durable et de la réduction de la pauvreté, auteur de « Transformation économique verte » et d'autres ouvrages.",
-                "members.gonzalez.bio": "Experte en conservation forestière, a mené à bien le projet de protection de la forêt amazonienne et a remporté le prix de l'environnement des Nations Unies.",
-                "about.title": "À propos du Conseil Permanent",
-                "about.subtitle": "Nos Responsabilités et Mission",
-                "about.p1": "Le Conseil Permanent de l'Organisation Mondiale de Protection de l'Environnement est l'organe de décision suprême de l'organisation, composé de leaders exceptionnels du domaine environnemental mondial. Le Conseil est chargé d'élaborer l'orientation stratégique de l'organisation, de superviser la mise en œuvre des projets et d'approuver les décisions importantes.",
-                "about.p2": "Les membres du Conseil exercent un mandat de cinq ans, nommés et élus par les pays membres du monde entier. Le Conseil tient deux sessions plénières par an et peut convoquer des sessions extraordinaires si nécessaire. Le Conseil a établi plusieurs comités professionnels, notamment sur le changement climatique, la biodiversité, la prévention et le contrôle de la pollution, et le développement durable.",
-                "about.p3": "Notre mission est de rassembler la sagesse environnementale mondiale, de coordonner les actions environnementales entre les pays, de promouvoir l'élaboration et la mise en œuvre des politiques environnementales, et de contribuer au développement durable de la planète.",
-                "footer.about": "L'Organisation Mondiale de Protection de l'Environnement (WEPO) est une organisation internationale à but non lucratif dédiée à la protection environnementale mondiale, promouvant le développement durable par la recherche scientifique, la défense des politiques et l'éducation du public.",
-                "footer.links_title": "Liens Rapides",
-                "footer.contact_title": "Nous Contacter",
-                "footer.address": "Adresse : No. 10, Avenue Xingsheng, District de Yubei, Chongqing, Chine",
-                "footer.phone": "Téléphone : 130-2835-0677",
-                "footer.email": "E-mail : wepo2021@outlook.com",
-                "footer.hours": "Heures d'Ouverture : Lundi au Vendredi 9h00-18h00",
-                "footer.copyright": "Organisation Mondiale de Protection de l'Environnement. Tous droits réservés."
-            },
-            "ru": {
-                "lang.current": "RU",
-                "nav.home": "Главная",
-                "nav.about": "О нас",
-                "nav.mission": "Миссия",
-                "nav.programs": "Программы",
-                "nav.partners": "Партнеры",
-                "nav.contact": "Контакты",
-                "nav.council": "Совет",
-                "nav.videos": "Видео",
-                "nav.donate": "Пожертвовать",
-                "nav.support": "Поддержка клиентов",
-                "page.title": "WEPO - Постоянный Совет",
-                "hero.title": "Постоянный Совет Всемирной организации по охране окружающей среды",
-                "hero.description": "Объединяя выдающихся лидеров из глобальной области охраны окружающей среды, совместно разрабатывать стратегии охраны окружающей среды и способствовать повестке дня устойчивого развития.",
-                "members.title": "Члены Совета",
-                "members.chairman": "Председатель",
-                "members.vice_chairman": "Заместитель председателя",
-                "members.member": "Член",
-                "members.kang.bio": "Доктор наук об окружающей среде, бывший старший советник Программы ООН по окружающей среде, с 20-летним опытом работы в области изменения климата и устойчивого развития.",
-                "members.deng.bio": "Эколог, специализирующийся на сохранении биоразнообразия, руководил несколькими международными экологическими проектами и получил Глобальную премию лидера в области охраны окружающей среды.",
-                "members.chen.bio": "Эксперт по экологической политике, с обширным опытом в области экологического законодательства и переговоров по международным соглашениям в области окружающей среды, способствовал разработке нескольких международных экологических конвенций.",
-                "members.smith.bio": "Эксперт по изменению климата, бывший ключевой член МГЭИК, с углубленными исследованиями в области технологий и политики сокращения выбросов углерода.",
-                "members.johnson.bio": "Эксперт по охране морских экосистем, занимается контролем загрязнения моря пластиком, основала Глобальный альянс по очистке океана.",
-                "members.dubois.bio": "Эксперт по устойчивому развитию городов, способствовал строительству зеленой инфраструктуры в более чем 100 городах мира.",
-                "members.patel.bio": "Эколог-экономист, сосредоточенный на сочетании устойчивого развития и борьбы с бедностью, автор книги «Зеленая экономическая трансформация» и других работ.",
-                "members.gonzalez.bio": "Эксперт по охране лесов, успешно возглавила проект по защите амазонских лесов и получила премию ООН по окружающей среде.",
-                "about.title": "О Постоянном Совете",
-                "about.subtitle": "Наши Обязанности и Миссия",
-                "about.p1": "Постоянный Совет Всемирной организации по охране окружающей среды является высшим органом принятия решений организации, состоящим из выдающихся лидеров из глобальной области охраны окружающей среды. Совет несет ответственность за определение стратегического направления организации, надзор за реализацией проектов и утверждение важных решений.",
-                "about.p2": "Срок полномочий членов Совета составляет пять лет, они назначаются и избираются странами-членами по всему миру. Совет проводит две пленарные сессии в год и может созывать специальные сессии при необходимости. Совет учредил несколько профессиональных комитетов, включая Комитеты по изменению климата, биоразнообразию, предотвращению и контролю загрязнения, а также устойчивому развитию.",
-                "about.p3": "Наша миссия - собрать глобальную экологическую мудрость, координировать экологические действия стран, способствовать разработке и реализации экологической политики и внести вклад в устойчивое развитие Земли.",
-                "footer.about": "Всемирная организация по охране окружающей среды (WEPO) - это некоммерческая международная организация, посвященная глобальной охране окружающей среды, способствуя устойчивому развитию посредством научных исследований, продвижения политики и просвещения общественности.",
-                "footer.links_title": "Быстрые ссылки",
-                "footer.contact_title": "Связаться с нами",
-                "footer.address": "Адрес: No. 10, проспект Синшэн, район Юбэй, Чунцин, Китай",
-                "footer.phone": "Телефон: 130-2835-0677",
-                "footer.email": "Электронная почта: wepo2021@outlook.com",
-                "footer.hours": "Часы работы: Понедельник - пятница 9:00-18:00",
-                "footer.copyright": "Всемирная организация по охране окружающей среды. Все права защищены."
-            },
-            "ar": {
-                "lang.current": "AR",
-                "nav.home": "الرئيسية",
-                "nav.about": "معلومات عنا",
-                "nav.mission": "الرسالة والرؤية",
-                "nav.programs": "البرامج البيئية",
-                "nav.partners": "الشركاء",
-                "nav.contact": "اتصل بنا",
-                "nav.council": "المجلس",
-                "nav.videos": "الفيديوهات",
-                "nav.donate": "تبرع",
-                "nav.support": "دعم العملاء",
-                "page.title": "WEPO - المجلس الدائم",
-                "hero.title": "المجلس الدائم لمنظمة حماية البيئة العالمية",
-                "hero.description": "جمع القادة المتميزين من مجال البيئة العالمي لوضع استراتيجيات حماية البيئة وتعزيز جدول الأعمال للتنمية المستدامة بشكل مشترك.",
-                "members.title": "أعضاء المجلس",
-                "members.chairman": "الرئيس",
-                "members.vice_chairman": "نائب الرئيس",
-                "members.member": "عضو",
-                "members.kang.bio": "دكتوراه في علوم البيئة، مستشار سابق رفيع في برنامج الأمم المتحدة للبيئة، مع 20 عامًا من الخبرة في مجال تغير المناخ والتنمية المستدامة.",
-                "members.deng.bio": "عالم بيئي، يركز على حفظ التنوع البيولوجي، قاد عدة مشاريع بيئية دولية وفاز بجائزة القائد البيئي العالمي.",
-                "members.chen.bio": "خبير في السياسات البيئية، مع خبرة واسعة في القانون البيئي والتفاوض على الاتفاقيات البيئية الدولية، ساهم في صياغة عدة اتفاقيات بيئية دولية.",
-                "members.smith.bio": "خبير في تغير المناخ، عضو سابق في الفريق الأساسي لـ IPCC، مع بحوث متعمقة في تقنيات وسياسات خفض الكربون.",
-                "members.johnson.bio": "خبيرة في حفظ النظم البيئية البحرية، مكرسة لمحاربة تلوث المحيطات بالبلاستيك، أسست التحالف العالمي لتنظيف المحيطات.",
-                "members.dubois.bio": "خبير في التنمية الحضرية المستدامة، ساهم في بناء البنية التحتية الخضراء في أكثر من 100 مدينة حول العالم.",
-                "members.patel.bio": "عالم اقتصاد بيئي، يركز على دمج التنمية المستدامة مع التخفيف من الفقر، مؤلف كتاب \"التحول الاقتصادي الأخضر\" وغيرها من المؤلفات.",
-                "members.gonzalez.bio": "خبيرة في حفظ الغابات، قادت بنجاح مشروع حماية غابات الأمازون وفازت بجائزة الأمم المتحدة للبيئة.",
-                "about.title": "حول المجلس الدائم",
-                "about.subtitle": "مسؤولياتنا ومهمتنا",
-                "about.p1": "المجلس الدائم لمنظمة حماية البيئة العالمية هو أعلى هيئة اتخاذ قرارات في المنظمة، يتكون من قادة متميزين من مجال البيئة العالمي. يتحمل المجلس مسؤولية وضع الاتجاه الاستراتيجي للمنظمة والإشراف على تنفيذ المشاريع والموافقة على القرارات المهمة.",
-                "about.p2": "أعضاء المجلس يخدمون فترة ولاية مدتها خمس سنوات، يتم ترشيحهم واختيارهم من قبل الدول الأعضاء في جميع أنحاء العالم. يعقد المجلس جلستين تامة في السنة ويمكنه عقد جلسات خاصة عند الضرورة. أنشأ المجلس عدة لجان متخصصة، بما في ذلك لجان تغير المناخ والتنوع البيولوجي ومنع التلوث والسيطرة عليه والتنمية المستدامة.",
-                "about.p3": "مهمتنا هي جمع الحكمة البيئية العالمية، وتنسيق الجهود البيئية بين الدول، وتعزيز صياغة وتنفيذ السياسات البيئية، والمساهمة في التنمية المستدامة للأرض.",
-                "footer.about": "منظمة حماية البيئة العالمية (WEPO) هي منظمة دولية غير ربحية مكرسة لحماية البيئة العالمية، وتعمل على تعزيز التنمية المستدامة من خلال البحث العلمي والدعوة للسياسات والتوعية العامة.",
-                "footer.links_title": "روابط سريعة",
-                "footer.contact_title": "اتصل بنا",
-                "footer.address": "العنوان: رقم 10، شارع شينشينغ، منطقة يوبي، مدينة تشونغتشينغ، الصين",
-                "footer.phone": "الهاتف: 130-2835-0677",
-                "footer.email": "البريد الإلكتروني: wepo2021@outlook.com",
-                "footer.hours": "ساعات العمل: من الاثنين إلى الجمعة 9:00 صباحاً - 6:00 مساءً",
-                "footer.copyright": "منظمة حماية البيئة العالمية. جميع الحقوق محفوظة."
+                "footer.contact_title": "Contact",
+                "footer.address": "Address: No. 10 Xingsheng Ave, Chongqing, CN",
+                "footer.phone": "Phone: (+86) 02386161804",
+                "footer.email": "Email: xcb@wepo.top",
+                "footer.copyright": "WEPO. All rights reserved."
             }
         };
 
-        let currentLang = 'zh-CN';
+        // --- Logic ---
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -1627,223 +725,37 @@
             elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
+                    element.textContent = translations[lang][key];
                 }
             });
-
-            document.querySelectorAll('[data-i18n="lang.current"]').forEach(el => {
-                el.textContent = translations[lang]["lang.current"];
-            });
-
             document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            localStorage.setItem('selectedLanguage', lang);
-            // 更新页面标题
-            document.title = translations[lang]["page.title"] || document.title;
+            localStorage.setItem('lang', lang);
         }
 
-        const savedLang = localStorage.getItem('selectedLanguage');
+        const savedLang = localStorage.getItem('lang');
         if (savedLang && translations[savedLang]) {
             setLanguage(savedLang);
         } else {
-            setLanguage(currentLang);
+            setLanguage('zh-CN');
         }
 
-        document.getElementById('languageBtn').addEventListener('click', function(e) {
-             e.stopPropagation();
-             const dropdown = document.getElementById('languageDropdown');
-             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-        document.getElementById('mobileLanguageBtn').addEventListener('click', function(e) {
-             e.stopPropagation();
-             const dropdown = document.getElementById('mobileLanguageDropdown');
-             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        document.querySelectorAll('.language-dropdown li').forEach(li => {
+            li.addEventListener('click', () => setLanguage(li.getAttribute('data-lang')));
         });
 
-        document.querySelectorAll('#languageDropdown li, #mobileLanguageDropdown li').forEach(item => {
-            item.addEventListener('click', function() {
-                const selectedLang = this.getAttribute('data-lang');
-                setLanguage(selectedLang);
-                document.getElementById('languageDropdown').style.display = 'none';
-                document.getElementById('mobileLanguageDropdown').style.display = 'none';
-            });
+        // Spotlight
+        const spot = document.getElementById('cursor-spotlight');
+        document.addEventListener('mousemove', (e) => {
+            spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.language-switcher')) {
-                document.getElementById('languageDropdown').style.display = 'none';
-                document.getElementById('mobileLanguageDropdown').style.display = 'none';
-            }
-        });
-
-        // --- 动态背景 Canvas (与 index.html 保持一致) ---
-        const canvas = document.getElementById('backgroundCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                // 使用与主题更匹配的颜色
-                this.color = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                else if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                else if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
         }
 
-        const particles = [];
-        const numberOfParticles = 100;
-
-        function initParticles() {
-            for (let i = 0; i < numberOfParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function connectParticles() {
-            const maxDistance = 100;
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    const dx = particles[a].x - particles[b].x;
-                    const dy = particles[a].y - particles[b].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < maxDistance) {
-                        const opacity = 1 - distance / maxDistance;
-                        ctx.strokeStyle = `rgba(200, 200, 255, ${opacity * 0.2})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(26, 9, 51, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            connectParticles();
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-
-        initParticles();
-        animate();
-
-		// Mobile Menu Toggle (优化版)
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const body = document.body;
-
-        function openMenu() {
-            mobileMenu.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            body.classList.add('no-scroll'); // 防止背景滚动
-        }
-
-        function closeMenu() {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            body.classList.remove('no-scroll');
-            // 关闭语言下拉
-            document.getElementById('mobileLanguageDropdown').style.display = 'none';
-        }
-
-        mobileMenuBtn.addEventListener('click', openMenu);
-        mobileMenuClose.addEventListener('click', closeMenu);
-        mobileMenuOverlay.addEventListener('click', closeMenu); // 点击遮罩关闭
-
-        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // 防止菜单内容点击触发 overlay 关闭事件
-        mobileMenu.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        // ESC键关闭菜单
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-
-		// Scroll to Top Button
-		const scrollTopBtn = document.getElementById('scrollTop');
-
-		window.addEventListener('scroll', () => {
-			if (window.pageYOffset > 300) {
-				scrollTopBtn.classList.add('active');
-			} else {
-				scrollTopBtn.classList.remove('active');
-			}
-		});
-
-		scrollTopBtn.addEventListener('click', () => {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		});
-
-		// Animate on Scroll (优化版)
-		const animateOnScroll = () => {
-			const memberCards = document.querySelectorAll('.member-card');
-			
-			memberCards.forEach(card => {
-				const cardPosition = card.getBoundingClientRect().top;
-				const screenPosition = window.innerHeight / 1.3;
-				// const delay = card.dataset.delay || 0; // 不再使用延迟，让动画更流畅自然
-				
-				if (cardPosition < screenPosition) {
-					// setTimeout(() => { // 移除 setTimeout 延迟
-						card.classList.add('animated');
-					// }, delay * 300);
-				}
-			});
-		};
-
-		window.addEventListener('scroll', animateOnScroll);
-		window.addEventListener('load', animateOnScroll); // 页面加载时也触发
-
-        // 页脚年份
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-	</script>
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
