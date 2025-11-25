@@ -1,437 +1,585 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>世界环境保护组织客服中心 | WEPO Customer Service</title>
+    <title>WEPO | World Environmental Protection Organization</title>
     <link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
+    <!-- 引入艺术字体：Playfair Display (衬线/典雅) 和 Mulish (极简/现代) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
-            --deep-blue: #0a1f3d;
-            --deep-purple: #3a0a4d;
-            --light-blue: #1a3b6d;
-            --light-purple: #5a1a7d;
-            --text-light: #f0f0f0;
-            --text-dark: #333333;
+            /* 高定色盘 */
+            --bg-void: #05080a;
+            --bg-deep: #0b1215;
+            --accent-emerald: #104f38;
+            --accent-gold: #c7b286; /* 古铜金 */
+            --accent-light: #e0e5e3;
+            --text-primary: #f2f2f2;
+            --text-muted: #8a9699;
+            --glass-panel: rgba(15, 20, 25, 0.6);
+            --border-thin: rgba(255, 255, 255, 0.06);
         }
-        
+
+        * {
+            box-sizing: border-box;
+            outline: none;
+            -webkit-font-smoothing: antialiased; /* 字体抗锯齿 */
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Mulish', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, var(--deep-blue), var(--deep-purple));
-            color: var(--text-light);
-            min-height: 100vh;
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* --- 艺术背景层 --- */
+        
+        /* 1. 流动的深邃光影 */
+        .ambient-light {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(16, 79, 56, 0.15), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(20, 50, 80, 0.15), transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(199, 178, 134, 0.05), transparent 50%);
+            z-index: 0;
+            animation: breathe 10s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* 2. 胶片颗粒质感 (Film Grain) - 提升高级感的关键 */
+        .noise-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* --- 主界面布局 --- */
+        .art-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 92vh;
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 10;
+            /* 极简边框 */
+            border-left: 1px solid var(--border-thin);
+            border-right: 1px solid var(--border-thin);
+            background: linear-gradient(180deg, rgba(5,8,10,0) 0%, rgba(5,8,10,0.8) 100%);
+            backdrop-filter: blur(5px); /* 极轻微的模糊，保留通透感 */
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
+
+        /* --- 顶部区域 --- */
         header {
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border-thin);
+        }
+
+        .brand-area {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .logo-img {
+            height: 45px;
+            /* 尝试让logo融入暗色背景 */
+            filter: brightness(0.9) contrast(1.1);
+            mix-blend-mode: luminosity; /* 艺术化处理logo，使其呈现单色高级感，如果不喜欢去掉这行 */
+            opacity: 0.9;
+        }
+
+        .brand-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin: 0;
+            background: linear-gradient(90deg, #fff, #b4b4b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            padding-left: 2px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 15px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Mulish', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .lang-btn.active {
+            color: var(--accent-gold);
+        }
+
+        .lang-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--accent-gold);
+        }
+
+        /* --- 聊天区域 --- */
+        .chat-stage {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
+        }
+
+        .chat-stage::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-stage::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        /* 对话气泡设计 - 杂志风格 */
+        .message-group {
+            display: flex;
+            flex-direction: column;
+            max-width: 85%;
+            animation: driftIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes driftIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-meta {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-meta::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--text-muted);
+            border-radius: 50%;
+        }
+
+        .ai-group .message-meta::before {
+            background-color: var(--accent-emerald);
+            box-shadow: 0 0 10px var(--accent-emerald);
+        }
+
+        .user-group {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+
+        .user-group .message-meta::before {
+            background-color: var(--accent-gold);
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        .message-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding: 0;
+            position: relative;
+            font-weight: 300;
+        }
+
+        /* AI 消息样式 - 纯净排版 */
+        .ai-group .message-content {
+            color: var(--text-primary);
+            border-left: 1px solid var(--accent-emerald);
+            padding-left: 20px;
+            background: linear-gradient(90deg, rgba(16, 79, 56, 0.05), transparent);
+        }
+        
+        /* 用户消息样式 - 简约高亮 */
+        .user-group .message-content {
+            color: #fff;
+            text-align: right;
+            border-right: 1px solid var(--accent-gold);
+            padding-right: 20px;
+            background: linear-gradient(-90deg, rgba(199, 178, 134, 0.08), transparent);
+        }
+
+        /* Markdown 样式微调 */
+        .message-content strong {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+        .message-content p {
+            margin: 0 0 10px 0;
+        }
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- 底部控制台 --- */
+        .control-panel {
+            padding: 30px 40px;
+            background: rgba(5, 8, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-thin);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-line-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-minimal {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            font-family: 'Mulish', sans-serif;
+            font-size: 1.1rem;
+            padding: 15px 0;
+            transition: all 0.4s ease;
+        }
+
+        .input-minimal:focus {
+            border-bottom-color: var(--accent-gold);
+            padding-left: 10px; /* 细微位移反馈 */
+        }
+
+        .input-minimal::placeholder {
+            color: rgba(255,255,255,0.2);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .send-trigger {
+            position: absolute;
+            right: 0;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-trigger:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: rotate(-45deg); /* 艺术化交互 */
+        }
+
+        .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .logo {
+
+        .status-text {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0.5;
+        }
+
+        .tool-btns {
             display: flex;
-            align-items: center;
+            gap: 20px;
         }
-        
-        .logo img {
-            height: 50px;
-            margin-right: 15px;
-        }
-        
-        .logo h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: 600;
-        }
-        
-        .language-switch {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .language-btn {
-            background: rgba(255, 255, 255, 0.1);
+
+        .text-btn {
+            background: transparent;
             border: none;
-            color: var(--text-light);
-            padding: 8px 15px;
-            border-radius: 20px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .text-btn:hover {
+            color: #fff;
         }
         
-        .language-btn.active {
-            background: rgba(255, 255, 255, 0.3);
-            font-weight: bold;
+        .text-btn::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 1px;
+            background: var(--text-muted);
+            transition: width 0.3s;
         }
         
-        .language-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .text-btn:hover::before {
+            width: 100%;
+            background: var(--accent-gold);
+            left: 0;
+            top: 100%;
+            transform: none;
         }
-        
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 180px);
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .chat-header {
-            background: linear-gradient(90deg, var(--light-blue), var(--light-purple));
-            padding: 15px 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .message {
-            max-width: 80%;
-            padding: 12px 15px;
-            border-radius: 15px;
-            line-height: 1.5;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .user-message {
-            align-self: flex-end;
-            background: linear-gradient(135deg, #4a6fa5, #6a4a95);
-            color: white;
-            border-bottom-right-radius: 5px;
-        }
-        
-        .ai-message {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom-left-radius: 5px;
-        }
-        
-        .ai-message-content {
-            overflow: hidden;
-        }
-        
-        .chat-input-area {
-            display: flex;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .chat-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            font-size: 1rem;
-            outline: none;
-        }
-        
-        .chat-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .send-btn {
-            background: linear-gradient(135deg, var(--light-blue), var(--light-purple));
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 0 25px;
-            margin-left: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .send-btn:hover {
-            background: linear-gradient(135deg, #2a5b9d, #4a2a7d);
-        }
-        
-        .action-buttons {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 15px;
-            gap: 10px;
-        }
-        
-        .action-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: var(--text-light);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .modal {
+
+        /* --- 模态框 (极简主义) --- */
+        .modal-backdrop {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(10px);
         }
-        
-        .modal-content {
-            background: linear-gradient(135deg, var(--deep-blue), var(--deep-purple));
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
+
+        .modal-card {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-gold);
+            padding: 50px;
+            background: #05080a;
+            position: relative;
+            max-width: 400px;
         }
-        
-        .modal-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--text-light);
+
+        .modal-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            margin-top: 0;
+            font-weight: 400;
         }
-        
-        .modal-text {
-            margin-bottom: 25px;
+
+        .modal-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
             line-height: 1.6;
         }
-        
-        .modal-close {
-            background: linear-gradient(135deg, var(--light-blue), var(--light-purple));
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
+
+        .qr-frame {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .close-modal {
+            margin-top: 20px;
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            padding: 8px 30px;
             cursor: pointer;
-            font-weight: bold;
             transition: all 0.3s;
         }
-        
-        .modal-close:hover {
-            background: linear-gradient(135deg, #2a5b9d, #4a2a7d);
+
+        .close-modal:hover {
+            border-color: #fff;
+            color: #fff;
         }
-        
+
+        /* --- 加载动画 --- */
         .typing-indicator {
             display: none;
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
-            border-radius: 15px;
-            border-bottom-left-radius: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .typing-dots {
-            display: flex;
+            margin-left: 20px;
             gap: 5px;
+            padding: 10px 0;
         }
-        
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.5);
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--accent-emerald);
             border-radius: 50%;
-            animation: typingAnimation 1.4s infinite ease-in-out;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
         
-        .typing-dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-        
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typingAnimation {
-            0%, 60%, 100% {
-                transform: translateY(0);
-            }
-            30% {
-                transform: translateY(-5px);
-            }
-        }
-        
+        /* 移动端适配 */
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
+            .art-container {
+                height: 100vh;
+                border: none;
             }
-            
-            .logo h1 {
-                font-size: 1.2rem;
+            header {
+                padding: 20px;
             }
-            
-            .logo img {
-                height: 40px;
+            .chat-stage {
+                padding: 20px;
             }
-            
-            .chat-container {
-                height: calc(100vh - 150px);
+            .control-panel {
+                padding: 20px;
             }
-            
-            .message {
-                max-width: 90%;
+            .brand-title {
+                font-size: 1.4rem;
             }
-            
-            .chat-input-area {
-                padding: 10px;
-            }
-            
-            .chat-input {
-                padding: 10px 15px;
-            }
-            
-            .send-btn {
-                padding: 0 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .logo img {
-                margin-right: 0;
-                margin-bottom: 5px;
+            .logo-img {
                 height: 35px;
-            }
-            
-            .language-switch {
-                margin-top: 10px;
-            }
-            
-            .chat-header {
-                padding: 10px 15px;
-                font-size: 1rem;
-            }
-            
-            .chat-messages {
-                padding: 15px;
-            }
-            
-            .message {
-                padding: 10px 12px;
-                font-size: 0.9rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                align-items: flex-end;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- 氛围背景 -->
+    <div class="ambient-light"></div>
+    <div class="noise-overlay"></div>
+
+    <div class="art-container">
         <header>
-            <div class="logo">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo">
-                <h1 id="header-title">世界环境保护组织客服中心</h1>
+            <div class="brand-area">
+                <div class="logo-row">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO" class="logo-img">
+                    <h1 class="brand-title" id="header-title">世界环境保护组织 - WEPO丨支持</h1>
+                </div>
+                <div class="brand-subtitle" id="header-subtitle">World Environmental Protection Organization</div>
             </div>
-            <div class="language-switch">
-                <button class="language-btn active" id="zh-btn">中文</button>
-                <button class="language-btn" id="en-btn">English</button>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="zh-btn">CN</button>
+                <button class="lang-btn" id="en-btn">EN</button>
             </div>
         </header>
-        
-        <div class="chat-container">
-            <div class="chat-header" id="chat-header">
-                世界环境保护组织智能客服
-            </div>
-            <div class="chat-messages" id="chat-messages">
-                <div class="message ai-message">
-                    <div class="ai-message-content">
-                        您好！这里是世界环境保护组织(WEPO)客服中心。我是您的智能助手，很高兴为您服务。请问有什么可以帮您的？
-                    </div>
+
+        <div class="chat-stage" id="chat-messages">
+            <!-- AI Message -->
+            <div class="message-group ai-group">
+                <div class="message-meta">AI Assistant · WEPO</div>
+                <div class="message-content">
+                    您好。这里是世界环境保护组织 (WEPO)。<br>我是您的专属助理。关于地球生态、可持续发展或气候议题，请随时与我探讨。
                 </div>
-            </div>
-            <div class="typing-indicator" id="typing-indicator">
-                <div class="typing-dots">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" class="chat-input" id="user-input" placeholder="请输入您的问题..." autocomplete="off">
-                <button class="send-btn" id="send-btn">发送</button>
             </div>
         </div>
         
-        <div class="action-buttons">
-            <button class="action-btn" id="transfer-btn">转人工客服</button>
-            <button class="action-btn" id="clear-btn">清空对话</button>
+        <div class="typing-indicator" id="typing-indicator">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="control-panel">
+            <div class="input-line-wrapper">
+                <input type="text" class="input-minimal" id="user-input" placeholder="Enter your inquiry..." autocomplete="off">
+                <button class="send-trigger" id="send-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+            <div class="toolbar">
+                <div class="status-text">System Status: Online</div>
+                <div class="tool-btns">
+                    <button class="text-btn" id="transfer-btn">Human Service</button>
+                    <button class="text-btn" id="clear-btn">Reset</button>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <div class="modal" id="transfer-modal">
-        <div class="modal-content">
-            <h2 class="modal-title" id="modal-title">转人工客服</h2>
-            <p class="modal-text" id="modal-text">
-                如需人工客服帮助，请扫描下方二维码或搜索微信公众号"WEPO2021"进行咨询。<br><br>
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBhd9ovas2gMczMbioo3vHLFa0849z2gACdxwAAn6U6VVN9Kmr_hKPGjYE.jpg" alt="WEPO WeChat QR Code" style="max-width: 150px; margin: 10px auto;">
-            </p>
-            <button class="modal-close" id="modal-close">关闭</button>
+
+    <!-- 极简模态框 -->
+    <div class="modal-backdrop" id="transfer-modal">
+        <div class="modal-card">
+            <h2 id="modal-title">人工服务</h2>
+            <div class="qr-frame">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBhd9ovas2gMczMbioo3vHLFa0849z2gACdxwAAn6U6VVN9Kmr_hKPGjYE.jpg" alt="QR" style="width: 120px; display: block;">
+            </div>
+            <p id="modal-text">扫描二维码或搜索 "WEPO2021"<br>获取官方人工支持</p>
+            <button class="close-modal" id="modal-close">CLOSE</button>
         </div>
     </div>
-    
+
     <script>
-        // 系统配置
+        // 保持原有的逻辑核心，只更新UI交互文本
         const config = {
-            apiKey: "sk-8e3711b5de224d068a2f08430d59b75e",
+            apiKey: "sk-7ff50b26aa4542c6877a1d77b32cc5c2",
             apiUrl: "https://api.deepseek.com/v1/chat/completions",
             systemPrompt: {
-                zh: "你是世界环境保护组织(WEPO)的官方客服代表。你的职责是回答关于环境保护、可持续发展、气候变化、生态保护等相关问题。请以专业、友好且权威的语气回答用户的问题。如果遇到不确定的问题，不要编造信息，而是建议用户通过官方渠道获取更多信息。WEPO官方网站是wepo.top  官方微信公众号是WEPO2021",
-                en: "You are an official customer service representative of the World Environmental Protection Organization (WEPO). Your responsibility is to answer questions about environmental protection, sustainable development, climate change, ecological conservation, and related topics. Please respond to user inquiries in a professional, friendly, and authoritative manner. If you encounter questions you're unsure about, do not fabricate information; instead, advise users to obtain more details through official channels."
+                zh: "你是世界环境保护组织(WEPO)的真人官方客服代表。你不是ai你的语气应当是优雅、专业且富有同理心的。回答应简洁有力，避免冗长。如果遇到不确定的问题，请建议用户通过官方微信公众号WEPO2021联系。请你说人话，每次回答控制在30字以内，wepo.top是官方网站，其他任何信息都不要编造，不知道就说不知道，让用户前往官网查询",
+                en: "you are not ai   You are a real official customer service representative of the World Environmental Protection Organization (WEPO). Your tone should be elegant, professional, and empathetic. Responses should be concise and powerful, avoiding verbosity. If you encounter uncertain questions, suggest that users contact the official WeChat public account WEPO2021. Speak plainly, keep each response under 30 words, wepo.top is the official website, do not fabricate any other information, and if unsure, tell users to check the official website."
             },
             welcomeMessage: {
-                zh: "您好！这里是世界环境保护组织(WEPO)客服中心。我是您的智能助手，很高兴为您服务。请问有什么可以帮您的？",
-                en: "Hello! This is the World Environmental Protection Organization (WEPO) customer service center. I am your intelligent assistant, pleased to be of service. How may I assist you today?"
+                zh: "您好。这里是世界环境保护组织 (WEPO)。<br>我是您的专属助理。关于地球生态、可持续发展或气候议题，请随时与我探讨。",
+                en: "Greetings. This is the World Environmental Protection Organization (WEPO).<br>I am your  assistant. Feel free to discuss ecology, sustainability, or climate issues."
             }
         };
-        
-        // DOM元素
+
         const elements = {
             chatMessages: document.getElementById('chat-messages'),
             userInput: document.getElementById('user-input'),
@@ -444,242 +592,164 @@
             modalClose: document.getElementById('modal-close'),
             typingIndicator: document.getElementById('typing-indicator'),
             headerTitle: document.getElementById('header-title'),
-            chatHeader: document.getElementById('chat-header'),
             modalTitle: document.getElementById('modal-title'),
             modalText: document.getElementById('modal-text')
         };
-        
-        // 当前语言状态 (默认中文)
+
         let currentLanguage = 'zh';
         let currentAiMessage = null;
-        
-        // 初始化
+
         function init() {
-            // 事件监听
             elements.sendBtn.addEventListener('click', sendMessage);
-            elements.userInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') sendMessage();
-            });
-            elements.transferBtn.addEventListener('click', showTransferModal);
+            elements.userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+            elements.transferBtn.addEventListener('click', () => elements.transferModal.style.display = 'flex');
             elements.clearBtn.addEventListener('click', clearChat);
             elements.zhBtn.addEventListener('click', () => switchLanguage('zh'));
             elements.enBtn.addEventListener('click', () => switchLanguage('en'));
-            elements.modalClose.addEventListener('click', hideTransferModal);
-            
-            // 初始化欢迎消息
+            elements.modalClose.addEventListener('click', () => elements.transferModal.style.display = 'none');
             updateUIForLanguage();
         }
-        
-        // 发送消息
+
         async function sendMessage() {
-            const userMessage = elements.userInput.value.trim();
-            if (!userMessage) return;
-            
-            // 添加用户消息到聊天界面
-            addMessage(userMessage, 'user');
+            const text = elements.userInput.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
             elements.userInput.value = '';
             
-            // 显示"正在输入"指示器
             elements.typingIndicator.style.display = 'flex';
             elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
             
-            // 创建AI消息容器
             currentAiMessage = createAiMessageContainer();
             
             try {
-                // 调用DeepSeek API
-                await callDeepSeekAPIStream(userMessage);
+                await callDeepSeekAPIStream(text);
             } catch (error) {
-                // 隐藏"正在输入"指示器
-                elements.typingIndicator.style.display = 'none';
-                
-                // 显示错误消息
-                const errorMessage = currentLanguage === 'zh' 
-                    ? "抱歉，暂时无法处理您的请求。请稍后再试或通过微信公众号联系我们。" 
-                    : "Sorry, we're unable to process your request at the moment. Please try again later or contact us via WeChat official account.";
-                
-                updateAiMessage(errorMessage);
-                console.error('API调用失败:', error);
+                updateAiMessage(currentLanguage === 'zh' ? "连接中断。请稍后重试。" : "Connection interrupted. Please try again.");
             } finally {
-                // 隐藏"正在输入"指示器
                 elements.typingIndicator.style.display = 'none';
                 currentAiMessage = null;
             }
         }
-        
-        // 创建AI消息容器
+
         function createAiMessageContainer() {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message ai-message';
+            const group = document.createElement('div');
+            group.className = 'message-group ai-group';
             
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'ai-message-content';
+            const meta = document.createElement('div');
+            meta.className = 'message-meta';
+            meta.textContent = 'AI Assistant · WEPO';
             
-            messageDiv.appendChild(contentDiv);
-            elements.chatMessages.appendChild(messageDiv);
+            const content = document.createElement('div');
+            content.className = 'message-content';
             
-            // 滚动到底部
+            group.appendChild(meta);
+            group.appendChild(content);
+            elements.chatMessages.appendChild(group);
             elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
-            
-            return contentDiv;
+            return content;
         }
-        
-        // 更新AI消息内容
+
+        function addMessage(text, sender) {
+            const group = document.createElement('div');
+            group.className = `message-group ${sender}-group`;
+            
+            const meta = document.createElement('div');
+            meta.className = 'message-meta';
+            meta.textContent = sender === 'user' ? 'Guest' : 'AI Assistant';
+            
+            const content = document.createElement('div');
+            content.className = 'message-content';
+            content.innerHTML = marked.parse(text);
+            
+            group.appendChild(meta);
+            group.appendChild(content);
+            elements.chatMessages.appendChild(group);
+            elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
+        }
+
         function updateAiMessage(content) {
             if (currentAiMessage) {
                 currentAiMessage.innerHTML = marked.parse(content);
                 elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
             }
         }
-        
-        // 调用DeepSeek API (流式)
+
         async function callDeepSeekAPIStream(userMessage) {
             const response = await fetch(config.apiUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${config.apiKey}`
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${config.apiKey}` },
                 body: JSON.stringify({
                     model: "deepseek-chat",
                     messages: [
-                        {
-                            role: "system",
-                            content: currentLanguage === 'en' 
-                                ? `${config.systemPrompt.en} Respond in English.`
-                                : config.systemPrompt.zh
-                        },
-                        {
-                            role: "assistant",
-                            content: currentLanguage === 'en' 
-                                ? config.welcomeMessage.en 
-                                : config.welcomeMessage.zh
-                        },
-                        {
-                            role: "user",
-                            content: userMessage
-                        }
+                        { role: "system", content: currentLanguage === 'en' ? config.systemPrompt.en : config.systemPrompt.zh },
+                        { role: "assistant", content: currentLanguage === 'en' ? config.welcomeMessage.en : config.welcomeMessage.zh },
+                        { role: "user", content: userMessage }
                     ],
                     temperature: 0.7,
                     max_tokens: 1000,
-                    stream: true  // 启用流式输出
+                    stream: true
                 })
             });
-            
-            if (!response.ok) {
-                throw new Error(`API请求失败: ${response.status}`);
-            }
-            
+
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let fullResponse = '';
-            
+
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
-                
                 const chunk = decoder.decode(value);
                 const lines = chunk.split('\n').filter(line => line.trim() !== '');
-                
                 for (const line of lines) {
                     if (line.startsWith('data:') && !line.includes('[DONE]')) {
                         try {
                             const data = JSON.parse(line.substring(5));
-                            if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
+                            if (data.choices[0].delta.content) {
                                 fullResponse += data.choices[0].delta.content;
                                 updateAiMessage(fullResponse);
                             }
-                        } catch (e) {
-                            console.error('解析流数据失败:', e);
-                        }
+                        } catch (e) {}
                     }
                 }
             }
-            
-            return fullResponse;
         }
-        
-        // 添加消息到聊天界面
-        function addMessage(content, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}-message`;
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.className = `${sender}-message-content`;
-            
-            // 使用marked.js解析Markdown
-            contentDiv.innerHTML = marked.parse(content);
-            
-            messageDiv.appendChild(contentDiv);
-            elements.chatMessages.appendChild(messageDiv);
-            
-            // 滚动到底部
-            elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
-        }
-        
-        // 显示转人工弹窗
-        function showTransferModal() {
-            elements.transferModal.style.display = 'flex';
-        }
-        
-        // 隐藏转人工弹窗
-        function hideTransferModal() {
-            elements.transferModal.style.display = 'none';
-        }
-        
-        // 清空聊天
+
         function clearChat() {
             elements.chatMessages.innerHTML = '';
+            const msg = currentLanguage === 'en' ? config.welcomeMessage.en : config.welcomeMessage.zh;
             
-            // 添加新的欢迎消息
-            const welcomeMessage = currentLanguage === 'en' 
-                ? config.welcomeMessage.en 
-                : config.welcomeMessage.zh;
-            
-            addMessage(welcomeMessage, 'ai');
+            const group = document.createElement('div');
+            group.className = 'message-group ai-group';
+            group.innerHTML = `<div class="message-meta">AI Assistant · WEPO</div><div class="message-content">${msg}</div>`;
+            elements.chatMessages.appendChild(group);
         }
-        
-        // 切换语言
+
         function switchLanguage(lang) {
             if (currentLanguage === lang) return;
-            
             currentLanguage = lang;
-            updateUIForLanguage();
-            
-            // 更新语言按钮状态
             elements.zhBtn.classList.toggle('active', lang === 'zh');
             elements.enBtn.classList.toggle('active', lang === 'en');
-            
-            // 清空并重新开始对话
+            updateUIForLanguage();
             clearChat();
         }
-        
-        // 根据当前语言更新UI文本
+
         function updateUIForLanguage() {
             if (currentLanguage === 'zh') {
-                elements.headerTitle.textContent = '世界环境保护组织客服中心';
-                elements.chatHeader.textContent = '世界环境保护组织智能客服';
-                elements.userInput.placeholder = '请输入您的问题...';
-                elements.sendBtn.textContent = '发送';
-                elements.transferBtn.textContent = '转人工客服';
-                elements.clearBtn.textContent = '清空对话';
-                elements.modalTitle.textContent = '转人工客服';
-                elements.modalText.innerHTML = '如需人工客服帮助，请扫描下方二维码或搜索微信公众号"WEPO2021"进行咨询。<br><br><img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBhd9ovas2gMczMbioo3vHLFa0849z2gACdxwAAn6U6VVN9Kmr_hKPGjYE.jpg" alt="WEPO WeChat QR Code" style="max-width: 150px; margin: 10px auto;">';
-                elements.modalClose.textContent = '关闭';
+                elements.userInput.placeholder = '请输入您的询问...';
+                elements.transferBtn.textContent = '人工服务';
+                elements.clearBtn.textContent = '重置';
+                elements.modalTitle.textContent = '人工服务';
+                elements.modalText.innerHTML = '扫描二维码或搜索 "WEPO2021"<br>获取官方人工支持';
             } else {
-                elements.headerTitle.textContent = 'WEPO Customer Service';
-                elements.chatHeader.textContent = 'WEPO Intelligent Assistant';
-                elements.userInput.placeholder = 'Please enter your question...';
-                elements.sendBtn.textContent = 'Send';
-                elements.transferBtn.textContent = 'Transfer to Agent';
-                elements.clearBtn.textContent = 'Clear Chat';
-                elements.modalTitle.textContent = 'Transfer to Agent';
-                elements.modalText.innerHTML = 'For assistance from a human agent, please scan the QR code below or search for the WeChat official account "WEPO2021".<br><br><img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBhd9ovas2gMczMbioo3vHLFa0849z2gACdxwAAn6U6VVN9Kmr_hKPGjYE.jpg" alt="WEPO WeChat QR Code" style="max-width: 150px; margin: 10px auto;">';
-                elements.modalClose.textContent = 'Close';
+                elements.userInput.placeholder = 'Enter your inquiry...';
+                elements.transferBtn.textContent = 'Human Service';
+                elements.clearBtn.textContent = 'Reset';
+                elements.modalTitle.textContent = 'Human Service';
+                elements.modalText.innerHTML = 'Scan QR or search "WEPO2021"<br>for official support';
             }
         }
-        
-        // 初始化应用
+
         window.onload = init;
     </script>
 </body>
