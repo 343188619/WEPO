@@ -1,941 +1,540 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>WEPO - 志愿者网络</title>
-	<link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
-	<style>
-		:root {
-			--primary-dark: #1a0933;
-			--primary-medium: #2a1a4a;
-			--primary-light: #3a2a6a;
-			--accent-blue: #4a3a8a;
-			--accent-purple: #7d5ab5;
-			--text-light: #f8f9fa;
-			--text-dark: #212529;
-			--transition-time: 0.5s;
-		}
-
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		}
-
-		body {
-			background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
-			color: var(--text-light);
-			overflow-x: hidden;
-			line-height: 1.6;
-		}
-
-		.container {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 0 20px;
-		}
-
-		/* Header */
-		header {
-			background: rgba(26, 9, 51, 0.9);
-			backdrop-filter: blur(10px);
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			padding: 15px 5%;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			z-index: 1000;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-		}
-
-		.logo-container {
-			display: flex;
-			align-items: center;
-		}
-
-		.logo {
-			height: 50px;
-			transition: transform 0.3s ease;
-		}
-
-		.logo:hover {
-			transform: scale(1.05);
-		}
-
-		.nav-links {
-			display: flex;
-			list-style: none;
-		}
-
-		.nav-links li {
-			margin-left: 30px;
-			position: relative;
-		}
-
-		.nav-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-weight: 500;
-			font-size: 16px;
-			transition: color 0.3s ease;
-			position: relative;
-		}
-
-		.nav-links a::after {
-			content: '';
-			position: absolute;
-			bottom: -5px;
-			left: 0;
-			width: 0;
-			height: 2px;
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-			transition: width 0.3s ease;
-		}
-
-		.nav-links a:hover::after {
-			width: 100%;
-		}
-
-		.nav-links a:hover {
-			color: #b8a2e6;
-		}
-
-		.mobile-menu-btn {
-			display: none;
-			background: none;
-			border: none;
-			color: var(--text-light);
-			font-size: 24px;
-			cursor: pointer;
-		}
-
-		/* Hero Section */
-		.hero {
-			height: 60vh;
-			display: flex;
-			align-items: center;
-			padding: 100px 10% 0;
-			position: relative;
-			overflow: hidden;
-			background: linear-gradient(135deg, rgba(26, 9, 51, 0.8), rgba(58, 42, 106, 0.8));
-		}
-
-		.hero::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: radial-gradient(circle at 70% 50%, rgba(122, 90, 181, 0.2), transparent 60%);
-		}
-
-		.hero-content {
-			max-width: 800px;
-			z-index: 1;
-		}
-
-		.hero h1 {
-			font-size: 3.5rem;
-			margin-bottom: 20px;
-			background: linear-gradient(90deg, #fff, #b8a2e6);
-			-webkit-background-clip: text;
-			background-clip: text;
-			color: transparent;
-			line-height: 1.2;
-			animation: fadeInUp 1s ease-out forwards;
-		}
-
-		.hero p {
-			font-size: 1.2rem;
-			margin-bottom: 30px;
-			opacity: 0.9;
-			animation: fadeInUp 1s ease-out 0.3s forwards;
-			opacity: 0;
-		}
-
-		.hero-btns {
-			display: flex;
-			gap: 20px;
-			animation: fadeInUp 1s ease-out 0.6s forwards;
-			opacity: 0;
-		}
-
-		.btn {
-			padding: 12px 30px;
-			border-radius: 30px;
-			font-weight: 600;
-			text-decoration: none;
-			transition: all 0.3s ease;
-			display: inline-block;
-		}
-
-		.btn-primary {
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-			color: white;
-			box-shadow: 0 4px 15px rgba(42, 116, 179, 0.4);
-		}
-
-		.btn-primary:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 6px 20px rgba(42, 116, 179, 0.6);
-		}
-
-		.btn-secondary {
-			border: 2px solid rgba(255, 255, 255, 0.3);
-			color: white;
-		}
-
-		.btn-secondary:hover {
-			background: rgba(255, 255, 255, 0.1);
-			border-color: rgba(255, 255, 255, 0.5);
-		}
-
-		@keyframes fadeInUp {
-			0% { opacity: 0; transform: translateY(20px); }
-			100% { opacity: 1; transform: translateY(0); }
-		}
-
-		/* Volunteer Programs Section */
-		.section {
-			padding: 80px 0;
-			position: relative;
-		}
-
-		.section-title {
-			text-align: center;
-			margin-bottom: 60px;
-			font-size: 2.5rem;
-			position: relative;
-			display: inline-block;
-		}
-
-		.section-title::after {
-			content: '';
-			position: absolute;
-			bottom: -10px;
-			left: 50%;
-			transform: translateX(-50%);
-			width: 80px;
-			height: 3px;
-			background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-		}
-
-		.programs-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 30px;
-		}
-
-		.program-card {
-			background: rgba(255, 255, 255, 0.05);
-			backdrop-filter: blur(10px);
-			border-radius: 10px;
-			overflow: hidden;
-			transition: all 0.3s ease;
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			opacity: 0;
-			transform: translateY(30px);
-		}
-
-		.program-card.animated {
-			opacity: 1;
-			transform: translateY(0);
-			transition: all 0.6s ease;
-		}
-
-		.program-card:hover {
-			transform: translateY(-10px);
-			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-			background: rgba(255, 255, 255, 0.1);
-		}
-
-		.program-image {
-			height: 200px;
-			overflow: hidden;
-			position: relative;
-		}
-
-		.program-image img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			transition: transform 0.5s ease;
-		}
-
-		.program-card:hover .program-image img {
-			transform: scale(1.1);
-		}
-
-		.program-content {
-			padding: 25px;
-		}
-
-		.program-content h3 {
-			font-size: 1.5rem;
-			margin-bottom: 15px;
-			color: #b8a2e6;
-		}
-
-		.program-content p {
-			margin-bottom: 20px;
-			opacity: 0.8;
-		}
-
-		.program-details {
-			display: flex;
-			justify-content: space-between;
-			margin-top: 15px;
-			font-size: 0.9rem;
-		}
-
-		.program-location, .program-duration {
-			display: flex;
-			align-items: center;
-			gap: 5px;
-			opacity: 0.7;
-		}
-
-		/* Volunteer Stories Section */
-		.stories {
-			background: linear-gradient(135deg, rgba(26, 9, 51, 0.8), rgba(58, 42, 106, 0.8));
-			position: relative;
-			overflow: hidden;
-		}
-
-		.stories::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-			opacity: 0.1;
-			z-index: -1;
-		}
-
-		.stories-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 40px;
-		}
-
-		.story-card {
-			background: rgba(255, 255, 255, 0.05);
-			backdrop-filter: blur(10px);
-			border-radius: 10px;
-			padding: 30px;
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			transition: all 0.3s ease;
-			opacity: 0;
-			transform: translateY(30px);
-		}
-
-		.story-card.animated {
-			opacity: 1;
-			transform: translateY(0);
-			transition: all 0.6s ease;
-		}
-
-		.story-card:hover {
-			transform: translateY(-10px);
-			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-			background: rgba(255, 255, 255, 0.1);
-		}
-
-		.story-quote {
-			font-size: 1.1rem;
-			font-style: italic;
-			margin-bottom: 20px;
-			position: relative;
-		}
-
-		.story-quote::before {
-			content: '"';
-			font-size: 3rem;
-			position: absolute;
-			top: -20px;
-			left: -15px;
-			opacity: 0.2;
-		}
-
-		.story-author {
-			display: flex;
-			align-items: center;
-			gap: 15px;
-		}
-
-		.author-avatar {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			overflow: hidden;
-		}
-
-		.author-avatar img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-
-		.author-info h4 {
-			color: #b8a2e6;
-			margin-bottom: 5px;
-		}
-
-		.author-info p {
-			font-size: 0.9rem;
-			opacity: 0.7;
-		}
-
-		/* Join Section */
-		.join {
-			text-align: center;
-			padding: 100px 0;
-		}
-
-		.join h2 {
-			font-size: 2.5rem;
-			margin-bottom: 30px;
-		}
-
-		.join p {
-			max-width: 700px;
-			margin: 0 auto 40px;
-			font-size: 1.1rem;
-			opacity: 0.9;
-		}
-
-		/* Footer */
-		footer {
-			background: rgba(26, 9, 51, 0.9);
-			padding: 60px 0 30px;
-			position: relative;
-		}
-
-		.footer-content {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 50px;
-			margin-bottom: 40px;
-		}
-
-		.footer-logo {
-			width: 150px;
-			margin-bottom: 20px;
-		}
-
-		.footer-about p {
-			margin-bottom: 20px;
-			opacity: 0.8;
-		}
-
-		.social-links {
-			display: flex;
-			gap: 15px;
-		}
-
-		.social-link {
-			width: 40px;
-			height: 40px;
-			background: rgba(255, 255, 255, 0.1);
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			transition: all 0.3s ease;
-		}
-
-		.social-link:hover {
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			transform: translateY(-5px);
-		}
-
-		.footer-links h3 {
-			font-size: 1.3rem;
-			margin-bottom: 20px;
-			position: relative;
-			padding-bottom: 10px;
-		}
-
-		.footer-links h3::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 40px;
-			height: 2px;
-			background: var(--accent-blue);
-		}
-
-		.footer-links ul {
-			list-style: none;
-		}
-
-		.footer-links li {
-			margin-bottom: 10px;
-		}
-
-		.footer-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			opacity: 0.8;
-			transition: opacity 0.3s ease;
-		}
-
-		.footer-links a:hover {
-			opacity: 1;
-		}
-
-		.footer-bottom {
-			text-align: center;
-			padding-top: 30px;
-			border-top: 1px solid rgba(255, 255, 255, 0.1);
-		}
-
-		/* Scroll to Top Button */
-		.scroll-top {
-			position: fixed;
-			bottom: 30px;
-			right: 30px;
-			width: 50px;
-			height: 50px;
-			background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			color: white;
-			font-size: 20px;
-			cursor: pointer;
-			opacity: 0;
-			visibility: hidden;
-			transition: all 0.3s ease;
-			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-			z-index: 999;
-		}
-
-		.scroll-top.active {
-			opacity: 1;
-			visibility: visible;
-		}
-
-		.scroll-top:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-		}
-
-		/* Responsive Styles */
-		@media (max-width: 992px) {
-			.hero h1 {
-				font-size: 2.8rem;
-			}
-		}
-
-		@media (max-width: 768px) {
-			.nav-links {
-				display: none;
-			}
-			
-			.mobile-menu-btn {
-				display: block;
-			}
-			
-			.hero h1 {
-				font-size: 2.5rem;
-			}
-			
-			.section-title {
-				font-size: 2rem;
-			}
-			
-			.hero-btns {
-				flex-direction: column;
-				gap: 15px;
-			}
-			
-			.btn {
-				width: 100%;
-				text-align: center;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.hero h1 {
-				font-size: 2rem;
-			}
-			
-			.hero p {
-				font-size: 1rem;
-			}
-			
-			.section {
-				padding: 50px 0;
-			}
-		}
-
-		/* Mobile Menu */
-		.mobile-menu {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(26, 9, 51, 0.98);
-			backdrop-filter: blur(10px);
-			z-index: 999;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			opacity: 0;
-			pointer-events: none;
-			transition: all 0.3s ease;
-		}
-
-		.mobile-menu.active {
-			opacity: 1;
-			pointer-events: all;
-		}
-
-		.mobile-menu-links {
-			list-style: none;
-			text-align: center;
-		}
-
-		.mobile-menu-links li {
-			margin: 25px 0;
-		}
-
-		.mobile-menu-links a {
-			color: var(--text-light);
-			text-decoration: none;
-			font-size: 1.5rem;
-			font-weight: 500;
-			transition: color 0.3s ease;
-		}
-
-		.mobile-menu-links a:hover {
-			color: #b8a2e6;
-		}
-
-		.mobile-menu-close {
-			position: absolute;
-			top: 30px;
-			right: 30px;
-			background: none;
-			border: none;
-			color: var(--text-light);
-			font-size: 2rem;
-			cursor: pointer;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.title">Volunteer Network | WEPO - 世界环境保护组织</title>
+    <meta name="description" content="Join WEPO's global volunteer network and take action for a sustainable future.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-void: #080808;
+            --text-primary: #f2f2f2;
+            --text-secondary: #888888;
+            --accent-gold: #d4af37;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+            cursor: default;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Noise Texture */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--noise-url);
+            pointer-events: none; z-index: 9999; opacity: 0.4;
+        }
+
+        /* Cursor Spotlight */
+        #cursor-spotlight {
+            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
+            transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
+            transition: transform 0.1s linear;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
+        ul { list-style: none; }
+
+        /* --- Header --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 25px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            background: rgba(8,8,8,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .logo { height: 45px; transition: transform 0.4s; }
+        .logo:hover { transform: scale(1.05); }
+
+        nav ul { display: flex; gap: 40px; }
+        nav ul li a {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
+            position: relative; padding: 5px 0;
+        }
+        nav ul li a::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--accent-gold); transition: width 0.4s var(--easing);
+        }
+        nav ul li a:hover { color: var(--text-primary); }
+        nav ul li a:hover::before { width: 100%; }
+
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        
+        .language-switcher { position: relative; }
+        .language-btn {
+            background: transparent; border: 1px solid var(--border-glass);
+            color: var(--text-primary); padding: 8px 18px;
+            border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+
+        .language-dropdown {
+            position: absolute; top: 120%; right: 0;
+            background: #0f0f0f; border: 1px solid var(--border-glass);
+            border-radius: 8px; padding: 10px 0;
+            min-width: max-content;
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s var(--easing);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 1002;
+        }
+        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        
+        .language-dropdown li {
+            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
+            white-space: nowrap; text-align: right;
+        }
+        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+
+        /* --- Hero Section --- */
+        .volunteer-hero {
+            padding: 180px 5% 100px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-glass);
+            position: relative;
+        }
+        .volunteer-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .volunteer-hero p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .btn {
+            padding: 15px 40px; border-radius: 2px; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;
+            transition: all 0.4s var(--easing); cursor: pointer; position: relative; overflow: hidden;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: var(--text-primary); color: var(--bg-void); border: 1px solid var(--text-primary); font-weight: 600;
+        }
+        .btn-primary:hover { background: transparent; color: var(--text-primary); }
+        .btn-secondary {
+            background: transparent; color: var(--text-primary); border: 1px solid rgba(255,255,255,0.3); margin-left: 20px;
+        }
+        .btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+        /* --- Programs Section --- */
+        .section { padding: 100px 8%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-size: 2.5rem; color: var(--text-primary); margin-bottom: 10px; }
+        
+        .programs-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .program-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s var(--easing);
+            display: flex; flex-direction: column;
+        }
+        .program-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            background: rgba(255,255,255,0.04);
+        }
+        
+        .program-img { height: 200px; overflow: hidden; }
+        .program-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s; filter: grayscale(0.3);
+        }
+        .program-card:hover .program-img img { transform: scale(1.1); filter: grayscale(0); }
+        
+        .program-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .program-content h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--text-primary); }
+        .program-content p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px; flex: 1; }
+        .program-meta {
+            display: flex; justify-content: space-between; font-size: 0.8rem;
+            color: var(--accent-gold); border-top: 1px solid var(--border-glass); padding-top: 15px;
+        }
+
+        /* --- Stories Section --- */
+        .stories-section { background: #050505; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); }
+        .stories-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .story-card {
+            padding: 30px; border: 1px solid var(--border-glass);
+            position: relative; transition: 0.3s;
+        }
+        .story-card:hover { border-color: var(--accent-gold); }
+        .story-quote {
+            font-size: 1rem; color: var(--text-secondary); margin-bottom: 30px;
+            font-style: italic; line-height: 1.6;
+        }
+        .story-quote::before {
+            content: '"'; font-size: 4rem; position: absolute; top: 10px; left: 10px;
+            color: var(--border-glass); font-family: 'Playfair Display', serif; z-index: -1;
+        }
+        .author { display: flex; align-items: center; gap: 15px; }
+        .author img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; filter: grayscale(1); }
+        .author-info h4 { font-size: 1rem; color: var(--text-primary); margin-bottom: 2px; font-family: 'Manrope', sans-serif; }
+        .author-info span { font-size: 0.8rem; color: var(--accent-gold); }
+
+        /* --- Join CTA --- */
+        .join-cta { text-align: center; padding: 120px 5%; }
+        .join-cta h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--text-primary); }
+        .join-cta p { max-width: 600px; margin: 0 auto 40px; color: var(--text-secondary); }
+
+        /* --- Footer --- */
+        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); margin-top: auto; }
+        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
+        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
+        .footer-navs { display: flex; gap: 80px; }
+        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
+        .footer-col a:hover { color: var(--accent-gold); }
+        .footer-btm { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; color: #444; font-size: 0.8rem; flex-wrap: wrap; gap: 20px; }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        .mobile-menu {
+            position: fixed; inset: 0; background: #080808; z-index: 1001;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: all; }
+        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
+        .mobile-menu a.active { color: #fff; }
+        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+            .volunteer-hero h1 { font-size: 2.5rem; }
+            .btn-secondary { margin-left: 0; margin-top: 20px; display: block; }
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-navs { flex-wrap: wrap; gap: 30px; width: 100%; justify-content: space-between; }
+        }
+    </style>
 </head>
 <body>
-	<!-- Header -->
-	<header>
-		<div class="logo-container">
-			<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" class="logo">
-		</div>
-		<nav>
-			<ul class="nav-links">
-				<li><a href="index.html">首页</a></li>
-				<li><a href="crlsh.html">常任理事会</a></li>
-				<li><a href="zyz.html" class="active">志愿者网络</a></li>
-				<li><a href="index.html">环保项目</a></li>
-				<li><a href="index.html">关于我们</a></li>
-				<li><a href="index.html">联系我们</a></li>
-			</ul>
-		</nav>
-		<button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-	</header>
 
-	<!-- Mobile Menu -->
-	<div class="mobile-menu" id="mobileMenu">
-		<button class="mobile-menu-close" id="mobileMenuClose">×</button>
-		<ul class="mobile-menu-links">
-			<li><a href="index.html">首页</a></li>
-			<li><a href="crlsh.html">常任理事会</a></li>
-			<li><a href="zyz.html" class="active">志愿者网络</a></li>
-			<li><a href="index.html">环保项目</a></li>
-			<li><a href="index.html">关于我们</a></li>
-			<li><a href="index.html">联系我们</a></li>
-		</ul>
-	</div>
+    <div id="cursor-spotlight"></div>
 
-	<!-- Hero Section -->
-	<section class="hero">
-		<div class="hero-content">
-			<h1>加入我们的志愿者网络</h1>
-			<p>与全球数万名志愿者一起，为地球的可持续发展贡献力量。无论您的专业背景如何，都能在这里找到适合的志愿服务机会。</p>
-			<div class="hero-btns">
-				<a href="#join" class="btn btn-primary">立即加入</a>
-				<a href="#programs" class="btn btn-secondary">查看项目</a>
-			</div>
-		</div>
-	</section>
+    <header id="header">
+        <a href="index.html" class="logo-container">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html" data-i18n="nav.home"></a></li>
+                <li><a href="crlsh.html" data-i18n="nav.council"></a></li>
+                <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
+                <li><a href="index.html#about" data-i18n="nav.about"></a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
+                <li><a href="sp.html" data-i18n="nav.videos"></a></li>
+                <li><a href="jz.html" data-i18n="nav.donate"></a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="language-switcher">
+                <button class="language-btn" id="langBtn">
+                    <span data-i18n="lang.current"></span> ▾
+                </button>
+                <ul class="language-dropdown">
+                    <li data-lang="zh-CN">中文 (简体)</li>
+                    <li data-lang="en">English</li>
+                    <li data-lang="es">Español</li>
+                    <li data-lang="fr">Français</li>
+                    <li data-lang="ru">Русский</li>
+                    <li data-lang="ar">العربية</li>
+                </ul>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
 
-	<!-- Volunteer Programs Section -->
-	<section class="section" id="programs">
-		<div class="container">
-			<h2 class="section-title">志愿者项目</h2>
-			<div class="programs-grid">
-				<!-- 项目1 -->
-				<div class="program-card" data-delay="0">
-					<div class="program-image">
-						<img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="气候变化行动">
-					</div>
-					<div class="program-content">
-						<h3>气候变化行动</h3>
-						<p>参与碳足迹监测、气候教育推广和可再生能源项目，帮助社区减少碳排放。</p>
-						<div class="program-details">
-							<span class="program-location">📍 全球各地</span>
-							<span class="program-duration">⏳ 3-12个月</span>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 项目2 -->
-				<div class="program-card" data-delay="0.1">
-					<div class="program-image">
-						<img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="生物多样性保护">
-					</div>
-					<div class="program-content">
-						<h3>生物多样性保护</h3>
-						<p>参与野生动物监测、栖息地恢复和环保宣传，保护地球珍贵的生物多样性。</p>
-						<div class="program-details">
-							<span class="program-location">📍 自然保护区</span>
-							<span class="program-duration">⏳ 1-6个月</span>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 项目3 -->
-				<div class="program-card" data-delay="0.2">
-					<div class="program-image">
-						<img src="https://images.unsplash.com/photo-1569336415962-a32bd7beb10f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="海洋保护">
-					</div>
-					<div class="program-content">
-						<h3>海洋保护</h3>
-						<p>参与海滩清洁、珊瑚礁保护和海洋污染监测，守护蓝色星球。</p>
-						<div class="program-details">
-							<span class="program-location">📍 沿海地区</span>
-							<span class="program-duration">⏳ 2-8周</span>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 项目4 -->
-				<div class="program-card" data-delay="0.3">
-					<div class="program-image">
-						<img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="可持续城市">
-					</div>
-					<div class="program-content">
-						<h3>可持续城市</h3>
-						<p>参与城市绿化、垃圾分类推广和可持续交通倡导，建设更宜居的城市环境。</p>
-						<div class="program-details">
-							<span class="program-location">📍 城市社区</span>
-							<span class="program-duration">⏳ 灵活时间</span>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 项目5 -->
-				<div class="program-card" data-delay="0.4">
-					<div class="program-image">
-						<img src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="环境教育">
-					</div>
-					<div class="program-content">
-						<h3>环境教育</h3>
-						<p>在学校和社区开展环保教育活动，培养下一代环保意识。</p>
-						<div class="program-details">
-							<span class="program-location">📍 教育机构</span>
-							<span class="program-duration">⏳ 长期/短期</span>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 项目6 -->
-				<div class="program-card" data-delay="0.5">
-					<div class="program-image">
-						<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="政策倡导">
-					</div>
-					<div class="program-content">
-						<h3>政策倡导</h3>
-						<p>参与环保政策研究、公众倡导和国际会议支持，推动环境友好型政策的制定。</p>
-						<div class="program-details">
-							<span class="program-location">📍 线上线下结合</span>
-							<span class="program-duration">⏳ 灵活时间</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav.home"></a>
+        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="nav.council"></a>
+        <a href="index.html#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs"></a>
+        <a href="index.html#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
+        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
+        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos"></a>
+        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate"></a>
+    </div>
 
-	<!-- Volunteer Stories Section -->
-	<section class="section stories">
-		<div class="container">
-			<h2 class="section-title">志愿者故事</h2>
-			<div class="stories-grid">
-				<!-- 故事1 -->
-				<div class="story-card" data-delay="0">
-					<div class="story-quote">
-						参与海洋保护项目让我亲眼见证了塑料污染对海洋生态的破坏，也让我更加坚定了环保的决心。现在我已经成为一名全职环保工作者。
-					</div>
-					<div class="story-author">
-						<div class="author-avatar">
-							<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="张雨薇">
-						</div>
-						<div class="author-info">
-							<h4>张雨薇</h4>
-							<p>海洋保护志愿者，2020-2022</p>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 故事2 -->
-				<div class="story-card" data-delay="0.1">
-					<div class="story-quote">
-						在肯尼亚的野生动物保护区做志愿者是我人生中最有意义的经历之一。我不仅学到了很多关于生态保护的知识，还结识了来自世界各地的志同道合的朋友。
-					</div>
-					<div class="story-author">
-						<div class="author-avatar">
-							<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="李明">
-						</div>
-						<div class="author-info">
-							<h4>李明</h4>
-							<p>生物多样性保护志愿者，2021</p>
-						</div>
-					</div>
-				</div>
-				
-				<!-- 故事3 -->
-				<div class="story-card" data-delay="0.2">
-					<div class="story-quote">
-						作为一名退休教师，我通过环境教育项目继续发挥余热。看到孩子们对环保知识充满兴趣，我感到非常欣慰和自豪。
-					</div>
-					<div class="story-author">
-						<div class="author-avatar">
-							<img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="王芳">
-						</div>
-						<div class="author-info">
-							<h4>王芳</h4>
-							<p>环境教育志愿者，2019至今</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="volunteer-hero">
+        <h1 data-i18n="hero.title">Join Our Volunteer Network</h1>
+        <p data-i18n="hero.subtitle">Join tens of thousands of volunteers worldwide in contributing to the sustainable development of our planet. Find the right opportunity for you.</p>
+        <a href="https://wj.qq.com/s2/17731884/9fba/" class="btn btn-primary" data-i18n="hero.join">Join Now</a>
+        <a href="#programs" class="btn btn-secondary" data-i18n="hero.view">View Programs</a>
+    </section>
 
-	<!-- Join Section -->
-	<section class="section join" id="join">
-		<div class="container">
-			<h2>准备好加入我们了吗？</h2>
-			<p>无论您是想参与实地项目，还是希望通过线上方式贡献力量，我们都有适合您的志愿服务机会。填写简单的申请表，我们的团队将与您联系。</p>
-			<a href="https://wj.qq.com/s2/17731884/9fba/" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">立即申请</a>
-		</div>
-	</section>
+    <!-- Programs Grid -->
+    <section class="section" id="programs">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="programs.title">Volunteer Opportunities</h2>
+        </div>
+        <div class="programs-grid" id="programsGrid">
+            <!-- JS will populate -->
+        </div>
+    </section>
 
-	<!-- Footer -->
-	<footer>
-		<div class="container">
-			<div class="footer-content">
-				<div class="footer-about">
-					<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
-					<p>世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。</p>
-					<div class="social-links">
-					
-					</div>
-				</div>
-				<div class="footer-links">
-					<h3>快速链接</h3>
-					<ul>
-						<li><a href="index.html">首页</a></li>
-						<li><a href="crlsh.html">常任理事会</a></li>
-						<li><a href="zyz.html">志愿者网络</a></li>
-						<li><a href="index.html">环保项目</a></li>
-						<li><a href="index.html">关于我们</a></li>
-						<li><a href="index.html">联系我们</a></li>
-					</ul>
-				</div>
-				<div class="footer-links">
-					<h3>联系我们</h3>
-					<ul>
-						<li>地址: 中国重庆市渝北区兴盛大道十号</li>
-						<li>电话: 130-2835-0677</li>
-						<li>邮箱: wepo2021@outlook.com</li>
-						<li>工作时间: 周一至周五 9:00-18:00</li>
-					</ul>
-				</div>
-			</div>
-			<div class="footer-bottom">
-				<p>&copy; 2025 世界环境保护组织. 版权所有.</p>
-			</div>
-		</div>
-	</footer>
+    <!-- Stories -->
+    <section class="section stories-section">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="stories.title">Volunteer Stories</h2>
+        </div>
+        <div class="stories-grid" id="storiesGrid">
+            <!-- JS will populate -->
+        </div>
+    </section>
 
-	<!-- Scroll to Top Button -->
-	<div class="scroll-top" id="scrollTop">↑</div>
+    <!-- CTA -->
+    <section class="join-cta">
+        <h2 data-i18n="cta.title">Ready to Make a Difference?</h2>
+        <p data-i18n="cta.desc">Whether you want to work in the field or contribute online, we have a place for you.</p>
+        <a href="https://wj.qq.com/s2/17731884/9fba/" class="btn btn-primary" data-i18n="cta.btn">Apply Now</a>
+    </section>
 
-	<script>
-		// Mobile Menu Toggle
-		const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-		const mobileMenu = document.getElementById('mobileMenu');
-		const mobileMenuClose = document.getElementById('mobileMenuClose');
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="Logo">
+                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+            </div>
+            <div class="footer-navs">
+                <div class="footer-col">
+                    <h5 data-i18n="footer.links_title">Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
+                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 data-i18n="footer.contact_title">Contact</h5>
+                    <ul>
+                         <li data-i18n="footer.address">Address: No. 10 Xingsheng Ave, Chongqing, CN</li>
+                         <li><a href="mailto:xcb@wepo.top" data-i18n="footer.email">Email: xcb@wepo.top</a></li>
+                         <li data-i18n="footer.phone">Phone: (+86) 02386161804</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-btm">
+            <p>&copy; <span id="year"></span> <span data-i18n="footer.copyright">WEPO. All rights reserved.</span></p>
+        </div>
+    </footer>
 
-		mobileMenuBtn.addEventListener('click', () => {
-			mobileMenu.classList.add('active');
-		});
+    <script>
+        // --- Content Data ---
+        const translations = {
+            "zh-CN": {
+                "lang.current": "中文",
+                "nav.home": "首页", "nav.about": "关于我们", "nav.mission": "使命愿景", "nav.programs": "环保项目", "nav.partners": "合作伙伴", "nav.contact": "联系我们", "nav.council": "常任理事会", "nav.videos": "环保视频", "nav.donate": "捐赠支持",
+                "page.title": "志愿者网络 | WEPO",
+                "hero.title": "加入我们的志愿者网络",
+                "hero.subtitle": "与全球数万名志愿者一起，为地球的可持续发展贡献力量。无论您的专业背景如何，都能在这里找到适合的志愿服务机会。",
+                "hero.join": "立即加入", "hero.view": "查看项目",
+                "programs.title": "志愿者项目",
+                "stories.title": "志愿者故事",
+                "cta.title": "准备好加入我们了吗？",
+                "cta.desc": "无论您是想参与实地项目，还是希望通过线上方式贡献力量，我们都有适合您的志愿服务机会。",
+                "cta.btn": "立即申请",
+                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
+                "footer.links_title": "快速链接", "footer.contact_title": "联系我们",
+                "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
+                "footer.phone": "电话: (+86) 02386161804",
+                "footer.email": "邮箱: xcb@wepo.top",
+                "footer.copyright": "世界环境保护组织. 版权所有."
+            },
+            "en": {
+                "lang.current": "EN",
+                "nav.home": "Home", "nav.about": "About", "nav.mission": "Mission", "nav.programs": "Programs", "nav.partners": "Partners", "nav.contact": "Contact", "nav.council": "Council", "nav.videos": "Videos", "nav.donate": "Donate",
+                "page.title": "Volunteer Network | WEPO",
+                "hero.title": "Join Our Volunteer Network",
+                "hero.subtitle": "Join tens of thousands of volunteers worldwide in contributing to the sustainable development of our planet. Find the right opportunity for you.",
+                "hero.join": "Join Now", "hero.view": "View Programs",
+                "programs.title": "Volunteer Opportunities",
+                "stories.title": "Volunteer Stories",
+                "cta.title": "Ready to Make a Difference?",
+                "cta.desc": "Whether you want to work in the field or contribute online, we have a place for you.",
+                "cta.btn": "Apply Now",
+                "footer.about": "WEPO is dedicated to global environmental protection.",
+                "footer.links_title": "Quick Links", "footer.contact_title": "Contact",
+                "footer.address": "Address: No. 10 Xingsheng Ave, Chongqing, CN",
+                "footer.phone": "Phone: (+86) 02386161804",
+                "footer.email": "Email: xcb@wepo.top",
+                "footer.copyright": "WEPO. All rights reserved."
+            }
+        };
 
-		mobileMenuClose.addEventListener('click', () => {
-			mobileMenu.classList.remove('active');
-		});
+        const programsData = [
+            {
+                img: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                "zh-CN": { title: "气候变化行动", desc: "参与碳足迹监测、气候教育推广和可再生能源项目，帮助社区减少碳排放。", loc: "全球各地", time: "3-12个月" },
+                "en": { title: "Climate Action", desc: "Participate in carbon footprint monitoring, climate education, and renewable energy projects.", loc: "Global", time: "3-12 Months" }
+            },
+            {
+                img: "https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                "zh-CN": { title: "生物多样性保护", desc: "参与野生动物监测、栖息地恢复和环保宣传，保护地球珍贵的生物多样性。", loc: "自然保护区", time: "1-6个月" },
+                "en": { title: "Biodiversity Protection", desc: "Wildlife monitoring, habitat restoration, and environmental awareness campaigns.", loc: "Nature Reserves", time: "1-6 Months" }
+            },
+            {
+                img: "https://images.unsplash.com/photo-1569336415962-a32bd7beb10f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                "zh-CN": { title: "海洋保护", desc: "参与海滩清洁、珊瑚礁保护和海洋污染监测，守护蓝色星球。", loc: "沿海地区", time: "2-8周" },
+                "en": { title: "Ocean Conservation", desc: "Beach cleanups, coral reef protection, and marine pollution monitoring.", loc: "Coastal Areas", time: "2-8 Weeks" }
+            }
+        ];
 
-		// Scroll to Top Button
-		const scrollTopBtn = document.getElementById('scrollTop');
+        const storiesData = [
+            {
+                img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80",
+                "zh-CN": { quote: "参与海洋保护项目让我亲眼见证了塑料污染对海洋生态的破坏，也让我更加坚定了环保的决心。", name: "张雨薇", role: "海洋保护志愿者" },
+                "en": { quote: "Seeing the impact of plastic pollution firsthand strengthened my resolve to protect our oceans.", name: "Yuwei Zhang", role: "Marine Volunteer" }
+            },
+            {
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80",
+                "zh-CN": { quote: "在肯尼亚的野生动物保护区做志愿者是我人生中最有意义的经历之一。", name: "李明", role: "生物多样性志愿者" },
+                "en": { quote: "Volunteering in Kenya's wildlife reserves was one of the most meaningful experiences of my life.", name: "Ming Li", role: "Biodiversity Volunteer" }
+            }
+        ];
 
-		window.addEventListener('scroll', () => {
-			if (window.pageYOffset > 300) {
-				scrollTopBtn.classList.add('active');
-			} else {
-				scrollTopBtn.classList.remove('active');
-			}
-		});
+        // --- Logic ---
+        let currentLang = localStorage.getItem('lang') || 'zh-CN';
 
-		scrollTopBtn.addEventListener('click', () => {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		});
+        function updateContent() {
+            const langData = translations[currentLang] || translations['en'];
+            
+            // Static Text
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (langData[key]) el.textContent = langData[key];
+            });
 
-		// Animate on Scroll
-		const animateOnScroll = () => {
-			const cards = document.querySelectorAll('.program-card, .story-card');
-			
-			cards.forEach(card => {
-				const cardPosition = card.getBoundingClientRect().top;
-				const screenPosition = window.innerHeight / 1.3;
-				const delay = card.dataset.delay || 0;
-				
-				if (cardPosition < screenPosition) {
-					setTimeout(() => {
-						card.classList.add('animated');
-					}, delay * 300);
-				}
-			});
-		};
+            // Dynamic Programs
+            const progGrid = document.getElementById('programsGrid');
+            progGrid.innerHTML = '';
+            programsData.forEach(p => {
+                const data = p[currentLang] || p['en'];
+                const card = document.createElement('div');
+                card.className = 'program-card';
+                card.innerHTML = `
+                    <div class="program-img"><img src="${p.img}" alt="${data.title}"></div>
+                    <div class="program-content">
+                        <h3>${data.title}</h3>
+                        <p>${data.desc}</p>
+                        <div class="program-meta">
+                            <span>📍 ${data.loc}</span>
+                            <span>⏳ ${data.time}</span>
+                        </div>
+                    </div>
+                `;
+                progGrid.appendChild(card);
+            });
 
-		window.addEventListener('scroll', animateOnScroll);
-		window.addEventListener('load', animateOnScroll);
-	</script>
+            // Dynamic Stories
+            const storyGrid = document.getElementById('storiesGrid');
+            storyGrid.innerHTML = '';
+            storiesData.forEach(s => {
+                const data = s[currentLang] || s['en'];
+                const card = document.createElement('div');
+                card.className = 'story-card';
+                card.innerHTML = `
+                    <div class="story-quote">${data.quote}</div>
+                    <div class="author">
+                        <img src="${s.img}" alt="${data.name}">
+                        <div class="author-info">
+                            <h4>${data.name}</h4>
+                            <span>${data.role}</span>
+                        </div>
+                    </div>
+                `;
+                storyGrid.appendChild(card);
+            });
+
+            // RTL check
+            document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.querySelectorAll('.language-btn').forEach(btn => {
+               btn.innerHTML = langData['lang.current'] + ' ▾'; 
+            });
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            updateContent();
+        }
+
+        // Init
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        } else {
+            setLanguage('zh-CN');
+        }
+
+        document.querySelectorAll('.language-dropdown li').forEach(li => {
+            li.addEventListener('click', () => setLanguage(li.getAttribute('data-lang')));
+        });
+
+        // Spotlight
+        const spot = document.getElementById('cursor-spotlight');
+        document.addEventListener('mousemove', (e) => {
+            spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
