@@ -1,714 +1,285 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page.title">世界环境保护组织 - 捐赠</title>
-    <link rel="icon" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" type="image/jpeg">
+    <title data-i18n="page.title">Donate | WEPO - 世界环境保护组织</title>
+    <meta name="description" content="Support WEPO's mission to protect the global environment. Donate today.">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-dark: #1a0933;
-            --primary-medium: #2a1a4a;
-            --primary-light: #3a2a6a;
-            --accent-blue: #4a3a8a;
-            --accent-purple: #7d5ab5;
-            --text-light: #f8f9fa;
-            --text-highlight: #ffcc00;
-            --transition-time: 0.5s;
-            --bg-gradient: linear-gradient(135deg, var(--primary-dark), var(--primary-medium), var(--accent-purple));
+            --bg-void: #080808;
+            --text-primary: #f2f2f2;
+            --text-secondary: #888888;
+            --accent-gold: #d4af37;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            --easing: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* 动态背景将通过 Canvas 实现 */
-            color: var(--text-light);
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+            cursor: default;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            line-height: 1.6;
-            background: var(--bg-gradient);
-            overflow-x: hidden;
         }
 
-         /* 动态背景 Canvas */
+        /* Noise Texture */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: var(--noise-url);
+            pointer-events: none; z-index: 9999; opacity: 0.4;
+        }
+
+        /* Cursor Spotlight */
+        #cursor-spotlight {
+            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
+            transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
+            transition: transform 0.1s linear;
+        }
+        
+        /* Background Canvas */
         #backgroundCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* 确保在所有内容之下 */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            opacity: 0.6;
         }
 
-        /* 容器样式 */
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(26, 9, 51, 0.7); /* 使用主题色 */
-            backdrop-filter: blur(10px); /* 毛玻璃效果 */
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateY(30px);
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
+        ul { list-style: none; }
 
-        /* 标题样式 */
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            /* 使用与 index.html 相同的渐变文字 */
-            background: linear-gradient(90deg, #fff, #b8a2e6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.2;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin: 25px 0 15px;
-            color: #b8a2e6; /* 使用主题紫色 */
-        }
-
-        /* 动画效果 */
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 5px rgba(184, 162, 230, 0.3); /* 使用主题紫色阴影 */
-            }
-            to {
-                text-shadow: 0 0 15px rgba(184, 162, 230, 0.6), 0 0 25px rgba(184, 162, 230, 0.4);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.4); /* 使用主题蓝色 */
-            }
-            70% {
-                transform: scale(1.02);
-                box-shadow: 0 0 0 15px rgba(79, 172, 254, 0); /* 扩散效果 */
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(79, 172, 254, 0);
-            }
-        }
-
-        /* 内容区域 */
-        .content {
-            margin-bottom: 30px;
-        }
-
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-
-        .highlight {
-            color: var(--text-highlight); /* 使用定义的高亮色 */
-            font-weight: bold;
-        }
-
-        /* 微信公众号区域 */
-        .wechat-info {
-            background: rgba(0, 30, 60, 0.8); /* 保留深蓝色背景，但调整透明度 */
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px 0;
-            /* 使用主题色边框 */
-            border-left: 4px solid var(--accent-purple);
-            animation: pulse 3s infinite ease-in-out;
-        }
-
-        .wechat-id {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: var(--text-highlight);
-            background: rgba(255, 204, 0, 0.1);
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-            margin: 15px 0;
-        }
-
-        /* 装饰元素 - 保持但调整颜色 */
-        .decoration {
-            position: absolute;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .circle-1 {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            /* 使用主题紫色边框 */
-            border: 10px solid var(--accent-purple);
-            top: -100px;
-            right: -100px;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .circle-2 {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            /* 使用主题蓝色边框 */
-            border: 8px solid var(--accent-blue);
-            bottom: -75px;
-            left: -75px;
-            animation: float 12s infinite ease-in-out reverse;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            33% {
-                transform: translate(10px, -15px) rotate(60deg);
-            }
-            66% {
-                transform: translate(-5px, 10px) rotate(-30deg);
-            }
-        }
-
-        /* Header (复用 index.html 样式) */
+        /* --- Header (Consistent) --- */
         header {
-            background: rgba(26, 9, 51, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 25px 40px;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(8,8,8,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
+        .logo { height: 45px; transition: transform 0.4s; }
+        .logo:hover { transform: scale(1.05); }
 
-        .logo {
-            height: 50px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-            position: relative;
-        }
-
+        nav ul { display: flex; gap: 40px; }
         nav ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: color 0.3s ease;
-            position: relative;
-            padding: 5px 0;
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
+            position: relative; padding: 5px 0;
         }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            transition: width 0.3s ease;
+        nav ul li a::before {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--accent-gold); transition: width 0.4s var(--easing);
         }
+        nav ul li a:hover, nav ul li a.active { color: var(--text-primary); }
+        nav ul li a:hover::before, nav ul li a.active::before { width: 100%; }
 
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: #b8a2e6;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .language-switcher {
-            position: relative;
-        }
-
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        
+        /* Language Switcher */
+        .language-switcher { position: relative; }
         .language-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: var(--text-light);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            background: transparent; border: 1px solid var(--border-glass);
+            color: var(--text-primary); padding: 8px 18px;
+            border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
         }
-
-        .language-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
 
         .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(26, 9, 51, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 5px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            padding: 10px 0;
-            min-width: 150px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            z-index: 1001;
+            position: absolute; top: 120%; right: 0;
+            background: #0f0f0f; border: 1px solid var(--border-glass);
+            border-radius: 8px; padding: 10px 0;
+            min-width: max-content;
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: all 0.3s var(--easing);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 1002;
         }
-
-        .language-switcher:hover .language-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
+        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        
         .language-dropdown li {
-            list-style: none;
-            margin: 0;
-            padding: 8px 15px;
-            cursor: pointer;
-            transition: background 0.2s ease;
+            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
+            white-space: nowrap; text-align: right;
+        }
+        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+
+
+        /* --- Page Layout --- */
+        .page-wrapper {
+            max-width: 800px;
+            margin: 160px auto 100px;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2;
+            text-align: center;
         }
 
-        .language-dropdown li:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .page-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 24px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mobile-menu-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Mobile Menu (复用 index.html 样式) */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 320px;
-            height: 100%;
-            background: rgba(26, 9, 51, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 80px 30px 30px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
-            overflow-y: auto;
-        }
-
-        .mobile-menu.active {
-            left: 0;
-        }
-
-        .mobile-menu-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 2rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(90deg);
-        }
-
-        .mobile-menu-links {
-            list-style: none;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .mobile-menu-links li {
-            margin: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu-links li:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-menu-links a {
-            color: var(--text-light);
-            text-decoration: none;
+        .page-header h2 {
             font-size: 1.2rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: block;
-            padding: 8px 0;
-            position: relative;
-        }
-
-        .mobile-menu-links a:hover {
-            color: #b8a2e6;
-            transform: translateX(10px);
-        }
-
-        .mobile-menu-links a::before {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            transform: translateY(-50%) scale(0);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu-links a:hover::before {
-            transform: translateY(-50%) scale(1);
-        }
-
-        .mobile-language-switcher {
-            margin-top: auto;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Footer (复用 index.html 样式) */
-        footer {
-            background: rgba(26, 9, 51, 0.95);
-            padding: 60px 5% 30px;
-            position: relative;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
             margin-bottom: 40px;
+            font-family: 'Manrope', sans-serif;
         }
 
-        .footer-logo {
-            width: 150px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-
-        .footer-about p {
-            margin-bottom: 20px;
-            opacity: 0.8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .social-link:hover {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .footer-links h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+        /* Donation Content Card */
+        .donate-card {
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            padding: 60px 40px;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            transition: transform 0.4s var(--easing);
             position: relative;
-            padding-bottom: 10px;
-            color: #b8a2e6;
+            overflow: hidden;
         }
-
-        .footer-links h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent-blue);
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease, color 0.3s ease;
-            display: block;
-            padding: 5px 0;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            color: #b8a2e6;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        /* Scroll to Top Button (复用 index.html 样式) */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            z-index: 999;
-            border: none;
-        }
-
-        .scroll-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
+        
+        .donate-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.3);
         }
 
-        /* 响应式设计 */
-        @media (max-width: 992px) {
-            .container {
-                padding: 30px;
-            }
+        /* Decoration Lines */
+        .donate-card::before, .donate-card::after {
+            content: ''; position: absolute; width: 40px; height: 40px;
+            border: 1px solid var(--accent-gold); opacity: 0.5; transition: all 0.5s;
         }
+        .donate-card::before { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .donate-card::after { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+        
+        .donate-card:hover::before { top: 15px; left: 15px; }
+        .donate-card:hover::after { bottom: 15px; right: 15px; }
+
+        .donate-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .notice-box {
+            border: 1px solid var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+            padding: 15px;
+            margin: 30px 0;
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* WeChat Area */
+        .wechat-box {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-glass);
+        }
+        
+        .wechat-id {
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin: 20px 0;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        .wechat-id::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 1px;
+            background: var(--accent-gold); transform: scaleX(0); transition: transform 0.4s var(--easing);
+        }
+        .donate-card:hover .wechat-id::after { transform: scaleX(1); }
+
+
+        /* --- Footer (Consistent) --- */
+        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); position: relative; z-index: 2; text-align: left; margin-top: auto;}
+        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
+        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
+        
+        .footer-navs { display: flex; gap: 80px; }
+        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
+        .footer-col a:hover { color: var(--accent-gold); }
+        
+        .footer-btm {
+            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
+            display: flex; justify-content: space-between; color: #444; font-size: 0.8rem;
+            flex-wrap: wrap; gap: 20px;
+        }
+
+        /* Mobile Responsive */
+        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        .mobile-menu {
+            position: fixed; inset: 0; background: #080808; z-index: 1001;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: 0.4s;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: all; }
+        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
+        .mobile-menu a.active { color: #fff; }
+        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
 
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
-            .container {
-                padding: 25px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-
-            .wechat-id {
-                font-size: 1.2rem;
-            }
-
-            .footer-content {
-                gap: 30px;
-            }
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-navs { flex-wrap: wrap; gap: 30px; width: 100%; justify-content: space-between; }
+            .page-header h1 { font-size: 2.5rem; }
+            .donate-card { padding: 40px 20px; }
+            .language-dropdown { right: -20px; }
         }
-
-        @media (max-width: 576px) {
-            .container {
-                padding: 20px 15px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.3rem;
-            }
-
-            p {
-                font-size: 0.95rem;
-            }
-        }
-
-        /* RTL Support for Arabic */
-        body[dir="rtl"] {
-            direction: rtl;
-        }
-        body[dir="rtl"] nav ul li {
-             margin-left: 0;
-             margin-right: 25px;
-        }
-        body[dir="rtl"] .wechat-info {
-             border-left: none;
-             border-right: 4px solid var(--accent-purple);
-        }
-        body[dir="rtl"] .footer-content,
-        body[dir="rtl"] .social-links,
-        body[dir="rtl"] .footer-links ul {
-            direction: rtl;
-        }
-        body[dir="rtl"] .footer-links h3::after {
-            left: auto;
-            right: 0;
-        }
-        body[dir="rtl"] nav ul li a::after {
-             left: auto;
-             right: 0;
-        }
-        body[dir="rtl"] .mobile-menu-links a::before {
-            left: auto;
-            right: -15px;
-        }
-        body[dir="rtl"] .mobile-menu-links a:hover {
-            transform: translateX(-10px);
-        }
-
     </style>
 </head>
 <body>
-     <!-- Dynamic Background Canvas -->
-    <canvas id="backgroundCanvas"></canvas>
 
-    <!-- Header -->
-    <header>
-        <div class="logo-container">
+    <!-- Background Canvas -->
+    <canvas id="backgroundCanvas"></canvas>
+    
+    <!-- Spotlight Effect -->
+    <div id="cursor-spotlight"></div>
+
+    <header id="header">
+        <a href="index.html" class="logo-container">
             <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-        </div>
+        </a>
         <nav>
             <ul>
                 <li><a href="index.html" data-i18n="nav.home"></a></li>
@@ -722,11 +293,10 @@
         </nav>
         <div class="header-actions">
             <div class="language-switcher">
-                <button class="language-btn" id="languageBtn">
-                    <span data-i18n="lang.current"></span>
-                    <span>▼</span>
+                <button class="language-btn" id="langBtn">
+                    <span data-i18n="lang.current"></span> ▾
                 </button>
-                <ul class="language-dropdown" id="languageDropdown">
+                <ul class="language-dropdown">
                     <li data-lang="zh-CN">中文 (简体)</li>
                     <li data-lang="en">English</li>
                     <li data-lang="es">Español</li>
@@ -735,110 +305,78 @@
                     <li data-lang="ar">العربية</li>
                 </ul>
             </div>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-menu-close" id="mobileMenuClose">×</button>
-        <ul class="mobile-menu-links">
-            <li><a href="index.html" data-i18n="nav.home"></a></li>
-            <li><a href="crlsh.html" data-i18n="nav.council"></a></li>
-            <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-            <li><a href="index.html#about" data-i18n="nav.about"></a></li>
-            <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-            <li><a href="sp.html" data-i18n="nav.videos"></a></li>
-            <li><a href="jz.html" class="active" data-i18n="nav.donate"></a></li>
-        </ul>
-        <div class="mobile-language-switcher">
-            <div class="language-switcher">
-                <button class="language-btn" id="mobileLanguageBtn">
-                    <span data-i18n="lang.current"></span>
-                    <span>▼</span>
-                </button>
-                <ul class="language-dropdown" id="mobileLanguageDropdown">
-                    <li data-lang="zh-CN">中文 (简体)</li>
-                    <li data-lang="en">English</li>
-                    <li data-lang="es">Español</li>
-                    <li data-lang="fr">Français</li>
-                    <li data-lang="ru">Русский</li>
-                    <li data-lang="ar">العربية</li>
-                </ul>
+        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav.home"></a>
+        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="nav.council"></a>
+        <a href="index.html#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs"></a>
+        <a href="index.html#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
+        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
+        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos"></a>
+        <a href="jz.html" class="active" onclick="toggleMobileMenu()" data-i18n="nav.donate"></a>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="page-header">
+            <h1 data-i18n="hero.title">World Environmental Protection Organization</h1>
+            <h2 data-i18n="hero.subtitle">Support & Donation</h2>
+        </div>
+
+        <div class="donate-card">
+            <p class="donate-text" data-i18n="content.p1">Thank you for your interest in supporting WEPO's mission.</p>
+            
+            <div class="notice-box">
+                <span data-i18n="content.highlight">Online donation is currently unavailable</span>
+            </div>
+            
+            <p class="donate-text" data-i18n="content.p2">Your support helps us protect ecosystems and promote sustainable development.</p>
+            
+            <div class="wechat-box">
+                <p data-i18n="wechat.p1" style="font-size: 0.9rem; color: #666;">Scan QR code or search WeChat ID</p>
+                <span class="wechat-id" data-i18n="wechat.id">WEPO2021</span>
+                <p data-i18n="wechat.p2" style="font-size: 0.9rem; color: #666;">For latest updates and donation news</p>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <!-- 装饰元素 -->
-        <div class="decoration circle-1"></div>
-        <div class="decoration circle-2"></div>
-
-        <div class="content">
-            <h1 data-i18n="hero.title"></h1>
-            <h2 data-i18n="hero.subtitle"></h2>
-
-            <p data-i18n="content.p1"></p>
-            <p><span class="highlight" data-i18n="content.highlight"></span></p>
-
-            <div class="wechat-info">
-                <p data-i18n="wechat.p1"></p>
-                <p class="wechat-id" data-i18n="wechat.id"></p>
-                <p data-i18n="wechat.p2"></p>
-            </div>
-
-            <p data-i18n="content.p2"></p>
-            <p data-i18n="content.p3"></p>
-        </div>
-    </div>
-
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="footer-logo">
-                <p data-i18n="footer.about"></p>
-                <div class="social-links">
-                    <a href="https://v.douyin.com/fUX46P9TEgI" class="social-link" target="_blank" rel="noopener noreferrer">T</a>
-                    <a href="https://v.kuaishou.com/nVWIvhvP" class="social-link" target="_blank" rel="noopener noreferrer">K</a>
-                    <a href="https://mp.weixin.qq.com/s/mMligZQeXm2KZz22c_M4nQ" class="social-link" target="_blank" rel="noopener noreferrer">W</a>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="Logo">
+                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+            </div>
+            <div class="footer-navs">
+                <div class="footer-col">
+                    <h5 data-i18n="footer.links_title">Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+                        <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
+                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5 data-i18n="footer.contact_title">Contact</h5>
+                    <ul>
+                         <!-- Using simple text for contact info in footer for cleaner look -->
+                         <li><a href="mailto:wepo2021@outlook.com">wepo2021@outlook.com</a></li>
+                         <li><span style="color:#888; font-size:0.85rem;">+86 130-2835-0677</span></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-links">
-                <h3 data-i18n="footer.links_title"></h3>
-                <ul>
-                    <li><a href="index.html" data-i18n="nav.home"></a></li>
-                    <li><a href="crlsh.html" data-i18n="nav.council"></a></li>
-                    <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-                    <li><a href="index.html#about" data-i18n="nav.about"></a></li>
-                    <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-                    <li><a href="sp.html" data-i18n="nav.videos"></a></li>
-                    <li><a href="jz.html" data-i18n="nav.donate"></a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h3 data-i18n="footer.contact_title"></h3>
-                <ul>
-                    <li data-i18n="footer.address"></li>
-                    <li data-i18n="footer.phone"></li>
-                    <li data-i18n="footer.email"></li>
-                    <li data-i18n="footer.hours"></li>
-                </ul>
-            </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="currentYear"></span> <span data-i18n="footer.copyright"></span></p>
+        <div class="footer-btm">
+            <p>&copy; <span id="year"></span> <span data-i18n="footer.copyright">WEPO. All rights reserved.</span></p>
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" id="scrollTop">↑</div>
-
     <script>
-        // --- 多语言支持 (与 index.html 保持一致) ---
+        // --- Translation Data ---
         const translations = {
             "zh-CN": {
                 "lang.current": "中文",
@@ -858,17 +396,12 @@
                 "content.p1": "感谢您有意支持世界环境保护组织的使命和工作。",
                 "content.highlight": "在线捐赠功能暂未启用",
                 "content.p2": "您的支持将帮助我们继续保护脆弱生态系统、推动可持续发展政策并应对全球环境挑战。",
-                "content.p3": "敬请期待，我们很快将为您提供安全便捷的捐赠渠道。",
                 "wechat.p1": "请扫描二维码或搜索关注我们的官方微信公众号",
                 "wechat.id": "WEPO2021",
                 "wechat.p2": "了解最新项目进展和捐赠开通通知",
-                "footer.about": "世界环境保护组织(WEPO)是一个致力于全球环境保护的非营利性国际组织，通过科学研究、政策倡导和公众教育推动可持续发展。",
+                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
                 "footer.links_title": "快速链接",
                 "footer.contact_title": "联系我们",
-                "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
-                "footer.phone": "电话: 130-2835-0677",
-                "footer.email": "邮箱: wepo2021@outlook.com",
-                "footer.hours": "工作时间: 周一至周五 9:00-18:00",
                 "footer.copyright": "世界环境保护组织. 版权所有."
             },
             "en": {
@@ -882,27 +415,22 @@
                 "nav.council": "Council",
                 "nav.videos": "Videos",
                 "nav.donate": "Donate",
-                "nav.support": "Customer Support",
+                "nav.support": "Support",
                 "page.title": "WEPO - Donate",
                 "hero.title": "World Environmental Protection Organization",
-                "hero.subtitle": "Donate Support",
-                "content.p1": "Thank you for your interest in supporting the mission and work of the World Environmental Protection Organization.",
-                "content.highlight": "Online donation function is not currently available",
-                "content.p2": "Your support will help us continue to protect vulnerable ecosystems, promote sustainable development policies, and address global environmental challenges.",
-                "content.p3": "Please stay tuned, we will soon provide you with a safe and convenient donation channel.",
-                "wechat.p1": "Please scan the QR code or search for our official WeChat public account",
+                "hero.subtitle": "Support & Donation",
+                "content.p1": "Thank you for your interest in supporting WEPO's mission.",
+                "content.highlight": "Online donation is currently unavailable",
+                "content.p2": "Your support helps us protect ecosystems and promote sustainable development.",
+                "wechat.p1": "Search our official WeChat ID",
                 "wechat.id": "WEPO2021",
-                "wechat.p2": "To learn about the latest project progress and donation opening notifications",
-                "footer.about": "The World Environmental Protection Organization (WEPO) is a non-profit international organization dedicated to global environmental protection, promoting sustainable development through scientific research, policy advocacy, and public education.",
+                "wechat.p2": "For updates and donation news",
+                "footer.about": "WEPO is dedicated to global environmental protection.",
                 "footer.links_title": "Quick Links",
-                "footer.contact_title": "Contact Us",
-                "footer.address": "Address: No. 10, Xingsheng Avenue, Yubei District, Chongqing, China",
-                "footer.phone": "Phone: 130-2835-0677",
-                "footer.email": "Email: wepo2021@outlook.com",
-                "footer.hours": "Working Hours: Monday to Friday 9:00-18:00",
-                "footer.copyright": "World Environmental Protection Organization. All rights reserved."
+                "footer.contact_title": "Contact",
+                "footer.copyright": "WEPO. All rights reserved."
             },
-             "es": {
+            "es": {
                 "lang.current": "ES",
                 "nav.home": "Inicio",
                 "nav.about": "Acerca de",
@@ -913,25 +441,20 @@
                 "nav.council": "Consejo",
                 "nav.videos": "Videos",
                 "nav.donate": "Donar",
-                "nav.support": "Soporte al Cliente",
+                "nav.support": "Soporte",
                 "page.title": "WEPO - Donar",
-                "hero.title": "Organización Mundial para la Protección del Medio Ambiente",
-                "hero.subtitle": "Apoyo de Donaciones",
-                "content.p1": "Gracias por su interés en apoyar la misión y el trabajo de la Organización Mundial para la Protección del Medio Ambiente.",
-                "content.highlight": "La función de donación en línea no está disponible actualmente",
-                "content.p2": "Su apoyo nos ayudará a continuar protegiendo los ecosistemas vulnerables, promoviendo políticas de desarrollo sostenible y enfrentando los desafíos ambientales globales.",
-                "content.p3": "Por favor, manténgase atento, pronto le proporcionaremos un canal de donación seguro y conveniente.",
-                "wechat.p1": "Por favor, escanee el código QR o busque nuestra cuenta pública oficial de WeChat",
+                "hero.title": "Organización Mundial de Protección Ambiental",
+                "hero.subtitle": "Apoyo y Donación",
+                "content.p1": "Gracias por su interés en apoyar la misión de WEPO.",
+                "content.highlight": "La donación en línea no está disponible",
+                "content.p2": "Su apoyo nos ayuda a proteger los ecosistemas y promover el desarrollo sostenible.",
+                "wechat.p1": "Busque nuestra ID oficial de WeChat",
                 "wechat.id": "WEPO2021",
-                "wechat.p2": "Para conocer el progreso más reciente del proyecto y las notificaciones de apertura de donaciones",
-                "footer.about": "La Organización Mundial para la Protección del Medio Ambiente (WEPO) es una organización internacional sin fines de lucro dedicada a la protección ambiental global, promoviendo el desarrollo sostenible a través de la investigación científica, la defensa de políticas y la educación pública.",
+                "wechat.p2": "Para actualizaciones y noticias",
+                "footer.about": "WEPO se dedica a la protección ambiental global.",
                 "footer.links_title": "Enlaces Rápidos",
-                "footer.contact_title": "Contáctenos",
-                "footer.address": "Dirección: No. 10, Avenida Xingsheng, Distrito de Yubei, Chongqing, China",
-                "footer.phone": "Teléfono: 130-2835-0677",
-                "footer.email": "Correo electrónico: wepo2021@outlook.com",
-                "footer.hours": "Horario de Atención: Lunes a Viernes 9:00-18:00",
-                "footer.copyright": "Organización Mundial para la Protección del Medio Ambiente. Todos los derechos reservados."
+                "footer.contact_title": "Contacto",
+                "footer.copyright": "WEPO. Todos los derechos reservados."
             },
             "fr": {
                 "lang.current": "FR",
@@ -944,25 +467,20 @@
                 "nav.council": "Conseil",
                 "nav.videos": "Vidéos",
                 "nav.donate": "Faire un don",
-                "nav.support": "Support Client",
+                "nav.support": "Support",
                 "page.title": "WEPO - Faire un don",
                 "hero.title": "Organisation Mondiale de Protection de l'Environnement",
-                "hero.subtitle": "Soutien par Don",
-                "content.p1": "Merci de votre intérêt pour soutenir la mission et le travail de l'Organisation Mondiale de Protection de l'Environnement.",
-                "content.highlight": "La fonction de don en ligne n'est actuellement pas disponible",
-                "content.p2": "Votre soutien nous aidera à continuer à protéger les écosystèmes vulnérables, à promouvoir les politiques de développement durable et à relever les défis environnementaux mondiaux.",
-                "content.p3": "Veuillez rester à l'écoute, nous vous fournirons bientôt un canal de don sûr et pratique.",
-                "wechat.p1": "Veuillez scanner le code QR ou rechercher notre compte public officiel WeChat",
+                "hero.subtitle": "Soutien et Don",
+                "content.p1": "Merci de votre intérêt pour soutenir la mission de WEPO.",
+                "content.highlight": "Le don en ligne n'est pas disponible",
+                "content.p2": "Votre soutien nous aide à protéger les écosystèmes et à promouvoir le développement durable.",
+                "wechat.p1": "Recherchez notre ID WeChat officiel",
                 "wechat.id": "WEPO2021",
-                "wechat.p2": "Pour connaître les dernières avancées du projet et les notifications d'ouverture des dons",
-                "footer.about": "L'Organisation Mondiale de Protection de l'Environnement (WEPO) est une organisation internationale à but non lucratif dédiée à la protection environnementale mondiale, promouvant le développement durable par la recherche scientifique, la défense des politiques et l'éducation du public.",
+                "wechat.p2": "Pour les mises à jour et les nouvelles",
+                "footer.about": "WEPO est dédiée à la protection de l'environnement mondial.",
                 "footer.links_title": "Liens Rapides",
-                "footer.contact_title": "Nous Contacter",
-                "footer.address": "Adresse : No. 10, Avenue Xingsheng, District de Yubei, Chongqing, Chine",
-                "footer.phone": "Téléphone : 130-2835-0677",
-                "footer.email": "E-mail : wepo2021@outlook.com",
-                "footer.hours": "Heures d'Ouverture : Lundi au Vendredi 9h00-18h00",
-                "footer.copyright": "Organisation Mondiale de Protection de l'Environnement. Tous droits réservés."
+                "footer.contact_title": "Contact",
+                "footer.copyright": "WEPO. Tous droits réservés."
             },
             "ru": {
                 "lang.current": "RU",
@@ -975,59 +493,50 @@
                 "nav.council": "Совет",
                 "nav.videos": "Видео",
                 "nav.donate": "Пожертвовать",
-                "nav.support": "Поддержка клиентов",
+                "nav.support": "Поддержка",
                 "page.title": "WEPO - Пожертвовать",
                 "hero.title": "Всемирная организация по охране окружающей среды",
-                "hero.subtitle": "Поддержка пожертвований",
-                "content.p1": "Спасибо за проявленный интерес к поддержке миссии и работы Всемирной организации по охране окружающей среды.",
-                "content.highlight": "Функция онлайн-пожертвований в настоящее время недоступна",
-                "content.p2": "Ваша поддержка поможет нам продолжать защищать уязвимые экосистемы, продвигать политику устойчивого развития и решать глобальные экологические проблемы.",
-                "content.p3": "Пожалуйста, следите за новостями, мы скоро предоставим вам безопасный и удобный канал для пожертвований.",
-                "wechat.p1": "Пожалуйста, отсканируйте QR-код или найдите наш официальный аккаунт в WeChat",
+                "hero.subtitle": "Поддержка и пожертвования",
+                "content.p1": "Спасибо за ваш интерес к поддержке миссии WEPO.",
+                "content.highlight": "Онлайн-пожертвование недоступно",
+                "content.p2": "Ваша поддержка помогает нам защищать экосистемы и продвигать устойчивое развитие.",
+                "wechat.p1": "Найдите наш официальный WeChat ID",
                 "wechat.id": "WEPO2021",
-                "wechat.p2": "Чтобы узнать о последних достижениях проекта и уведомлениях об открытии пожертвований",
-                "footer.about": "Всемирная организация по охране окружающей среды (WEPO) - это некоммерческая международная организация, посвященная глобальной охране окружающей среды, способствуя устойчивому развитию посредством научных исследований, продвижения политики и просвещения общественности.",
+                "wechat.p2": "Для обновлений и новостей",
+                "footer.about": "WEPO посвящена глобальной защите окружающей среды.",
                 "footer.links_title": "Быстрые ссылки",
-                "footer.contact_title": "Связаться с нами",
-                "footer.address": "Адрес: No. 10, проспект Синшэн, район Юбэй, Чунцин, Китай",
-                "footer.phone": "Телефон: 130-2835-0677",
-                "footer.email": "Электронная почта: wepo2021@outlook.com",
-                "footer.hours": "Часы работы: Понедельник - пятница 9:00-18:00",
-                "footer.copyright": "Всемирная организация по охране окружающей среды. Все права защищены."
+                "footer.contact_title": "Контакты",
+                "footer.copyright": "WEPO. Все права защищены."
             },
             "ar": {
                 "lang.current": "AR",
                 "nav.home": "الرئيسية",
                 "nav.about": "معلومات عنا",
-                "nav.mission": "الرسالة والرؤية",
-                "nav.programs": "البرامج البيئية",
-                "nav.partners": "الشركاء",
-                "nav.contact": "اتصل بنا",
+                "nav.mission": "المهمة",
+                "nav.programs": "البرامج",
+                "nav.partners": "شركاء",
+                "nav.contact": "اتصل",
                 "nav.council": "المجلس",
-                "nav.videos": "الفيديوهات",
+                "nav.videos": "فيديو",
                 "nav.donate": "تبرع",
-                "nav.support": "دعم العملاء",
+                "nav.support": "دعم",
                 "page.title": "WEPO - تبرع",
                 "hero.title": "منظمة حماية البيئة العالمية",
-                "hero.subtitle": "دعم التبرعات",
-                "content.p1": "شكرًا لاهتمامك بدعم مهمة وعمل منظمة حماية البيئة العالمية.",
-                "content.highlight": "وظيفة التبرع عبر الإنترنت غير متوفرة حاليًا",
-                "content.p2": "ستساعدنا مساعدتكم في مواصلة حماية النظم البيئية الضعيفة، وتعزيز سياسات التنمية المستدامة، ومجابهة التحديات البيئية العالمية.",
-                "content.p3": "يرجى الانتظار، سنزودك قريبًا بقناة تبرع آمنة ومريحة.",
-                "wechat.p1": "يرجى مسح رمز الاستجابة السريعة أو البحث عن حسابنا الرسمي على WeChat",
+                "hero.subtitle": "الدعم والتبرع",
+                "content.p1": "شكرا لاهتمامك بدعم مهمة WEPO.",
+                "content.highlight": "التبرع عبر الإنترنت غير متاح حاليا",
+                "content.p2": "دعمكم يساعدنا على حماية النظم البيئية وتعزيز التنمية المستدامة.",
+                "wechat.p1": "ابحث عن معرف WeChat الرسمي الخاص بنا",
                 "wechat.id": "WEPO2021",
-                "wechat.p2": "للحصول على معلومات حول أحدث تطورات المشروع وإشعارات فتح التبرعات",
-                "footer.about": "منظمة حماية البيئة العالمية (WEPO) هي منظمة دولية غير ربحية مكرسة لحماية البيئة العالمية، وتعمل على تعزيز التنمية المستدامة من خلال البحث العلمي والدعوة للسياسات والتوعية العامة.",
+                "wechat.p2": "للتحديثات والأخبار",
+                "footer.about": "WEPO مكرسة لحماية البيئة العالمية.",
                 "footer.links_title": "روابط سريعة",
-                "footer.contact_title": "اتصل بنا",
-                "footer.address": "العنوان: رقم 10، شارع شينشينغ، منطقة يوبي، مدينة تشونغتشينغ، الصين",
-                "footer.phone": "الهاتف: 130-2835-0677",
-                "footer.email": "البريد الإلكتروني: wepo2021@outlook.com",
-                "footer.hours": "ساعات العمل: من الاثنين إلى الجمعة 9:00 صباحاً - 6:00 مساءً",
-                "footer.copyright": "منظمة حماية البيئة العالمية. جميع الحقوق محفوظة."
+                "footer.contact_title": "اتصل",
+                "footer.copyright": "WEPO. جميع الحقوق محفوظة."
             }
         };
 
+        // --- Logic Control ---
         let currentLang = 'zh-CN';
 
         function setLanguage(lang) {
@@ -1036,203 +545,111 @@
             elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
+                    element.textContent = translations[lang][key];
                 }
             });
-
-            document.querySelectorAll('[data-i18n="lang.current"]').forEach(el => {
-                el.textContent = translations[lang]["lang.current"];
-            });
-
             document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            localStorage.setItem('selectedLanguage', lang);
-            // 更新页面标题
+            localStorage.setItem('lang', lang);
             document.title = translations[lang]["page.title"] || document.title;
         }
 
-        const savedLang = localStorage.getItem('selectedLanguage');
+        const savedLang = localStorage.getItem('lang');
         if (savedLang && translations[savedLang]) {
             setLanguage(savedLang);
         } else {
-            setLanguage(currentLang);
+            setLanguage('zh-CN'); // Default to Chinese for this page as per original
         }
 
-        document.getElementById('languageBtn').addEventListener('click', function(e) {
-             e.stopPropagation();
-             const dropdown = document.getElementById('languageDropdown');
-             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-        document.getElementById('mobileLanguageBtn').addEventListener('click', function(e) {
-             e.stopPropagation();
-             const dropdown = document.getElementById('mobileLanguageDropdown');
-             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-
-        document.querySelectorAll('#languageDropdown li, #mobileLanguageDropdown li').forEach(item => {
-            item.addEventListener('click', function() {
-                const selectedLang = this.getAttribute('data-lang');
-                setLanguage(selectedLang);
-                document.getElementById('languageDropdown').style.display = 'none';
-                document.getElementById('mobileLanguageDropdown').style.display = 'none';
+        document.querySelectorAll('.language-dropdown li').forEach(li => {
+            li.addEventListener('click', () => {
+                setLanguage(li.getAttribute('data-lang'));
             });
         });
 
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.language-switcher')) {
-                document.getElementById('languageDropdown').style.display = 'none';
-                document.getElementById('mobileLanguageDropdown').style.display = 'none';
-            }
+        // Spotlight
+        const spot = document.getElementById('cursor-spotlight');
+        document.addEventListener('mousemove', (e) => {
+            spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
-        // --- 动态背景 Canvas (与 index.html 保持一致) ---
+        // Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        // Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Background Canvas Animation (Subtle Particles) ---
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', resize);
+        resize();
 
         class Particle {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                // 使用与主题更匹配的颜色
-                this.color = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`;
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                else if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                else if (this.y < 0) this.y = canvas.height;
+                this.x += this.vx;
+                this.y += this.vy;
+                if(this.x < 0) this.x = width;
+                if(this.x > width) this.x = 0;
+                if(this.y < 0) this.y = height;
+                if(this.y > height) this.y = 0;
             }
             draw() {
-                ctx.fillStyle = this.color;
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`; // Gold color
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
                 ctx.fill();
             }
         }
 
-        const particles = [];
-        const numberOfParticles = 100;
-
         function initParticles() {
-            for (let i = 0; i < numberOfParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function connectParticles() {
-            const maxDistance = 100;
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    const dx = particles[a].x - particles[b].x;
-                    const dy = particles[a].y - particles[b].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < maxDistance) {
-                        const opacity = 1 - distance / maxDistance;
-                        ctx.strokeStyle = `rgba(200, 200, 255, ${opacity * 0.2})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
+            particles = [];
+            for(let i=0; i<80; i++) particles.push(new Particle());
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(26, 9, 51, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            connectParticles();
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw connections
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                for(let j=index+1; j<particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 100) {
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.1 * (1 - dist/100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
             });
             requestAnimationFrame(animate);
         }
 
         initParticles();
         animate();
-
-        // Mobile Menu Toggle (优化版)
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-        const body = document.body;
-
-        function openMenu() {
-            mobileMenu.classList.add('active');
-            mobileMenuOverlay.classList.add('active');
-            body.classList.add('no-scroll'); // 防止背景滚动
-        }
-
-        function closeMenu() {
-            mobileMenu.classList.remove('active');
-            mobileMenuOverlay.classList.remove('active');
-            body.classList.remove('no-scroll');
-            // 关闭语言下拉
-            document.getElementById('mobileLanguageDropdown').style.display = 'none';
-        }
-
-        mobileMenuBtn.addEventListener('click', openMenu);
-        mobileMenuClose.addEventListener('click', closeMenu);
-        mobileMenuOverlay.addEventListener('click', closeMenu); // 点击遮罩关闭
-
-        document.querySelectorAll('.mobile-menu-links a').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // 防止菜单内容点击触发 overlay 关闭事件
-        mobileMenu.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        // ESC键关闭菜单
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                closeMenu();
-            }
-        });
-
-        // Scroll to Top Button
-        const scrollTopBtn = document.getElementById('scrollTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('active');
-            } else {
-                scrollTopBtn.classList.remove('active');
-            }
-        });
-
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // 页脚年份
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
     </script>
 </body>
 </html>
