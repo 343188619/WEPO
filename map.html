@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GAIA | 全球生态卫士联盟</title>
+    
+    <!-- 引入高级字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 变量定义 --- */
+        :root {
+            --primary: #00f2ff;       /* 科技蓝 */
+            --accent: #ffd700;        /* 奢华金 */
+            --glass-bg: rgba(8, 15, 30, 0.75); /* 深色磨砂背景 */
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+        
+        body { 
+            overflow: hidden; 
+            background-color: #000; 
+            font-family: 'Montserrat', 'Noto Sans SC', sans-serif;
+            color: #fff;
+        }
+
+        /* 3D 容器 */
+        #canvas-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+            background: radial-gradient(circle at 50% 50%, #111a2e 0%, #000000 100%);
+        }
+
+        /* UI 层 */
+        #ui-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+            pointer-events: none;
+            display: flex; flex-direction: column; justify-content: space-between;
+            padding: 2rem 3rem;
+        }
+
+        /* 顶部栏 */
+        header {
+            display: flex; justify-content: space-between; align-items: center; pointer-events: auto;
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;
+        }
+
+        .brand h1 {
+            font-family: 'Cinzel', serif; font-size: 2.2rem; letter-spacing: 3px;
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+        }
+        .brand p { font-size: 0.75rem; color: rgba(255,255,255,0.7); letter-spacing: 4px; margin-top: 5px; }
+
+        /* 语言切换 */
+        .lang-switch {
+            display: flex; background: var(--glass-bg); backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 30px; padding: 5px;
+        }
+        .lang-btn {
+            padding: 6px 16px; font-size: 0.75rem; cursor: pointer; border-radius: 20px;
+            transition: all 0.3s; color: rgba(255,255,255,0.6); font-weight: 600;
+        }
+        .lang-btn:hover { color: #fff; }
+        .lang-btn.active { background: rgba(255,255,255,0.15); color: var(--primary); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+
+        /* 信息卡片 */
+        .info-card {
+            position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+            width: 300px; background: var(--glass-bg); backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); padding: 2rem; border-radius: 4px;
+            pointer-events: auto; border-left: 3px solid var(--primary);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        .info-card h3 { font-family: 'Cinzel', serif; color: var(--primary); margin-bottom: 10px; font-size: 1.2rem; }
+        .info-card p { font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.9); }
+
+        /* 底部状态 */
+        footer { display: flex; gap: 2rem; pointer-events: auto; font-family: 'Montserrat', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+        .stat-item b { color: #fff; margin-left: 5px; }
+        .active-dot { display: inline-block; width: 8px; height: 8px; background: #00ff66; border-radius: 50%; margin-right: 5px; box-shadow: 0 0 8px #00ff66; }
+
+        /* 3D 标签样式 */
+        .label-wrap { text-align: center; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; }
+        .label-text {
+            font-family: 'Noto Sans SC', sans-serif; font-size: 13px; color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8); background: rgba(0, 10, 20, 0.75);
+            padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;
+            backdrop-filter: blur(4px); display: inline-block;
+        }
+        .hq-wrap .label-text {
+            border-color: var(--accent); color: var(--accent); font-weight: bold; font-size: 15px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); background: rgba(10, 20, 0, 0.85);
+        }
+
+        /* Loading */
+        #loader {
+            position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%;
+            background: #020408; display: flex; justify-content: center; align-items: center;
+            flex-direction: column; transition: opacity 0.8s;
+        }
+        .loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.2); margin-top: 15px; position: relative; }
+        .loader-bar::after {
+            content:''; position: absolute; top:0; left:0; height:100%; width: 0%;
+            background: var(--primary); animation: load 1.5s ease-out forwards;
+        }
+        @keyframes load { to { width: 100%; } }
+
+        @media (max-width: 768px) {
+            #ui-layer { padding: 1.5rem; }
+            .info-card { display: none; }
+            .brand h1 { font-size: 1.5rem; }
+            footer { flex-direction: column; gap: 5px; }
+        }
+    </style>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="loader">
+        <div style="font-family: 'Cinzel'; color: #fff; letter-spacing: 5px;">SYSTEM INITIALIZING</div>
+        <div class="loader-bar"></div>
+    </div>
+
+    <div id="ui-layer">
+        <header>
+            <div class="brand">
+                <h1 data-i18n="title">GAIA 全球联盟</h1>
+                <p data-i18n="subtitle">世界环境保护组织 | 3D 可视化系统</p>
+            </div>
+            <div class="lang-switch">
+                <div class="lang-btn active" onclick="changeLang('zh')">CN</div>
+                <div class="lang-btn" onclick="changeLang('en')">EN</div>
+                <div class="lang-btn" onclick="changeLang('jp')">JP</div>
+                <div class="lang-btn" onclick="changeLang('de')">DE</div>
+            </div>
+        </header>
+
+        <div class="info-card">
+            <h3 data-i18n="card_title">指挥中心：中国重庆</h3>
+            <p data-i18n="card_desc">
+                全球环境数据汇聚节点。利用量子计算实时分析 8 大气候区的碳排放与生态流量。全天候监测网络已覆盖 99.8% 的关键生态区域。
+            </p>
+        </div>
+
+        <footer>
+            <div class="stat-item"><span class="active-dot"></span><span data-i18n="status">系统状态：在线</span></div>
+            <div class="stat-item">HQ: <b data-i18n="hq_loc">中国 重庆</b></div>
+        </footer>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+        import TWEEN from 'three/addons/libs/tween.module.js';
+
+        // --- 数据定义 ---
+        const i18n = {
+            'zh': {
+                title: 'GAIA 全球联盟',
+                subtitle: '世界环境保护组织 | 3D 可视化系统',
+                card_title: '指挥中心：中国重庆',
+                card_desc: '全球环境数据汇聚节点。利用量子计算实时分析 8 大气候区的碳排放与生态流量。全天候监测网络已覆盖 99.8% 的关键生态区域。',
+                status: '系统状态：在线',
+                hq_loc: '中国 重庆',
+                loc_cq: '总部：中国重庆',
+                loc_bj: '中国北京',
+                loc_hk: '中国香港',
+                loc_jp: '日本东京',
+                loc_in: '印度新德里',
+                loc_us: '美国纽约',
+                loc_uk: '英国伦敦',
+                loc_au: '澳大利亚',
+                loc_ch: '瑞士伯尔尼'
+            },
+            'en': {
+                title: 'GAIA ALLIANCE',
+                subtitle: 'Global Eco-Protection Org | Visualization',
+                card_title: 'HQ: CHONGQING, CN',
+                card_desc: 'Central node for global environmental data. Utilizing quantum computing to analyze carbon emissions across 8 climate zones in real-time.',
+                status: 'SYSTEM: ONLINE',
+                hq_loc: 'CHONGQING, CN',
+                loc_cq: 'HQ: CHONGQING',
+                loc_bj: 'BEIJING',
+                loc_hk: 'HONG KONG',
+                loc_jp: 'TOKYO',
+                loc_in: 'NEW DELHI',
+                loc_us: 'NEW YORK',
+                loc_uk: 'LONDON',
+                loc_au: 'CANBERRA',
+                loc_ch: 'BERN'
+            },
+            'jp': {
+                title: 'GAIA アライアンス',
+                subtitle: '世界環境保護機関 | 3D可視化システム',
+                card_title: '本部：中国・重慶',
+                card_desc: '地球環境データの集約ノード。量子コンピューティングを駆使し、8つの気候帯における炭素排出と生態系フローをリアルタイムで解析。',
+                status: 'システム：オンライン',
+                hq_loc: '中国 重慶',
+                loc_cq: '本部：重慶',
+                loc_bj: '北京',
+                loc_hk: '香港',
+                loc_jp: '東京',
+                loc_in: 'ニューデリー',
+                loc_us: 'ニューヨーク',
+                loc_uk: 'ロンドン',
+                loc_au: 'キャンベラ',
+                loc_ch: 'ベルン'
+            },
+            'de': {
+                title: 'GAIA ALLIANZ',
+                subtitle: 'Weltumweltschutzorganisation',
+                card_title: 'HQ: CHONGQING',
+                card_desc: 'Zentraler Knotenpunkt für Umweltdaten. Echtzeitanalyse von Kohlenstoffemissionen in 8 Klimazonen mittels Quantencomputing.',
+                status: 'SYSTEM: ONLINE',
+                hq_loc: 'CHONGQING, CN',
+                loc_cq: 'HQ: CHONGQING',
+                loc_bj: 'PEKING',
+                loc_hk: 'HONGKONG',
+                loc_jp: 'TOKIO',
+                loc_in: 'NEU-DELHI',
+                loc_us: 'NEW YORK',
+                loc_uk: 'LONDON',
+                loc_au: 'CANBERRA',
+                loc_ch: 'BERN'
+            }
+        };
+
+        const LOCATIONS = [
+            { id: 'cq', lat: 29.5630, lon: 106.5516, type: 'hq' },
+            { id: 'bj', lat: 39.9042, lon: 116.4074 },
+            { id: 'hk', lat: 22.3193, lon: 114.1694 },
+            { id: 'jp', lat: 35.6762, lon: 139.6503 },
+            { id: 'in', lat: 28.6139, lon: 77.2090 },
+            { id: 'ch', lat: 46.9480, lon: 7.4474 },
+            { id: 'uk', lat: 51.5074, lon: -0.1278 },
+            { id: 'us', lat: 40.7128, lon: -74.0060 },
+            { id: 'au', lat: -35.2809, lon: 149.1300 }
+        ];
+
+        let scene, camera, renderer, labelRenderer, composer, controls;
+        let earth, clouds;
+        let particles = [];
+        const labelObjects = {};
+        let currentLang = 'zh';
+
+        // --- 核心修复：先定义函数，再赋值给 Window ---
+        
+        function updateLanguageText(lang) {
+            currentLang = lang;
+            
+            // UI 更新
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(i18n[lang][key]) {
+                    el.textContent = i18n[lang][key];
+                }
+            });
+
+            // 3D 标签更新
+            Object.keys(labelObjects).forEach(id => {
+                const el = labelObjects[id];
+                if(el && i18n[lang]['loc_' + id]) {
+                    el.textContent = i18n[lang]['loc_' + id];
+                }
+            });
+
+            // 按钮样式
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+        }
+
+        // 暴露给 HTML 按钮使用
+        window.changeLang = updateLanguageText;
+
+        // --- 主逻辑 ---
+
+        function init() {
+            const container = document.getElementById('canvas-container');
+
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x020408, 0.006); 
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 40, 80);
+
+            // 渲染器 - 高级感设置
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.3; // 提升整体亮度
+            container.appendChild(renderer.domElement);
+
+            labelRenderer = new CSS2DRenderer();
+            labelRenderer.setSize(window.innerWidth, window.innerHeight);
+            labelRenderer.domElement.style.position = 'absolute';
+            labelRenderer.domElement.style.top = '0';
+            labelRenderer.domElement.style.pointerEvents = 'none';
+            container.appendChild(labelRenderer.domElement);
+
+            // 发光效果 (Bloom)
+            const renderPass = new RenderPass(scene, camera);
+            const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+            bloomPass.threshold = 0.25; 
+            bloomPass.strength = 1.0; // 增强辉光
+            bloomPass.radius = 0.5;
+            
+            composer = new EffectComposer(renderer);
+            composer.addPass(renderPass);
+            composer.addPass(bloomPass);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.enablePan = false;
+            controls.minDistance = 12;
+            controls.maxDistance = 100;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.6;
+
+            // 灯光增强 - 确保地球明亮
+            const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambient);
+
+            const sun = new THREE.DirectionalLight(0xffffff, 3.0); // 强阳光
+            sun.position.set(50, 30, 50);
+            scene.add(sun);
+
+            const rim = new THREE.SpotLight(0x0088ff, 3.0); // 侧边蓝光
+            rim.position.set(-50, 0, -20);
+            scene.add(rim);
+
+            // 创建场景元素
+            createStars();
+            createEarth();
+            createNetwork();
+
+            // 入场动画
+            startIntro();
+
+            // 初始化时强制刷新语言（解决初始语言不显示问题）
+            updateLanguageText('zh');
+
+            window.addEventListener('resize', onWindowResize);
+            
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = 0;
+                setTimeout(() => loader.remove(), 800);
+            }, 1000);
+        }
+
+        function createEarth() {
+            const loader = new THREE.TextureLoader();
+            
+            // 明亮材质
+            const mat = new THREE.MeshPhongMaterial({
+                map: loader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'),
+                bumpMap: loader.load('https://unpkg.com/three-globe/example/img/earth-topology.png'),
+                bumpScale: 0.05,
+                specular: new THREE.Color(0x222222),
+                shininess: 10,
+                emissive: new THREE.Color(0x001133), // 关键：自发光，防止背光太黑
+                emissiveIntensity: 0.4
+            });
+            earth = new THREE.Mesh(new THREE.SphereGeometry(10, 64, 64), mat);
+            scene.add(earth);
+
+            // 独立云层
+            const cloudMat = new THREE.MeshLambertMaterial({
+                map: loader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_clouds_1024.png'),
+                transparent: true, opacity: 0.5, side: THREE.DoubleSide
+            });
+            clouds = new THREE.Mesh(new THREE.SphereGeometry(10.2, 64, 64), cloudMat);
+            earth.add(clouds);
+
+            // 大气光晕
+            const atmosMat = new THREE.ShaderMaterial({
+                vertexShader: `
+                    varying vec3 vNormal;
+                    void main() { vNormal = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
+                `,
+                fragmentShader: `
+                    varying vec3 vNormal;
+                    void main() { float i = pow(0.6 - dot(vNormal, vec3(0,0,1)), 3.0); gl_FragColor = vec4(0.2, 0.7, 1.0, 1.0) * i * 1.5; }
+                `,
+                side: THREE.BackSide, blending: THREE.AdditiveBlending, transparent: true
+            });
+            scene.add(new THREE.Mesh(new THREE.SphereGeometry(10.6, 64, 64), atmosMat));
+        }
+
+        function createStars() {
+            const geo = new THREE.BufferGeometry();
+            const arr = new Float32Array(4000 * 3);
+            for(let i=0; i<4000*3; i++) arr[i] = (Math.random()-0.5)*700;
+            geo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+            scene.add(new THREE.Points(geo, new THREE.PointsMaterial({size:0.6, color:0xffffff, transparent:true, opacity:0.8})));
+        }
+
+        function createNetwork() {
+            const hqPos = latLonToVec3(LOCATIONS[0].lat, LOCATIONS[0].lon, 10);
+            
+            LOCATIONS.forEach(loc => {
+                const pos = latLonToVec3(loc.lat, loc.lon, 10);
+                const isHQ = loc.type === 'hq';
+
+                // 标记点
+                const marker = new THREE.Mesh(
+                    new THREE.SphereGeometry(isHQ ? 0.15 : 0.08, 16, 16),
+                    new THREE.MeshBasicMaterial({ color: isHQ ? 0xffd700 : 0x00f2ff })
+                );
+                marker.position.copy(pos);
+                earth.add(marker);
+
+                // 总部特效
+                if(isHQ) {
+                    const ring = new THREE.Mesh(
+                        new THREE.RingGeometry(0.2, 0.3, 32),
+                        new THREE.MeshBasicMaterial({ color: 0xffd700, side: THREE.DoubleSide, transparent:true })
+                    );
+                    ring.lookAt(pos.clone().multiplyScalar(2));
+                    marker.add(ring);
+                    new TWEEN.Tween(ring.scale).to({x:4,y:4}, 2000).repeat(Infinity).start();
+                    new TWEEN.Tween(ring.material).to({opacity:0}, 2000).repeat(Infinity).start();
+                }
+
+                // 文字标签
+                const div = document.createElement('div');
+                div.className = isHQ ? 'label-wrap hq-wrap' : 'label-wrap';
+                const span = document.createElement('span');
+                span.className = 'label-text';
+                div.appendChild(span);
+                
+                const label = new CSS2DObject(div);
+                label.position.set(0, 0.2, 0);
+                marker.add(label);
+                
+                labelObjects[loc.id] = span;
+                setTimeout(() => div.style.opacity = 1, 2000);
+
+                // 连线
+                if(!isHQ) {
+                    const dist = hqPos.distanceTo(pos);
+                    const mid = hqPos.clone().add(pos).multiplyScalar(0.5).normalize().multiplyScalar(10 + dist*0.6);
+                    const curve = new THREE.QuadraticBezierCurve3(hqPos, mid, pos);
+                    
+                    // 静态线
+                    const line = new THREE.Line(
+                        new THREE.BufferGeometry().setFromPoints(curve.getPoints(40)),
+                        new THREE.LineBasicMaterial({ color: 0x00f2ff, transparent:true, opacity:0.15 })
+                    );
+                    earth.add(line);
+
+                    // 动态粒子
+                    const pMesh = new THREE.Points(
+                        new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0]), 3)),
+                        new THREE.PointsMaterial({ color: 0xffffff, size: 0.35, transparent:true })
+                    );
+                    earth.add(pMesh);
+                    particles.push({ mesh: pMesh, curve: curve, t: Math.random() });
+                }
+            });
+        }
+
+        function latLonToVec3(lat, lon, r) {
+            const phi = (90 - lat)*(Math.PI/180);
+            const theta = (lon + 180)*(Math.PI/180);
+            return new THREE.Vector3(
+                -(r * Math.sin(phi) * Math.cos(theta)),
+                r * Math.cos(phi),
+                r * Math.sin(phi) * Math.sin(theta)
+            );
+        }
+
+        function startIntro() {
+            const hq = LOCATIONS[0];
+            const target = latLonToVec3(hq.lat, hq.lon, 25);
+            new TWEEN.Tween(camera.position)
+                .to({x:target.x, y:target.y, z:target.z}, 2500)
+                .easing(TWEEN.Easing.Cubic.InOut)
+                .onComplete(() => controls.autoRotate = true)
+                .start();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+            labelRenderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+            controls.update();
+            composer.render();
+            labelRenderer.render(scene, camera);
+            if(clouds) clouds.rotation.y += 0.0002;
+            particles.forEach(p => {
+                p.t += 0.004;
+                if(p.t > 1) p.t = 0;
+                p.mesh.position.copy(p.curve.getPoint(p.t));
+            });
+        }
+
+        // 启动
+        init();
+        animate();
+    </script>
+</body>
+</html>
