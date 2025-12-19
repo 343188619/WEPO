@@ -4,23 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- --- SEO: 核心标题与描述 --- -->
-    <!-- 标题包含核心关键词：缩写、英文全称、中文全称 -->
     <title>WEPO - World Environmental Protection Organization | 世界环境保护组织</title>
-    
-    <!-- 描述应简练且包含关键词，建议在160字符以内 -->
     <meta name="description" content="The World Environmental Protection Organization (WEPO) is a global NGO dedicated to climate action, biodiversity, and sustainable development. 世界环境保护组织致力于全球环保事业。">
-    
-    <!-- 关键词：包含中英文核心词汇 -->
     <meta name="keywords" content="WEPO, World Environmental Protection Organization, 世界环境保护组织, Environmental NGO, Climate Change, Biodiversity, 环保组织, 气候变化, 可持续发展, Carbon Neutrality">
-    
     <meta name="author" content="WEPO Council">
-    <!-- 规范链接，告诉搜索引擎这是唯一权威版本 (请将 https://wepo.top 替换为你实际的域名) -->
     <link rel="canonical" href="https://wepo.top/">
     <meta name="theme-color" content="#0a0a0a">
 
-    <!-- --- SEO: Open Graph (社交媒体分享优化) --- -->
+    <!-- --- SEO: Open Graph --- -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wepo.top/">
     <meta property="og:title" content="WEPO - World Environmental Protection Organization">
@@ -36,8 +29,7 @@
     <meta name="twitter:description" content="WEPO is an international non-profit organization dedicated to environmental protection and sustainable development.">
     <meta name="twitter:image" content="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
 
-    <!-- --- SEO: 结构化数据 (Schema.org) --- -->
-    <!-- 这一步对于让 Google/Baidu 理解 "WEPO" = "世界环境保护组织" 至关重要 -->
+    <!-- --- SEO: 结构化数据 --- -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -69,50 +61,60 @@
     }
     </script>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-void: #080808;
-            --text-primary: #f2f2f2;
-            --text-secondary: #888888;
+            /* Dark Mode (Default) */
+            --bg-void: #050507;
+            --bg-surface: #111113;
+            --bg-card: rgba(30, 30, 35, 0.4);
+            --text-primary: #F5F5F7;
+            --text-secondary: #86868B;
             --accent-gold: #d4af37;
-            --accent-blue: #2c4f6d;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(20px);
+            --nav-bg: rgba(5, 5, 7, 0.7);
+            --spotlight-color: rgba(60, 80, 120, 0.15);
+            
+            /* Animation Curves (Apple Style) */
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg-void: #F2F2F7;
+            --bg-surface: #FFFFFF;
+            --bg-card: rgba(255, 255, 255, 0.6);
+            --text-primary: #1D1D1F;
+            --text-secondary: #515154;
+            --accent-gold: #B49020; /* Slightly darker for contrast */
+            --border-glass: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.75);
+            --spotlight-color: rgba(212, 175, 55, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
             background-color: var(--bg-void);
             color: var(--text-primary);
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
-            line-height: 1.8;
-            cursor: default;
+            line-height: 1.6;
+            transition: background-color 0.6s var(--ease-apple), color 0.6s var(--ease-apple);
         }
 
-        /* Noise Texture */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: var(--noise-url);
-            pointer-events: none; z-index: 9999; opacity: 0.4;
-        }
-
-        /* Cursor Spotlight */
+        /* Spotlight */
         #cursor-spotlight {
             position: fixed; top: 0; left: 0; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
+            background: radial-gradient(circle, var(--spotlight-color), transparent 70%);
             transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
             transition: transform 0.1s linear;
         }
@@ -120,1036 +122,1200 @@
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
             font-weight: 400;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.015em;
         }
 
-        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
+        a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease-apple); }
         ul { list-style: none; }
 
         /* --- Header --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            padding: 25px 40px;
+            padding: 30px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(8,8,8,0.9), transparent);
-            transition: padding 0.4s var(--easing), background 0.4s;
+            transition: padding 0.4s var(--ease-apple), background 0.4s, border 0.4s;
+            /* Explicitly Transparent at top */
+            background: transparent; 
+            border-bottom: 1px solid transparent;
         }
+
         header.scrolled {
-            background: rgba(8,8,8,0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 40px;
+            background: var(--nav-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 15px 5%;
             border-bottom: 1px solid var(--border-glass);
         }
 
-        /* Logo - Full Color */
         .logo { 
-            height: 45px; 
-            transition: transform 0.4s; 
+            height: 40px; 
+            transition: transform 0.4s var(--ease-apple); 
+            border-radius: 4px; /* Slight rounding looks better */
         }
-        .logo:hover { transform: scale(1.05); }
+        .logo:hover { transform: scale(1.03); }
 
-        nav ul { display: flex; gap: 40px; }
+        nav ul { display: flex; gap: 35px; }
         nav ul li a {
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
-            position: relative; padding: 5px 0;
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; 
+            color: var(--text-primary); opacity: 0.8;
+            position: relative; padding: 5px 0; font-weight: 500;
         }
-        nav ul li a::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-            background: var(--accent-gold); transition: width 0.4s var(--easing);
+        nav ul li a::after {
+            content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 1.5px;
+            background: var(--accent-gold); transition: all 0.4s var(--ease-apple);
+            transform: translateX(-50%);
         }
-        nav ul li a:hover { color: var(--text-primary); }
-        nav ul li a:hover::before { width: 100%; }
+        nav ul li a:hover { opacity: 1; }
+        nav ul li a:hover::after { width: 100%; }
 
-        /* --- Language Switcher --- */
-        .header-actions { display: flex; align-items: center; gap: 20px; }
+        /* Actions Area */
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* Theme Toggle & Lang Btn */
+        .control-btn {
+            background: rgba(125,125,125, 0.1);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-apple);
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            backdrop-filter: blur(5px);
+        }
+        .control-btn:hover {
+            background: rgba(125,125,125, 0.2);
+            transform: scale(1.05);
+        }
+        .control-btn:active { transform: scale(0.95); }
+
+        /* Theme Icon Animation */
+        .theme-icon { width: 14px; height: 14px; fill: currentColor; }
+        [data-theme="light"] .moon-icon { display: block; }
+        [data-theme="light"] .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: block; }
+
+        /* Dropdown */
         .language-switcher { position: relative; }
-        
-        .language-btn {
-            background: transparent; border: 1px solid var(--border-glass);
-            color: var(--text-primary); padding: 8px 18px;
-            border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
-            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
-        }
-        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
-
         .language-dropdown {
-            position: absolute; top: 120%; right: 0;
-            background: #0f0f0f; border: 1px solid var(--border-glass);
-            border-radius: 8px; padding: 10px 0;
-            min-width: max-content;
-            opacity: 0; visibility: hidden; transform: translateY(10px);
-            transition: all 0.3s var(--easing);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: absolute; top: calc(100% + 15px); right: 0;
+            background: var(--bg-surface); 
+            border: 1px solid var(--border-glass);
+            border-radius: 12px; padding: 8px;
+            min-width: 140px;
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.98);
+            transition: all 0.3s var(--ease-apple);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            z-index: 1001;
         }
-        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        
+        .language-switcher:hover .language-dropdown { 
+            opacity: 1; visibility: visible; transform: translateY(0) scale(1); 
+        }
         .language-dropdown li {
-            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
-            white-space: nowrap; text-align: right;
+            padding: 8px 16px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
+            border-radius: 6px; text-align: left; transition: 0.2s;
         }
-        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+        .language-dropdown li:hover { color: var(--text-primary); background: rgba(125,125,125,0.1); }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section (Video) --- */
         .hero {
             height: 100vh; position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: center; text-align: center;
         }
         .hero-video-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.6; filter: contrast(1.1) saturate(0.8); z-index: -1;
+            object-fit: cover; z-index: -1;
+            /* Filter adapts to theme for readability */
+            transition: filter 0.6s;
         }
+        /* Dark mode overlay */
         .hero::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 0%, #080808 90%);
-            z-index: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 0; pointer-events: none;
+            transition: background 0.6s;
+        }
+        /* Adjust hero brightness based on theme */
+        [data-theme="light"] .hero-video-bg { filter: brightness(1.1) contrast(0.9); }
+        [data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,1) 100%); }
+        [data-theme="dark"] .hero-video-bg { filter: brightness(0.7) contrast(1.1); }
+        [data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
+
+        .hero-content { 
+            z-index: 2; max-width: 1200px; padding: 0 20px; 
+            /* Hero text always needs to be visible over video, so we might override theme color slightly here if video is dark, 
+               but with the light mode fade-to-white at bottom, standard colors work. */
         }
 
-        .hero-content { z-index: 2; max-width: 1200px; padding: 0 20px; opacity: 0; animation: fadeUp 1.5s var(--easing) forwards 0.5s; }
+        /* Typewriter Cursor */
+        .typewriter-cursor {
+            display: inline-block; width: 3px; background-color: var(--accent-gold);
+            animation: blink 1s step-end infinite; margin-left: 5px; vertical-align: middle;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1.1; margin-bottom: 30px;
-            color: var(--text-primary); mix-blend-mode: overlay;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-size: clamp(3rem, 7vw, 6.5rem); line-height: 1.1; margin-bottom: 25px;
+            color: var(--text-primary); /* Uses theme color */
+            min-height: 1.2em; /* Prevent jump */
         }
+        /* Force dark text in light mode for hero? 
+           Actually, the "fade to white" gradient at the bottom allows dark text to work.
+           But over the video center, white text is better.
+           Let's apply a text-shadow for better contrast. */
+        .hero h1 { text-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
         .hero p {
-            font-size: clamp(1rem, 1.5vw, 1.2rem); color: rgba(255,255,255,0.8);
-            max-width: 600px; margin: 0 auto 50px; font-weight: 300; letter-spacing: 0.02em;
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text-primary); opacity: 0.9;
+            max-width: 650px; margin: 0 auto 50px; font-weight: 300; letter-spacing: 0.01em;
+            animation: fadeUp 1s var(--ease-out-expo) forwards 0.5s; opacity: 0;
         }
 
-        .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        /* Buttons Apple Style */
+        .btn-group { 
+            display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; 
+            animation: fadeUp 1s var(--ease-out-expo) forwards 0.8s; opacity: 0;
+        }
         .btn {
-            padding: 15px 40px; border-radius: 2px; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;
-            transition: all 0.4s var(--easing); cursor: pointer; position: relative; overflow: hidden;
+            padding: 16px 42px; border-radius: 30px; 
+            font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;
+            transition: transform 0.2s var(--ease-apple), box-shadow 0.3s, background 0.3s;
+            cursor: pointer; position: relative; overflow: hidden;
         }
+        .btn:active { transform: scale(0.96); }
+
         .btn-primary {
-            background: var(--text-primary); color: var(--bg-void); border: 1px solid var(--text-primary); font-weight: 600;
+            background: var(--text-primary); color: var(--bg-void); 
+            border: 1px solid var(--text-primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .btn-primary:hover { background: transparent; color: var(--text-primary); }
+        .btn-primary:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
         
         .btn-secondary {
-            background: transparent; color: var(--text-primary); border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(125,125,125, 0.15); 
+            color: var(--text-primary); 
+            border: 1px solid rgba(125,125,125, 0.3);
+            backdrop-filter: blur(10px);
         }
-        .btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
-
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- Sections --- */
-        .section { padding: 150px 8%; position: relative; }
-        .section.partners-section {
-            padding: 100px 8%;
-            background: #050505;
-            border-top: 1px solid var(--border-glass); 
-            border-bottom: 1px solid var(--border-glass);
+        .btn-secondary:hover { 
+            background: rgba(125,125,125, 0.3);
+            border-color: var(--text-primary);
         }
 
-        .section-header { margin-bottom: 100px; display: flex; flex-direction: column; align-items: flex-start; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Sections General --- */
+        .section { padding: 160px 8%; position: relative; overflow: hidden; }
+        .section-header { margin-bottom: 80px; }
         .section-label {
-            font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 20px;
-            display: flex; align-items: center; gap: 10px;
+            font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; 
+            color: var(--accent-gold); margin-bottom: 25px; font-weight: 600;
+            display: flex; align-items: center; gap: 15px;
         }
-        .section-label::before { content: ''; width: 30px; height: 1px; background: var(--accent-gold); }
+        .section-label::before { content: ''; width: 40px; height: 1px; background: var(--accent-gold); }
         
         .section-title {
-            font-size: 3.5rem; max-width: 800px; line-height: 1.1;
-            background: linear-gradient(to right, #fff, #666); -webkit-background-clip: text; color: transparent;
+            font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; line-height: 1.1;
+            color: var(--text-primary);
         }
+
+        /* --- Reveal Animation Class --- */
+        .reveal {
+            opacity: 0; transform: translateY(50px);
+            transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
 
         /* --- About --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-        .about-content p { color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem; }
+        .about-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; align-items: center; }
+        .about-content p { color: var(--text-secondary); margin-bottom: 30px; font-size: 1.15rem; leading-height: 1.8; }
         
-        .stats-row {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 80px;
-            border-top: 1px solid var(--border-glass); padding-top: 40px;
+        .about-image { position: relative; overflow: hidden; border-radius: 20px; }
+        .about-image img { 
+            width: 100%; display: block; 
+            transition: transform 1.5s var(--ease-apple);
         }
-        .stat-item h4 { font-size: 2.5rem; color: var(--text-primary); margin-bottom: 5px; }
-        .stat-item span { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
+        .about-image:hover img { transform: scale(1.05); }
+
+        .stats-row {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 100px;
+            border-top: 1px solid var(--border-glass); padding-top: 60px;
+        }
+        .stat-item h4 { font-size: 3.5rem; color: var(--text-primary); margin-bottom: 5px; font-family: 'Manrope', sans-serif; font-weight: 600; }
+        .stat-item span { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
 
         /* --- Mission --- */
-        .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .mission-section { background: var(--bg-surface); }
+        .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .mission-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+            background: var(--bg-card);
             border: 1px solid var(--border-glass);
-            padding: 50px 30px;
-            transition: 0.5s var(--easing);
+            padding: 60px 40px; border-radius: 20px;
+            transition: all 0.5s var(--ease-apple);
+            position: relative; overflow: hidden;
         }
-        .mission-card:hover { transform: translateY(-10px); border-color: var(--accent-gold); background: rgba(255,255,255,0.05); }
-        .mission-card h3 { font-size: 1.5rem; margin-bottom: 20px; font-family: 'Manrope', sans-serif; font-weight: 300; }
-        .mission-card p { color: var(--text-secondary); font-size: 0.95rem; }
+        .mission-card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1); 
+            border-color: var(--accent-gold);
+        }
+        .mission-card h3 { font-size: 1.8rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; color: var(--text-primary); }
+        .mission-card p { color: var(--text-secondary); font-size: 1rem; }
 
         /* --- Programs --- */
         .programs-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;
         }
-        .program-item { group: hover; position: relative; }
+        .program-item { 
+            cursor: pointer; 
+            transition: transform 0.4s var(--ease-apple);
+        }
+        .program-item:hover { transform: translateY(-10px); }
+        
         .program-img-box {
-            overflow: hidden; margin-bottom: 25px; position: relative;
+            overflow: hidden; margin-bottom: 30px; border-radius: 16px;
+            position: relative; aspect-ratio: 4/3;
         }
         .program-img-box img {
-            width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: grayscale(100%);
-            transition: transform 0.8s var(--easing), filter 0.5s;
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s var(--ease-apple), filter 0.5s;
+            filter: grayscale(100%);
         }
-        .program-item:hover img { transform: scale(1.1); filter: grayscale(0); }
-        .program-item h3 { font-size: 1.4rem; margin-bottom: 10px; font-family: 'Manrope', sans-serif; }
-        .program-item p { color: var(--text-secondary); font-size: 0.9rem; }
+        .program-item:hover .program-img-box img { transform: scale(1.1); filter: grayscale(0); }
+        
+        .program-item h3 { font-size: 1.6rem; margin-bottom: 12px; color: var(--text-primary); }
+        .program-item p { color: var(--text-secondary); font-size: 1rem; }
 
         /* --- Partners Marquee --- */
-        .marquee { overflow: hidden; white-space: nowrap; position: relative; margin-top: 20px; }
+        .partners-section { background: var(--bg-surface); padding: 120px 0; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); }
+        .marquee { overflow: hidden; white-space: nowrap; position: relative; margin-top: 40px; }
         .marquee::before, .marquee::after {
-            content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2;
-            background: linear-gradient(to right, #050505, transparent);
+            content: ''; position: absolute; top: 0; width: 200px; height: 100%; z-index: 2;
+            pointer-events: none;
         }
-        .marquee::after { right: 0; background: linear-gradient(to left, #050505, transparent); }
+        .marquee::before { left: 0; background: linear-gradient(to right, var(--bg-surface), transparent); }
+        .marquee::after { right: 0; background: linear-gradient(to left, var(--bg-surface), transparent); }
         
-        .track { display: inline-block; animation: scroll 40s linear infinite; }
+        .track { display: inline-block; animation: scroll 60s linear infinite; }
         .partner-text {
-            display: inline-block; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: rgba(255,255,255,0.15);
-            margin: 0 40px; transition: 0.3s; cursor: default;
+            display: inline-block; font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--text-secondary);
+            margin: 0 60px; transition: 0.4s; opacity: 0.3; cursor: default;
         }
         .track:hover { animation-play-state: paused; }
-        .partner-text:hover { color: var(--accent-gold); opacity: 1; }
+        .partner-text:hover { color: var(--accent-gold); opacity: 1; transform: scale(1.1); }
 
         @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
         /* --- Contact --- */
-        .contact-split { display: grid; grid-template-columns: 1fr 1fr; height: 600px; border-top: 1px solid var(--border-glass); }
-        .contact-info { padding: 80px 10%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border-glass); }
-        .info-row { margin-bottom: 40px; }
-        .info-label { font-size: 0.8rem; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .info-val { font-size: 1.4rem; color: var(--text-primary); font-family: 'Playfair Display', serif; }
-        /* Add hover effect to links in info-val */
-        a.info-val:hover { color: var(--accent-gold); }
-        .contact-map { filter: grayscale(1) invert(1); width: 100%; height: 100%; border: none; }
+        .contact-section { background: var(--bg-void); padding: 0; }
+        .contact-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
+        .contact-info { 
+            padding: 120px 12%; 
+            display: flex; flex-direction: column; justify-content: center; 
+            border-right: 1px solid var(--border-glass);
+        }
+        .info-row { margin-bottom: 50px; }
+        .info-label { font-size: 0.85rem; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 15px; display: block; letter-spacing: 0.1em; }
+        .info-val { font-size: 1.8rem; color: var(--text-primary); font-family: 'Playfair Display', serif; }
+        a.info-val { position: relative; display: inline-block; }
+        a.info-val::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--text-primary); transition: width 0.3s;
+        }
+        a.info-val:hover::after { width: 100%; }
+
+        .contact-map { 
+            width: 100%; height: 100%; border: none; 
+            transition: filter 0.6s;
+        }
+        [data-theme="dark"] .contact-map { filter: grayscale(1) invert(1) brightness(0.8); }
+        [data-theme="light"] .contact-map { filter: grayscale(1); }
 
         /* --- Footer --- */
-        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); }
-        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
-        .footer-brand { flex: 1; min-width: 250px; }
-        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
+        footer { padding: 100px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
+        .footer-top { display: flex; justify-content: space-between; margin-bottom: 80px; flex-wrap: wrap; gap: 60px; }
+        .footer-brand img { height: 45px; margin-bottom: 25px; opacity: 0.9; }
+        .footer-brand p { max-width: 300px; color: var(--text-secondary); font-size: 0.95rem; }
         
-        .footer-navs { display: flex; gap: 80px; }
-        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
+        .footer-navs { display: flex; gap: 100px; }
+        .footer-col h5 { color: var(--text-primary); margin-bottom: 25px; font-size: 0.95rem; letter-spacing: 0.05em; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col a { color: var(--text-secondary); font-size: 0.9rem; position: relative; }
         .footer-col a:hover { color: var(--accent-gold); }
-        
+
         .footer-btm {
-            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
-            display: flex; justify-content: space-between; color: #444; font-size: 0.8rem;
+            border-top: 1px solid var(--border-glass); padding-top: 40px;
+            display: flex; justify-content: space-between; color: var(--text-secondary); font-size: 0.85rem;
             flex-wrap: wrap; gap: 20px;
         }
 
         /* --- Cookie Bar --- */
         .cookie-bar {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(200%);
-            background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass); padding: 25px 40px;
-            border-radius: 20px; display: flex; flex-direction: column; gap: 20px;
-            z-index: 9999; transition: 0.6s var(--easing); width: min(600px, 90%);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(200%);
+            background: var(--bg-surface); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass); padding: 30px 50px;
+            border-radius: 24px; display: flex; flex-direction: column; gap: 20px;
+            z-index: 9999; transition: 0.8s var(--ease-apple); width: min(600px, 90%);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
         }
         .cookie-bar.active { transform: translateX(-50%) translateY(0); }
-        .cookie-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+        .cookie-text { font-size: 1rem; color: var(--text-primary); line-height: 1.6; }
         
-        .cookie-links { 
-            display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; font-size: 0.85rem; 
-        }
+        .cookie-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 10px; font-size: 0.9rem; }
         .cookie-links a { color: var(--accent-gold); border-bottom: 1px solid transparent; }
         .cookie-links a:hover { border-bottom-color: var(--accent-gold); }
 
         .cookie-actions { display: flex; gap: 15px; justify-content: center; }
         .c-btn { 
-            background: transparent; border: 1px solid var(--border-glass); 
-            padding: 8px 25px; border-radius: 50px; cursor: pointer; 
-            font-size: 0.85rem; transition: 0.3s; color: var(--text-primary);
+            padding: 12px 30px; border-radius: 50px; cursor: pointer; 
+            font-size: 0.9rem; transition: 0.3s var(--ease-apple); 
         }
-        .c-btn.ok { background: var(--text-primary); color: var(--bg-void); border-color: var(--text-primary); font-weight: 600; }
-        .c-btn.no:hover { border-color: var(--text-secondary); }
-        .c-btn.ok:hover { opacity: 0.9; }
+        .c-btn.ok { background: var(--text-primary); color: var(--bg-void); border: 1px solid var(--text-primary); font-weight: 600; }
+        .c-btn.no { background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); }
+        .c-btn:hover { transform: scale(1.05); }
 
-        /* Mobile Menu */
-        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+        /* --- Mobile --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.6rem; cursor: pointer; }
         .mobile-menu {
-            position: fixed; inset: 0; background: #080808; z-index: 1001;
+            position: fixed; inset: 0; 
+            background: var(--bg-void); /* Solid background for mobile menu */
+            z-index: 1001;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: 0.4s;
+            opacity: 0; pointer-events: none; transition: 0.5s var(--ease-apple);
         }
         .mobile-menu.open { opacity: 1; pointer-events: all; }
-        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
-        .mobile-menu a.active { color: #fff; }
-        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+        .mobile-menu a { font-size: 2.2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: var(--text-secondary); transition: 0.3s; }
+        .mobile-menu a.active, .mobile-menu a:hover { color: var(--text-primary); transform: scale(1.1); }
+        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; color: var(--text-primary); background: none; border: none; cursor: pointer; }
 
-        /* --- Mobile Responsive --- */
         @media (max-width: 1024px) {
-            .section-title { font-size: 2.5rem; }
-            .about-grid, .contact-split { grid-template-columns: 1fr; }
+            .about-grid, .contact-split { grid-template-columns: 1fr; gap: 60px; }
             .stats-row { grid-template-columns: 1fr 1fr; }
             .mission-grid { grid-template-columns: 1fr; }
-            .contact-split { height: auto; }
+            .contact-split { min-height: auto; }
             .contact-info { border-right: none; border-bottom: 1px solid var(--border-glass); padding: 80px 5%; }
             .contact-map { height: 400px; }
             header { padding: 20px; }
-            header.scrolled { padding: 15px 20px; }
         }
 
         @media (max-width: 768px) {
             nav ul { display: none; }
             .mobile-menu-btn { display: block; }
-            
             .hero h1 { font-size: 3rem; }
-            .section { padding: 100px 5%; }
-            .section.partners-section { padding: 80px 5%; }
-            
-            /* Optimized Mobile Footer */
-            .footer-top { flex-direction: column; gap: 40px; }
-            .footer-navs { 
-                flex-wrap: wrap; 
-                gap: 30px; 
-                justify-content: space-between;
-                width: 100%;
-            }
-            .footer-col { flex: 1 1 40%; min-width: 140px; }
-            
-            .cookie-bar { width: 95%; bottom: 20px; padding: 20px; }
-            .cookie-actions { width: 100%; }
-            .c-btn { flex: 1; }
-            
-            .language-dropdown { right: -20px; }
+            .section { padding: 100px 6%; }
+            .footer-navs { flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+            .footer-col { flex: 1 1 40%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Spotlight Effect -->
-    <div id="cursor-spotlight"></div>
+<!-- Spotlight Effect -->
+<div id="cursor-spotlight"></div>
 
-    <header id="header">
-        <a href="#home" class="logo-container">
-            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-        </a>
-        <nav>
-            <!-- SEO: Default text is English, JS replaces it but crawlers see this first -->
-            <ul>
-                <li><a href="#home" data-i18n="nav.home">Home</a></li>
-                <li><a href="#about" data-i18n="nav.about">About</a></li>
-                <li><a href="#mission" data-i18n="nav.mission">Mission</a></li>
-                <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
-                <li><a href="#partners" data-i18n="nav.partners">Partners</a></li>
-                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+<header id="header">
+    <a href="#home" class="logo-container">
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+    </a>
+    <nav>
+        <ul>
+            <li><a href="#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="#mission" data-i18n="nav.mission">Mission</a></li>
+            <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
+            <li><a href="#partners" data-i18n="nav.partners">Partners</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button class="control-btn" id="themeBtn" aria-label="Toggle Theme">
+            <!-- Sun Icon (for dark mode) -->
+            <svg class="theme-icon sun-icon" viewBox="0 0 24 24">
+                <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29zm1.29-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.29 1.29c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.29-1.29zM7.28 17.65a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29z"></path>
+            </svg>
+            <!-- Moon Icon (for light mode) -->
+            <svg class="theme-icon moon-icon" viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+            </svg>
+        </button>
+
+        <div class="language-switcher">
+            <button class="control-btn" id="langBtn">
+                <span data-i18n="lang.current">EN</span> ▾
+            </button>
+            <ul class="language-dropdown">
+                <li data-lang="en">English</li>
+                <li data-lang="zh-CN">中文 (简体)</li>
+                <li data-lang="es">Español</li>
+                <li data-lang="fr">Français</li>
+                <li data-lang="ru">Русский</li>
+                <li data-lang="ar">العربية</li>
             </ul>
-        </nav>
-        <div class="header-actions">
-            <div class="language-switcher">
-                <button class="language-btn" id="langBtn">
-                    <span data-i18n="lang.current">EN</span> ▾
-                </button>
-                <ul class="language-dropdown">
-                    <li data-lang="en">English</li>
-                    <li data-lang="zh-CN">中文 (简体)</li>
-                    <li data-lang="es">Español</li>
-                    <li data-lang="fr">Français</li>
-                    <li data-lang="ru">Русский</li>
-                    <li data-lang="ar">العربية</li>
-                </ul>
-            </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-        <a href="#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
-        <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about">About</a>
-        <a href="#mission" onclick="toggleMobileMenu()" data-i18n="nav.mission">Mission</a>
-        <a href="#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs">Programs</a>
-        <a href="#partners" onclick="toggleMobileMenu()" data-i18n="nav.partners">Partners</a>
-        <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
-        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate" style="color: var(--accent-gold);">Donate</a>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </div>
+</header>
 
-    <section class="hero" id="home">
-        <video class="hero-video-bg" autoplay muted loop playsinline>
-            <source src="https://coss.yupoo.com/upchat/2025-09-25/1758794842595.mp4" type="video/mp4">
-        </video>
-        <div class="hero-content">
-            <!-- H1 is critical for SEO. It contains main Keywords -->
-            <h1 data-i18n="hero.title">Protecting Earth Our Common Home</h1>
-            <p data-i18n="hero.description">WEPO is committed to global environmental protection through scientific research, policy advocacy, and public education.</p>
-            <div class="btn-group">
-                <a href="https://wj.qq.com/s2/17731884/9fba/" class="btn btn-primary" data-i18n="hero.btn_join">Join Us</a>
-                <a href="#programs" class="btn btn-secondary" data-i18n="hero.btn_feedback">Learn More</a>
-            </div>
-        </div>
-    </section>
+<div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+    <a href="#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+    <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about">About</a>
+    <a href="#mission" onclick="toggleMobileMenu()" data-i18n="nav.mission">Mission</a>
+    <a href="#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs">Programs</a>
+    <a href="#partners" onclick="toggleMobileMenu()" data-i18n="nav.partners">Partners</a>
+    <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
+    <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate" style="color: var(--accent-gold);">Donate</a>
+</div>
 
-    <section class="section" id="about">
-        <div class="section-header">
-            <span class="section-label" data-i18n="nav.about">About Us</span>
-            <h2 class="section-title" data-i18n="about.subtitle">Building a sustainable future where humans and nature coexist.</h2>
-        </div>
-        <div class="about-grid">
-            <div class="about-content">
-                <p data-i18n="about.p1">Founded in 2010 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.</p>
-                <p data-i18n="about.p2">From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.</p>
-                <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 5px;" data-i18n="about.report_link">Read Our Annual Report →</a>
-            </div>
-            <div class="about-image">
-                <!-- Added detailed alt text for SEO -->
-                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" style="width:100%; border-radius:4px; filter: grayscale(0.5);" alt="WEPO Team working on environmental protection projects">
-            </div>
-        </div>
-        <div class="stats-row">
-            <div class="stat-item"><h4 data-i18n="stats.countries">30+</h4><span data-i18n="stats.countries_text">Countries</span></div>
-            <div class="stat-item"><h4 data-i18n="stats.staff">500+</h4><span data-i18n="stats.staff_text">Staff</span></div>
-            <div class="stat-item"><h4 data-i18n="stats.projects">100+</h4><span data-i18n="stats.projects_text">Projects</span></div>
-            <div class="stat-item"><h4 data-i18n="stats.volunteers">10k+</h4><span data-i18n="stats.volunteers_text">Volunteers</span></div>
-        </div>
-    </section>
+<section class="hero" id="home">
+    <video class="hero-video-bg" autoplay muted loop playsinline>
+        <source src="https://coss.yupoo.com/upchat/2025-09-25/1758794842595.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+        <!-- H1 text is managed by Typewriter JS -->
+        <h1><span id="hero-title">Protecting Earth Our Common Home</span><span class="typewriter-cursor"></span></h1>
+        
+        <!-- Hidden span to hold the source text for SEO and translation -->
+        <span id="hero-title-source" data-i18n="hero.title" style="display:none;">Protecting Earth Our Common Home</span>
 
-    <section class="section" id="mission" style="background: #0c0c0c;">
-        <div class="section-header">
-            <span class="section-label" data-i18n="nav.mission">Core Values</span>
-            <h2 class="section-title" data-i18n="mission.title">Mission & Vision</h2>
+        <p data-i18n="hero.description">WEPO is committed to global environmental protection through scientific research, policy advocacy, and public education.</p>
+        <div class="btn-group">
+            <a href="https://wj.qq.com/s2/17731884/9fba/" class="btn btn-primary" data-i18n="hero.btn_join">Join Us</a>
+            <a href="#programs" class="btn btn-secondary" data-i18n="hero.btn_feedback">Learn More</a>
         </div>
-        <div class="mission-grid">
-            <div class="mission-card">
-                <h3 data-i18n="mission.mission_title">Our Mission</h3>
-                <p data-i18n="mission.mission_desc">Promoting global environmental protection through science, policy, and education.</p>
-            </div>
-            <div class="mission-card">
-                <h3 data-i18n="mission.vision_title">Our Vision</h3>
-                <p data-i18n="mission.vision_desc">Creating a world where humans and nature coexist in harmony.</p>
-            </div>
-            <div class="mission-card">
-                <h3 data-i18n="mission.values_title">Our Values</h3>
-                <p data-i18n="mission.values_desc">Scientific rigor, collaboration, transparency, and innovation.</p>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <section class="section" id="programs">
-        <div class="section-header">
-            <span class="section-label" data-i18n="nav.programs">Focus Areas</span>
-            <h2 class="section-title" data-i18n="programs.title">Programs</h2>
+<section class="section" id="about">
+    <div class="section-header reveal">
+        <span class="section-label" data-i18n="nav.about">About Us</span>
+        <h2 class="section-title" data-i18n="about.subtitle">Building a sustainable future where humans and nature coexist.</h2>
+    </div>
+    <div class="about-grid">
+        <div class="about-content reveal stagger-1">
+            <p data-i18n="about.p1">Founded in 2010 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.</p>
+            <p data-i18n="about.p2">From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.</p>
+            <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500;" data-i18n="about.report_link">Read Our Annual Report →</a>
         </div>
-        <div class="programs-grid">
-            <div class="program-item">
-                <div class="program-img-box">
-                    <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Change Action - Glaciers melting">
-                </div>
-                <h3 data-i18n="programs.climate_title">Climate Action</h3>
-                <p data-i18n="programs.climate_desc">Helping communities adapt to climate change and promoting carbon neutrality.</p>
-            </div>
-            <div class="program-item">
-                <div class="program-img-box">
-                    <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity Protection - Green forest">
-                </div>
-                <h3 data-i18n="programs.biodiversity_title">Biodiversity</h3>
-                <p data-i18n="programs.biodiversity_desc">Protecting endangered species and restoring ecosystems.</p>
-            </div>
-            <div class="program-item">
-                <div class="program-img-box">
-                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities - Modern green architecture">
-                </div>
-                <h3 data-i18n="programs.cities_title">Sustainable Cities</h3>
-                <p data-i18n="programs.cities_desc">Promoting green buildings and sustainable urban environments.</p>
-            </div>
+        <div class="about-image reveal stagger-2">
+            <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="WEPO Team">
         </div>
-    </section>
+    </div>
+    <div class="stats-row reveal">
+        <div class="stat-item"><h4 data-i18n="stats.countries">30+</h4><span data-i18n="stats.countries_text">Countries</span></div>
+        <div class="stat-item"><h4 data-i18n="stats.staff">500+</h4><span data-i18n="stats.staff_text">Staff</span></div>
+        <div class="stat-item"><h4 data-i18n="stats.projects">100+</h4><span data-i18n="stats.projects_text">Projects</span></div>
+        <div class="stat-item"><h4 data-i18n="stats.volunteers">10k+</h4><span data-i18n="stats.volunteers_text">Volunteers</span></div>
+    </div>
+</section>
 
-    <!-- Partners Section -->
-    <section class="section partners-section" id="partners">
+<section class="section mission-section" id="mission">
+    <div class="section-header reveal">
+        <span class="section-label" data-i18n="nav.mission">Core Values</span>
+        <h2 class="section-title" data-i18n="mission.title">Mission & Vision</h2>
+    </div>
+    <div class="mission-grid">
+        <div class="mission-card reveal stagger-1">
+            <h3 data-i18n="mission.mission_title">Our Mission</h3>
+            <p data-i18n="mission.mission_desc">Promoting global environmental protection through science, policy, and education.</p>
+        </div>
+        <div class="mission-card reveal stagger-2">
+            <h3 data-i18n="mission.vision_title">Our Vision</h3>
+            <p data-i18n="mission.vision_desc">Creating a world where humans and nature coexist in harmony.</p>
+        </div>
+        <div class="mission-card reveal stagger-3">
+            <h3 data-i18n="mission.values_title">Our Values</h3>
+            <p data-i18n="mission.values_desc">Scientific rigor, collaboration, transparency, and innovation.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="programs">
+    <div class="section-header reveal">
+        <span class="section-label" data-i18n="nav.programs">Focus Areas</span>
+        <h2 class="section-title" data-i18n="programs.title">Programs</h2>
+    </div>
+    <div class="programs-grid">
+        <div class="program-item reveal stagger-1">
+            <div class="program-img-box">
+                <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Action">
+            </div>
+            <h3 data-i18n="programs.climate_title">Climate Action</h3>
+            <p data-i18n="programs.climate_desc">Helping communities adapt to climate change and promoting carbon neutrality.</p>
+        </div>
+        <div class="program-item reveal stagger-2">
+            <div class="program-img-box">
+                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity">
+            </div>
+            <h3 data-i18n="programs.biodiversity_title">Biodiversity</h3>
+            <p data-i18n="programs.biodiversity_desc">Protecting endangered species and restoring ecosystems.</p>
+        </div>
+        <div class="program-item reveal stagger-3">
+            <div class="program-img-box">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities">
+            </div>
+            <h3 data-i18n="programs.cities_title">Sustainable Cities</h3>
+            <p data-i18n="programs.cities_desc">Promoting green buildings and sustainable urban environments.</p>
+        </div>
+    </div>
+</section>
+
+<section class="partners-section" id="partners">
+    <div class="section reveal" style="padding-top:0; padding-bottom:0;">
         <div class="section-header">
             <span class="section-label" data-i18n="nav.partners">Partners</span>
             <h2 class="section-title" data-i18n="partners.title">Global Collaboration</h2>
         </div>
-        <div class="marquee">
-            <div class="track">
-                <!-- Set 1 -->
-                <span class="partner-text" data-i18n="partners.wwf">WWF</span>
-                <span class="partner-text" data-i18n="partners.unep">UNEP</span>
-                <span class="partner-text" data-i18n="partners.greenpeace">Greenpeace</span>
-                <span class="partner-text" data-i18n="partners.wepo_china">WEPO China</span>
-                <span class="partner-text" data-i18n="partners.tnc">The Nature Conservancy</span>
-                <span class="partner-text" data-i18n="partners.earth">Earth Alliance</span>
-                <!-- Set 2 (Duplicate for continuous scroll) -->
-                <span class="partner-text" data-i18n="partners.wwf">WWF</span>
-                <span class="partner-text" data-i18n="partners.unep">UNEP</span>
-                <span class="partner-text" data-i18n="partners.greenpeace">Greenpeace</span>
-                <span class="partner-text" data-i18n="partners.wepo_china">WEPO China</span>
-                <span class="partner-text" data-i18n="partners.tnc">The Nature Conservancy</span>
-                <span class="partner-text" data-i18n="partners.earth">Earth Alliance</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" style="background: #0a0a0a;">
-        <div class="contact-split">
-            <div class="contact-info">
-                <h2 style="margin-bottom: 50px; font-size: 2.5rem;" data-i18n="contact.title">Contact Us</h2>
-                <div class="info-row">
-                    <span class="info-label" data-i18n="contact.address_title">Address</span>
-                    <span class="info-val" data-i18n="contact.address" style="font-size: 1.2rem;">No. 10 Xingsheng Ave, Chongqing, CN</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label" data-i18n="contact.email_title">Email</span>
-                    <a href="mailto:xcb@wepo.top" class="info-val">xcb@wepo.top</a>
-                </div>
-                <div class="info-row">
-                    <span class="info-label" data-i18n="contact.phone_title">Phone</span>
-                    <!-- Updated Phone Number with correct country code format -->
-                    <span class="info-val">(+86) 02386161804</span>
-                </div>
-            </div>
-            <div>
-                <iframe class="contact-map" title="WEPO Office Location" src="https://map.qq.com/m/place/info/uid=3303587459730765633&word=%E4%B8%8A%E5%93%81.%E6%8B%BE%E9%99%86&type=point"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo">
-                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
-            </div>
-            <div class="footer-navs">
-                <div class="footer-col">
-                    <h5 data-i18n="footer.links_title">Quick Links</h5>
-                    <ul>
-                        <li><a href="#about" data-i18n="nav.about">About</a></li>
-                        <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
-                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h5 data-i18n="footer.org_title">Organization</h5>
-                    <ul>
-                        <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
-                        <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
-                        <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h5 data-i18n="footer.resources_title">Resources</h5>
-                    <ul>
-                        <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
-                        <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-btm">
-            <p>&copy; <span id="year"></span> WEPO. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Cookie Bar -->
-    <div class="cookie-bar" id="cookieBar">
-        <div class="cookie-text" data-i18n="cookie.text">
-            We use cookies to provide the best experience. By continuing to browse, you agree to our policy.
-        </div>
-        <div class="cookie-links">
-            <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
-            <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
-        </div>
-        <div class="cookie-actions">
-            <button class="c-btn no" onclick="declineCookie()" data-i18n="cookie.decline">Decline</button>
-            <button class="c-btn ok" onclick="acceptCookie()" data-i18n="cookie.accept">Accept</button>
+    </div>
+    <div class="marquee reveal">
+        <div class="track">
+            <span class="partner-text" data-i18n="partners.wwf">WWF</span>
+            <span class="partner-text" data-i18n="partners.unep">UNEP</span>
+            <span class="partner-text" data-i18n="partners.greenpeace">Greenpeace</span>
+            <span class="partner-text" data-i18n="partners.wepo_china">WEPO China</span>
+            <span class="partner-text" data-i18n="partners.tnc">The Nature Conservancy</span>
+            <span class="partner-text" data-i18n="partners.earth">Earth Alliance</span>
+            <!-- Duplicate for loop -->
+            <span class="partner-text" data-i18n="partners.wwf">WWF</span>
+            <span class="partner-text" data-i18n="partners.unep">UNEP</span>
+            <span class="partner-text" data-i18n="partners.greenpeace">Greenpeace</span>
+            <span class="partner-text" data-i18n="partners.wepo_china">WEPO China</span>
+            <span class="partner-text" data-i18n="partners.tnc">The Nature Conservancy</span>
+            <span class="partner-text" data-i18n="partners.earth">Earth Alliance</span>
         </div>
     </div>
+</section>
 
-    <script>
-        // --- Translation Data ---
-        const translations = {
-            "zh-CN": {
-                "lang.current": "中文",
-                "nav.home": "首页",
-                "nav.about": "关于我们",
-                "nav.mission": "使命愿景",
-                "nav.programs": "环保项目",
-                "nav.partners": "合作伙伴",
-                "nav.contact": "联系我们",
-                "nav.videos": "环保视频",
-                "nav.donate": "捐赠支持",
-                "nav.support": "客服支持",
-                "hero.title": "保护地球 我们的共同家园",
-                "hero.description": "世界环境保护组织(WEPO)致力于全球环境保护事业，通过科学研究、政策倡导和公众教育，推动可持续发展。",
-                "hero.btn_feedback": "了解更多",
-                "hero.btn_join": "加入我们",
-                "about.subtitle": "致力于构建人与自然和谐共生的可持续未来。",
-                "about.p1": "世界环境保护组织(WEPO)成立于2010年，总部位于中国重庆。作为一个非营利性国际环保组织，我们始终站在应对环境危机的最前线。",
-                "about.p2": "从气候变化到生物多样性丧失，我们通过科学研究、政策倡导和公众教育，寻找切实可行的解决方案。",
-                "about.report_link": "阅读我们的年度报告 →",
-                "stats.countries": "30+",
-                "stats.countries_text": "国家开展项目",
-                "stats.staff": "500+",
-                "stats.staff_text": "专业工作人员",
-                "stats.projects": "100+",
-                "stats.projects_text": "环保项目",
-                "stats.volunteers": "10k+",
-                "stats.volunteers_text": "志愿者",
-                "mission.title": "使命与愿景",
-                "mission.mission_title": "我们的使命",
-                "mission.mission_desc": "通过科学研究、政策倡导和公众教育，推动全球环境保护事业。",
-                "mission.vision_title": "我们的愿景",
-                "mission.vision_desc": "创造一个人类与自然和谐共处的世界，所有生命都能繁荣昌盛。",
-                "mission.values_title": "核心价值观",
-                "mission.values_desc": "科学严谨、合作共赢、公正透明、勇于创新。",
-                "programs.title": "环保项目",
-                "programs.climate_title": "气候变化应对",
-                "programs.climate_desc": "帮助社区应对气候变化的影响，推动碳中和。",
-                "programs.biodiversity_title": "生物多样性保护",
-                "programs.biodiversity_desc": "保护濒危物种，恢复受损的生态系统。",
-                "programs.cities_title": "可持续城市",
-                "programs.cities_desc": "建设绿色、低碳、宜居的城市环境。",
-                "partners.title": "携手共创变革",
-                "partners.wwf": "世界自然基金会",
-                "partners.unep": "联合国环境署",
-                "partners.greenpeace": "绿色和平",
-                "partners.wepo_china": "WEPO 中国",
-                "partners.tnc": "大自然保护协会",
-                "partners.earth": "地球联盟",
-                "contact.title": "联系我们",
-                "contact.address_title": "地址",
-                "contact.address": "中国重庆市渝北区兴盛大道十号",
-                "contact.email_title": "邮箱",
-                "contact.phone_title": "电话",
-                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
-                "footer.links_title": "快速链接",
-                "footer.org_title": "组织架构",
-                "footer.council": "理事会",
-                "footer.volunteers": "志愿者网络",
-                "footer.resources_title": "资源中心",
-                "footer.reports": "年度报告",
-                "footer.charter": "组织章程",
-                "footer.privacy": "隐私政策",
-                "footer.terms": "用户协议",
-                "cookie.text": "我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。",
-                "cookie.decline": "退出",
-                "cookie.accept": "同意"
-            },
-            "en": {
-                "lang.current": "EN",
-                "nav.home": "Home",
-                "nav.about": "About",
-                "nav.mission": "Mission",
-                "nav.programs": "Programs",
-                "nav.partners": "Partners",
-                "nav.contact": "Contact",
-                "nav.videos": "Videos",
-                "nav.donate": "Donate",
-                "nav.support": "Support",
-                "hero.title": "Protecting Earth Our Common Home",
-                "hero.description": "WEPO is committed to global environmental protection through research, policy advocacy, and public education.",
-                "hero.btn_feedback": "Learn More",
-                "hero.btn_join": "Join Us",
-                "about.subtitle": "Building a sustainable future where humans and nature coexist.",
-                "about.p1": "Founded in 2010 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.",
-                "about.p2": "From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.",
-                "about.report_link": "Read Our Annual Report →",
-                "stats.countries": "30+",
-                "stats.countries_text": "Countries",
-                "stats.staff": "500+",
-                "stats.staff_text": "Staff",
-                "stats.projects": "100+",
-                "stats.projects_text": "Projects",
-                "stats.volunteers": "10k+",
-                "stats.volunteers_text": "Volunteers",
-                "mission.title": "Mission & Vision",
-                "mission.mission_title": "Mission",
-                "mission.mission_desc": "Promoting global environmental protection through science, policy, and education.",
-                "mission.vision_title": "Vision",
-                "mission.vision_desc": "Creating a world where humans and nature coexist in harmony.",
-                "mission.values_title": "Values",
-                "mission.values_desc": "Scientific rigor, collaboration, transparency, and innovation.",
-                "programs.title": "Programs",
-                "programs.climate_title": "Climate Action",
-                "programs.climate_desc": "Helping communities adapt to climate change and promoting carbon neutrality.",
-                "programs.biodiversity_title": "Biodiversity",
-                "programs.biodiversity_desc": "Protecting endangered species and restoring ecosystems.",
-                "programs.cities_title": "Sustainable Cities",
-                "programs.cities_desc": "Promoting green buildings and sustainable urban environments.",
-                "partners.title": "Global Collaboration",
-                "partners.wwf": "WWF",
-                "partners.unep": "UNEP",
-                "partners.greenpeace": "Greenpeace",
-                "partners.wepo_china": "WEPO China",
-                "partners.tnc": "The Nature Conservancy",
-                "partners.earth": "Earth Alliance",
-                "contact.title": "Contact Us",
-                "contact.address_title": "Address",
-                "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-                "contact.email_title": "Email",
-                "contact.phone_title": "Phone",
-                "footer.about": "WEPO is dedicated to global environmental protection.",
-                "footer.links_title": "Quick Links",
-                "footer.org_title": "Organization",
-                "footer.council": "Council",
-                "footer.volunteers": "Volunteers",
-                "footer.resources_title": "Resources",
-                "footer.reports": "Reports",
-                "footer.charter": "Charter",
-                "footer.privacy": "Privacy Policy",
-                "footer.terms": "User Agreement",
-                "cookie.text": "We use cookies to provide the best experience. By continuing, you agree to our policy.",
-                "cookie.decline": "Decline",
-                "cookie.accept": "Accept"
-            },
-            "es": {
-                "lang.current": "ES",
-                "nav.home": "Inicio",
-                "nav.about": "Acerca de",
-                "nav.mission": "Misión",
-                "nav.programs": "Programas",
-                "nav.partners": "Socios",
-                "nav.contact": "Contacto",
-                "nav.videos": "Vídeos",
-                "nav.donate": "Donar",
-                "nav.support": "Soporte",
-                "hero.title": "Protegiendo la Tierra Nuestro Hogar Común",
-                "hero.description": "WEPO se compromete a proteger el medio ambiente global mediante investigación, abogacía política y educación pública.",
-                "hero.btn_feedback": "Más Información",
-                "hero.btn_join": "Únete",
-                "about.subtitle": "Construyendo un futuro sostenible donde humanos y naturaleza coexisten.",
-                "about.p1": "Fundada en 2010 con sede en Chongqing, China, WEPO es una organización internacional sin fines de lucro en la vanguardia de la protección ambiental.",
-                "about.p2": "Desde el cambio climático hasta la pérdida de biodiversidad, buscamos soluciones prácticas a través de la ciencia, la política y la educación.",
-                "about.report_link": "Lea Nuestro Informe Anual →",
-                "stats.countries": "30+",
-                "stats.countries_text": "Países",
-                "stats.staff": "500+",
-                "stats.staff_text": "Personal",
-                "stats.projects": "100+",
-                "stats.projects_text": "Proyectos",
-                "stats.volunteers": "10k+",
-                "stats.volunteers_text": "Voluntarios",
-                "mission.title": "Misión y Visión",
-                "mission.mission_title": "Misión",
-                "mission.mission_desc": "Promover la protección ambiental global mediante la ciencia, la política y la educación.",
-                "mission.vision_title": "Visión",
-                "mission.vision_desc": "Crear un mundo donde humanos y naturaleza coexisten en armonía.",
-                "mission.values_title": "Valores",
-                "mission.values_desc": "Rigor científico, colaboración, transparencia e innovación.",
-                "programs.title": "Programas",
-                "programs.climate_title": "Acción Climática",
-                "programs.climate_desc": "Ayudando a las comunidades a adaptarse al cambio climático y promoviendo la neutralidad de carbono.",
-                "programs.biodiversity_title": "Biodiversidad",
-                "programs.biodiversity_desc": "Protegiendo especies en peligro de extinción y restaurando ecosistemas.",
-                "programs.cities_title": "Ciudades Sostenibles",
-                "programs.cities_desc": "Promoviendo edificios verdes y entornos urbanos sostenibles.",
-                "partners.title": "Colaboración Global",
-                "partners.wwf": "WWF",
-                "partners.unep": "PNUMA",
-                "partners.greenpeace": "Greenpeace",
-                "partners.wepo_china": "WEPO China",
-                "partners.tnc": "The Nature Conservancy",
-                "partners.earth": "Alianza por la Tierra",
-                "contact.title": "Contáctenos",
-                "contact.address_title": "Dirección",
-                "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-                "contact.email_title": "Correo",
-                "contact.phone_title": "Teléfono",
-                "footer.about": "WEPO está dedicada a la protección ambiental global.",
-                "footer.links_title": "Enlaces Rápidos",
-                "footer.org_title": "Organización",
-                "footer.council": "Consejo",
-                "footer.volunteers": "Voluntarios",
-                "footer.resources_title": "Recursos",
-                "footer.reports": "Informes",
-                "footer.charter": "Estatuto",
-                "footer.privacy": "Privacidad",
-                "footer.terms": "Términos",
-                "cookie.text": "Usamos cookies para brindar la mejor experiencia. Al continuar, acepta nuestra política.",
-                "cookie.decline": "Rechazar",
-                "cookie.accept": "Aceptar"
-            },
-            "fr": {
-                "lang.current": "FR",
-                "nav.home": "Accueil",
-                "nav.about": "À propos",
-                "nav.mission": "Mission",
-                "nav.programs": "Programmes",
-                "nav.partners": "Partenaires",
-                "nav.contact": "Contact",
-                "nav.videos": "Vidéos",
-                "nav.donate": "Faire un don",
-                "nav.support": "Support",
-                "hero.title": "Protéger la Terre Notre Maison Commune",
-                "hero.description": "WEPO s'engage à protéger l'environnement mondial par la recherche, le plaidoyer politique et l'éducation publique.",
-                "hero.btn_feedback": "En savoir plus",
-                "hero.btn_join": "Rejoindre",
-                "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
-                "about.p1": "Fondée en 2010 et basée à Chongqing, en Chine, WEPO est une organisation internationale à but non lucratif à l'avant-garde de la protection de l'environnement.",
-                "about.p2": "Du changement climatique à la perte de biodiversité, nous recherchons des solutions pratiques par la science, la politique et l'éducation.",
-                "about.report_link": "Lire Notre Rapport Annuel →",
-                "stats.countries": "30+",
-                "stats.countries_text": "Pays",
-                "stats.staff": "500+",
-                "stats.staff_text": "Personnel",
-                "stats.projects": "100+",
-                "stats.projects_text": "Projets",
-                "stats.volunteers": "10k+",
-                "stats.volunteers_text": "Bénévoles",
-                "mission.title": "Mission et Vision",
-                "mission.mission_title": "Mission",
-                "mission.mission_desc": "Promouvoir la protection de l'environnement mondial par la science, la politique et l'éducation.",
-                "mission.vision_title": "Vision",
-                "mission.vision_desc": "Créer un monde où l'humain et la nature coexistent en harmonie.",
-                "mission.values_title": "Valeurs",
-                "mission.values_desc": "Rigueur scientifique, collaboration, transparence et innovation.",
-                "programs.title": "Programmes",
-                "programs.climate_title": "Action Climatique",
-                "programs.climate_desc": "Aider les communautés à s'adapter au changement climatique et promouvoir la neutralité carbone.",
-                "programs.biodiversity_title": "Biodiversité",
-                "programs.biodiversity_desc": "Protéger les espèces menacées et restaurer les écosystèmes.",
-                "programs.cities_title": "Villes Durables",
-                "programs.cities_desc": "Promouvoir les bâtiments verts et les environnements urbains durables.",
-                "partners.title": "Collaboration Mondiale",
-                "partners.wwf": "WWF",
-                "partners.unep": "PNUE",
-                "partners.greenpeace": "Greenpeace",
-                "partners.wepo_china": "WEPO Chine",
-                "partners.tnc": "The Nature Conservancy",
-                "partners.earth": "Earth Alliance",
-                "contact.title": "Contactez-nous",
-                "contact.address_title": "Adresse",
-                "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-                "contact.email_title": "Email",
-                "contact.phone_title": "Téléphone",
-                "footer.about": "WEPO est dédiée à la protection de l'environnement mondial.",
-                "footer.links_title": "Liens Rapides",
-                "footer.org_title": "Organisation",
-                "footer.council": "Conseil",
-                "footer.volunteers": "Bénévoles",
-                "footer.resources_title": "Ressources",
-                "footer.reports": "Rapports",
-                "footer.charter": "Charte",
-                "footer.privacy": "Confidentialité",
-                "footer.terms": "Conditions",
-                "cookie.text": "Nous utilisons des cookies pour offrir la meilleure expérience. En continuant, vous acceptez notre politique.",
-                "cookie.decline": "Refuser",
-                "cookie.accept": "Accepter"
-            },
-            "ru": {
-                "lang.current": "RU",
-                "nav.home": "Главная",
-                "nav.about": "О нас",
-                "nav.mission": "Миссия",
-                "nav.programs": "Программы",
-                "nav.partners": "Партнеры",
-                "nav.contact": "Контакты",
-                "nav.videos": "Видео",
-                "nav.donate": "Пожертвовать",
-                "nav.support": "Поддержка",
-                "hero.title": "Защита Земли Наш Общий Дом",
-                "hero.description": "WEPO привержена глобальной защите окружающей среды через исследования, политическое влияние и общественное образование.",
-                "hero.btn_feedback": "Узнать больше",
-                "hero.btn_join": "Присоединиться",
-                "about.subtitle": "Создание устойчивого будущего, где человек и природа сосуществуют.",
-                "about.p1": "Основанная в 2010 году со штаб-квартирой в Чунцине, Китай, WEPO является международной неприбыльной организацией на передовой защиты окружающей среды.",
-                "about.p2": "От изменения климата до потери биоразнообразия мы ищем практические решения через науку, политику и образование.",
-                "about.report_link": "Прочитать Наш Годовой Отчет →",
-                "stats.countries": "30+",
-                "stats.countries_text": "Страны",
-                "stats.staff": "500+",
-                "stats.staff_text": "Сотрудники",
-                "stats.projects": "100+",
-                "stats.projects_text": "Проекты",
-                "stats.volunteers": "10k+",
-                "stats.volunteers_text": "Волонтеры",
-                "mission.title": "Миссия и Видение",
-                "mission.mission_title": "Миссия",
-                "mission.mission_desc": "Продвижение глобальной защиты окружающей среды через науку, политику и образование.",
-                "mission.vision_title": "Видение",
-                "mission.vision_desc": "Создание мира, где человек и природа сосуществуют в гармонии.",
-                "mission.values_title": "Ценности",
-                "mission.values_desc": "Научная строгость, сотрудничество, прозрачность и инновации.",
-                "programs.title": "Программы",
-                "programs.climate_title": "Климатические Действия",
-                "programs.climate_desc": "Помощь сообществам в адаптации к изменению климата и продвижение углеродной нейтральности.",
-                "programs.biodiversity_title": "Биоразнообразие",
-                "programs.biodiversity_desc": "Защита вымирающих видов и восстановление экосистем.",
-                "programs.cities_title": "Устойчивые Города",
-                "programs.cities_desc": "Продвижение зеленых зданий и устойчивых городских сред.",
-                "partners.title": "Глобальное Сотрудничество",
-                "partners.wwf": "WWF",
-                "partners.unep": "ЮНЕП",
-                "partners.greenpeace": "Гринпис",
-                "partners.wepo_china": "WEPO Китай",
-                "partners.tnc": "The Nature Conservancy",
-                "partners.earth": "Earth Alliance",
-                "contact.title": "Свяжитесь с нами",
-                "contact.address_title": "Адрес",
-                "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-                "contact.email_title": "Email",
-                "contact.phone_title": "Телефон",
-                "footer.about": "WEPO посвящена глобальной защите окружающей среды.",
-                "footer.links_title": "Быстрые Ссылки",
-                "footer.org_title": "Организация",
-                "footer.council": "Совет",
-                "footer.volunteers": "Волонтеры",
-                "footer.resources_title": "Ресурсы",
-                "footer.reports": "Отчеты",
-                "footer.charter": "Устав",
-                "footer.privacy": "Конфиденциальность",
-                "footer.terms": "Условия",
-                "cookie.text": "Мы используем файлы cookie для обеспечения лучшего опыта. Продолжая, вы соглашаетесь с нашей политикой.",
-                "cookie.decline": "Отклонить",
-                "cookie.accept": "Принять"
-            },
-            "ar": {
-                "lang.current": "العربية",
-                "nav.home": "الرئيسية",
-                "nav.about": "معلومات عنا",
-                "nav.mission": "المهمة",
-                "nav.programs": "البرامج",
-                "nav.partners": "شركاء",
-                "nav.contact": "اتصل",
-                "nav.videos": "أشرطة الفيديو",
-                "nav.donate": "التبرع",
-                "nav.support": "دعم",
-                "hero.title": "حماية الأرض منزلنا المشترك",
-                "hero.description": "ملتزم WEPO بحماية البيئة العالمية من خلال البحث والدعوة السياسية والتعليم العام.",
-                "hero.btn_feedback": "تعرف أكثر",
-                "hero.btn_join": "انضم إلينا",
-                "about.subtitle": "بناء مستقبل مستدام يتعايش فيه الإنسان والطبيعة.",
-                "about.p1": "تأسست عام 2010 ومقرها في تشونغتشينغ ، الصين ، WEPO هي منظمة دولية غير ربحية تتصدر حركة حماية البيئة.",
-                "about.p2": "من تغير المناخ إلى فقدان التنوع البيولوجي ، نسعى إلى حلول عملية من خلال العلم والسياسة والتعليم.",
-                "about.report_link": "اقرأ تقريرنا السنوي →",
-                "stats.countries": "30+",
-                "stats.countries_text": "الدول",
-                "stats.staff": "500+",
-                "stats.staff_text": "الموظفون",
-                "stats.projects": "100+",
-                "stats.projects_text": "المشاريع",
-                "stats.volunteers": "10k+",
-                "stats.volunteers_text": "المتطوعون",
-                "mission.title": "المهمة والرؤية",
-                "mission.mission_title": "المهمة",
-                "mission.mission_desc": "تعزيز الحماية البيئية العالمية من خلال العلم والسياسة والتعليم.",
-                "mission.vision_title": "الرؤية",
-                "mission.vision_desc": "خلق عالم يتعايش فيه الإنسان والطبيعة في تناغم.",
-                "mission.values_title": "القيم",
-                "mission.values_desc": "الصرامة العلمية والتعاون والشفافية والابتكار.",
-                "programs.title": "البرامج",
-                "programs.climate_title": "العمل المناخي",
-                "programs.climate_desc": "مساعدة المجتمعات على التكيف مع تغير المناخ وتعزيز الحياد الكربوني.",
-                "programs.biodiversity_title": "التنوع البيولوجي",
-                "programs.biodiversity_desc": "حماية الأنواع المهددة بالانقراض واستعادة النظم البيئية.",
-                "programs.cities_title": "مدن مستدامة",
-                "programs.cities_desc": "تعزيز المباني الخضراء والبيئات الحضرية المستدامة.",
-                "partners.title": "تعاون عالمي",
-                "partners.wwf": "الصندوق العالمي للطبيعة",
-                "partners.unep": "برنامج الأمم المتحدة للبيئة",
-                "partners.greenpeace": "منظمة السلام الأخضر",
-                "partners.wepo_china": "WEPO الصين",
-                "partners.tnc": "منظمة الحفاظ على الطبيعة",
-                "partners.earth": "تحالف الأرض",
-                "contact.title": "اتصل بنا",
-                "contact.address_title": "العنوان",
-                "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-                "contact.email_title": "البريد الإلكتروني",
-                "contact.phone_title": "الهاتف",
-                "footer.about": "ملتزم WEPO بحماية البيئة العالمية.",
-                "footer.links_title": "روابط سريعة",
-                "footer.org_title": "المنظمة",
-                "footer.council": "المجلس",
-                "footer.volunteers": "المتطوعون",
-                "footer.resources_title": "الموارد",
-                "footer.reports": "التقارير",
-                "footer.charter": "الميثاق",
-                "footer.privacy": "الخصوصية",
-                "footer.terms": "الشروط",
-                "cookie.text": "نحن نستخدم ملفات تعريف الارتباط لتوفير أفضل تجربة. من خلال الاستمرار ، فإنك توافق على سياستنا.",
-                "cookie.decline": "رفض",
-                "cookie.accept": "قبول"
-            }
-        };
+<section id="contact" class="contact-section">
+    <div class="contact-split">
+        <div class="contact-info reveal">
+            <h2 style="margin-bottom: 60px; font-size: 3rem;" data-i18n="contact.title">Contact Us</h2>
+            <div class="info-row">
+                <span class="info-label" data-i18n="contact.address_title">Address</span>
+                <span class="info-val" data-i18n="contact.address" style="font-size: 1.4rem;">No. 10 Xingsheng Ave, Chongqing, CN</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label" data-i18n="contact.email_title">Email</span>
+                <a href="mailto:xcb@wepo.top" class="info-val">xcb@wepo.top</a>
+            </div>
+            <div class="info-row">
+                <span class="info-label" data-i18n="contact.phone_title">Phone</span>
+                <span class="info-val">(+86) 02386161804</span>
+            </div>
+        </div>
+        <div>
+            <iframe class="contact-map" title="WEPO Office Location" src="https://map.qq.com/m/place/info/uid=3303587459730765633&word=%E4%B8%8A%E5%93%81.%E6%8B%BE%E9%99%86&type=point"></iframe>
+        </div>
+    </div>
+</section>
 
-        // --- Logic Control ---
+<footer>
+    <div class="footer-top">
+        <div class="footer-brand reveal">
+            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo">
+            <p data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+        </div>
+        <div class="footer-navs reveal stagger-1">
+            <div class="footer-col">
+                <h5 data-i18n="footer.links_title">Quick Links</h5>
+                <ul>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
+                    <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+                    <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5 data-i18n="footer.org_title">Organization</h5>
+                <ul>
+                    <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
+                    <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+                    <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5 data-i18n="footer.resources_title">Resources</h5>
+                <ul>
+                    <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
+                    <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-btm reveal">
+        <p>&copy; <span id="year"></span> WEPO. All rights reserved.</p>
+    </div>
+</footer>
+
+<div class="cookie-bar" id="cookieBar">
+    <div class="cookie-text" data-i18n="cookie.text">
+        We use cookies to provide the best experience. By continuing to browse, you agree to our policy.
+    </div>
+    <div class="cookie-links">
+        <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
+    </div>
+    <div class="cookie-actions">
+        <button class="c-btn no" onclick="declineCookie()" data-i18n="cookie.decline">Decline</button>
+        <button class="c-btn ok" onclick="acceptCookie()" data-i18n="cookie.accept">Accept</button>
+    </div>
+</div>
+
+<script>
+    // --- Data ---
+    const translations = {
+        "zh-CN": {
+            "lang.current": "中文",
+            "nav.home": "首页",
+            "nav.about": "关于我们",
+            "nav.mission": "使命愿景",
+            "nav.programs": "环保项目",
+            "nav.partners": "合作伙伴",
+            "nav.contact": "联系我们",
+            "nav.videos": "环保视频",
+            "nav.donate": "捐赠支持",
+            "nav.support": "客服支持",
+            "hero.title": "保护地球 我们的共同家园",
+            "hero.description": "世界环境保护组织(WEPO)致力于全球环境保护事业，通过科学研究、政策倡导和公众教育，推动可持续发展。",
+            "hero.btn_feedback": "了解更多",
+            "hero.btn_join": "加入我们",
+            "about.subtitle": "致力于构建人与自然和谐共生的可持续未来。",
+            "about.p1": "世界环境保护组织(WEPO)成立于2010年，总部位于中国重庆。作为一个非营利性国际环保组织，我们始终站在应对环境危机的最前线。",
+            "about.p2": "从气候变化到生物多样性丧失，我们通过科学研究、政策倡导和公众教育，寻找切实可行的解决方案。",
+            "about.report_link": "阅读我们的年度报告 →",
+            "stats.countries": "30+",
+            "stats.countries_text": "国家开展项目",
+            "stats.staff": "500+",
+            "stats.staff_text": "专业工作人员",
+            "stats.projects": "100+",
+            "stats.projects_text": "环保项目",
+            "stats.volunteers": "10k+",
+            "stats.volunteers_text": "志愿者",
+            "mission.title": "使命与愿景",
+            "mission.mission_title": "我们的使命",
+            "mission.mission_desc": "通过科学研究、政策倡导和公众教育，推动全球环境保护事业。",
+            "mission.vision_title": "我们的愿景",
+            "mission.vision_desc": "创造一个人类与自然和谐共处的世界，所有生命都能繁荣昌盛。",
+            "mission.values_title": "核心价值观",
+            "mission.values_desc": "科学严谨、合作共赢、公正透明、勇于创新。",
+            "programs.title": "环保项目",
+            "programs.climate_title": "气候变化应对",
+            "programs.climate_desc": "帮助社区应对气候变化的影响，推动碳中和。",
+            "programs.biodiversity_title": "生物多样性保护",
+            "programs.biodiversity_desc": "保护濒危物种，恢复受损的生态系统。",
+            "programs.cities_title": "可持续城市",
+            "programs.cities_desc": "建设绿色、低碳、宜居的城市环境。",
+            "partners.title": "携手共创变革",
+            "partners.wwf": "世界自然基金会",
+            "partners.unep": "联合国环境署",
+            "partners.greenpeace": "绿色和平",
+            "partners.wepo_china": "WEPO 中国",
+            "partners.tnc": "大自然保护协会",
+            "partners.earth": "地球联盟",
+            "contact.title": "联系我们",
+            "contact.address_title": "地址",
+            "contact.address": "中国重庆市渝北区兴盛大道十号",
+            "contact.email_title": "邮箱",
+            "contact.phone_title": "电话",
+            "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
+            "footer.links_title": "快速链接",
+            "footer.org_title": "组织架构",
+            "footer.council": "理事会",
+            "footer.volunteers": "志愿者网络",
+            "footer.resources_title": "资源中心",
+            "footer.reports": "年度报告",
+            "footer.charter": "组织章程",
+            "footer.privacy": "隐私政策",
+            "footer.terms": "用户协议",
+            "cookie.text": "我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。",
+            "cookie.decline": "退出",
+            "cookie.accept": "同意"
+        },
+        "en": {
+            "lang.current": "EN",
+            "nav.home": "Home",
+            "nav.about": "About",
+            "nav.mission": "Mission",
+            "nav.programs": "Programs",
+            "nav.partners": "Partners",
+            "nav.contact": "Contact",
+            "nav.videos": "Videos",
+            "nav.donate": "Donate",
+            "nav.support": "Support",
+            "hero.title": "Protecting Earth Our Common Home",
+            "hero.description": "WEPO is committed to global environmental protection through research, policy advocacy, and public education.",
+            "hero.btn_feedback": "Learn More",
+            "hero.btn_join": "Join Us",
+            "about.subtitle": "Building a sustainable future where humans and nature coexist.",
+            "about.p1": "Founded in 2010 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.",
+            "about.p2": "From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.",
+            "about.report_link": "Read Our Annual Report →",
+            "stats.countries": "30+",
+            "stats.countries_text": "Countries",
+            "stats.staff": "500+",
+            "stats.staff_text": "Staff",
+            "stats.projects": "100+",
+            "stats.projects_text": "Projects",
+            "stats.volunteers": "10k+",
+            "stats.volunteers_text": "Volunteers",
+            "mission.title": "Mission & Vision",
+            "mission.mission_title": "Mission",
+            "mission.mission_desc": "Promoting global environmental protection through science, policy, and education.",
+            "mission.vision_title": "Vision",
+            "mission.vision_desc": "Creating a world where humans and nature coexist in harmony.",
+            "mission.values_title": "Values",
+            "mission.values_desc": "Scientific rigor, collaboration, transparency, and innovation.",
+            "programs.title": "Programs",
+            "programs.climate_title": "Climate Action",
+            "programs.climate_desc": "Helping communities adapt to climate change and promoting carbon neutrality.",
+            "programs.biodiversity_title": "Biodiversity",
+            "programs.biodiversity_desc": "Protecting endangered species and restoring ecosystems.",
+            "programs.cities_title": "Sustainable Cities",
+            "programs.cities_desc": "Promoting green buildings and sustainable urban environments.",
+            "partners.title": "Global Collaboration",
+            "partners.wwf": "WWF",
+            "partners.unep": "UNEP",
+            "partners.greenpeace": "Greenpeace",
+            "partners.wepo_china": "WEPO China",
+            "partners.tnc": "The Nature Conservancy",
+            "partners.earth": "Earth Alliance",
+            "contact.title": "Contact Us",
+            "contact.address_title": "Address",
+            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
+            "contact.email_title": "Email",
+            "contact.phone_title": "Phone",
+            "footer.about": "WEPO is dedicated to global environmental protection.",
+            "footer.links_title": "Quick Links",
+            "footer.org_title": "Organization",
+            "footer.council": "Council",
+            "footer.volunteers": "Volunteers",
+            "footer.resources_title": "Resources",
+            "footer.reports": "Reports",
+            "footer.charter": "Charter",
+            "footer.privacy": "Privacy Policy",
+            "footer.terms": "User Agreement",
+            "cookie.text": "We use cookies to provide the best experience. By continuing, you agree to our policy.",
+            "cookie.decline": "Decline",
+            "cookie.accept": "Accept"
+        },
+        "es": {
+            "lang.current": "ES",
+            "nav.home": "Inicio",
+            "nav.about": "Acerca de",
+            "nav.mission": "Misión",
+            "nav.programs": "Programas",
+            "nav.partners": "Socios",
+            "nav.contact": "Contacto",
+            "nav.videos": "Vídeos",
+            "nav.donate": "Donar",
+            "nav.support": "Soporte",
+            "hero.title": "Protegiendo la Tierra Nuestro Hogar Común",
+            "hero.description": "WEPO se compromete a proteger el medio ambiente global mediante investigación, abogacía política y educación pública.",
+            "hero.btn_feedback": "Más Información",
+            "hero.btn_join": "Únete",
+            "about.subtitle": "Construyendo un futuro sostenible donde humanos y naturaleza coexisten.",
+            "about.p1": "Fundada en 2010 con sede en Chongqing, China, WEPO es una organización internacional sin fines de lucro en la vanguardia de la protección ambiental.",
+            "about.p2": "Desde el cambio climático hasta la pérdida de biodiversidad, buscamos soluciones prácticas a través de la ciencia, la política y la educación.",
+            "about.report_link": "Lea Nuestro Informe Anual →",
+            "stats.countries": "30+",
+            "stats.countries_text": "Países",
+            "stats.staff": "500+",
+            "stats.staff_text": "Personal",
+            "stats.projects": "100+",
+            "stats.projects_text": "Proyectos",
+            "stats.volunteers": "10k+",
+            "stats.volunteers_text": "Voluntarios",
+            "mission.title": "Misión y Visión",
+            "mission.mission_title": "Misión",
+            "mission.mission_desc": "Promover la protección ambiental global mediante la ciencia, la política y la educación.",
+            "mission.vision_title": "Visión",
+            "mission.vision_desc": "Crear un mundo donde humanos y naturaleza coexisten en armonía.",
+            "mission.values_title": "Valores",
+            "mission.values_desc": "Rigor científico, colaboración, transparencia e innovación.",
+            "programs.title": "Programas",
+            "programs.climate_title": "Acción Climática",
+            "programs.climate_desc": "Ayudando a las comunidades a adaptarse al cambio climático y promoviendo la neutralidad de carbono.",
+            "programs.biodiversity_title": "Biodiversidad",
+            "programs.biodiversity_desc": "Protegiendo especies en peligro de extinción y restaurando ecosistemas.",
+            "programs.cities_title": "Ciudades Sostenibles",
+            "programs.cities_desc": "Promoviendo edificios verdes y entornos urbanos sostenibles.",
+            "partners.title": "Colaboración Global",
+            "partners.wwf": "WWF",
+            "partners.unep": "PNUMA",
+            "partners.greenpeace": "Greenpeace",
+            "partners.wepo_china": "WEPO China",
+            "partners.tnc": "The Nature Conservancy",
+            "partners.earth": "Alianza por la Tierra",
+            "contact.title": "Contáctenos",
+            "contact.address_title": "Dirección",
+            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
+            "contact.email_title": "Correo",
+            "contact.phone_title": "Teléfono",
+            "footer.about": "WEPO está dedicada a la protección ambiental global.",
+            "footer.links_title": "Enlaces Rápidos",
+            "footer.org_title": "Organización",
+            "footer.council": "Consejo",
+            "footer.volunteers": "Voluntarios",
+            "footer.resources_title": "Recursos",
+            "footer.reports": "Informes",
+            "footer.charter": "Estatuto",
+            "footer.privacy": "Privacidad",
+            "footer.terms": "Términos",
+            "cookie.text": "Usamos cookies para brindar la mejor experiencia. Al continuar, acepta nuestra política.",
+            "cookie.decline": "Rechazar",
+            "cookie.accept": "Aceptar"
+        },
+        "fr": {
+            "lang.current": "FR",
+            "nav.home": "Accueil",
+            "nav.about": "À propos",
+            "nav.mission": "Mission",
+            "nav.programs": "Programmes",
+            "nav.partners": "Partenaires",
+            "nav.contact": "Contact",
+            "nav.videos": "Vidéos",
+            "nav.donate": "Faire un don",
+            "nav.support": "Support",
+            "hero.title": "Protéger la Terre Notre Maison Commune",
+            "hero.description": "WEPO s'engage à protéger l'environnement mondial par la recherche, le plaidoyer politique et l'éducation publique.",
+            "hero.btn_feedback": "En savoir plus",
+            "hero.btn_join": "Rejoindre",
+            "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
+            "about.p1": "Fondée en 2010 et basée à Chongqing, en Chine, WEPO est une organisation internationale à but non lucratif à l'avant-garde de la protection de l'environnement.",
+            "about.p2": "Du changement climatique à la perte de biodiversité, nous recherchons des solutions pratiques par la science, la politique et l'éducation.",
+            "about.report_link": "Lire Notre Rapport Annuel →",
+            "stats.countries": "30+",
+            "stats.countries_text": "Pays",
+            "stats.staff": "500+",
+            "stats.staff_text": "Personnel",
+            "stats.projects": "100+",
+            "stats.projects_text": "Projets",
+            "stats.volunteers": "10k+",
+            "stats.volunteers_text": "Bénévoles",
+            "mission.title": "Mission et Vision",
+            "mission.mission_title": "Mission",
+            "mission.mission_desc": "Promouvoir la protection de l'environnement mondial par la science, la politique et l'éducation.",
+            "mission.vision_title": "Vision",
+            "mission.vision_desc": "Créer un monde où l'humain et la nature coexistent en harmonie.",
+            "mission.values_title": "Valeurs",
+            "mission.values_desc": "Rigueur scientifique, collaboration, transparence et innovation.",
+            "programs.title": "Programmes",
+            "programs.climate_title": "Action Climatique",
+            "programs.climate_desc": "Aider les communautés à s'adapter au changement climatique et promouvoir la neutralité carbone.",
+            "programs.biodiversity_title": "Biodiversité",
+            "programs.biodiversity_desc": "Protéger les espèces menacées et restaurer les écosystèmes.",
+            "programs.cities_title": "Villes Durables",
+            "programs.cities_desc": "Promouvoir les bâtiments verts et les environnements urbains durables.",
+            "partners.title": "Collaboration Mondiale",
+            "partners.wwf": "WWF",
+            "partners.unep": "PNUE",
+            "partners.greenpeace": "Greenpeace",
+            "partners.wepo_china": "WEPO Chine",
+            "partners.tnc": "The Nature Conservancy",
+            "partners.earth": "Earth Alliance",
+            "contact.title": "Contactez-nous",
+            "contact.address_title": "Adresse",
+            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
+            "contact.email_title": "Email",
+            "contact.phone_title": "Téléphone",
+            "footer.about": "WEPO est dédiée à la protection de l'environnement mondial.",
+            "footer.links_title": "Liens Rapides",
+            "footer.org_title": "Organisation",
+            "footer.council": "Conseil",
+            "footer.volunteers": "Bénévoles",
+            "footer.resources_title": "Ressources",
+            "footer.reports": "Rapports",
+            "footer.charter": "Charte",
+            "footer.privacy": "Confidentialité",
+            "footer.terms": "Conditions",
+            "cookie.text": "Nous utilisons des cookies pour offrir la meilleure expérience. En continuant, vous acceptez notre politique.",
+            "cookie.decline": "Refuser",
+            "cookie.accept": "Accepter"
+        },
+        "ru": {
+            "lang.current": "RU",
+            "nav.home": "Главная",
+            "nav.about": "О нас",
+            "nav.mission": "Миссия",
+            "nav.programs": "Программы",
+            "nav.partners": "Партнеры",
+            "nav.contact": "Контакты",
+            "nav.videos": "Видео",
+            "nav.donate": "Пожертвовать",
+            "nav.support": "Поддержка",
+            "hero.title": "Защита Земли Наш Общий Дом",
+            "hero.description": "WEPO привержена глобальной защите окружающей среды через исследования, политическое влияние и общественное образование.",
+            "hero.btn_feedback": "Узнать больше",
+            "hero.btn_join": "Присоединиться",
+            "about.subtitle": "Создание устойчивого будущего, где человек и природа сосуществуют.",
+            "about.p1": "Основанная в 2010 году со штаб-квартирой в Чунцине, Китай, WEPO является международной неприбыльной организацией на передовой защиты окружающей среды.",
+            "about.p2": "От изменения климата до потери биоразнообразия мы ищем практические решения через науку, политику и образование.",
+            "about.report_link": "Прочитать Наш Годовой Отчет →",
+            "stats.countries": "30+",
+            "stats.countries_text": "Страны",
+            "stats.staff": "500+",
+            "stats.staff_text": "Сотрудники",
+            "stats.projects": "100+",
+            "stats.projects_text": "Проекты",
+            "stats.volunteers": "10k+",
+            "stats.volunteers_text": "Волонтеры",
+            "mission.title": "Миссия и Видение",
+            "mission.mission_title": "Миссия",
+            "mission.mission_desc": "Продвижение глобальной защиты окружающей среды через науку, политику и образование.",
+            "mission.vision_title": "Видение",
+            "mission.vision_desc": "Создание мира, где человек и природа сосуществуют в гармонии.",
+            "mission.values_title": "Ценности",
+            "mission.values_desc": "Научная строгость, сотрудничество, прозрачность и инновации.",
+            "programs.title": "Программы",
+            "programs.climate_title": "Климатические Действия",
+            "programs.climate_desc": "Помощь сообществам в адаптации к изменению климата и продвижение углеродной нейтральности.",
+            "programs.biodiversity_title": "Биоразнообразие",
+            "programs.biodiversity_desc": "Защита вымирающих видов и восстановление экосистем.",
+            "programs.cities_title": "Устойчивые Города",
+            "programs.cities_desc": "Продвижение зеленых зданий и устойчивых городских сред.",
+            "partners.title": "Глобальное Сотрудничество",
+            "partners.wwf": "WWF",
+            "partners.unep": "ЮНЕП",
+            "partners.greenpeace": "Гринпис",
+            "partners.wepo_china": "WEPO Китай",
+            "partners.tnc": "The Nature Conservancy",
+            "partners.earth": "Earth Alliance",
+            "contact.title": "Свяжитесь с нами",
+            "contact.address_title": "Адрес",
+            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
+            "contact.email_title": "Email",
+            "contact.phone_title": "Телефон",
+            "footer.about": "WEPO посвящена глобальной защите окружающей среды.",
+            "footer.links_title": "Быстрые Ссылки",
+            "footer.org_title": "Организация",
+            "footer.council": "Совет",
+            "footer.volunteers": "Волонтеры",
+            "footer.resources_title": "Ресурсы",
+            "footer.reports": "Отчеты",
+            "footer.charter": "Устав",
+            "footer.privacy": "Конфиденциальность",
+            "footer.terms": "Условия",
+            "cookie.text": "Мы используем файлы cookie для обеспечения лучшего опыта. Продолжая, вы соглашаетесь с нашей политикой.",
+            "cookie.decline": "Отклонить",
+            "cookie.accept": "Принять"
+        },
+        "ar": {
+            "lang.current": "العربية",
+            "nav.home": "الرئيسية",
+            "nav.about": "معلومات عنا",
+            "nav.mission": "المهمة",
+            "nav.programs": "البرامج",
+            "nav.partners": "شركاء",
+            "nav.contact": "اتصل",
+            "nav.videos": "أشرطة الفيديو",
+            "nav.donate": "التبرع",
+            "nav.support": "دعم",
+            "hero.title": "حماية الأرض منزلنا المشترك",
+            "hero.description": "ملتزم WEPO بحماية البيئة العالمية من خلال البحث والدعوة السياسية والتعليم العام.",
+            "hero.btn_feedback": "تعرف أكثر",
+            "hero.btn_join": "انضم إلينا",
+            "about.subtitle": "بناء مستقبل مستدام يتعايش فيه الإنسان والطبيعة.",
+            "about.p1": "تأسست عام 2010 ومقرها في تشونغتشينغ ، الصين ، WEPO هي منظمة دولية غير ربحية تتصدر حركة حماية البيئة.",
+            "about.p2": "من تغير المناخ إلى فقدان التنوع البيولوجي ، نسعى إلى حلول عملية من خلال العلم والسياسة والتعليم.",
+            "about.report_link": "اقرأ تقريرنا السنوي →",
+            "stats.countries": "30+",
+            "stats.countries_text": "الدول",
+            "stats.staff": "500+",
+            "stats.staff_text": "الموظفون",
+            "stats.projects": "100+",
+            "stats.projects_text": "المشاريع",
+            "stats.volunteers": "10k+",
+            "stats.volunteers_text": "المتطوعون",
+            "mission.title": "المهمة والرؤية",
+            "mission.mission_title": "المهمة",
+            "mission.mission_desc": "تعزيز الحماية البيئية العالمية من خلال العلم والسياسة والتعليم.",
+            "mission.vision_title": "الرؤية",
+            "mission.vision_desc": "خلق عالم يتعايش فيه الإنسان والطبيعة في تناغم.",
+            "mission.values_title": "القيم",
+            "mission.values_desc": "الصرامة العلمية والتعاون والشفافية والابتكار.",
+            "programs.title": "البرامج",
+            "programs.climate_title": "العمل المناخي",
+            "programs.climate_desc": "مساعدة المجتمعات على التكيف مع تغير المناخ وتعزيز الحياد الكربوني.",
+            "programs.biodiversity_title": "التنوع البيولوجي",
+            "programs.biodiversity_desc": "حماية الأنواع المهددة بالانقراض واستعادة النظم البيئية.",
+            "programs.cities_title": "مدن مستدامة",
+            "programs.cities_desc": "تعزيز المباني الخضراء والبيئات الحضرية المستدامة.",
+            "partners.title": "تعاون عالمي",
+            "partners.wwf": "الصندوق العالمي للطبيعة",
+            "partners.unep": "برنامج الأمم المتحدة للبيئة",
+            "partners.greenpeace": "منظمة السلام الأخضر",
+            "partners.wepo_china": "WEPO الصين",
+            "partners.tnc": "منظمة الحفاظ على الطبيعة",
+            "partners.earth": "تحالف الأرض",
+            "contact.title": "اتصل بنا",
+            "contact.address_title": "العنوان",
+            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
+            "contact.email_title": "البريد الإلكتروني",
+            "contact.phone_title": "الهاتف",
+            "footer.about": "ملتزم WEPO بحماية البيئة العالمية.",
+            "footer.links_title": "روابط سريعة",
+            "footer.org_title": "المنظمة",
+            "footer.council": "المجلس",
+            "footer.volunteers": "المتطوعون",
+            "footer.resources_title": "الموارد",
+            "footer.reports": "التقارير",
+            "footer.charter": "الميثاق",
+            "footer.privacy": "الخصوصية",
+            "footer.terms": "الشروط",
+            "cookie.text": "نحن نستخدم ملفات تعريف الارتباط لتوفير أفضل تجربة. من خلال الاستمرار ، فإنك توافق على سياستنا.",
+            "cookie.decline": "رفض",
+            "cookie.accept": "قبول"
+        }
+    };
+
+    // --- Typewriter Effect ---
+    let typewriterTimeout;
+    
+    function typeWriter(text, elementId, speed = 100) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
         
-        // 1. Language Switching
-        function setLanguage(lang) {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
+        // Clear existing content and timeout
+        element.textContent = '';
+        clearTimeout(typewriterTimeout);
+        
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typewriterTimeout = setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
+    // --- Logic Control ---
+    
+    // 1. Theme Logic
+    const themeBtn = document.getElementById('themeBtn');
+    
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            // Auto-detect system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    initTheme();
+
+    // 2. Language Switching
+    function setLanguage(lang) {
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                // Special handling for H1 to trigger typewriter
+                if (key === 'hero.title') {
+                    // Store text in the hidden source span, then trigger typewriter
+                    document.getElementById('hero-title-source').textContent = translations[lang][key];
+                    typeWriter(translations[lang][key], 'hero-title', 80);
+                } else {
                     element.textContent = translations[lang][key];
                 }
-            });
-            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            localStorage.setItem('lang', lang);
-        }
-
-        // Initialize: Check localStorage, default to 'en' if nothing saved
-        const savedLang = localStorage.getItem('lang');
-        if (savedLang) {
-            setLanguage(savedLang);
-        } else {
-            // Default is English in HTML, ensure state matches
-            localStorage.setItem('lang', 'en');
-        }
-
-        document.querySelectorAll('.language-dropdown li').forEach(li => {
-            li.addEventListener('click', () => {
-                setLanguage(li.getAttribute('data-lang'));
-            });
-        });
-
-        // 2. Scroll Effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // 3. Spotlight
-        const spot = document.getElementById('cursor-spotlight');
-        document.addEventListener('mousemove', (e) => {
-            spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-        });
-
-        // 4. Mobile Menu
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('open');
-        }
-
-        // 5. Cookie Bar Logic
-        setTimeout(() => {
-            if (!localStorage.getItem('cookieStatus')) {
-                document.getElementById('cookieBar').classList.add('active');
             }
-        }, 1500);
-
-        function acceptCookie() {
-            document.getElementById('cookieBar').classList.remove('active');
-            localStorage.setItem('cookieStatus', 'accepted');
-        }
-
-        function declineCookie() {
-            document.getElementById('cookieBar').classList.remove('active');
-            localStorage.setItem('cookieStatus', 'declined');
-        }
-
-        // 6. Update Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // 7. Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
         });
-    </script>
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        localStorage.setItem('lang', lang);
+    }
+
+    // Initialize Language
+    const savedLang = localStorage.getItem('lang') || 'en';
+    // Small delay to ensure DOM is ready for typewriter
+    setTimeout(() => setLanguage(savedLang), 100);
+
+    document.querySelectorAll('.language-dropdown li').forEach(li => {
+        li.addEventListener('click', () => {
+            setLanguage(li.getAttribute('data-lang'));
+        });
+    });
+
+    // 3. Scroll Effect & Reveal Animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        // Add scrolled class if not at very top
+        header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // 4. Spotlight
+    const spot = document.getElementById('cursor-spotlight');
+    document.addEventListener('mousemove', (e) => {
+        spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    });
+
+    // 5. Mobile Menu
+    function toggleMobileMenu() {
+        document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // 6. Cookie Bar Logic
+    setTimeout(() => {
+        if (!localStorage.getItem('cookieStatus')) {
+            document.getElementById('cookieBar').classList.add('active');
+        }
+    }, 2000); // Slightly longer delay for smoother entrance
+
+    function acceptCookie() {
+        document.getElementById('cookieBar').classList.remove('active');
+        localStorage.setItem('cookieStatus', 'accepted');
+    }
+
+    function declineCookie() {
+        document.getElementById('cookieBar').classList.remove('active');
+        localStorage.setItem('cookieStatus', 'declined');
+    }
+
+    // 7. Update Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+</script>
+
 </body>
 </html>
