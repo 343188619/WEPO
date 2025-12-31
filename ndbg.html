@@ -1,517 +1,436 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page.title">Annual Report 2024 | WEPO - 世界环境保护组织</title>
-    <meta name="description" content="WEPO 2024 Annual Report: Accelerating Action for a Sustainable Future.">
-    <meta name="theme-color" content="#0a0a0a">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
+    <title>2025年度报告 | 世界环境保护组织 WEPO</title>
+    <meta name="description" content="WEPO 2025 Annual Report. Transparency, Impact, and Future Outlook.">
     
-    <!-- Fonts -->
+    <!-- Chart.js 图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-void: #080808;
-            --text-primary: #f2f2f2;
-            --text-secondary: #888888;
+            /* 核心变量 */
+            --bg-void: #050507;
+            --bg-surface: #111113;
+            --bg-card: rgba(30, 30, 35, 0.6);
+            --text-primary: #F5F5F7;
+            --text-secondary: #86868B;
             --accent-gold: #d4af37;
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --accent-red: #ff453a;
+            --accent-green: #30d158;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(20px);
+            --nav-bg: rgba(5, 5, 7, 0.7);
+            --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 浅色模式支持 */
+        [data-theme="light"] {
+            --bg-void: #F2F2F7;
+            --bg-surface: #FFFFFF;
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --text-primary: #1D1D1F;
+            --text-secondary: #515154;
+            --border-glass: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.75);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             background-color: var(--bg-void);
             color: var(--text-primary);
-            font-family: 'Manrope', sans-serif;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            transition: background-color 0.6s, color 0.6s;
             overflow-x: hidden;
-            line-height: 1.8;
-            cursor: default;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            line-height: 1.6;
         }
 
-        /* Noise & Spotlight */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: var(--noise-url); pointer-events: none; z-index: 9999; opacity: 0.4;
-        }
-        #cursor-spotlight {
-            position: fixed; top: 0; left: 0; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
-            transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
-            transition: transform 0.1s linear;
-        }
-
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; letter-spacing: -0.01em; }
-        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
-        ul { list-style: none; }
-
-        /* --- Header --- */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 25px 40px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            background: rgba(8,8,8,0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-glass);
-        }
-        .logo { height: 45px; transition: transform 0.4s; }
-        .logo:hover { transform: scale(1.05); }
-        nav ul { display: flex; gap: 40px; }
-        nav ul li a {
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
-            position: relative; padding: 5px 0;
-        }
-        nav ul li a::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-            background: var(--accent-gold); transition: width 0.4s var(--easing);
-        }
-        nav ul li a:hover { color: var(--text-primary); }
-        nav ul li a:hover::before { width: 100%; }
-
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .language-switcher { position: relative; }
-        .language-btn {
-            background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary);
-            padding: 8px 18px; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
-            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
-        }
-        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
-        .language-dropdown {
-            position: absolute; top: 120%; right: 0; background: #0f0f0f; border: 1px solid var(--border-glass);
-            border-radius: 8px; padding: 10px 0; min-width: max-content;
-            opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s var(--easing);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 1002;
-        }
-        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        .language-dropdown li {
-            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
-            white-space: nowrap; text-align: right;
-        }
-        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
-
-        /* --- Hero Section --- */
-        .report-hero {
-            padding: 180px 8% 100px;
-            border-bottom: 1px solid var(--border-glass);
-            position: relative;
-        }
-        .report-hero h1 {
-            font-size: clamp(4rem, 10vw, 8rem);
-            line-height: 0.9;
-            background: linear-gradient(to bottom, #fff, #666);
-            -webkit-background-clip: text; color: transparent;
-            margin-bottom: 30px;
-        }
-        .report-hero h2 {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            color: var(--accent-gold);
-            margin-bottom: 40px;
+        /* 英文辅助字体 */
+        .en-font { font-family: 'Playfair Display', serif; }
+        .en-sub { 
+            display: block; 
+            font-size: 0.85em; 
+            color: var(--text-secondary); 
+            margin-top: 4px; 
+            font-weight: 300; 
             font-family: 'Manrope', sans-serif;
-            font-weight: 300;
-        }
-        .report-intro {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-            color: var(--text-secondary); font-size: 1.1rem;
+            opacity: 0.8;
         }
 
-        /* --- Common Section --- */
-        .section { padding: 100px 8%; position: relative; }
+        h1, h2, h3 { font-weight: 600; }
 
-        /* --- Impact Stats --- */
-        .impact-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px; margin-top: 20px;
-        }
-        .impact-card {
-            padding: 40px 30px; border: 1px solid var(--border-glass);
-            text-align: center; transition: 0.3s;
-        }
-        .impact-card:hover { border-color: var(--accent-gold); background: rgba(212,175,55,0.05); }
-        .impact-num {
-            font-size: 3.5rem; color: var(--accent-gold); font-family: 'Playfair Display', serif;
-            line-height: 1; margin-bottom: 10px; display: block;
-        }
-        .impact-label { font-size: 0.9rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.1em; }
-
-        /* --- Financials --- */
-        .financial-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .finance-chart { position: relative; }
-        
-        .bar-item { margin-bottom: 25px; }
-        .bar-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-primary); }
-        .bar-track { width: 100%; height: 4px; background: rgba(255,255,255,0.1); position: relative; }
-        .bar-fill { 
-            position: absolute; top: 0; left: 0; height: 100%; 
-            background: var(--accent-gold); width: 0; transition: width 1.5s var(--easing);
-        }
-        
-        .stat-circle {
-            width: 200px; height: 200px; border: 1px solid var(--accent-gold); border-radius: 50%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            margin: 0 auto;
-        }
-        .stat-circle h4 { font-size: 3rem; color: var(--text-primary); line-height: 1; }
-        .stat-circle span { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; }
-
-        /* --- Downloads --- */
-        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .download-card {
-            background: #111; border: 1px solid var(--border-glass); padding: 30px;
+        /* 导航栏 */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s; cursor: pointer;
+            z-index: 100; background: var(--nav-bg);
+            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-glass);
         }
-        .download-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
-        .dl-info h4 { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 5px; font-family: 'Manrope', sans-serif; }
-        .dl-info span { font-size: 0.8rem; color: var(--text-secondary); }
-        .dl-icon { font-size: 1.5rem; color: var(--accent-gold); }
-
-        /* --- Footer --- */
-        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); margin-top: auto; }
-        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
-        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
-        .footer-navs { display: flex; gap: 80px; }
-        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
-        .footer-col a:hover { color: var(--accent-gold); }
-        .footer-btm { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; display: flex; justify-content: space-between; color: #444; font-size: 0.8rem; flex-wrap: wrap; gap: 20px; }
-
-        /* Mobile Menu */
-        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
-        .mobile-menu {
-            position: fixed; inset: 0; background: #080808; z-index: 1001;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: 0.4s;
+        .logo { height: 36px; border-radius: 4px; }
+        .back-link { 
+            font-size: 0.9rem; color: var(--text-secondary); text-decoration: none; 
+            display: flex; align-items: center; gap: 8px; transition: 0.3s; 
         }
-        .mobile-menu.open { opacity: 1; pointer-events: all; }
-        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
-        .mobile-menu a.active { color: #fff; }
-        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+        .back-link:hover { color: var(--accent-gold); }
+
+        /* 头部 Hero 区域 */
+        .report-hero {
+            padding: 160px 8% 80px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+        }
+        .report-label { color: var(--accent-gold); letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; display: block; }
+        .report-title { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; margin-bottom: 30px; }
+        .report-subtitle { max-width: 800px; margin: 0 auto; color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* 通用容器 */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        
+        /* 统计卡片网格 */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin-bottom: 80px;
+        }
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border-glass);
+            padding: 25px; border-radius: 20px; text-align: center;
+            transition: transform 0.3s var(--ease-apple);
+        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
+        .stat-num { font-size: 2.2rem; font-family: 'Playfair Display', serif; color: var(--text-primary); margin-bottom: 5px; }
+        .stat-num.money { color: var(--accent-gold); }
+        .stat-desc { color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; }
+        .stat-desc .en-sub { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* 图表分析区域 */
+        .analysis-section { padding: 40px 0; }
+        .section-head { margin-bottom: 40px; text-align: left; border-left: 3px solid var(--accent-gold); padding-left: 20px; }
+        .section-head h2 { font-size: 2rem; margin-bottom: 5px; }
+        
+        .charts-wrapper {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+            margin-bottom: 60px;
+        }
+        .chart-card {
+            background: var(--bg-card); border: 1px solid var(--border-glass);
+            border-radius: 24px; padding: 30px;
+            position: relative; height: 420px;
+            display: flex; flex-direction: column;
+        }
+        .chart-title { font-size: 1.1rem; margin-bottom: 20px; color: var(--text-primary); font-weight: 600; display: flex; justify-content: space-between; align-items: baseline; }
+        .chart-title span { font-size: 0.85rem; color: var(--text-secondary); font-weight: 400; }
+        
+        .full-width-chart { grid-column: 1 / -1; height: 450px; }
+
+        /* 财务摘要框 */
+        .financial-summary {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            background: rgba(125,125,125,0.05); padding: 40px; border-radius: 20px;
+            margin-bottom: 60px; border: 1px solid var(--border-glass);
+        }
+        .f-item h4 { font-size: 1.3rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .f-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-top: 10px; }
+        .deficit-alert { color: var(--accent-red); font-weight: 600; font-size: 0.85rem; margin-top: 10px; display: inline-block; padding: 4px 10px; background: rgba(255,69,58,0.1); border-radius: 4px; }
+
+        /* 底部下载按钮 */
+        .dl-btn {
+            display: inline-block; padding: 14px 35px; background: var(--text-primary);
+            color: var(--bg-void); text-decoration: none; border-radius: 50px;
+            font-weight: 600; margin-top: 40px; transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .dl-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        /* 页脚 */
+        footer { padding: 60px 5%; border-top: 1px solid var(--border-glass); text-align: center; color: var(--text-secondary); font-size: 0.85rem; }
 
         @media (max-width: 768px) {
-            nav ul { display: none; }
-            .mobile-menu-btn { display: block; }
-            .report-hero h1 { font-size: 4rem; }
-            .report-intro { grid-template-columns: 1fr; }
-            .financial-split { grid-template-columns: 1fr; }
-            .footer-top { flex-direction: column; gap: 40px; }
-            .footer-navs { flex-wrap: wrap; gap: 30px; width: 100%; justify-content: space-between; }
+            .charts-wrapper { grid-template-columns: 1fr; }
+            .financial-summary { grid-template-columns: 1fr; gap: 30px; }
+            .report-title { font-size: 2rem; }
+            .stat-num { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="cursor-spotlight"></div>
+<header>
+    <a href="index.html" class="logo-container">
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+    </a>
+    <a href="index.html" class="back-link">
+        <span>← 返回首页</span>
+        <span style="font-size: 0.8em; opacity: 0.6; margin-left: 5px;">Back Home</span>
+    </a>
+</header>
 
-    <header id="header">
-        <a href="index.html" class="logo-container">
-            <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-        </a>
-        <nav>
-            <ul>
-                <li><a href="index.html" data-i18n="nav.home"></a></li>
-                <li><a href="crlsh.html" data-i18n="nav.council"></a></li>
-                <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-                <li><a href="index.html#about" data-i18n="nav.about"></a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-                <li><a href="sp.html" data-i18n="nav.videos"></a></li>
-                <li><a href="jz.html" data-i18n="nav.donate"></a></li>
-            </ul>
-        </nav>
-        <div class="header-actions">
-            <div class="language-switcher">
-                <button class="language-btn" id="langBtn">
-                    <span data-i18n="lang.current"></span> ▾
-                </button>
-                <ul class="language-dropdown">
-                    <li data-lang="zh-CN">中文 (简体)</li>
-                    <li data-lang="en">English</li>
-                    <li data-lang="es">Español</li>
-                    <li data-lang="fr">Français</li>
-                    <li data-lang="ru">Русский</li>
-                    <li data-lang="ar">العربية</li>
-                </ul>
-            </div>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+<section class="report-hero">
+    <span class="report-label">Transparency & Impact | 透明 · 影响 · 未来</span>
+    <h1 class="report-title">
+        2025 年度报告
+        <span class="en-sub" style="font-size: 0.4em; margin-top: 10px; font-weight: 400;">2025 Annual Report</span>
+    </h1>
+    <p class="report-subtitle">
+        这一年充满了韧性与变革。尽管面临财务挑战，我们仍通过科学行动扩大了全球影响力，致力于构建人与自然和谐共生的未来。
+        <br>
+        <span class="en-sub" style="margin-top: 15px;">A year of resilience, expansion, and scientific action. Despite financial challenges, our global impact has never been stronger.</span>
+    </p>
+    
+ 
+    <a href="https://img.nickyam.com/file/BQACAgUAAyEGAASS2zT1AAIzkWlU1Ad5svd7XzbMV0Ptk3H3I-FWAAIGGgACD4CoVo_XR_ngfnB8OAQ.pdf" target="_blank" class="dl-btn">
+        下载完整 PDF 报告 <span style="font-weight: 300; opacity: 0.8;">| Download PDF</span>
+    </a>
+
+</section>
+
+<!-- 1. 核心统计数据 (Key Statistics) -->
+<div class="container">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-num" data-target="158">0</div>
+            <div class="stat-desc">活跃项目 <span class="en-sub">Active Projects</span></div>
         </div>
-    </header>
+        <div class="stat-card">
+            <div class="stat-num" data-target="36">0</div>
+            <div class="stat-desc">覆盖国家 <span class="en-sub">Countries</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" data-target="105">0</div>
+            <div class="stat-desc">活跃志愿者 <span class="en-sub">Active Volunteers</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" data-target="72">0</div>
+            <div class="stat-desc">新成员 <span class="en-sub">New Members</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" data-target="26">0</div>
+            <div class="stat-desc">保护物种 <span class="en-sub">Protected Species</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num money">¥5.6k</div>
+            <div class="stat-desc">公益支出 <span class="en-sub">Public Welfare</span></div>
+        </div>
+    </div>
+</div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav.home"></a>
-        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="nav.council"></a>
-        <a href="index.html#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs"></a>
-        <a href="index.html#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
-        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
-        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos"></a>
-        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate"></a>
+<!-- 2. 财务分析 (Financial Analysis) -->
+<div class="container analysis-section">
+    <div class="section-head">
+        <h2>财务概览 <span style="font-size: 0.5em; font-weight: 300; color: var(--text-secondary); margin-left: 10px;">Financial Overview</span></h2>
+        <p style="color: var(--text-secondary);">深入解析我们的财政责任与资金流向。</p>
     </div>
 
-    <!-- Hero Section -->
-    <section class="report-hero">
-        <h1 data-i18n="report.year">2024</h1>
-        <h2 data-i18n="report.title">Annual Report</h2>
-        <div class="report-intro">
-            <p data-i18n="report.intro1">In a year defined by unprecedented climate challenges, WEPO has remained steadfast in its mission. We have expanded our global reach, deepened our scientific impact, and empowered communities to take action.</p>
-            <p data-i18n="report.intro2">This report outlines our strategic achievements, financial transparency, and the roadmap for a resilient future. Together, we are building a world where humans and nature thrive.</p>
+    <div class="financial-summary">
+        <div class="f-item">
+            <h4>总收入 <span class="en-sub" style="display:inline; margin-left: 10px;">Total Income</span></h4>
+            <div class="stat-num money" style="font-size: 2rem;">¥51,987.75</div>
+            <p>
+                资金主要来自个人捐赠者和小额赠款。虽然支持力度保持稳定，但我们正积极寻求新的企业合作伙伴以扩大运营规模。
+            </p>
+            <p class="en-sub">Funding primarily driven by individual donors. actively seeking new corporate partnerships.</p>
         </div>
-    </section>
+        <div class="f-item">
+            <h4>总支出 <span class="en-sub" style="display:inline; margin-left: 10px;">Total Expenditure</span></h4>
+            <div class="stat-num" style="font-size: 2rem;">¥52,873.66</div>
+            <p>
+                对新生物多样性项目的战略性投资导致支出略高于收入。
+            </p>
+            <span class="deficit-alert">⚠️ 年度赤字 Deficit: -¥885.91 (由储备金覆盖)</span>
+        </div>
+    </div>
 
-    <!-- Impact Stats -->
-    <section class="section" style="background: #050505;">
-        <div class="section-header">
-            <h3 style="color: #fff; font-size: 2rem; margin-bottom: 20px;" data-i18n="impact.title">Our Impact in Numbers</h3>
+    <div class="charts-wrapper">
+        <!-- 收支对比图 -->
+        <div class="chart-card">
+            <h3 class="chart-title">收支对比分析 <span>Income vs. Expenditure</span></h3>
+            <canvas id="financeChart"></canvas>
         </div>
-        <div class="impact-grid">
-            <div class="impact-card">
-                <span class="impact-num" data-count="50">50M+</span>
-                <span class="impact-label" data-i18n="impact.trees">Trees Planted</span>
-            </div>
-            <div class="impact-card">
-                <span class="impact-num" data-count="30">30</span>
-                <span class="impact-label" data-i18n="impact.countries">Countries Active</span>
-            </div>
-            <div class="impact-card">
-                <span class="impact-num" data-count="120">120</span>
-                <span class="impact-label" data-i18n="impact.species">Species Protected</span>
-            </div>
-            <div class="impact-card">
-                <span class="impact-num" data-count="5000">5000+</span>
-                <span class="impact-label" data-i18n="impact.volunteers">New Volunteers</span>
-            </div>
+        
+        <!-- 支出分布图 -->
+        <div class="chart-card">
+            <h3 class="chart-title">资金支出分布 <span>Expenditure Allocation</span></h3>
+            <canvas id="allocationChart"></canvas>
         </div>
-    </section>
 
-    <!-- Financials -->
-    <section class="section">
-        <h3 style="color: #fff; font-size: 2rem; margin-bottom: 60px;" data-i18n="finance.title">Financial Overview</h3>
-        <div class="financial-split">
-            <div>
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span data-i18n="finance.program">Program Services</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
-                </div>
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span data-i18n="finance.fundraising">Fundraising</span>
-                        <span>10%</span>
-                    </div>
-                    <div class="bar-track"><div class="bar-fill" style="width: 10%;"></div></div>
-                </div>
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span data-i18n="finance.admin">Management & General</span>
-                        <span>5%</span>
-                    </div>
-                    <div class="bar-track"><div class="bar-fill" style="width: 5%;"></div></div>
-                </div>
-                <p style="margin-top: 40px; font-size: 0.9rem; color: #666;" data-i18n="finance.note">We are committed to transparency. 85 cents of every dollar donated goes directly to our environmental programs.</p>
-            </div>
-            <div style="text-align: center;">
-                <div class="stat-circle">
-                    <h4>$12.5M</h4>
-                    <span data-i18n="finance.revenue">Total Revenue</span>
-                </div>
-            </div>
+        <!-- 增长趋势图 -->
+        <div class="chart-card full-width-chart">
+            <h3 class="chart-title">增长轨迹与影响力 (2025季度) <span>Growth Trajectory</span></h3>
+            <canvas id="growthChart"></canvas>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Downloads -->
-    <section class="section" style="background: #050505;">
-        <h3 style="color: #fff; font-size: 2rem; margin-bottom: 40px;" data-i18n="download.title">Downloads</h3>
-        <div class="download-grid">
-            <div class="download-card">
-                <div class="dl-info">
-                    <h4 data-i18n="download.full">Full Report 2024</h4>
-                    <span>PDF (15 MB)</span>
-                </div>
-                <div class="dl-icon">↓</div>
-            </div>
-            <div class="download-card">
-                <div class="dl-info">
-                    <h4 data-i18n="download.financial">Financial Statement</h4>
-                    <span>PDF (3 MB)</span>
-                </div>
-                <div class="dl-icon">↓</div>
-            </div>
-            <div class="download-card">
-                <div class="dl-info">
-                    <h4 data-i18n="download.summary">Executive Summary</h4>
-                    <span>PDF (5 MB)</span>
-                </div>
-                <div class="dl-icon">↓</div>
-            </div>
+<!-- 3. 影响力叙述 (Impact Narrative) -->
+<div class="container" style="padding-bottom: 100px;">
+    <div class="financial-summary" style="background: transparent; border: none; padding: 0;">
+        <div class="f-item">
+            <h2>公益与慈善 <span class="en-sub" style="font-size: 0.5em; display: inline-block;">Public Welfare</span></h2>
+            <p style="margin-top: 20px;">
+                2025年，WEPO 直接拨付了 <strong>¥5,628.00</strong> 用于公益事业。这包括紧急救灾物资以及为偏远地区学校提供的环保教育材料。
+                <br>
+                <span class="en-sub">This represents approximately <strong>10.6%</strong> of our total expenditure, ensuring funds directly aid communities in need.</span>
+            </p>
         </div>
-    </section>
+        <div class="f-item">
+            <h2>全球足迹 <span class="en-sub" style="font-size: 0.5em; display: inline-block;">Global Reach</span></h2>
+            <p style="margin-top: 20px;">
+                我们的网络已扩展至 <strong>36个国家</strong>。随着本年度 <strong>105名志愿者</strong> 和 <strong>72名新成员</strong> 的加入，我们的基层行动能力翻了一番。
+                <br>
+                重点保护工作集中在 <strong>26个特定濒危物种</strong>，包括东南亚的穿山甲和喜马拉雅山的雪豹。
+            </p>
+        </div>
+    </div>
+</div>
 
-    <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="Logo">
-                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
-            </div>
-            <div class="footer-navs">
-                <div class="footer-col">
-                    <h5 data-i18n="footer.links_title">Quick Links</h5>
-                    <ul>
-                        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
-                        <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
-                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h5 data-i18n="footer.contact_title">Contact</h5>
-                    <ul>
-                         <li data-i18n="footer.address">Address: No. 10 Xingsheng Ave, Chongqing, CN</li>
-                         <li><a href="mailto:xcb@wepo.top" data-i18n="footer.email">Email: xcb@wepo.top</a></li>
-                         <li data-i18n="footer.phone">Phone: (+86) 02386161804</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-btm">
-            <p>&copy; <span id="year"></span> <span data-i18n="footer.copyright">WEPO. All rights reserved.</span></p>
-        </div>
-    </footer>
+<footer>
+    <p>&copy; 2025 世界环境保护组织 (WEPO). 保留所有权利。</p>
+    <p style="margin-top: 10px; opacity: 0.6; font-size: 0.8rem;">
+        财务数据截止至2025年12月31日，经内部审计。<br>
+        <span class="en-font">Financial data audited internally as of Dec 31, 2025.</span>
+    </p>
+</footer>
 
-    <script>
-        // --- Translations ---
-        const translations = {
-            "zh-CN": {
-                "lang.current": "中文",
-                "nav.home": "首页",
-                "nav.about": "关于我们",
-                "nav.mission": "使命愿景",
-                "nav.programs": "环保项目",
-                "nav.partners": "合作伙伴",
-                "nav.contact": "联系我们",
-                "nav.council": "常任理事会",
-                "nav.videos": "环保视频",
-                "nav.donate": "捐赠支持",
-                "page.title": "2024 年度报告 | WEPO",
-                "report.year": "2024",
-                "report.title": "年度报告",
-                "report.intro1": "在气候挑战空前的一年里，WEPO 始终坚定使命。我们扩大了全球影响力，深化了科学研究，并赋能社区采取行动。",
-                "report.intro2": "本报告概述了我们的战略成就、财务透明度以及通往韧性未来的路线图。我们将携手共建人与自然和谐共生的世界。",
-                "impact.title": "我们的影响力",
-                "impact.trees": "种植树木",
-                "impact.countries": "活跃国家",
-                "impact.species": "受保护物种",
-                "impact.volunteers": "新志愿者",
-                "finance.title": "财务概览",
-                "finance.program": "项目支出",
-                "finance.fundraising": "筹款支出",
-                "finance.admin": "管理支出",
-                "finance.note": "我们致力于透明度。每一美元捐款中有85美分直接用于我们的环保项目。",
-                "finance.revenue": "总收入",
-                "download.title": "下载中心",
-                "download.full": "2024 完整报告",
-                "download.financial": "财务报表",
-                "download.summary": "执行摘要",
-                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
-                "footer.links_title": "快速链接",
-                "footer.contact_title": "联系我们",
-                "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
-                "footer.phone": "电话: (+86) 02386161804",
-                "footer.email": "邮箱: xcb@wepo.top",
-                "footer.copyright": "世界环境保护组织. 版权所有."
-            },
-            "en": {
-                "lang.current": "EN",
-                "nav.home": "Home",
-                "nav.about": "About",
-                "nav.mission": "Mission",
-                "nav.programs": "Programs",
-                "nav.partners": "Partners",
-                "nav.contact": "Contact",
-                "nav.council": "Council",
-                "nav.videos": "Videos",
-                "nav.donate": "Donate",
-                "page.title": "Annual Report 2024 | WEPO",
-                "report.year": "2024",
-                "report.title": "Annual Report",
-                "report.intro1": "In a year defined by unprecedented climate challenges, WEPO has remained steadfast in its mission. We have expanded our global reach, deepened our scientific impact, and empowered communities to take action.",
-                "report.intro2": "This report outlines our strategic achievements, financial transparency, and the roadmap for a resilient future. Together, we are building a world where humans and nature thrive.",
-                "impact.title": "Our Impact in Numbers",
-                "impact.trees": "Trees Planted",
-                "impact.countries": "Countries Active",
-                "impact.species": "Species Protected",
-                "impact.volunteers": "New Volunteers",
-                "finance.title": "Financial Overview",
-                "finance.program": "Program Services",
-                "finance.fundraising": "Fundraising",
-                "finance.admin": "Management & General",
-                "finance.note": "We are committed to transparency. 85 cents of every dollar donated goes directly to our environmental programs.",
-                "finance.revenue": "Total Revenue",
-                "download.title": "Downloads",
-                "download.full": "Full Report 2024",
-                "download.financial": "Financial Statement",
-                "download.summary": "Executive Summary",
-                "footer.about": "WEPO is dedicated to global environmental protection.",
-                "footer.links_title": "Quick Links",
-                "footer.contact_title": "Contact",
-                "footer.address": "Address: No. 10 Xingsheng Ave, Chongqing, CN",
-                "footer.phone": "Phone: (+86) 02386161804",
-                "footer.email": "Email: xcb@wepo.top",
-                "footer.copyright": "WEPO. All rights reserved."
+<script>
+    // --- 1. 主题检测 (继承自首页) ---
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 颜色配置
+    const isDark = theme === 'dark';
+    const textColor = isDark ? '#F5F5F7' : '#1D1D1F';
+    const gridColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)';
+    const goldColor = '#d4af37';
+    
+    // --- 2. 计数器动画 ---
+    const counters = document.querySelectorAll('.stat-num[data-target]');
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 2000; // ms
+        const increment = target / (duration / 16);
+        
+        let current = 0;
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                counter.innerText = Math.ceil(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.innerText = target;
             }
         };
+        setTimeout(updateCounter, 500); 
+    });
 
-        // --- Logic ---
-        let currentLang = localStorage.getItem('lang') || 'zh-CN';
+    // --- 3. 图表配置 (Chart.js) ---
+    Chart.defaults.color = textColor;
+    Chart.defaults.font.family = "'Manrope', sans-serif";
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
+    // 图表A: 收支对比 (Income vs Expenditure)
+    const ctxFinance = document.getElementById('financeChart').getContext('2d');
+    new Chart(ctxFinance, {
+        type: 'bar',
+        data: {
+            labels: ['总收入 Income', '总支出 Expenditure'],
+            datasets: [{
+                label: '人民币 (RMB)',
+                data: [51987.75, 52873.66],
+                backgroundColor: [
+                    'rgba(48, 209, 88, 0.6)', // 绿色 (收入)
+                    'rgba(255, 69, 58, 0.6)'  // 红色 (支出)
+                ],
+                borderColor: [
+                    'rgba(48, 209, 88, 1)',
+                    'rgba(255, 69, 58, 1)'
+                ],
+                borderWidth: 1,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { grid: { color: gridColor }, beginAtZero: true }
+            }
+        }
+    });
+
+    // 图表B: 支出分布 (Expenditure Allocation)
+    // 逻辑: 总支出 52873.66 - 公益 5628 = 剩余 47245.66 (模拟拆分为项目与运营)
+    const ctxAlloc = document.getElementById('allocationChart').getContext('2d');
+    new Chart(ctxAlloc, {
+        type: 'doughnut',
+        data: {
+            labels: ['环保项目 Projects', '运营成本 Operations', '公益捐赠 Public Welfare'],
+            datasets: [{
+                data: [35000, 12245.66, 5628], // 模拟数据以匹配总数
+                backgroundColor: [
+                    'rgba(212, 175, 55, 0.7)', // 金色
+                    'rgba(134, 134, 139, 0.5)', // 灰色
+                    'rgba(48, 209, 88, 0.7)'  // 绿色
+                ],
+                borderColor: isDark ? '#111' : '#fff',
+                borderWidth: 2,
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 20 } }
+            }
+        }
+    });
+
+    // 图表C: 增长趋势 (Growth Chart)
+    const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctxGrowth, {
+        type: 'line',
+        data: {
+            labels: ['Q1 一季度', 'Q2 二季度', 'Q3 三季度', 'Q4 四季度'],
+            datasets: [
+                {
+                    label: '累计项目 (Cumulative Projects)',
+                    data: [120, 135, 148, 158], // 最终达到 158
+                    borderColor: goldColor,
+                    backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: '活跃志愿者 (Active Volunteers)',
+                    data: [80, 88, 95, 105], // 最终达到 105
+                    borderColor: '#30d158',
+                    borderDash: [5, 5],
+                    tension: 0.4
                 }
-            });
-            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            localStorage.setItem('lang', lang);
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { grid: { color: gridColor } },
+                x: { grid: { display: false } }
+            },
+            plugins: {
+                legend: { labels: { usePointStyle: true } }
+            }
         }
+    });
 
-        const savedLang = localStorage.getItem('lang');
-        if (savedLang && translations[savedLang]) {
-            setLanguage(savedLang);
-        } else {
-            setLanguage('zh-CN');
-        }
+</script>
 
-        document.querySelectorAll('.language-dropdown li').forEach(li => {
-            li.addEventListener('click', () => setLanguage(li.getAttribute('data-lang')));
-        });
-
-        // Spotlight
-        const spot = document.getElementById('cursor-spotlight');
-        document.addEventListener('mousemove', (e) => {
-            spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-        });
-
-        // Mobile Menu
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('open');
-        }
-
-        // Year
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>
