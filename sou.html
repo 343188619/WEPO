@@ -1,0 +1,939 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <style>
+        /* --- CSS 变量与重置 --- */
+        :root {
+            --bg-light: #fdfbf7;
+            --text-light: #2d2d2d;
+            --glass-light: rgba(255, 255, 255, 0.65);
+            --glass-medium: rgba(255, 255, 255, 0.4);
+            --modal-bg-light: rgba(255, 255, 255, 0.85);
+            --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --accent-color: #5d5fef;
+            --danger-color: #ff4757;
+            --success-color: #00b894;
+            --chip-bg-light: rgba(150,150,150,0.1);
+
+            --bg-dark: #0f0f11;
+            --text-dark: #f0f0f0;
+            --glass-dark: rgba(20, 20, 25, 0.7);
+            --glass-medium-dark: rgba(255, 255, 255, 0.05);
+            --modal-bg-dark: rgba(30, 30, 35, 0.85);
+            --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --chip-bg-dark: rgba(255,255,255,0.1);
+
+            --transition-speed: 0.4s;
+            --easing: cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            transition: background-color var(--transition-speed) var(--easing), color var(--transition-speed) var(--easing);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- 深色模式覆盖 --- */
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        body.dark-mode .glass-panel,
+        body.dark-mode .clock-widget,
+        body.dark-mode .timer-widget {
+            background: var(--glass-dark);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-dark);
+        }
+        
+        body.dark-mode .modal-box {
+            background: var(--modal-bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .chip {
+            background: var(--chip-bg-dark);
+            color: #ddd;
+        }
+        
+        body.dark-mode .chip:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        body.dark-mode .orb {
+            opacity: 0.45;
+        }
+        
+        body.dark-mode .timer-btn {
+            background: rgba(255,255,255,0.1);
+        }
+        body.dark-mode .timer-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* --- 艺术背景动画 (流体光斑) --- */
+        .background-art {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(90px);
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .orb-1 { width: 60vw; height: 60vw; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); top: -10%; left: -10%; animation-delay: 0s; }
+        .orb-2 { width: 50vw; height: 50vw; background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); bottom: -10%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 40vw; height: 40vw; background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); top: 40%; left: 40%; animation-delay: -10s; opacity: 0.6; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        /* --- 左上角：时钟日期 --- */
+        .top-left-clock {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 20;
+            opacity: 0;
+            animation: entrance 1s var(--easing) forwards 0.8s;
+        }
+
+        .clock-widget {
+            background: var(--glass-light);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .clock-time {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+            background: linear-gradient(45deg, #2d2d2d, #5d5fef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        body.dark-mode .clock-time {
+            background: linear-gradient(45deg, #fff, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .clock-date {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        /* --- 右上角：计时器与主题切换 --- */
+        .top-right-group {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            opacity: 0;
+            animation: entrance 1s var(--easing) forwards 0.8s;
+            z-index: 20;
+        }
+
+        /* 计时器样式 */
+        .timer-widget {
+            background: var(--glass-light);
+            backdrop-filter: blur(12px);
+            padding: 8px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            height: 44px;
+        }
+        
+        .timer-display {
+            font-family: 'Courier New', Courier, monospace; /* 强制等宽字体 */
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            width: 90px;
+            text-align: center;
+        }
+        
+        body.dark-mode .timer-display {
+            color: #a18cd1;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 6px;
+            border-left: 1px solid rgba(150,150,150,0.2);
+            padding-left: 10px;
+        }
+
+        .timer-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            border: none;
+            background: rgba(0,0,0,0.05);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: inherit;
+        }
+
+        .timer-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .timer-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* 主题按钮样式 */
+        .icon-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: inherit;
+            backdrop-filter: blur(5px);
+        }
+
+        .icon-btn:hover {
+            background: rgba(128,128,128,0.15);
+            transform: rotate(15deg) scale(1.05);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* --- 主容器 --- */
+        .container {
+            width: 100%;
+            max-width: 680px;
+            padding: 20px;
+            z-index: 10;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: entrance 1s var(--easing) forwards 0.3s;
+        }
+
+        @keyframes entrance {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 搜索区域 --- */
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 200;
+            margin-bottom: 2.5rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: opacity 0.3s;
+            font-family: 'Product Sans', sans-serif;
+        }
+
+        .glass-panel {
+            background: var(--glass-light);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s var(--easing);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .glass-panel:hover, .glass-panel:focus-within {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+            border-color: var(--accent-color);
+        }
+
+        .engine-selector {
+            padding: 0 16px;
+            border-right: 1px solid rgba(150,150,150,0.2);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            height: 30px;
+        }
+
+        .engine-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .engine-selector:hover .engine-icon {
+            transform: scale(1.15);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 16px 20px;
+            font-size: 1.15rem;
+            color: inherit;
+            font-family: inherit;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(150, 150, 150, 0.6);
+            font-weight: 300;
+        }
+
+        button.search-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            width: 52px;
+            height: 52px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(93, 95, 239, 0.3);
+        }
+
+        button.search-btn:hover {
+            transform: scale(0.95);
+            background: #4b4ddb;
+        }
+
+        /* --- 历史记录区域 --- */
+        .history-container {
+            margin-top: 2.5rem;
+            width: 100%;
+            text-align: left;
+            opacity: 0;
+            animation: entrance 1s var(--easing) forwards 1s;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 8px;
+        }
+
+        .history-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
+        .clear-history {
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0.5;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .clear-history:hover { 
+            color: var(--danger-color); 
+            opacity: 1; 
+            background: rgba(255, 71, 87, 0.1);
+        }
+
+        .history-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .chip {
+            background: var(--chip-bg-light);
+            border-radius: 18px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            padding: 0;
+            max-width: 100%;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .chip:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(93, 95, 239, 0.25);
+        }
+
+        .chip-text {
+            padding: 8px 0 8px 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .chip-delete {
+            padding: 8px 10px 8px 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+
+        .chip:hover .chip-delete { opacity: 0.7; }
+        .chip-delete:hover { opacity: 1 !important; }
+
+        /* --- 底部版权 --- */
+        .footer-copyright {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0;
+            animation: entrance 1s var(--easing) forwards 1.2s;
+            z-index: 10;
+            letter-spacing: 1px;
+            color: inherit;
+        }
+
+        /* --- 自定义模态框 (Modal) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s var(--easing);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--modal-bg-light);
+            width: 90%;
+            max-width: 400px;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s var(--easing);
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .modal-desc {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .btn-cancel {
+            background: rgba(150,150,150,0.15);
+            color: inherit;
+        }
+        .btn-cancel:hover {
+            background: rgba(150,150,150,0.25);
+        }
+
+        .btn-confirm {
+            background: var(--danger-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+        }
+        .btn-confirm:hover {
+            background: #e0404e;
+            transform: translateY(-1px);
+        }
+
+        /* --- 退出动画 --- */
+        body.exiting .container {
+            animation: exit 0.6s var(--easing) forwards;
+        }
+        body.exiting .background-art {
+            transition: filter 0.6s, transform 0.6s;
+            filter: blur(0px) brightness(1.2);
+            transform: scale(1.1);
+        }
+
+        @keyframes exit {
+            0% { opacity: 1; transform: scale(1); filter: blur(0); }
+            40% { opacity: 0.8; transform: scale(0.98); }
+            100% { opacity: 0; transform: scale(1.15); filter: blur(15px); }
+        }
+
+        svg { width: 20px; height: 20px; fill: currentColor; }
+        .empty-history { width: 100%; text-align: center; font-size: 0.85rem; opacity: 0.4; margin-top: 10px; font-style: italic; }
+
+        /* Mobile Response */
+        @media (max-width: 768px) {
+            .top-left-clock { top: 1rem; left: 1rem; }
+            .top-right-group { top: 1.2rem; right: 1rem; gap: 8px; }
+            .timer-display { font-size: 0.9rem; width: 70px; }
+            .clock-time { font-size: 1.4rem; }
+            .logo { font-size: 2.8rem; }
+            .container { padding-top: 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 艺术背景 -->
+    <div class="background-art">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- 左上角：精美时钟日期 -->
+    <div class="top-left-clock">
+        <div class="clock-widget" title="当前时间">
+            <div class="clock-time" id="clockTime">00:00:00</div>
+            <div class="clock-date" id="clockDate">加载中...</div>
+        </div>
+    </div>
+
+    <!-- 右上角：计时器 + 主题切换 -->
+    <div class="top-right-group">
+        
+        <!-- 计时器 Widget -->
+        <div class="timer-widget" title="计时器 (分:秒:微秒)">
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+            <div class="timer-controls">
+                <button class="timer-btn" id="startStopBtn" title="开始/暂停">
+                    <svg id="iconPlay" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <svg id="iconPause" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </button>
+                <button class="timer-btn" id="resetBtn" title="重置">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 主题切换 -->
+        <button class="icon-btn" id="themeToggle" title="切换深色/浅色模式">
+            <!-- 默认图标由JS加载 -->
+        </button>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="container">
+        <h1 class="logo" id="engineTitle">Google</h1>
+
+        <form id="searchForm" class="glass-panel">
+            <div class="engine-selector" id="engineSwitch" title="点击切换 Google / 必应">
+                <svg class="engine-icon" id="iconGoogle" viewBox="0 0 24 24" style="display:block;">
+                    <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"></path>
+                </svg>
+                <svg class="engine-icon" id="iconBing" viewBox="0 0 24 24" style="display:none;">
+                   <path d="M3.5 3v17l13.5-4.5-5.5-2.5 5-8z"></path>
+                </svg>
+            </div>
+            
+            <input type="text" id="searchInput" placeholder="输入关键词搜索..." autocomplete="off">
+            
+            <button type="submit" class="search-btn" title="搜索">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+        </form>
+
+        <div class="history-container" id="historySection">
+            <div class="history-header">
+                <span class="history-title">搜索历史</span>
+                <span class="clear-history" id="clearHistoryBtn" title="清空所有历史">全部清空</span>
+            </div>
+            <div class="history-chips" id="historyList">
+                <!-- 历史记录插入处 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部版权 -->
+    <footer class="footer-copyright">
+        &copy; 版权所有 KCK2026
+    </footer>
+
+    <!-- 自定义确认模态框 -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-box">
+            <h3 class="modal-title">确认清空？</h3>
+            <p class="modal-desc">此操作将删除您所有的本地搜索历史记录，且无法恢复。</p>
+            <div class="modal-actions">
+                <button class="btn btn-cancel" id="cancelModal">取消</button>
+                <button class="btn btn-confirm" id="confirmDelete">确认清空</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 状态管理 ---
+        const state = {
+            engine: localStorage.getItem('engine') || 'google', 
+            theme: localStorage.getItem('theme') || 'light',
+            history: JSON.parse(localStorage.getItem('searchHistory')) || []
+        };
+
+        const urls = {
+            google: 'https://www.google.com/search?q=',
+            bing: 'https://www.bing.com/search?q='
+        };
+
+        // DOM 元素
+        const body = document.body;
+        const themeBtn = document.getElementById('themeToggle');
+        const engineSwitch = document.getElementById('engineSwitch');
+        const engineTitle = document.getElementById('engineTitle');
+        const iconGoogle = document.getElementById('iconGoogle');
+        const iconBing = document.getElementById('iconBing');
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const historyList = document.getElementById('historyList');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        
+        // 时钟元素
+        const clockTimeEl = document.getElementById('clockTime');
+        const clockDateEl = document.getElementById('clockDate');
+
+        // 计时器元素
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startStopBtn = document.getElementById('startStopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const iconPlay = document.getElementById('iconPlay');
+        const iconPause = document.getElementById('iconPause');
+
+        // Modal 元素
+        const confirmModal = document.getElementById('confirmModal');
+        const cancelModalBtn = document.getElementById('cancelModal');
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+
+        // --- 初始化 ---
+        function init() {
+            applyTheme();
+            applyEngine();
+            renderHistory();
+            startClock();
+            setTimeout(() => searchInput.focus(), 1500);
+        }
+
+        // --- 左上角：普通时钟逻辑 ---
+        function startClock() {
+            const update = () => {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('zh-CN', { hour12: false });
+                const dateString = now.toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' });
+                
+                clockTimeEl.textContent = timeString;
+                clockDateEl.textContent = dateString;
+            };
+            update();
+            setInterval(update, 1000);
+        }
+
+        // --- 右上角：高精度计时器逻辑 ---
+        let timerInterval = null;
+        let timerStartTime = 0;
+        let timerElapsedTime = 0;
+        let timerRunning = false;
+
+        function updateTimerDisplay() {
+            const time = Date.now() - timerStartTime + timerElapsedTime;
+            
+            // 计算 分:秒:百分秒(10ms)
+            const minutes = Math.floor(time / 60000);
+            const seconds = Math.floor((time % 60000) / 1000);
+            const centiseconds = Math.floor((time % 1000) / 10); // 显示2位毫秒(百分秒)，更符合人类视觉习惯
+
+            const pad = (num) => num.toString().padStart(2, '0');
+            timerDisplay.textContent = `${pad(minutes)}:${pad(seconds)}:${pad(centiseconds)}`;
+        }
+
+        function toggleTimer() {
+            if (timerRunning) {
+                // 暂停
+                clearInterval(timerInterval);
+                timerElapsedTime += Date.now() - timerStartTime;
+                timerRunning = false;
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+            } else {
+                // 开始
+                timerStartTime = Date.now();
+                timerInterval = setInterval(updateTimerDisplay, 10); // 10ms 更新一次
+                timerRunning = true;
+                iconPlay.style.display = 'none';
+                iconPause.style.display = 'block';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerElapsedTime = 0;
+            timerDisplay.textContent = "00:00:00";
+            iconPlay.style.display = 'block';
+            iconPause.style.display = 'none';
+        }
+
+        // --- 主题与引擎 ---
+        function applyTheme() {
+            if (state.theme === 'dark') {
+                body.classList.add('dark-mode');
+                themeBtn.innerHTML = '<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+            } else {
+                body.classList.remove('dark-mode');
+                themeBtn.innerHTML = '<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+            }
+            localStorage.setItem('theme', state.theme);
+        }
+
+        function toggleTheme() {
+            state.theme = state.theme === 'light' ? 'dark' : 'light';
+            applyTheme();
+        }
+
+        function applyEngine() {
+            if (state.engine === 'google') {
+                engineTitle.textContent = 'Google';
+                engineTitle.style.background = 'linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335)';
+                engineTitle.style.webkitBackgroundClip = 'text';
+                iconGoogle.style.display = 'block';
+                iconBing.style.display = 'none';
+                searchInput.placeholder = "在 Google 上搜索...";
+            } else {
+                engineTitle.textContent = 'Bing';
+                engineTitle.style.background = 'linear-gradient(45deg, #008374, #00A99D)';
+                engineTitle.style.webkitBackgroundClip = 'text';
+                iconGoogle.style.display = 'none';
+                iconBing.style.display = 'block';
+                searchInput.placeholder = "在 必应 上搜索...";
+            }
+            engineTitle.style.webkitTextFillColor = 'transparent';
+            localStorage.setItem('engine', state.engine);
+        }
+
+        function toggleEngine() {
+            engineSwitch.style.transform = 'scale(0.9)';
+            setTimeout(() => engineSwitch.style.transform = 'scale(1)', 150);
+            state.engine = state.engine === 'google' ? 'bing' : 'google';
+            applyEngine();
+        }
+
+        // --- 历史记录 ---
+        function addToHistory(query) {
+            if (!query) return;
+            state.history = state.history.filter(item => item !== query);
+            state.history.unshift(query);
+            if (state.history.length > 10) state.history.pop();
+            saveAndRenderHistory();
+        }
+
+        function deleteHistoryItem(e, itemToDelete) {
+            e.stopPropagation();
+            state.history = state.history.filter(item => item !== itemToDelete);
+            saveAndRenderHistory();
+        }
+
+        function saveAndRenderHistory() {
+            localStorage.setItem('searchHistory', JSON.stringify(state.history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            historyList.innerHTML = '';
+            if (state.history.length === 0) {
+                historyList.innerHTML = '<div class="empty-history">暂无搜索记录</div>';
+                clearHistoryBtn.style.display = 'none';
+                return;
+            }
+            clearHistoryBtn.style.display = 'block';
+            state.history.forEach(item => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                
+                const textSpan = document.createElement('span');
+                textSpan.className = 'chip-text';
+                textSpan.textContent = item;
+                textSpan.onclick = () => performSearch(item);
+
+                const deleteSpan = document.createElement('span');
+                deleteSpan.className = 'chip-delete';
+                deleteSpan.title = '删除此条记录';
+                deleteSpan.innerHTML = '<svg style="width:14px;height:14px;" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                deleteSpan.onclick = (e) => deleteHistoryItem(e, item);
+
+                chip.appendChild(textSpan);
+                chip.appendChild(deleteSpan);
+                historyList.appendChild(chip);
+            });
+        }
+
+        // --- 搜索与跳转 ---
+        function performSearch(query) {
+            if (!query.trim()) return;
+            addToHistory(query);
+            body.classList.add('exiting');
+            setTimeout(() => {
+                window.location.href = urls[state.engine] + encodeURIComponent(query);
+            }, 600);
+        }
+
+        // --- 模态框逻辑 ---
+        function openModal() {
+            confirmModal.classList.add('active');
+        }
+
+        function closeModal() {
+            confirmModal.classList.remove('active');
+        }
+
+        // --- 事件监听 ---
+        themeBtn.addEventListener('click', toggleTheme);
+        engineSwitch.addEventListener('click', toggleEngine);
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            performSearch(searchInput.value);
+        });
+
+        // 计时器事件
+        startStopBtn.addEventListener('click', toggleTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // 历史与弹窗事件
+        clearHistoryBtn.addEventListener('click', openModal);
+        cancelModalBtn.addEventListener('click', closeModal);
+        confirmDeleteBtn.addEventListener('click', () => {
+            state.history = [];
+            saveAndRenderHistory();
+            closeModal();
+        });
+        
+        confirmModal.addEventListener('click', (e) => {
+            if (e.target === confirmModal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && confirmModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
