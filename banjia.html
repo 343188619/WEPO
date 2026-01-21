@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>乔迁之喜 - 诚挚邀约</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --china-red: #B80F0A; /* 故宫红 */
+            --luxury-gold: #D4AF37; /* 鎏金色 */
+            --paper-bg: #FFFBF0;
+            --text-color: #4A1A1A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--china-red);
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-color);
+            overflow: hidden; /* 初始禁止滚动 */
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- 1. 开场动画层 --- */
+        #gate-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999; /* 保证最顶层 */
+            display: flex;
+            transition: visibility 0.1s 1s; /* 动画结束后隐藏整个层 */
+        }
+
+        .gate-panel {
+            width: 50%;
+            height: 100%;
+            background-color: var(--china-red);
+            /* 增加一点纹理，避免纯色单调 */
+            background-image: radial-gradient(circle at center, #c71b16 0%, #8e0e00 100%);
+            position: relative;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            border-bottom: 5px solid #630500;
+        }
+
+        .gate-left { 
+            justify-content: flex-end; 
+            border-right: 1px solid rgba(0,0,0,0.2);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        .gate-right { 
+            justify-content: flex-start;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+
+        /* 门环 */
+        .knocker-area {
+            position: absolute;
+            top: 40%;
+            width: 80px; height: 80px;
+            cursor: pointer;
+        }
+        .knocker-left { right: -40px; }
+        .knocker-right { left: -40px; }
+
+        .knocker {
+            width: 60px; height: 60px;
+            border: 3px solid var(--luxury-gold);
+            border-radius: 50%;
+            margin: 10px;
+            background: radial-gradient(circle, #e6c383 0%, #b8860b 100%);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .knocker::after {
+            content: ''; width: 40px; height: 40px;
+            border: 3px solid #6e4e08; border-radius: 50%;
+        }
+
+        /* 提示文字 */
+        .open-hint {
+            position: absolute;
+            bottom: 15%;
+            left: 0; 
+            width: 100%;
+            text-align: center;
+            color: var(--luxury-gold);
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            z-index: 3;
+            animation: blink 2s infinite;
+            pointer-events: none; /* 防止文字挡住点击 */
+            transition: opacity 0.3s ease; /* 快速消失 */
+        }
+
+        /* --- 2. 主内容层 --- */
+        #main-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--paper-bg) 0%, #FFF5E6 100%);
+            opacity: 0; /* 初始透明 */
+            transition: opacity 0.8s ease;
+            padding-bottom: 50px;
+            overflow-y: auto;
+        }
+
+        .content-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* 标题设计 */
+        .main-title {
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .main-title h1 {
+            color: var(--china-red);
+            font-size: 2.5rem;
+            letter-spacing: 0.2em;
+            text-shadow: 2px 2px 0 rgba(220, 220, 220, 0.5);
+        }
+        .main-title p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* 邀请函正文 */
+        .invite-content {
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: #333;
+            margin: 30px 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23B80F0A' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* 不收礼卡片 */
+        .no-gift {
+            border: 1px dashed var(--luxury-gold);
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .no-gift strong { color: var(--china-red); font-size: 1.1rem; }
+
+        /* 地图容器 */
+        .map-wrapper {
+            width: 100%;
+            background: #fff;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: 20px;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 350px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        /* 导航按钮 */
+        .nav-button {
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+            padding: 16px;
+            background: linear-gradient(135deg, #d31010 0%, #9e0c0c 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 15px rgba(184, 15, 10, 0.3);
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-button:active { transform: scale(0.98); }
+        
+        /* 动画类 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 开门动画层 -->
+    <div id="gate-overlay" onclick="handleOpen()">
+        <div class="gate-panel gate-left" id="left-door">
+            <div class="knocker-area knocker-left">
+                <div class="knocker"></div>
+            </div>
+        </div>
+        <div class="gate-panel gate-right" id="right-door">
+            <div class="knocker-area knocker-right">
+                <div class="knocker"></div>
+            </div>
+        </div>
+        <div class="open-hint" id="hint-text">点击开门 迎喜气</div>
+    </div>
+
+    <!-- 主内容 -->
+    <div id="main-container">
+        <div class="content-box">
+            
+            <div class="main-title fade-in">
+                <h1>乔迁之喜</h1>
+                <p>HOUSE WARMING</p>
+            </div>
+
+            <div class="invite-content fade-in">
+                <p>吉日良辰，喜迁新居。</p>
+                <p>备薄酒一杯，清茶一盏。</p>
+                <p>诚邀挚友亲朋，</p>
+                <p>共叙情谊，共享喜悦。</p>
+            </div>
+
+            <!-- 不收礼特别说明 -->
+            <div class="no-gift fade-in">
+                <p><strong>🧧 温馨提示</strong></p>
+                <p>本次聚会不收礼金与礼物</p>
+                <p>您能来就是给我们最好的祝福</p>
+            </div>
+
+            <div class="info-block fade-in" style="margin: 30px 0;">
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color:var(--china-red);">📅 时间</h3>
+                    <p style="font-size: 1.2rem; font-weight: bold;">1月29日 (正月初一)</p>
+                </div>
+                <div>
+                    <h3 style="color:var(--china-red);">📍 地点</h3>
+                    <p>鸿亨九棠府二期</p>
+                    <p style="color:#666; font-size:0.9rem;">六幢 一单元 201室</p>
+                </div>
+            </div>
+
+            <!-- 地图与导航 -->
+            <div class="map-wrapper fade-in">
+                <!-- 嵌入的高德地图 -->
+                <iframe class="map-frame" src="https://m.amap.com/search/mapview/poiid=B0KBXSHWU6&keywords=%E4%B9%9D%E6%A3%A0%E5%BA%9C%E4%BA%8C%E7%BB%84%E5%9B%A2&src=uriapi" allowfullscreen></iframe>
+                
+                <!-- 一键导航按钮 -->
+                <a href="https://m.amap.com/search/mapview/poiid=B0KBXSHWU6&keywords=%E4%B9%9D%E6%A3%A0%E5%BA%9C%E4%BA%8C%E7%BB%84%E5%9B%A2&src=uriapi" class="nav-button" target="_blank">
+                    🚗 一键导航到这里
+                </a>
+            </div>
+
+            <footer style="margin-top: 40px; color: #aaa; font-size: 0.8rem;" class="fade-in">
+                恭候您的光临
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function handleOpen() {
+            const leftDoor = document.getElementById('left-door');
+            const rightDoor = document.getElementById('right-door');
+            const hintText = document.getElementById('hint-text');
+            const overlay = document.getElementById('gate-overlay');
+            const mainContainer = document.getElementById('main-container');
+
+            // 1. 提示文字立即消失 (修复之前的Bug)
+            hintText.style.display = 'none'; 
+
+            // 2. 门开始向两边移动
+            leftDoor.style.transform = 'translateX(-100%)';
+            rightDoor.style.transform = 'translateX(100%)';
+
+            // 3. 显示主内容
+            setTimeout(() => {
+                // 显示主容器
+                mainContainer.style.opacity = '1';
+                document.body.style.overflowY = 'auto'; // 允许页面滚动
+                
+                // 彻底移除开门层，防止遮挡
+                overlay.style.display = 'none';
+
+                // 触发内部元素的上浮动画
+                triggerScrollAnim();
+            }, 800); // 这里的800ms稍微快于门的动画，衔接更自然
+        }
+
+        // 简单的滚动检测
+        function triggerScrollAnim() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+    </script>
+</body>
+</html>
