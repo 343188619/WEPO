@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>「核」摄影 CORE | 2026.01.28 约拍原片</title>
-    <!-- 引入 Tailwind CSS (样式库) -->
+    <!-- 允许跨域请求 -->
+    <meta name="referrer" content="no-referrer">
+    <title>「核」CORE 2026 影像交付</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入图标库 -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 引入高端衬线字体 -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <script>
@@ -18,26 +20,20 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        serif: ['"Noto Serif SC"', 'serif'], // 中文衬线体，营造高级感
+                        serif: ['"Noto Serif SC"', 'serif'],
                     },
                     colors: {
-                        gold: '#C5A059', // 奢侈金
-                        'gold-light': '#E5C585',
-                        dark: '#0f0f0f',
-                        'dark-card': '#1a1a1a'
+                        gold: '#C5A059',
+                        dark: '#050505',
+                        'dark-card': '#111111'
                     },
                     animation: {
-                        'fade-up': 'fadeUp 0.8s ease-out forwards',
-                        'scale-in': 'scaleIn 0.3s ease-out forwards',
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
                     },
                     keyframes: {
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        scaleIn: {
-                            '0%': { transform: 'scale(0.9)', opacity: '0' },
-                            '100%': { transform: 'scale(1)', opacity: '1' },
                         }
                     }
                 }
@@ -45,176 +41,167 @@
         }
     </script>
     <style>
-        /* 细节微调 */
-        body { -webkit-tap-highlight-color: transparent; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        * { -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #666; border-radius: 2px; }
         
-        /* 选中状态的金色边框动画 */
-        .selected-card {
-            box-shadow: 0 0 0 3px #C5A059;
-            transform: scale(0.95);
+        .image-card {
+            break-inside: avoid;
+            margin-bottom: 1rem;
         }
-        
+
+        .selected-ring {
+            box-shadow: inset 0 0 0 4px #C5A059;
+            transform: scale(0.98);
+        }
+
         /* 微信遮罩 */
         #wx-mask {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92); z-index: 9999; backdrop-filter: blur(5px);
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            z-index: 9999; backdrop-filter: blur(5px);
         }
-
-        /* 骨架屏加载动画 */
-        .skeleton {
-            background: linear-gradient(90deg, #f3f3f3 25%, #ececec 50%, #f3f3f3 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-        .dark .skeleton {
-            background: linear-gradient(90deg, #1f1f1f 25%, #2a2a2a 50%, #1f1f1f 75%);
-        }
-        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
-<body class="bg-[#fcfcfc] text-gray-800 dark:bg-dark dark:text-gray-200 transition-colors duration-500 font-serif antialiased selection:bg-gold selection:text-white">
+<body class="bg-gray-50 text-gray-900 dark:bg-dark dark:text-gray-200 transition-colors duration-300 font-serif selection:bg-gold selection:text-white">
 
-    <!-- 1. 微信/QQ 提示遮罩 -->
-    <div id="wx-mask" onclick="document.getElementById('wx-mask').style.display='none'">
-        <div class="flex flex-col items-end pt-4 pr-6 text-white">
-            <i class="fa-solid fa-arrow-turn-up text-5xl text-gold animate-bounce mb-4"></i>
-            <h2 class="text-2xl font-bold mb-2">请使用浏览器打开</h2>
-            <p class="text-gray-300 text-sm">微信/QQ 无法支持批量原图下载功能</p>
-            <p class="text-gray-300 text-sm mt-1">点击右上角 <i class="fa-solid fa-ellipsis"></i> 选择浏览器</p>
+    <!-- 1. 微信/QQ 强制拦截遮罩 -->
+    <div id="wx-mask" onclick="this.style.display='none'">
+        <div class="flex flex-col items-center justify-center h-full text-white px-8 text-center">
+            <i class="fa-brands fa-weixin text-6xl text-green-500 mb-6 animate-pulse"></i>
+            <h2 class="text-2xl font-bold mb-4">不支持在应用内直接下载</h2>
+            <p class="text-gray-300 mb-8 leading-relaxed text-sm">
+                微信/QQ 浏览器会拦截批量文件下载。<br>
+                请点击右上角 <i class="fa-solid fa-ellipsis mx-1"></i> 选择 <span class="text-gold font-bold">在浏览器打开</span>
+                <br>(如 Safari, Chrome)
+            </p>
+            <i class="fa-solid fa-arrow-up text-3xl text-gold animate-bounce"></i>
         </div>
     </div>
 
     <!-- 2. 顶部导航 -->
-    <nav class="fixed top-0 w-full z-40 transition-all duration-300 backdrop-blur-xl bg-white/80 dark:bg-dark/80 border-b border-gray-100 dark:border-white/5" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <nav class="fixed top-0 w-full z-40 bg-white/80 dark:bg-dark/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 transition-all">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16 md:h-20">
-                <!-- Logo -->
-                <div class="flex flex-col justify-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <h1 class="font-serif text-2xl font-bold tracking-widest text-black dark:text-white leading-none">
-                        「核」<span class="text-gold">.</span>
-                    </h1>
-                    <span class="text-[10px] tracking-[0.2em] text-gray-400 mt-1 uppercase font-sans">Photography</span>
+                <div class="flex flex-col cursor-pointer group" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <span class="font-bold text-xl md:text-2xl tracking-widest group-hover:text-gold transition-colors">CORE<span class="text-gold">.</span></span>
+                    <span class="text-[9px] text-gray-400 uppercase tracking-[0.3em]">Photography</span>
                 </div>
-
-                <!-- 顶部功能区 -->
-                <div class="flex items-center space-x-3 md:space-x-6">
-                    <!-- 管理/选择按钮 -->
-                    <button id="btn-toggle-select" onclick="toggleSelectMode()" class="flex items-center gap-2 px-4 py-1.5 rounded-full border border-gray-200 dark:border-white/20 hover:border-gold dark:hover:border-gold transition-all text-xs font-sans tracking-wider group">
-                        <i class="fa-regular fa-square-check group-hover:text-gold transition-colors"></i>
-                        <span id="select-text">选择图片</span>
+                
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleSelectMode()" id="btn-mode" class="flex items-center gap-2 px-4 py-1.5 rounded-full border border-gray-300 dark:border-white/20 text-xs font-sans tracking-wide hover:border-gold hover:text-gold transition-all">
+                        <i class="fa-regular fa-square-check"></i>
+                        <span id="mode-text">批量选择</span>
                     </button>
-
-                    <!-- 主题切换 -->
-                    <button onclick="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 transition-colors">
-                        <i class="fa-solid fa-sun text-sm dark:hidden"></i>
-                        <i class="fa-solid fa-moon text-sm hidden dark:block text-gold"></i>
+                    <button onclick="toggleTheme()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 text-gold">
+                        <i class="fa-solid fa-sun dark:hidden"></i>
+                        <i class="fa-solid fa-moon hidden dark:block"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- 3. 页面头部 -->
-    <header class="pt-32 pb-8 px-4 text-center">
-        <div class="max-w-4xl mx-auto animate-fade-up">
-            <div class="inline-block px-3 py-1 mb-4 border border-gold/30 rounded-full">
-                <p class="text-gold text-[10px] md:text-xs font-sans tracking-[0.2em] uppercase">2026.01.28 约拍交付</p>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-gray-900 dark:text-white">
-                光影叙事 · 核心映像
-            </h2>
-            <p class="text-gray-500 dark:text-gray-400 font-sans text-xs md:text-sm max-w-lg mx-auto leading-relaxed">
-                共 <span id="total-count" class="font-bold text-gold">0</span> 张原片 · WEBP 高清格式<br>
-                支持点击预览、单张下载或批量选择下载
-            </p>
+    <!-- 3. Header -->
+    <header class="pt-32 pb-8 px-4 text-center animate-fade-in">
+        <div class="inline-block border border-gold/30 px-3 py-1 rounded-full mb-4">
+            <p class="text-gold text-[10px] font-sans tracking-[0.2em]">PRIVATE COLLECTION</p>
         </div>
+        <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tight">“核” 2026 原片交付</h1>
+        <p class="text-gray-500 text-xs md:text-sm font-sans max-w-md mx-auto">
+            共 <span id="count-display" class="font-bold text-gold">0</span> 张 · 适配 GitHub 环境<br>
+            <span class="text-[10px] opacity-60">High Quality WebP Format</span>
+        </p>
     </header>
 
-    <!-- 4. 图片瀑布流展示区 -->
-    <main class="max-w-7xl mx-auto px-2 sm:px-4 pb-32">
-        <div id="gallery" class="columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-5 space-y-3 md:space-y-5">
-            <!-- JS 将在此处生成图片卡片 -->
+    <!-- 4. 画廊区域 -->
+    <main class="max-w-7xl mx-auto px-2 md:px-6 pb-32">
+        <div id="gallery" class="columns-2 md:columns-3 lg:columns-4 gap-4">
+            <!-- JS 生成图片 -->
         </div>
     </main>
 
-    <!-- 5. 底部悬浮操作栏 (选择模式下显示) -->
-    <div id="selection-bar" class="fixed bottom-0 left-0 w-full z-50 transform translate-y-full transition-transform duration-300">
-        <div class="bg-white/95 dark:bg-[#1a1a1a]/95 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 pb-safe pt-4 px-6 shadow-2xl">
-            <div class="max-w-7xl mx-auto flex justify-between items-center h-16">
-                
+    <!-- 5. 底部操作栏 (选择模式) -->
+    <div id="bottom-bar" class="fixed bottom-0 left-0 w-full z-50 transform translate-y-full transition-transform duration-300">
+        <div class="bg-white/95 dark:bg-[#111]/95 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 px-6 py-4 shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-4">
-                    <button onclick="toggleSelectMode()" class="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 dark:bg-white/10 hover:bg-gray-200 text-gray-500">
-                        <i class="fa-solid fa-xmark"></i>
+                    <button onclick="toggleSelectMode()" class="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center">
+                        <i class="fa-solid fa-xmark text-sm"></i>
                     </button>
-                    <div class="flex flex-col">
-                        <span class="text-sm font-bold text-gray-900 dark:text-white">已选择 <span id="selected-count" class="text-gold text-lg font-serif">0</span> 张</span>
-                        <span onclick="selectAll()" class="text-xs text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-gray-300 underline">全选 / 反选</span>
+                    <div>
+                        <p class="text-xs text-gray-500">已选择</p>
+                        <p class="font-serif text-lg leading-none font-bold text-gold" id="select-count">0</p>
                     </div>
+                    <button onclick="selectAll()" class="text-xs underline text-gray-500 ml-2">全选</button>
                 </div>
-
-                <button onclick="downloadSelected()" id="btn-download-selected" disabled class="flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-black px-6 py-3 rounded-full text-sm font-bold shadow-lg shadow-gold/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95">
+                <button onclick="downloadSelected()" id="btn-dl" disabled class="bg-gray-900 dark:bg-white text-white dark:text-black px-6 py-3 rounded-full text-xs font-bold tracking-widest shadow-lg disabled:opacity-50 disabled:shadow-none transition-all flex items-center gap-2">
+                    <span>下载选中</span>
                     <i class="fa-solid fa-download"></i>
-                    <span>下载选中图片</span>
                 </button>
-
             </div>
         </div>
     </div>
 
-    <!-- 6. 图片预览模态框 (Lightbox) -->
-    <div id="lightbox" class="fixed inset-0 z-[60] hidden opacity-0 transition-opacity duration-300" aria-modal="true">
-        <div class="absolute inset-0 bg-white/98 dark:bg-[#050505]/98 backdrop-blur-sm" onclick="closeLightbox()"></div>
-        
-        <!-- 预览控制栏 -->
-        <div class="absolute top-0 w-full p-4 flex justify-between items-center z-[70]">
-            <span id="lb-counter" class="text-gray-500 font-sans text-xs tracking-widest">1 / 10</span>
-            <button onclick="closeLightbox()" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 hover:rotate-90 transition-transform">
-                <i class="fa-solid fa-xmark text-lg"></i>
+    <!-- 6. 灯箱预览 -->
+    <div id="lightbox" class="fixed inset-0 z-[60] bg-white/98 dark:bg-black/98 hidden opacity-0 transition-opacity duration-300 flex flex-col">
+        <div class="h-16 flex justify-between items-center px-4 shrink-0">
+            <span id="lb-index" class="font-sans text-xs tracking-widest text-gray-500">1 / 1</span>
+            <button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-
-        <!-- 图片容器 -->
-        <div class="absolute inset-0 flex items-center justify-center p-2 md:p-10 pointer-events-none">
-            <img id="lb-img" src="" class="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm pointer-events-auto select-none transition-transform duration-300">
+        <div class="flex-1 flex items-center justify-center p-2 overflow-hidden relative">
+            <img id="lb-img" src="" class="max-w-full max-h-full object-contain shadow-2xl">
         </div>
-
-        <!-- 底部下载按钮 -->
-        <div class="absolute bottom-8 left-0 w-full flex justify-center z-[70] pointer-events-none">
-            <button onclick="downloadCurrentPreview()" class="pointer-events-auto flex items-center gap-2 bg-gold hover:bg-[#b08d48] text-white px-8 py-3 rounded-full shadow-xl shadow-gold/30 transition-all hover:-translate-y-1">
-                <span class="font-sans text-sm font-bold tracking-wide">下载此原图</span>
-                <i class="fa-solid fa-arrow-down"></i>
+        <div class="h-24 flex items-center justify-center shrink-0">
+            <button onclick="downloadCurrent()" class="bg-gold text-white px-8 py-3 rounded-full text-sm font-bold shadow-xl shadow-gold/30 hover:-translate-y-1 transition-transform flex items-center gap-2">
+                <span>下载此原图</span>
+                <i class="fa-solid fa-download"></i>
             </button>
         </div>
     </div>
 
-    <!-- 7. 下载进度提示全屏遮罩 -->
-    <div id="progress-mask" class="fixed inset-0 z-[80] bg-black/90 flex flex-col items-center justify-center hidden backdrop-blur-md">
-        <div class="relative w-20 h-20 mb-6">
+    <!-- 7. 升级版下载进度条 (含取消与ETA) -->
+    <div id="progress-mask" class="fixed inset-0 z-[70] bg-black/90 hidden flex flex-col items-center justify-center backdrop-blur-md px-6">
+        <!-- 进度环或图标 -->
+        <div class="relative w-16 h-16 mb-6">
             <div class="absolute inset-0 border-4 border-white/10 rounded-full"></div>
             <div class="absolute inset-0 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
         </div>
-        <h3 class="text-white text-2xl font-serif mb-2">正在打包下载</h3>
-        <p id="progress-text" class="text-gray-400 font-sans text-sm">准备开始...</p>
-        <div class="mt-6 bg-white/10 p-4 rounded-lg max-w-xs text-center">
-            <p class="text-gold text-xs font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 重要提示</p>
-            <p class="text-gray-400 text-[10px] leading-relaxed">
-                为了防止浏览器拦截，图片将逐张弹出下载请求。<br>
-                请在浏览器弹窗中点击 <span class="text-white border-b border-gray-500">“允许”</span> 下载多个文件。
-            </p>
+
+        <h3 class="text-white text-xl font-serif tracking-widest mb-1">正在处理</h3>
+        
+        <!-- 进度文字 -->
+        <div class="text-center mb-4">
+            <p id="progress-txt" class="text-white font-bold text-lg font-sans">0 / 0</p>
+            <p id="eta-txt" class="text-gold text-xs font-sans mt-1">计算剩余时间...</p>
         </div>
-        <button onclick="cancelDownload()" class="mt-8 px-6 py-2 border border-white/20 text-gray-400 rounded-full text-xs hover:text-white hover:border-white transition">取消任务</button>
+
+        <!-- 进度条容器 -->
+        <div class="w-full max-w-xs h-1.5 bg-gray-700 rounded-full overflow-hidden mb-8">
+            <div id="progress-bar" class="h-full bg-gold transition-all duration-300 ease-out" style="width: 0%"></div>
+        </div>
+
+        <!-- 提示信息 -->
+        <p class="text-gray-500 text-[10px] max-w-xs text-center mb-8">
+            浏览器弹窗提示请点击“允许”<br>
+            文件名已添加时间戳防止冲突
+        </p>
+
+        <!-- 取消按钮 -->
+        <button onclick="cancelBatchDownload()" class="border border-white/20 text-gray-300 hover:text-white hover:border-white hover:bg-white/10 px-6 py-2 rounded-full text-xs transition-all">
+            取消任务
+        </button>
     </div>
 
-    <!-- 8. 消息提示 Toast -->
-    <div id="toast" class="fixed top-24 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-black px-6 py-3 rounded-full shadow-2xl text-sm font-sans z-[90] transition-all duration-300 -translate-y-20 opacity-0 flex items-center gap-3">
+    <!-- 8. Toast -->
+    <div id="toast" class="fixed top-24 left-1/2 -translate-x-1/2 bg-gray-800 dark:bg-white text-white dark:text-black px-6 py-3 rounded-full shadow-2xl text-xs font-bold z-[80] transition-all duration-300 opacity-0 -translate-y-10 pointer-events-none flex items-center gap-2">
         <i class="fa-solid fa-circle-info text-gold"></i>
-        <span id="toast-msg">提示信息</span>
+        <span id="toast-msg">提示</span>
     </div>
 
     <script>
-        // --- 1. 数据配置 ---
+        // --- 图片数据 ---
         const imageUrls = [
             "https://youke.xn--y7xa690gmna.cn/s1/2026/01/29/697a3941c44ba.webp",
             "https://youke.xn--y7xa690gmna.cn/s1/2026/01/29/697a394a9158d.webp",
@@ -278,331 +265,280 @@
             "https://youke.xn--y7xa690gmna.cn/s1/2026/01/29/697a3aa061d83.webp"
         ];
 
-        // 状态管理
-        let isSelectionMode = false;
-        let selectedIndices = new Set();
-        let currentPreviewIndex = -1;
-        let isDownloading = false;
-        let cancelFlag = false;
+        document.getElementById('count-display').innerText = imageUrls.length;
 
-        document.getElementById('total-count').innerText = imageUrls.length;
-
-        // --- 2. 核心功能逻辑 ---
-
-        // 环境检测
-        function checkEnvironment() {
-            const ua = navigator.userAgent.toLowerCase();
-            const isWxOrQQ = ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq/') !== -1;
-            if (isWxOrQQ) {
-                document.getElementById('wx-mask').style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-        checkEnvironment();
-
-        // 渲染画廊
-        function renderGallery() {
-            const gallery = document.getElementById('gallery');
-            gallery.innerHTML = '';
-
-            imageUrls.forEach((url, index) => {
-                // 卡片容器
-                const card = document.createElement('div');
-                card.className = "break-inside-avoid relative mb-3 md:mb-5 rounded-sm overflow-hidden group cursor-pointer transition-all duration-300";
-                card.id = `card-${index}`;
-                
-                // 点击事件：区分选择模式和普通模式
-                card.onclick = () => handleCardClick(index);
-
-                // 骨架屏
-                const skeleton = document.createElement('div');
-                skeleton.className = "skeleton w-full h-64 md:h-80";
-                
-                // 图片
-                const img = document.createElement('img');
-                img.src = url;
-                img.loading = "lazy";
-                img.className = "w-full h-auto object-cover opacity-0 transition-opacity duration-500";
-                img.onload = () => {
-                    skeleton.remove();
-                    img.classList.remove('opacity-0');
-                };
-
-                // 普通模式：悬停遮罩
-                const hoverOverlay = document.createElement('div');
-                hoverOverlay.id = `overlay-${index}`;
-                hoverOverlay.className = "absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none";
-                hoverOverlay.innerHTML = '<i class="fa-solid fa-expand text-white text-xl md:text-3xl drop-shadow-md"></i>';
-
-                // 选择模式：勾选标记
-                const selectMark = document.createElement('div');
-                selectMark.id = `mark-${index}`;
-                selectMark.className = "absolute top-2 right-2 w-6 h-6 rounded-full border-2 border-white bg-black/30 backdrop-blur text-white flex items-center justify-center opacity-0 transition-all duration-300 scale-0 z-10";
-                selectMark.innerHTML = '<i class="fa-solid fa-check text-xs opacity-0"></i>';
-
-                card.appendChild(skeleton);
-                card.appendChild(img);
-                card.appendChild(hoverOverlay);
-                card.appendChild(selectMark);
-                gallery.appendChild(card);
-            });
-        }
-        renderGallery();
-
-        // 卡片点击处理
-        function handleCardClick(index) {
-            if (isSelectionMode) {
-                toggleSelection(index);
-            } else {
-                openLightbox(index);
-            }
-        }
-
-        // --- 3. 选择模式逻辑 ---
-
-        function toggleSelectMode() {
-            isSelectionMode = !isSelectionMode;
-            const btnText = document.getElementById('select-text');
-            const selectionBar = document.getElementById('selection-bar');
-            
-            if (isSelectionMode) {
-                // 进入选择模式
-                btnText.innerText = "退出选择";
-                selectionBar.classList.remove('translate-y-full');
-                document.body.classList.add('selection-mode-active');
-                showToast("点击图片即可选中");
-                
-                // 显示所有卡片的勾选框圆圈（未选中状态）
-                imageUrls.forEach((_, i) => {
-                    const mark = document.getElementById(`mark-${i}`);
-                    mark.classList.remove('opacity-0', 'scale-0');
-                    document.getElementById(`overlay-${i}`).style.display = 'none'; // 隐藏预览图标
-                });
-            } else {
-                // 退出选择模式
-                btnText.innerText = "选择图片";
-                selectionBar.classList.add('translate-y-full');
-                selectedIndices.clear();
-                updateSelectionUI();
-                
-                // 隐藏勾选框
-                imageUrls.forEach((_, i) => {
-                    const card = document.getElementById(`card-${i}`);
-                    const mark = document.getElementById(`mark-${i}`);
-                    mark.classList.add('opacity-0', 'scale-0');
-                    card.classList.remove('selected-card');
-                    document.getElementById(`overlay-${i}`).style.display = '';
-                });
-            }
-        }
-
-        function toggleSelection(index) {
-            const card = document.getElementById(`card-${index}`);
-            const mark = document.getElementById(`mark-${index}`);
-            const icon = mark.querySelector('i');
-
-            if (selectedIndices.has(index)) {
-                selectedIndices.delete(index);
-                card.classList.remove('selected-card');
-                mark.classList.remove('bg-gold', 'border-gold');
-                mark.classList.add('bg-black/30', 'border-white');
-                icon.classList.add('opacity-0');
-            } else {
-                selectedIndices.add(index);
-                card.classList.add('selected-card');
-                mark.classList.remove('bg-black/30', 'border-white');
-                mark.classList.add('bg-gold', 'border-gold');
-                icon.classList.remove('opacity-0');
-            }
-            updateSelectionUI();
-        }
-
-        function selectAll() {
-            const allSelected = selectedIndices.size === imageUrls.length;
-            if (allSelected) {
-                selectedIndices.clear();
-            } else {
-                imageUrls.forEach((_, i) => selectedIndices.add(i));
-            }
-            
-            // 刷新所有 UI
-            imageUrls.forEach((_, i) => {
-                const card = document.getElementById(`card-${i}`);
-                const mark = document.getElementById(`mark-${i}`);
-                const icon = mark.querySelector('i');
-                
-                if (selectedIndices.has(i)) {
-                    card.classList.add('selected-card');
-                    mark.classList.remove('bg-black/30', 'border-white');
-                    mark.classList.add('bg-gold', 'border-gold');
-                    icon.classList.remove('opacity-0');
-                } else {
-                    card.classList.remove('selected-card');
-                    mark.classList.remove('bg-gold', 'border-gold');
-                    mark.classList.add('bg-black/30', 'border-white');
-                    icon.classList.add('opacity-0');
-                }
-            });
-            updateSelectionUI();
-        }
-
-        function updateSelectionUI() {
-            const count = selectedIndices.size;
-            document.getElementById('selected-count').innerText = count;
-            const btn = document.getElementById('btn-download-selected');
-            btn.disabled = count === 0;
-            btn.innerHTML = count === 0 
-                ? '<i class="fa-solid fa-download"></i> <span>请选择图片</span>' 
-                : `<i class="fa-solid fa-download"></i> <span>下载选中 (${count})</span>`;
-        }
-
-        // --- 4. 预览逻辑 ---
-
-        function openLightbox(index) {
-            currentPreviewIndex = index;
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lb-img');
-            const counter = document.getElementById('lb-counter');
-
-            img.src = imageUrls[index];
-            counter.innerText = `${index + 1} / ${imageUrls.length}`;
-            
-            lightbox.classList.remove('hidden');
-            setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.add('opacity-0');
-            setTimeout(() => {
-                lightbox.classList.add('hidden');
-                document.body.style.overflow = '';
-            }, 300);
-        }
-        
-        function downloadCurrentPreview() {
-            if (currentPreviewIndex !== -1) {
-                showToast("开始下载...");
-                triggerDownload(imageUrls[currentPreviewIndex], currentPreviewIndex);
-            }
-        }
-
-        // --- 5. 下载核心逻辑 ---
-
-        async function triggerDownload(url, index) {
-            // 使用 Fetch 获取 Blob，强制触发下载而不是跳转
-            const filename = `CORE_Photo_2026_${index + 1}.webp`;
+        // --- 核心：CORS 代理下载 + 唯一命名 ---
+        async function downloadImageWithProxy(url, filename) {
             try {
-                const res = await fetch(url);
-                const blob = await res.blob();
-                const blobUrl = URL.createObjectURL(blob);
+                // 使用 wsrv.nl 代理解决 GitHub Pages 跨域问题
+                const proxyUrl = `https://wsrv.nl/?url=${encodeURIComponent(url)}&output=webp&q=100`;
+
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error("代理请求失败");
+
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
                 const a = document.createElement('a');
+                a.style.display = 'none';
                 a.href = blobUrl;
-                a.download = filename;
+                a.download = filename; 
                 document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
-                setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(blobUrl);
+                }, 100);
+
                 return true;
             } catch (e) {
-                console.error('Download error:', e);
-                // 降级：直接打开
-                window.open(url, '_blank');
+                console.error("下载失败:", e);
                 return false;
             }
         }
 
+        // --- 生成唯一文件名 (序号+时间戳) ---
+        function generateUniqueFilename(index) {
+            const paddedIndex = String(index + 1).padStart(3, '0');
+            const timestamp = new Date().getTime(); 
+            return `CORE_2026_${paddedIndex}_${timestamp}.webp`;
+        }
+
+        // --- 业务逻辑 ---
+
+        let isSelectMode = false;
+        let selected = new Set();
+        let currentIndex = 0;
+        let isCancelled = false; // 取消标志
+
+        const gallery = document.getElementById('gallery');
+        imageUrls.forEach((url, i) => {
+            const div = document.createElement('div');
+            div.className = "image-card relative rounded-sm overflow-hidden group transition-all duration-300 cursor-pointer bg-gray-200 dark:bg-gray-800";
+            div.innerHTML = `
+                <img src="${url}" loading="lazy" class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none" id="hover-${i}">
+                    <i class="fa-solid fa-expand text-white text-2xl drop-shadow-md"></i>
+                </div>
+                <div class="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/40 border border-white/50 flex items-center justify-center text-white scale-0 transition-transform duration-200" id="check-${i}">
+                    <i class="fa-solid fa-check text-xs opacity-0"></i>
+                </div>
+            `;
+            div.onclick = () => handleClick(i);
+            div.id = `card-${i}`;
+            gallery.appendChild(div);
+        });
+
+        function handleClick(i) {
+            if (isSelectMode) {
+                toggleSelect(i);
+            } else {
+                openLightbox(i);
+            }
+        }
+
+        function toggleSelectMode() {
+            isSelectMode = !isSelectMode;
+            const bar = document.getElementById('bottom-bar');
+            const btnText = document.getElementById('mode-text');
+            const btn = document.getElementById('btn-mode');
+
+            if (isSelectMode) {
+                btnText.innerText = "退出选择";
+                btn.classList.add('bg-gold', 'border-gold', 'text-white');
+                bar.classList.remove('translate-y-full');
+                showToast("点击图片进行多选");
+                imageUrls.forEach((_, i) => {
+                    document.getElementById(`check-${i}`).classList.remove('scale-0');
+                    document.getElementById(`hover-${i}`).style.display = 'none';
+                });
+            } else {
+                btnText.innerText = "批量选择";
+                btn.classList.remove('bg-gold', 'border-gold', 'text-white');
+                bar.classList.add('translate-y-full');
+                selected.clear();
+                updateUI();
+                imageUrls.forEach((_, i) => {
+                    const check = document.getElementById(`check-${i}`);
+                    check.classList.add('scale-0');
+                    check.classList.remove('bg-gold', 'border-transparent');
+                    check.classList.add('bg-black/40', 'border-white/50');
+                    check.querySelector('i').classList.add('opacity-0');
+                    
+                    document.getElementById(`card-${i}`).classList.remove('selected-ring');
+                    document.getElementById(`hover-${i}`).style.display = '';
+                });
+            }
+        }
+
+        function toggleSelect(i) {
+            const card = document.getElementById(`card-${i}`);
+            const check = document.getElementById(`check-${i}`);
+            const icon = check.querySelector('i');
+
+            if (selected.has(i)) {
+                selected.delete(i);
+                card.classList.remove('selected-ring');
+                check.classList.remove('bg-gold', 'border-transparent');
+                check.classList.add('bg-black/40', 'border-white/50');
+                icon.classList.add('opacity-0');
+            } else {
+                selected.add(i);
+                card.classList.add('selected-ring');
+                check.classList.remove('bg-black/40', 'border-white/50');
+                check.classList.add('bg-gold', 'border-transparent');
+                icon.classList.remove('opacity-0');
+            }
+            updateUI();
+        }
+
+        function selectAll() {
+            if (selected.size === imageUrls.length) {
+                selected.clear();
+            } else {
+                imageUrls.forEach((_, i) => selected.add(i));
+            }
+            imageUrls.forEach((_, i) => {
+                const card = document.getElementById(`card-${i}`);
+                const check = document.getElementById(`check-${i}`);
+                const icon = check.querySelector('i');
+                
+                if (selected.has(i)) {
+                    card.classList.add('selected-ring');
+                    check.classList.add('bg-gold', 'border-transparent');
+                    icon.classList.remove('opacity-0');
+                } else {
+                    card.classList.remove('selected-ring');
+                    check.classList.remove('bg-gold', 'border-transparent');
+                    check.classList.add('bg-black/40', 'border-white/50');
+                    icon.classList.add('opacity-0');
+                }
+            });
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('select-count').innerText = selected.size;
+            document.getElementById('btn-dl').disabled = selected.size === 0;
+        }
+
+        // --- 批量下载 (带进度、ETA、取消) ---
         async function downloadSelected() {
-            if (selectedIndices.size === 0) return;
+            if (selected.size === 0) return;
             
-            // 确认提示
-            const confirmMsg = `即将下载 ${selectedIndices.size} 张原图。\n\n请注意：浏览器上方可能会弹出“允许下载多个文件”的提示，请务必点击【允许】。`;
-            if (!confirm(confirmMsg)) return;
-
+            const list = Array.from(selected).sort((a,b)=>a-b);
             const mask = document.getElementById('progress-mask');
-            const text = document.getElementById('progress-text');
+            const txt = document.getElementById('progress-txt');
+            const etaTxt = document.getElementById('eta-txt');
+            const bar = document.getElementById('progress-bar');
+            
             mask.classList.remove('hidden');
+            bar.style.width = '0%';
+            isCancelled = false; // 重置取消标志
             
-            isDownloading = true;
-            cancelFlag = false;
-            
-            // 将 Set 转为 Array 并排序，保证下载顺序
-            const targets = Array.from(selectedIndices).sort((a, b) => a - b);
-            
-            let successCount = 0;
+            let success = 0;
+            const startTime = Date.now();
+            const delayTime = 800; // 设定的间隔时间 ms
 
-            for (let i = 0; i < targets.length; i++) {
-                if (cancelFlag) break;
-                
-                const originalIndex = targets[i];
-                text.innerText = `正在处理第 ${i + 1} / ${targets.length} 张...`;
-                
-                await triggerDownload(imageUrls[originalIndex], originalIndex);
-                successCount++;
+            for (let i = 0; i < list.length; i++) {
+                // 1. 检查取消标志
+                if (isCancelled) {
+                    break;
+                }
 
-                // 关键延时：防止浏览器拦截高频请求
-                if (i < targets.length - 1) {
-                    await new Promise(r => setTimeout(r, 800));
+                const idx = list[i];
+                const currentCount = i + 1;
+                const totalCount = list.length;
+                
+                // 2. 更新文字和进度条
+                txt.innerText = `${currentCount} / ${totalCount}`;
+                const percent = Math.round((currentCount / totalCount) * 100);
+                bar.style.width = `${percent}%`;
+
+                // 3. 计算 ETA (基于已用时间平均值 + 预估延迟)
+                if (i > 0) {
+                    const elapsedTime = Date.now() - startTime;
+                    const avgTimePerItem = elapsedTime / i;
+                    const remainingItems = totalCount - i;
+                    const remainingMs = avgTimePerItem * remainingItems;
+                    const remainingSec = Math.ceil(remainingMs / 1000);
+                    etaTxt.innerText = `预计剩余 ${remainingSec} 秒`;
+                } else {
+                     etaTxt.innerText = `正在计算剩余时间...`;
+                }
+                
+                // 4. 执行下载
+                const uniqueName = generateUniqueFilename(idx);
+                const res = await downloadImageWithProxy(imageUrls[idx], uniqueName);
+                if (res) success++;
+                
+                // 5. 延时 (最后一张不延时)
+                if (i < list.length - 1) {
+                    if(isCancelled) break; // 延时前再次检查
+                    await new Promise(r => setTimeout(r, delayTime));
                 }
             }
 
             mask.classList.add('hidden');
-            isDownloading = false;
             
-            if (cancelFlag) {
-                showToast(`已取消，成功下载 ${successCount} 张`);
+            if (isCancelled) {
+                showToast(`已取消下载，成功保存 ${success} 张`);
             } else {
-                showToast("所有图片下载完成");
-                // 自动退出选择模式
-                toggleSelectMode();
+                showToast(success === list.length ? "所有图片下载完成" : `部分失败，成功 ${success} 张`);
+                if (success === list.length) toggleSelectMode();
             }
         }
 
-        function cancelDownload() {
-            cancelFlag = true;
+        function cancelBatchDownload() {
+            isCancelled = true;
+            document.getElementById('eta-txt').innerText = "正在停止...";
         }
 
-        // --- 6. 通用工具 ---
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
+        // --- 单张下载 ---
+        async function downloadCurrent() {
+            showToast("正在请求下载...");
+            const uniqueName = generateUniqueFilename(currentIndex);
+            const res = await downloadImageWithProxy(imageUrls[currentIndex], uniqueName);
+            if (!res) showToast("下载失败，请检查网络");
         }
-        
-        // 初始化主题
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
+
+        // Lightbox
+        function openLightbox(i) {
+            currentIndex = i;
+            document.getElementById('lb-img').src = imageUrls[i];
+            document.getElementById('lb-index').innerText = `${i+1} / ${imageUrls.length}`;
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('hidden');
+            requestAnimationFrame(() => lb.classList.remove('opacity-0'));
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('opacity-0');
+            setTimeout(() => lb.classList.add('hidden'), 300);
         }
 
         function showToast(msg) {
-            const toast = document.getElementById('toast');
+            const t = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = msg;
-            toast.classList.remove('-translate-y-20', 'opacity-0');
-            
-            // 3秒后自动隐藏
-            clearTimeout(toast.timer);
-            toast.timer = setTimeout(() => {
-                toast.classList.add('-translate-y-20', 'opacity-0');
-            }, 3000);
+            t.classList.remove('opacity-0', '-translate-y-10');
+            setTimeout(() => t.classList.add('opacity-0', '-translate-y-10'), 3000);
         }
 
-        // 导航栏滚动阴影
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.classList.add('shadow-md');
-            } else {
-                nav.classList.remove('shadow-md');
-            }
-        });
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
 
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.includes('micromessenger') || ua.includes('qq/')) {
+            document.getElementById('wx-mask').style.display = 'block';
+        }
+        
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
     </script>
 </body>
 </html>
