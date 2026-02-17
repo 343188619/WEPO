@@ -9,12 +9,12 @@
     <meta name="description" content="The World Environmental Protection Organization (WEPO) is a global NGO dedicated to climate action, biodiversity, and sustainable development. 世界环境保护组织致力于全球环保事业。">
     <meta name="keywords" content="WEPO, World Environmental Protection Organization, 世界环境保护组织, Environmental NGO, Climate Change, Biodiversity, 环保组织, 气候变化, 康朝凯,邓骁,陈是圳,环保,环境保护,环境保护组织,UNEP,IUCN,可持续发展, Carbon Neutrality">
     <meta name="author" content="WEPO Council">
-    <link rel="canonical" href="https://wepo.top/">
+    <link rel="canonical" href="https://wepo2021.org/">
     <meta name="theme-color" content="#0a0a0a">
 
     <!-- --- SEO: Open Graph --- -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wepo.top/">
+    <meta property="og:url" content="https://wepo2021.org/">
     <meta property="og:title" content="WEPO - World Environmental Protection Organization">
     <meta property="og:description" content="Leading global environmental protection through science, policy, and education. Join us to protect our common home.">
     <meta property="og:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
@@ -35,10 +35,10 @@
       "@type": "NGO",
       "name": "World Environmental Protection Organization",
       "alternateName": ["WEPO", "世界环境保护组织", "World EPO"],
-      "url": "https://wepo.top",
+      "url": "https://wepo2021.org",
       "logo": "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg",
       "description": "WEPO is a non-profit international organization at the forefront of environmental protection, focusing on climate change and biodiversity.",
-      "foundingDate": "2010",
+      "foundingDate": "2021",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "No. 10 Xingsheng Ave",
@@ -49,7 +49,7 @@
         "@type": "ContactPoint",
         "telephone": "+86-023-86161804",
         "contactType": "customer service",
-        "email": "xcb@wepo.top",
+        "email": "xcb@wepo2021.org",
         "areaServed": "Global",
         "availableLanguage": ["English", "Chinese"]
       },
@@ -227,6 +227,30 @@
             display: flex; align-items: center; justify-content: center; text-align: center;
         }
         
+        /* Loading State for Hero */
+        .hero.loading .carousel-slide {
+            filter: blur(20px) brightness(0.8);
+            transform: scale(1.1);
+        }
+        
+        /* Loader Animation */
+        .hero-loader {
+            position: absolute; top: 50%; left: 50%;
+            width: 50px; height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-gold);
+            animation: spin 1s ease-in-out infinite;
+            z-index: 10;
+            display: none;
+            transform: translate(-50%, -50%);
+        }
+        .hero.loading .hero-loader { display: block; }
+        
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
         /* Carousel Container */
         .hero-carousel {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -237,7 +261,7 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
+            transition: opacity 1.5s ease-in-out, transform 8s ease-out, filter 0.8s ease;
             transform: scale(1);
         }
         
@@ -595,8 +619,8 @@
             <li><a href="#mission" data-i18n="nav.mission">Mission</a></li>
             <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
             <li><a href="#partners" data-i18n="nav.partners">Partners</a></li>
-            <li><a href="https://weather.wepo.top" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
-            <li><a href="https://query.wepo.top/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
+            <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
+            <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
             <li><a href="map.html" data-i18n="nav.global">Global Vision</a></li>
             <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
@@ -636,8 +660,8 @@
     <a href="#mission" onclick="toggleMobileMenu()" data-i18n="nav.mission">Mission</a>
     <a href="#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs">Programs</a>
     <a href="#partners" onclick="toggleMobileMenu()" data-i18n="nav.partners">Partners</a>
-    <a href="https://weather.wepo.top" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
-    <a href="https://query.wepo.top/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
+    <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
+    <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
     <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
     <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
     <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate" style="color: var(--accent-gold);">Donate</a>
@@ -645,6 +669,7 @@
 
 <!-- Replaced Video Background with Image Carousel -->
 <section class="hero" id="home">
+    <div class="hero-loader"></div>
     <div class="hero-carousel">
         <div class="carousel-slide active" style="background-image: url('https://img.yohuo.eu.org/1768492122486.jpeg');"></div>
         <div class="carousel-slide" style="background-image: url('https://img.yohuo.eu.org/1768492123932.jpg');"></div>
@@ -672,7 +697,7 @@
     </div>
     <div class="about-grid">
         <div class="about-content reveal stagger-1">
-            <p data-i18n="about.p1">Founded in 2010 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.</p>
+            <p data-i18n="about.p1">Founded in 2021 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.</p>
             <p data-i18n="about.p2">From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.</p>
             <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500;" data-i18n="about.report_link">Read Our Annual Report →</a>
         </div>
@@ -774,7 +799,7 @@
             </div>
             <div class="info-row">
                 <span class="info-label" data-i18n="contact.email_title">Email</span>
-                <a href="mailto:xcb@wepo.top" class="info-val">xcb@wepo.top</a>
+                <a href="mailto:xcb@wepo2021.org" class="info-val">xcb@wepo2021.org</a>
             </div>
             <div class="info-row">
                 <span class="info-label" data-i18n="contact.phone_title">Phone</span>
@@ -843,24 +868,25 @@
             </a>
         </div>
         
-        <p>&copy; <span id="year"></span> WEPO. All rights reserved.</p>
+        <p>&copy; <span id="year">2026</span> WEPO. All rights reserved.</p>
     </div>
 </footer>
 
 <!-- Modified Cookie Modal (Full Overlay) -->
 <div class="cookie-overlay" id="cookieBar">
     <div class="cookie-modal">
-        <h3 class="cookie-title" data-i18n="cookie.title">Cookie Consent</h3>
-        <div class="cookie-text" data-i18n="cookie.text">
-            We use cookies to provide the best experience. By continuing to browse, you agree to our policy.
+        <h3 class="cookie-title">Cookie Consent / Cookie 许可</h3>
+        <div class="cookie-text">
+            <p>We use cookies to provide the best experience. By continuing to browse, you agree to our policy.</p>
+            <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
         </div>
         <div class="cookie-links">
             <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
             <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
         </div>
         <div class="cookie-actions">
-            <button class="c-btn no" onclick="declineCookie()" data-i18n="cookie.decline">Decline</button>
-            <button class="c-btn ok" onclick="acceptCookie()" data-i18n="cookie.accept">Accept</button>
+            <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
+            <button class="c-btn ok" onclick="acceptCookie()">Accept / 同意</button>
         </div>
     </div>
 </div>
@@ -887,7 +913,7 @@
             "hero.btn_feedback": "了解更多",
             "hero.btn_join": "加入我们",
             "about.subtitle": "致力于构建人与自然和谐共生的可持续未来。",
-            "about.p1": "世界环境保护组织(WEPO)成立于2010年，总部位于中国重庆。作为一个非营利性国际环保组织，我们始终站在应对环境危机的最前线。",
+            "about.p1": "世界环境保护组织(WEPO)成立于2021年，总部位于中国重庆。作为一个非营利性国际环保组织，我们始终站在应对环境危机的最前线。",
             "about.p2": "从气候变化到生物多样性丧失，我们通过科学研究、政策倡导和公众教育，寻找切实可行的解决方案。",
             "about.report_link": "阅读我们的年度报告 →",
             "stats.countries": "30+",
@@ -933,11 +959,7 @@
             "footer.reports": "年度报告",
             "footer.charter": "组织章程",
             "footer.privacy": "隐私政策",
-            "footer.terms": "用户协议",
-            "cookie.title": "Cookie 许可",
-            "cookie.text": "我们使用 Cookie 以提供最佳体验。您必须同意才能继续浏览网站。",
-            "cookie.decline": "拒绝",
-            "cookie.accept": "同意"
+            "footer.terms": "用户协议"
         },
         "en": {
             "lang.current": "EN",
@@ -958,7 +980,7 @@
             "hero.btn_feedback": "Learn More",
             "hero.btn_join": "Join Us",
             "about.subtitle": "Building a sustainable future where humans and nature coexist.",
-            "about.p1": "Founded in 2010 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.",
+            "about.p1": "Founded in 2021 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.",
             "about.p2": "From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.",
             "about.report_link": "Read Our Annual Report →",
             "stats.countries": "30+",
@@ -1004,11 +1026,7 @@
             "footer.reports": "Reports",
             "footer.charter": "Charter",
             "footer.privacy": "Privacy Policy",
-            "footer.terms": "User Agreement",
-            "cookie.title": "Cookie Consent",
-            "cookie.text": "We use cookies to provide the best experience. You must accept to continue browsing.",
-            "cookie.decline": "Decline",
-            "cookie.accept": "Accept"
+            "footer.terms": "User Agreement"
         },
         "es": {
             "lang.current": "ES",
@@ -1029,7 +1047,7 @@
             "hero.btn_feedback": "Más Información",
             "hero.btn_join": "Únete",
             "about.subtitle": "Construyendo un futuro sostenible donde humanos y naturaleza coexisten.",
-            "about.p1": "Fundada en 2010 con sede en Chongqing, China, WEPO es una organización internacional sin fines de lucro en la vanguardia de la protección ambiental.",
+            "about.p1": "Fundada en 2021 con sede en Chongqing, China, WEPO es una organización internacional sin fines de lucro en la vanguardia de la protección ambiental.",
             "about.p2": "Desde el cambio climático hasta la pérdida de biodiversidad, buscamos soluciones prácticas a través de la ciencia, la política y la educación.",
             "about.report_link": "Lea Nuestro Informe Anual →",
             "stats.countries": "30+",
@@ -1075,11 +1093,7 @@
             "footer.reports": "Informes",
             "footer.charter": "Estatuto",
             "footer.privacy": "Privacidad",
-            "footer.terms": "Términos",
-            "cookie.title": "Consentimiento de Cookies",
-            "cookie.text": "Usamos cookies para brindar la mejor experiencia. Debe aceptar para continuar navegando.",
-            "cookie.decline": "Rechazar",
-            "cookie.accept": "Aceptar"
+            "footer.terms": "Términos"
         },
         "fr": {
             "lang.current": "FR",
@@ -1100,7 +1114,7 @@
             "hero.btn_feedback": "En savoir plus",
             "hero.btn_join": "Rejoindre",
             "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
-            "about.p1": "Fondée en 2010 et basée à Chongqing, en Chine, WEPO est une organisation internationale à but non lucratif à l'avant-garde de la protection de l'environnement.",
+            "about.p1": "Fondée en 2021 et basée à Chongqing, en Chine, WEPO est une organisation internationale à but non lucratif à l'avant-garde de la protection de l'environnement.",
             "about.p2": "Du changement climatique à la perte de biodiversité, nous recherchons des solutions pratiques par la science, la politique et l'éducation.",
             "about.report_link": "Lire Notre Rapport Annuel →",
             "stats.countries": "30+",
@@ -1146,11 +1160,7 @@
             "footer.reports": "Rapports",
             "footer.charter": "Charte",
             "footer.privacy": "Confidentialité",
-            "footer.terms": "Conditions",
-            "cookie.title": "Consentement aux Cookies",
-            "cookie.text": "Nous utilisons des cookies pour offrir la meilleure expérience. Vous devez accepter pour continuer.",
-            "cookie.decline": "Refuser",
-            "cookie.accept": "Accepter"
+            "footer.terms": "Conditions"
         },
         "ru": {
             "lang.current": "RU",
@@ -1171,7 +1181,7 @@
             "hero.btn_feedback": "Узнать больше",
             "hero.btn_join": "Присоединиться",
             "about.subtitle": "Создание устойчивого будущего, где человек и природа сосуществуют.",
-            "about.p1": "Основанная в 2010 году со штаб-квартирой в Чунцине, Китай, WEPO является международной неприбыльной организацией на передовой защиты окружающей среды.",
+            "about.p1": "Основанная в 2021 году со штаб-квартирой в Чунцине, Китай, WEPO является международной неприбыльной организацией на передовой защиты окружающей среды.",
             "about.p2": "От изменения климата до потери биоразнообразия мы ищем практические решения через науку, политику и образование.",
             "about.report_link": "Прочитать Наш Годовой Отчет →",
             "stats.countries": "30+",
@@ -1217,11 +1227,7 @@
             "footer.reports": "Отчеты",
             "footer.charter": "Устав",
             "footer.privacy": "Конфиденциальность",
-            "footer.terms": "Условия",
-            "cookie.title": "Согласие на Cookie",
-            "cookie.text": "Мы используем файлы cookie. Вы должны принять их, чтобы продолжить просмотр.",
-            "cookie.decline": "Отклонить",
-            "cookie.accept": "Принять"
+            "footer.terms": "Условия"
         },
         "ar": {
             "lang.current": "العربية",
@@ -1242,7 +1248,7 @@
             "hero.btn_feedback": "تعرف أكثر",
             "hero.btn_join": "انضم إلينا",
             "about.subtitle": "بناء مستقبل مستدام يتعايش فيه الإنسان والطبيعة.",
-            "about.p1": "تأسست عام 2010 ومقرها في تشونغتشينغ ، الصين ، WEPO هي منظمة دولية غير ربحية تتصدر حركة حماية البيئة.",
+            "about.p1": "تأسست عام 2021 ومقرها في تشونغتشينغ ، الصين ، WEPO هي منظمة دولية غير ربحية تتصدر حركة حماية البيئة.",
             "about.p2": "من تغير المناخ إلى فقدان التنوع البيولوجي ، نسعى إلى حلول عملية من خلال العلم والسياسة والتعليم.",
             "about.report_link": "اقرأ تقريرنا السنوي →",
             "stats.countries": "30+",
@@ -1288,11 +1294,7 @@
             "footer.reports": "التقارير",
             "footer.charter": "الميثاق",
             "footer.privacy": "الخصوصية",
-            "footer.terms": "الشروط",
-            "cookie.title": "موافقة ملفات تعريف الارتباط",
-            "cookie.text": "نحن نستخدم ملفات تعريف الارتباط. يجب أن تقبل المتابعة.",
-            "cookie.decline": "رفض",
-            "cookie.accept": "قبول"
+            "footer.terms": "الشروط"
         }
     };
 
@@ -1431,14 +1433,40 @@
     // Call init immediately
     initCookieLogic();
 
-    // 7. Update Year
+    // 7. Update Year (Prioritize Hardcoded Requirement for 2026)
+    // The requirement is to change copyright to 2026. 
+    // Since current year is 2026, dynamic year works.
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 8. Hero Carousel Logic
+    // 8. Hero Carousel Logic & Priority Loading
     function initCarousel() {
+        const hero = document.querySelector('.hero');
         const slides = document.querySelectorAll('.carousel-slide');
         let currentSlide = 0;
         const totalSlides = slides.length;
+
+        // --- Priority Image Loading Logic ---
+        hero.classList.add('loading');
+        // Get URL from the first slide's style
+        const firstSlideStyle = slides[0].getAttribute('style');
+        // Extract url(...)
+        const urlMatch = firstSlideStyle.match(/url\(['"]?(.*?)['"]?\)/);
+        
+        if (urlMatch && urlMatch[1]) {
+            const img = new Image();
+            img.src = urlMatch[1];
+            img.onload = () => {
+                // Remove blur/loading state once loaded
+                hero.classList.remove('loading');
+            };
+            img.onerror = () => {
+                // Fallback: remove loading anyway so it's not stuck
+                hero.classList.remove('loading');
+            };
+        } else {
+            hero.classList.remove('loading');
+        }
+        // ------------------------------------
 
         setInterval(() => {
             // Remove active from current
