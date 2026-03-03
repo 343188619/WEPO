@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
@@ -53,7 +54,7 @@
         "areaServed": "Global",
         "availableLanguage": ["English", "Chinese"]
       },
-      "sameAs": [
+      "sameAs":[
         "https://www.facebook.com/wepo",
         "https://twitter.com/wepo"
       ]
@@ -84,8 +85,7 @@
             --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Light Mode Variables */
-        [data-theme="light"] {
+        /* Light Mode Variables */[data-theme="light"] {
             --bg-void: #F2F2F7;
             --bg-surface: #FFFFFF;
             --bg-card: rgba(255, 255, 255, 0.6);
@@ -196,8 +196,7 @@
 
         .theme-icon { width: 14px; height: 14px; fill: currentColor; }
         [data-theme="light"] .moon-icon { display: block; }
-        [data-theme="light"] .sun-icon { display: none; }
-        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }
         [data-theme="dark"] .sun-icon { display: block; }
 
         .language-switcher { position: relative; }
@@ -227,6 +226,18 @@
             display: flex; align-items: center; justify-content: center; text-align: center;
         }
         
+        .hero-slogan {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--accent-gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 600;
+            animation: fadeUp 1s var(--ease-out-expo) forwards 0.2s;
+            opacity: 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+
         /* Loading State for Hero */
         .hero.loading .carousel-slide {
             filter: blur(20px) brightness(0.8);
@@ -277,9 +288,7 @@
             z-index: 0; pointer-events: none;
         }
 
-        /* Adjust theme overlay specifics */
-        [data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,0.8) 100%); }
-        [data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
+        /* Adjust theme overlay specifics */[data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,0.8) 100%); }[data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
 
         .hero-content { 
             z-index: 2; max-width: 1200px; padding: 0 20px; 
@@ -300,7 +309,7 @@
 
         .hero p {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text-primary); opacity: 0.95;
-            max-width: 650px; margin: 0 auto 50px; font-weight: 300; letter-spacing: 0.01em;
+            max-width: 750px; margin: 0 auto 50px; font-weight: 300; letter-spacing: 0.01em;
             animation: fadeUp 1s var(--ease-out-expo) forwards 0.5s; opacity: 0;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
@@ -367,7 +376,7 @@
 
         /* --- About --- */
         .about-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; align-items: center; }
-        .about-content p { color: var(--text-secondary); margin-bottom: 30px; font-size: 1.15rem; leading-height: 1.8; }
+        .about-content p { color: var(--text-secondary); margin-bottom: 25px; font-size: 1.15rem; line-height: 1.8; }
         
         .about-image { position: relative; overflow: hidden; border-radius: 20px; }
         .about-image img { 
@@ -399,7 +408,7 @@
             border-color: var(--accent-gold);
         }
         .mission-card h3 { font-size: 1.8rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; color: var(--text-primary); }
-        .mission-card p { color: var(--text-secondary); font-size: 1rem; }
+        .mission-card p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 
         /* --- Programs --- */
         .programs-grid {
@@ -423,7 +432,7 @@
         .program-item:hover .program-img-box img { transform: scale(1.1); filter: grayscale(0); }
         
         .program-item h3 { font-size: 1.6rem; margin-bottom: 12px; color: var(--text-primary); }
-        .program-item p { color: var(--text-secondary); font-size: 1rem; }
+        .program-item p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 
         /* --- Partners Marquee --- */
         .partners-section { background: var(--bg-surface); padding: 120px 0; border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); }
@@ -474,7 +483,8 @@
         footer { padding: 100px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
         .footer-top { display: flex; justify-content: space-between; margin-bottom: 80px; flex-wrap: wrap; gap: 60px; }
         .footer-brand img { height: 45px; margin-bottom: 25px; opacity: 0.9; }
-        .footer-brand p { max-width: 300px; color: var(--text-secondary); font-size: 0.95rem; }
+        .footer-brand p { max-width: 320px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;}
+        .footer-slogan { font-weight: 600; color: var(--accent-gold); font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 10px; }
         
         .footer-navs { display: flex; gap: 100px; }
         .footer-col h5 { color: var(--text-primary); margin-bottom: 25px; font-size: 0.95rem; letter-spacing: 0.05em; }
@@ -515,13 +525,13 @@
             flex-wrap: wrap; gap: 20px;
         }
 
-        /* --- Cookie Bar / Modal (Modified) --- */
+        /* --- Cookie Bar / Modal --- */
         .cookie-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            z-index: 99999; /* Highest priority */
-            display: none; /* Hidden by default */
+            z-index: 99999;
+            display: none;
             justify-content: center; align-items: center;
             opacity: 0; transition: opacity 0.5s ease;
         }
@@ -667,7 +677,6 @@
     <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate" style="color: var(--accent-gold);">Donate</a>
 </div>
 
-<!-- Replaced Video Background with Image Carousel -->
 <section class="hero" id="home">
     <div class="hero-loader"></div>
     <div class="hero-carousel">
@@ -678,8 +687,10 @@
         <div class="carousel-slide" style="background-image: url('https://img.yohuo.eu.org/1768492129862.webp');"></div>
     </div>
     <div class="hero-content">
-        <h1><span id="hero-title">Protecting Earth Our Common Home</span><span class="typewriter-cursor"></span></h1>
+        <!-- 醒目位置加入口号 -->
+        <div class="hero-slogan" data-i18n="slogan.text">Let's change the world.</div>
         
+        <h1><span id="hero-title">Protecting Earth Our Common Home</span><span class="typewriter-cursor"></span></h1>
         <span id="hero-title-source" data-i18n="hero.title" style="display:none;">Protecting Earth Our Common Home</span>
 
         <p data-i18n="hero.description">WEPO is committed to global environmental protection through scientific research, policy advocacy, and public education.</p>
@@ -697,9 +708,11 @@
     </div>
     <div class="about-grid">
         <div class="about-content reveal stagger-1">
-            <p data-i18n="about.p1">Founded in 2021 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.</p>
-            <p data-i18n="about.p2">From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.</p>
-            <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500;" data-i18n="about.report_link">Read Our Annual Report →</a>
+            <p data-i18n="about.p1">Founded in 2021 and headquartered in Chongqing, China, the World Environmental Protection Organization (WEPO) is a non-profit international NGO standing at the forefront of the global environmental crisis.</p>
+            <p data-i18n="about.p2">From mitigating climate change to reversing biodiversity loss, we are dedicated to finding and implementing practical, science-based solutions. Through rigorous policy advocacy, public education, and grassroots initiatives, we strive to bridge the gap between human development and ecological preservation.</p>
+            <p data-i18n="about.p3">We actively collaborate with governmental bodies, indigenous communities, and multinational enterprises to drive systemic, long-lasting change. By deploying advanced ecological monitoring networks and championing green technologies, we empower millions of individuals to become proactive stewards of the Earth.</p>
+            <p><span data-i18n="about.p4">Today, our dedicated professional teams and passionate volunteers span across more than 30 countries. Together, we are working tirelessly to protect vulnerable habitats, reshape sustainable policies, and inspire the next generation to safeguard our common home.</span> <br><br> <strong style="color:var(--accent-gold); font-size:1.25rem; font-family:'Playfair Display', serif;" data-i18n="slogan.text">Let's change the world.</strong></p>
+            <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500; display: inline-block; margin-top: 15px;" data-i18n="about.report_link">Read Our Annual Report →</a>
         </div>
         <div class="about-image reveal stagger-2">
             <img src="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png" alt="WEPO Team">
@@ -721,15 +734,15 @@
     <div class="mission-grid">
         <div class="mission-card reveal stagger-1">
             <h3 data-i18n="mission.mission_title">Our Mission</h3>
-            <p data-i18n="mission.mission_desc">Promoting global environmental protection through science, policy, and education.</p>
+            <p data-i18n="mission.mission_desc">Driving global environmental protection through rigorous scientific research, proactive policy advocacy, and widespread public education to mitigate climate impact.</p>
         </div>
         <div class="mission-card reveal stagger-2">
             <h3 data-i18n="mission.vision_title">Our Vision</h3>
-            <p data-i18n="mission.vision_desc">Creating a world where humans and nature coexist in harmony.</p>
+            <p data-i18n="mission.vision_desc">Creating a thriving, resilient world where humanity and nature coexist in perfect harmony, ensuring abundant resources for all future generations.</p>
         </div>
         <div class="mission-card reveal stagger-3">
             <h3 data-i18n="mission.values_title">Our Values</h3>
-            <p data-i18n="mission.values_desc">Scientific rigor, collaboration, transparency, and innovation.</p>
+            <p data-i18n="mission.values_desc">Scientific rigor, borderless collaboration, unwavering transparency, and relentless innovation in tackling today's toughest ecological challenges.</p>
         </div>
     </div>
 </section>
@@ -745,21 +758,21 @@
                 <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Action">
             </div>
             <h3 data-i18n="programs.climate_title">Climate Action</h3>
-            <p data-i18n="programs.climate_desc">Helping communities adapt to climate change and promoting carbon neutrality.</p>
+            <p data-i18n="programs.climate_desc">Helping vulnerable communities adapt to climate change, advancing the global transition to renewable energy, and driving the ultimate goal of carbon neutrality.</p>
         </div>
         <div class="program-item reveal stagger-2">
             <div class="program-img-box">
                 <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity">
             </div>
             <h3 data-i18n="programs.biodiversity_title">Biodiversity</h3>
-            <p data-i18n="programs.biodiversity_desc">Protecting endangered species and restoring ecosystems.</p>
+            <p data-i18n="programs.biodiversity_desc">Protecting endangered wildlife, combating illegal poaching, and meticulously restoring degraded forests, wetlands, and marine ecosystems.</p>
         </div>
         <div class="program-item reveal stagger-3">
             <div class="program-img-box">
                 <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities">
             </div>
             <h3 data-i18n="programs.cities_title">Sustainable Cities</h3>
-            <p data-i18n="programs.cities_desc">Promoting green buildings and sustainable urban environments.</p>
+            <p data-i18n="programs.cities_desc">Promoting green building standards, circular economy practices, and sustainable urban mobility to create zero-carbon, livable environments.</p>
         </div>
     </div>
 </section>
@@ -792,7 +805,9 @@
 <section id="contact" class="contact-section">
     <div class="contact-split">
         <div class="contact-info reveal">
-            <h2 style="margin-bottom: 60px; font-size: 3rem;" data-i18n="contact.title">Contact Us</h2>
+            <h2 style="margin-bottom: 20px; font-size: 3rem;" data-i18n="contact.title">Contact Us</h2>
+            <h3 style="color:var(--accent-gold); margin-bottom: 50px; font-family:'Playfair Display', serif;" data-i18n="slogan.text">Let's change the world.</h3>
+            
             <div class="info-row">
                 <span class="info-label" data-i18n="contact.address_title">Address</span>
                 <span class="info-val" data-i18n="contact.address" style="font-size: 1.4rem;">No. 10 Xingsheng Ave, Chongqing, CN</span>
@@ -816,7 +831,8 @@
     <div class="footer-top">
         <div class="footer-brand reveal">
             <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo">
-            <p data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+            <span class="footer-slogan" data-i18n="slogan.text">Let's change the world.</span>
+            <p data-i18n="footer.about">WEPO is dedicated to global environmental protection, inspiring change through science, education, and action.</p>
         </div>
         <div class="footer-navs reveal stagger-1">
             <div class="footer-col">
@@ -896,6 +912,7 @@
     const translations = {
         "zh-CN": {
             "lang.current": "中文",
+            "slogan.text": "让我们一起改变世界。 (Let's change the world.)",
             "nav.home": "首页",
             "nav.about": "关于我们",
             "nav.mission": "使命愿景",
@@ -909,35 +926,37 @@
             "nav.query": "证书查询",
             "nav.global": "全球视野",
             "hero.title": "保护地球 我们的共同家园",
-            "hero.description": "世界环境保护组织(WEPO)致力于全球环境保护事业，通过科学研究、政策倡导和公众教育，推动可持续发展。",
+            "hero.description": "世界环境保护组织(WEPO)致力于全球环境保护事业，通过科学研究、政策倡导和公众教育，推动可持续发展并应对全球最紧迫的生态挑战。",
             "hero.btn_feedback": "了解更多",
             "hero.btn_join": "加入我们",
             "about.subtitle": "致力于构建人与自然和谐共生的可持续未来。",
-            "about.p1": "世界环境保护组织(WEPO)成立于2021年，总部位于中国重庆。作为一个非营利性国际环保组织，我们始终站在应对环境危机的最前线。",
-            "about.p2": "从气候变化到生物多样性丧失，我们通过科学研究、政策倡导和公众教育，寻找切实可行的解决方案。",
+            "about.p1": "世界环境保护组织(WEPO)成立于2021年，总部位于中国重庆。作为一个致力于可持续发展的非营利性国际环保组织，我们始终站在应对全球环境危机的最前线。",
+            "about.p2": "从缓解气候变化到扭转生物多样性丧失，我们致力于寻找并实施基于科学的切实解决方案。通过严谨的政策倡导、广泛的公众教育和扎根基层的环保行动，我们努力弥合人类发展与生态保护之间的鸿沟。",
+            "about.p3": "我们与各国政府、本土社区以及全球跨国企业紧密合作，推动系统性且深远的变革。通过部署先进的生态监测网络和大力推广绿色环保技术，我们赋能数以百万计的公众采取实际行动，共同成为地球家园的守护者。",
+            "about.p4": "如今，我们的专业团队和热忱的志愿者已遍布全球30多个国家。我们正夜以继日地不懈努力，保护脆弱的生态栖息地，重塑可持续发展政策，并激励下一代共同守护我们的家园。",
             "about.report_link": "阅读我们的年度报告 →",
             "stats.countries": "30+",
-            "stats.countries_text": "国家开展项目",
+            "stats.countries_text": "国家及地区",
             "stats.staff": "500+",
-            "stats.staff_text": "专业工作人员",
+            "stats.staff_text": "专业人员",
             "stats.projects": "100+",
             "stats.projects_text": "环保项目",
             "stats.volunteers": "10k+",
-            "stats.volunteers_text": "志愿者",
+            "stats.volunteers_text": "注册志愿者",
             "mission.title": "使命与愿景",
             "mission.mission_title": "我们的使命",
-            "mission.mission_desc": "通过科学研究、政策倡导和公众教育，推动全球环境保护事业。",
+            "mission.mission_desc": "通过严谨的科学研究、积极的政策倡导和广泛的公众教育，推动全球环境保护事业，有效减轻气候变化带来的影响。",
             "mission.vision_title": "我们的愿景",
-            "mission.vision_desc": "创造一个人类与自然和谐共处的世界，所有生命都能繁荣昌盛。",
+            "mission.vision_desc": "创造一个繁荣且充满韧性的世界，让人类与自然在此和谐共生，为子孙后代留下生生不息的丰饶资源。",
             "mission.values_title": "核心价值观",
-            "mission.values_desc": "科学严谨、合作共赢、公正透明、勇于创新。",
+            "mission.values_desc": "科学严谨、跨国界合作、绝对透明，以及在应对严峻生态挑战时坚持不懈的创新精神。",
             "programs.title": "环保项目",
             "programs.climate_title": "气候变化应对",
-            "programs.climate_desc": "帮助社区应对气候变化的影响，推动碳中和。",
+            "programs.climate_desc": "帮助脆弱社区适应气候变化，推进全球向可再生能源转型，并最终实现碳中和的宏伟目标。",
             "programs.biodiversity_title": "生物多样性保护",
-            "programs.biodiversity_desc": "保护濒危物种，恢复受损的生态系统。",
+            "programs.biodiversity_desc": "保护濒危野生动植物，打击非法盗猎，并致力于恢复受损的森林、湿地及海洋生态系统。",
             "programs.cities_title": "可持续城市",
-            "programs.cities_desc": "建设绿色、低碳、宜居的城市环境。",
+            "programs.cities_desc": "推广绿色建筑标准、循环经济实践及可持续的城市交通，打造零碳宜居的现代城市环境。",
             "partners.title": "携手共创变革",
             "partners.wwf": "世界自然基金会",
             "partners.unep": "联合国环境署",
@@ -950,7 +969,7 @@
             "contact.address": "中国重庆市渝北区兴盛大道十号",
             "contact.email_title": "邮箱",
             "contact.phone_title": "电话",
-            "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
+            "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护，通过科学、教育与行动激发变革。",
             "footer.links_title": "快速链接",
             "footer.org_title": "组织架构",
             "footer.council": "理事会",
@@ -963,6 +982,7 @@
         },
         "en": {
             "lang.current": "EN",
+            "slogan.text": "Let's change the world.",
             "nav.home": "Home",
             "nav.about": "About",
             "nav.mission": "Mission",
@@ -976,35 +996,37 @@
             "nav.query": "Cert Query",
             "nav.global": "Global Vision",
             "hero.title": "Protecting Earth Our Common Home",
-            "hero.description": "WEPO is committed to global environmental protection through research, policy advocacy, and public education.",
+            "hero.description": "WEPO is committed to global environmental protection through rigorous research, policy advocacy, and public education to address the most pressing ecological challenges.",
             "hero.btn_feedback": "Learn More",
             "hero.btn_join": "Join Us",
             "about.subtitle": "Building a sustainable future where humans and nature coexist.",
-            "about.p1": "Founded in 2021 and headquartered in Chongqing, China, WEPO is a non-profit international organization at the forefront of environmental protection.",
-            "about.p2": "From climate change to biodiversity loss, we seek practical solutions through science, policy, and education.",
+            "about.p1": "Founded in 2021 and headquartered in Chongqing, China, the World Environmental Protection Organization (WEPO) is a non-profit international NGO standing at the forefront of the global environmental crisis.",
+            "about.p2": "From mitigating climate change to reversing biodiversity loss, we are dedicated to finding and implementing practical, science-based solutions. Through rigorous policy advocacy, public education, and grassroots initiatives, we strive to bridge the gap between human development and ecological preservation.",
+            "about.p3": "We actively collaborate with governmental bodies, indigenous communities, and multinational enterprises to drive systemic, long-lasting change. By deploying advanced ecological monitoring networks and championing green technologies, we empower millions of individuals to become proactive stewards of the Earth.",
+            "about.p4": "Today, our dedicated professional teams and passionate volunteers span across more than 30 countries. Together, we are working tirelessly to protect vulnerable habitats, reshape sustainable policies, and inspire the next generation to safeguard our common home.",
             "about.report_link": "Read Our Annual Report →",
             "stats.countries": "30+",
             "stats.countries_text": "Countries",
             "stats.staff": "500+",
-            "stats.staff_text": "Staff",
+            "stats.staff_text": "Professionals",
             "stats.projects": "100+",
             "stats.projects_text": "Projects",
             "stats.volunteers": "10k+",
             "stats.volunteers_text": "Volunteers",
             "mission.title": "Mission & Vision",
             "mission.mission_title": "Mission",
-            "mission.mission_desc": "Promoting global environmental protection through science, policy, and education.",
+            "mission.mission_desc": "Driving global environmental protection through rigorous scientific research, proactive policy advocacy, and widespread public education to mitigate climate impact.",
             "mission.vision_title": "Vision",
-            "mission.vision_desc": "Creating a world where humans and nature coexist in harmony.",
+            "mission.vision_desc": "Creating a thriving, resilient world where humanity and nature coexist in perfect harmony, ensuring abundant resources for all future generations.",
             "mission.values_title": "Values",
-            "mission.values_desc": "Scientific rigor, collaboration, transparency, and innovation.",
+            "mission.values_desc": "Scientific rigor, borderless collaboration, unwavering transparency, and relentless innovation in tackling today's toughest ecological challenges.",
             "programs.title": "Programs",
             "programs.climate_title": "Climate Action",
-            "programs.climate_desc": "Helping communities adapt to climate change and promoting carbon neutrality.",
+            "programs.climate_desc": "Helping vulnerable communities adapt to climate change, advancing the global transition to renewable energy, and driving the ultimate goal of carbon neutrality.",
             "programs.biodiversity_title": "Biodiversity",
-            "programs.biodiversity_desc": "Protecting endangered species and restoring ecosystems.",
+            "programs.biodiversity_desc": "Protecting endangered wildlife, combating illegal poaching, and meticulously restoring degraded forests, wetlands, and marine ecosystems.",
             "programs.cities_title": "Sustainable Cities",
-            "programs.cities_desc": "Promoting green buildings and sustainable urban environments.",
+            "programs.cities_desc": "Promoting green building standards, circular economy practices, and sustainable urban mobility to create zero-carbon, livable environments.",
             "partners.title": "Global Collaboration",
             "partners.wwf": "WWF",
             "partners.unep": "UNEP",
@@ -1017,7 +1039,7 @@
             "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
             "contact.email_title": "Email",
             "contact.phone_title": "Phone",
-            "footer.about": "WEPO is dedicated to global environmental protection.",
+            "footer.about": "WEPO is dedicated to global environmental protection, inspiring change through science, education, and action.",
             "footer.links_title": "Quick Links",
             "footer.org_title": "Organization",
             "footer.council": "Council",
@@ -1030,6 +1052,7 @@
         },
         "es": {
             "lang.current": "ES",
+            "slogan.text": "Cambiemos el mundo. (Let's change the world.)",
             "nav.home": "Inicio",
             "nav.about": "Acerca de",
             "nav.mission": "Misión",
@@ -1043,12 +1066,14 @@
             "nav.query": "Consulta Cert",
             "nav.global": "Visión Global",
             "hero.title": "Protegiendo la Tierra Nuestro Hogar Común",
-            "hero.description": "WEPO se compromete a proteger el medio ambiente global mediante investigación, abogacía política y educación pública.",
+            "hero.description": "WEPO se compromete a la protección ambiental global a través de la investigación rigurosa, la defensa de políticas y la educación pública.",
             "hero.btn_feedback": "Más Información",
             "hero.btn_join": "Únete",
             "about.subtitle": "Construyendo un futuro sostenible donde humanos y naturaleza coexisten.",
-            "about.p1": "Fundada en 2021 con sede en Chongqing, China, WEPO es una organización internacional sin fines de lucro en la vanguardia de la protección ambiental.",
-            "about.p2": "Desde el cambio climático hasta la pérdida de biodiversidad, buscamos soluciones prácticas a través de la ciencia, la política y la educación.",
+            "about.p1": "Fundada en 2021 con sede en Chongqing, China, WEPO es una ONG internacional sin fines de lucro en la vanguardia de la crisis ambiental global.",
+            "about.p2": "Desde mitigar el cambio climático hasta revertir la pérdida de biodiversidad, nos dedicamos a encontrar e implementar soluciones prácticas basadas en la ciencia.",
+            "about.p3": "Colaboramos activamente con gobiernos, comunidades indígenas y empresas multinacionales para impulsar un cambio sistémico. Al desplegar redes avanzadas de monitoreo y promover tecnologías verdes, empoderamos a millones de personas.",
+            "about.p4": "Hoy, nuestros equipos dedicados en más de 30 países trabajan incansablemente para proteger hábitats vulnerables, rediseñar políticas sostenibles e inspirar a la próxima generación a salvaguardar nuestro hogar común.",
             "about.report_link": "Lea Nuestro Informe Anual →",
             "stats.countries": "30+",
             "stats.countries_text": "Países",
@@ -1060,18 +1085,18 @@
             "stats.volunteers_text": "Voluntarios",
             "mission.title": "Misión y Visión",
             "mission.mission_title": "Misión",
-            "mission.mission_desc": "Promover la protección ambiental global mediante la ciencia, la política y la educación.",
+            "mission.mission_desc": "Impulsar la protección ambiental global mediante la investigación científica rigurosa y la educación pública.",
             "mission.vision_title": "Visión",
-            "mission.vision_desc": "Crear un mundo donde humanos y naturaleza coexisten en armonía.",
+            "mission.vision_desc": "Crear un mundo próspero y resiliente donde la humanidad y la naturaleza coexistan en perfecta armonía.",
             "mission.values_title": "Valores",
-            "mission.values_desc": "Rigor científico, colaboración, transparencia e innovación.",
+            "mission.values_desc": "Rigor científico, colaboración sin fronteras, transparencia inquebrantable e innovación constante.",
             "programs.title": "Programas",
             "programs.climate_title": "Acción Climática",
-            "programs.climate_desc": "Ayudando a las comunidades a adaptarse al cambio climático y promoviendo la neutralidad de carbono.",
+            "programs.climate_desc": "Ayudando a comunidades vulnerables a adaptarse al cambio climático y avanzar hacia la neutralidad de carbono.",
             "programs.biodiversity_title": "Biodiversidad",
-            "programs.biodiversity_desc": "Protegiendo especies en peligro de extinción y restaurando ecosistemas.",
+            "programs.biodiversity_desc": "Protegiendo la vida silvestre en peligro y restaurando ecosistemas forestales, humedales y marinos.",
             "programs.cities_title": "Ciudades Sostenibles",
-            "programs.cities_desc": "Promoviendo edificios verdes y entornos urbanos sostenibles.",
+            "programs.cities_desc": "Promoviendo estándares de construcción verde y movilidad urbana sostenible para entornos de cero carbono.",
             "partners.title": "Colaboración Global",
             "partners.wwf": "WWF",
             "partners.unep": "PNUMA",
@@ -1084,7 +1109,7 @@
             "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
             "contact.email_title": "Correo",
             "contact.phone_title": "Teléfono",
-            "footer.about": "WEPO está dedicada a la protección ambiental global.",
+            "footer.about": "WEPO está dedicada a la protección ambiental global, inspirando el cambio mediante ciencia y educación.",
             "footer.links_title": "Enlaces Rápidos",
             "footer.org_title": "Organización",
             "footer.council": "Consejo",
@@ -1097,6 +1122,7 @@
         },
         "fr": {
             "lang.current": "FR",
+            "slogan.text": "Changeons le monde. (Let's change the world.)",
             "nav.home": "Accueil",
             "nav.about": "À propos",
             "nav.mission": "Mission",
@@ -1110,12 +1136,14 @@
             "nav.query": "Verif Cert",
             "nav.global": "Vision Globale",
             "hero.title": "Protéger la Terre Notre Maison Commune",
-            "hero.description": "WEPO s'engage à protéger l'environnement mondial par la recherche, le plaidoyer politique et l'éducation publique.",
+            "hero.description": "WEPO s'engage à protéger l'environnement par des recherches rigoureuses, un plaidoyer politique et l'éducation publique.",
             "hero.btn_feedback": "En savoir plus",
             "hero.btn_join": "Rejoindre",
             "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
-            "about.p1": "Fondée en 2021 et basée à Chongqing, en Chine, WEPO est une organisation internationale à but non lucratif à l'avant-garde de la protection de l'environnement.",
-            "about.p2": "Du changement climatique à la perte de biodiversité, nous recherchons des solutions pratiques par la science, la politique et l'éducation.",
+            "about.p1": "Fondée en 2021 et basée à Chongqing, en Chine, WEPO est une ONG internationale à but non lucratif à l'avant-garde de la crise environnementale.",
+            "about.p2": "De l'atténuation du changement climatique à l'inversion de la perte de biodiversité, nous nous consacrons à trouver et à mettre en œuvre des solutions fondées sur la science.",
+            "about.p3": "Nous collaborons activement avec les gouvernements, les communautés et les entreprises multinationales pour conduire un changement systémique. En promouvant les technologies vertes, nous autonomisons des millions de personnes.",
+            "about.p4": "Aujourd'hui, nos équipes dévouées dans plus de 30 pays travaillent sans relâche pour protéger les habitats vulnérables, remodeler des politiques durables et inspirer la prochaine génération.",
             "about.report_link": "Lire Notre Rapport Annuel →",
             "stats.countries": "30+",
             "stats.countries_text": "Pays",
@@ -1127,18 +1155,18 @@
             "stats.volunteers_text": "Bénévoles",
             "mission.title": "Mission et Vision",
             "mission.mission_title": "Mission",
-            "mission.mission_desc": "Promouvoir la protection de l'environnement mondial par la science, la politique et l'éducation.",
+            "mission.mission_desc": "Stimuler la protection environnementale mondiale grâce à une recherche scientifique rigoureuse et un plaidoyer politique proactif.",
             "mission.vision_title": "Vision",
-            "mission.vision_desc": "Créer un monde où l'humain et la nature coexistent en harmonie.",
+            "mission.vision_desc": "Créer un monde prospère et résilient où l'humanité et la nature coexistent en parfaite harmonie.",
             "mission.values_title": "Valeurs",
-            "mission.values_desc": "Rigueur scientifique, collaboration, transparence et innovation.",
+            "mission.values_desc": "Rigueur scientifique, collaboration sans frontières, transparence et innovation acharnée.",
             "programs.title": "Programmes",
             "programs.climate_title": "Action Climatique",
-            "programs.climate_desc": "Aider les communautés à s'adapter au changement climatique et promouvoir la neutralité carbone.",
+            "programs.climate_desc": "Aider les communautés vulnérables à s'adapter au changement climatique et faire progresser la neutralité carbone mondiale.",
             "programs.biodiversity_title": "Biodiversité",
-            "programs.biodiversity_desc": "Protéger les espèces menacées et restaurer les écosystèmes.",
+            "programs.biodiversity_desc": "Protéger les espèces sauvages menacées et restaurer méticuleusement les écosystèmes forestiers, humides et marins.",
             "programs.cities_title": "Villes Durables",
-            "programs.cities_desc": "Promouvoir les bâtiments verts et les environnements urbains durables.",
+            "programs.cities_desc": "Promouvoir les normes de construction écologique et la mobilité urbaine pour créer des environnements zéro carbone.",
             "partners.title": "Collaboration Mondiale",
             "partners.wwf": "WWF",
             "partners.unep": "PNUE",
@@ -1151,7 +1179,7 @@
             "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
             "contact.email_title": "Email",
             "contact.phone_title": "Téléphone",
-            "footer.about": "WEPO est dédiée à la protection de l'environnement mondial.",
+            "footer.about": "WEPO est dédiée à la protection de l'environnement, inspirant le changement par la science et l'éducation.",
             "footer.links_title": "Liens Rapides",
             "footer.org_title": "Organisation",
             "footer.council": "Conseil",
@@ -1164,6 +1192,7 @@
         },
         "ru": {
             "lang.current": "RU",
+            "slogan.text": "Давайте изменим мир. (Let's change the world.)",
             "nav.home": "Главная",
             "nav.about": "О нас",
             "nav.mission": "Миссия",
@@ -1181,8 +1210,10 @@
             "hero.btn_feedback": "Узнать больше",
             "hero.btn_join": "Присоединиться",
             "about.subtitle": "Создание устойчивого будущего, где человек и природа сосуществуют.",
-            "about.p1": "Основанная в 2021 году со штаб-квартирой в Чунцине, Китай, WEPO является международной неприбыльной организацией на передовой защиты окружающей среды.",
-            "about.p2": "От изменения климата до потери биоразнообразия мы ищем практические решения через науку, политику и образование.",
+            "about.p1": "Основанная в 2021 году со штаб-квартирой в Чунцине, Китай, WEPO является международной неправительственной организацией на передовой экологического кризиса.",
+            "about.p2": "От смягчения последствий изменения климата до восстановления биоразнообразия, мы стремимся находить и внедрять практические, научно обоснованные решения.",
+            "about.p3": "Мы активно сотрудничаем с правительствами, сообществами и международными предприятиями для стимулирования системных изменений, продвигая зеленые технологии.",
+            "about.p4": "Сегодня наши преданные команды в более чем 30 странах неустанно работают над защитой уязвимых мест обитания и вдохновляют следующее поколение на защиту нашего общего дома.",
             "about.report_link": "Прочитать Наш Годовой Отчет →",
             "stats.countries": "30+",
             "stats.countries_text": "Страны",
@@ -1194,18 +1225,18 @@
             "stats.volunteers_text": "Волонтеры",
             "mission.title": "Миссия и Видение",
             "mission.mission_title": "Миссия",
-            "mission.mission_desc": "Продвижение глобальной защиты окружающей среды через науку, политику и образование.",
+            "mission.mission_desc": "Продвижение глобальной защиты окружающей среды через строгие научные исследования и активное политическое влияние.",
             "mission.vision_title": "Видение",
-            "mission.vision_desc": "Создание мира, где человек и природа сосуществуют в гармонии.",
+            "mission.vision_desc": "Создание процветающего мира, где человечество и природа сосуществуют в полной гармонии.",
             "mission.values_title": "Ценности",
-            "mission.values_desc": "Научная строгость, сотрудничество, прозрачность и инновации.",
+            "mission.values_desc": "Научная строгость, сотрудничество без границ, прозрачность и неустанные инновации.",
             "programs.title": "Программы",
             "programs.climate_title": "Климатические Действия",
-            "programs.climate_desc": "Помощь сообществам в адаптации к изменению климата и продвижение углеродной нейтральности.",
+            "programs.climate_desc": "Помощь уязвимым сообществам в адаптации к изменению климата и продвижение углеродной нейтральности.",
             "programs.biodiversity_title": "Биоразнообразие",
-            "programs.biodiversity_desc": "Защита вымирающих видов и восстановление экосистем.",
+            "programs.biodiversity_desc": "Защита вымирающих видов и тщательное восстановление лесов, водно-болотных угодий и морских экосистем.",
             "programs.cities_title": "Устойчивые Города",
-            "programs.cities_desc": "Продвижение зеленых зданий и устойчивых городских сред.",
+            "programs.cities_desc": "Продвижение стандартов зеленого строительства и устойчивой мобильности для создания экологически чистых сред.",
             "partners.title": "Глобальное Сотрудничество",
             "partners.wwf": "WWF",
             "partners.unep": "ЮНЕП",
@@ -1218,7 +1249,7 @@
             "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
             "contact.email_title": "Email",
             "contact.phone_title": "Телефон",
-            "footer.about": "WEPO посвящена глобальной защите окружающей среды.",
+            "footer.about": "WEPO посвящена глобальной защите окружающей среды, вдохновляя на изменения через науку и образование.",
             "footer.links_title": "Быстрые Ссылки",
             "footer.org_title": "Организация",
             "footer.council": "Совет",
@@ -1231,6 +1262,7 @@
         },
         "ar": {
             "lang.current": "العربية",
+            "slogan.text": "دعونا نغير العالم. (Let's change the world.)",
             "nav.home": "الرئيسية",
             "nav.about": "معلومات عنا",
             "nav.mission": "المهمة",
@@ -1244,12 +1276,14 @@
             "nav.query": "الشهادات",
             "nav.global": "رؤية عالمية",
             "hero.title": "حماية الأرض منزلنا المشترك",
-            "hero.description": "ملتزم WEPO بحماية البيئة العالمية من خلال البحث والدعوة السياسية والتعليم العام.",
+            "hero.description": "ملتزمة WEPO بحماية البيئة العالمية من خلال البحث الدقيق والدعوة السياسية والتعليم العام.",
             "hero.btn_feedback": "تعرف أكثر",
             "hero.btn_join": "انضم إلينا",
             "about.subtitle": "بناء مستقبل مستدام يتعايش فيه الإنسان والطبيعة.",
-            "about.p1": "تأسست عام 2021 ومقرها في تشونغتشينغ ، الصين ، WEPO هي منظمة دولية غير ربحية تتصدر حركة حماية البيئة.",
-            "about.p2": "من تغير المناخ إلى فقدان التنوع البيولوجي ، نسعى إلى حلول عملية من خلال العلم والسياسة والتعليم.",
+            "about.p1": "تأسست WEPO في عام 2021 ومقرها في تشونغتشينغ ، الصين ، وهي منظمة غير حكومية دولية تقف في طليعة الأزمة البيئية العالمية.",
+            "about.p2": "من التخفيف من تغير المناخ إلى عكس فقدان التنوع البيولوجي ، نحن ملتزمون بإيجاد وتنفيذ حلول عملية قائمة على العلم.",
+            "about.p3": "نحن نتعاون بنشاط مع الهيئات الحكومية والشركات لدفع تغيير نظامي طويل الأمد من خلال نشر شبكات المراقبة البيئية والتقنيات الخضراء.",
+            "about.p4": "تعمل فرقنا المخصصة اليوم في أكثر من 30 دولة بلا كلل لحماية الموائل الضعيفة وإلهام الجيل القادم لحماية منزلنا المشترك.",
             "about.report_link": "اقرأ تقريرنا السنوي →",
             "stats.countries": "30+",
             "stats.countries_text": "الدول",
@@ -1261,18 +1295,18 @@
             "stats.volunteers_text": "المتطوعون",
             "mission.title": "المهمة والرؤية",
             "mission.mission_title": "المهمة",
-            "mission.mission_desc": "تعزيز الحماية البيئية العالمية من خلال العلم والسياسة والتعليم.",
+            "mission.mission_desc": "دفع الحماية البيئية العالمية من خلال البحث العلمي الصارم والدعوة السياسية الاستباقية.",
             "mission.vision_title": "الرؤية",
-            "mission.vision_desc": "خلق عالم يتعايش فيه الإنسان والطبيعة في تناغم.",
+            "mission.vision_desc": "خلق عالم مزدهر ومرن تتعايش فيه الإنسانية والطبيعة في وئام تام.",
             "mission.values_title": "القيم",
-            "mission.values_desc": "الصرامة العلمية والتعاون والشفافية والابتكار.",
+            "mission.values_desc": "الصرامة العلمية، التعاون بلا حدود، الشفافية، والابتكار المستمر.",
             "programs.title": "البرامج",
             "programs.climate_title": "العمل المناخي",
-            "programs.climate_desc": "مساعدة المجتمعات على التكيف مع تغير المناخ وتعزيز الحياد الكربوني.",
+            "programs.climate_desc": "مساعدة المجتمعات الضعيفة على التكيف مع تغير المناخ ودفع الهدف النهائي للحياد الكربوني.",
             "programs.biodiversity_title": "التنوع البيولوجي",
-            "programs.biodiversity_desc": "حماية الأنواع المهددة بالانقراض واستعادة النظم البيئية.",
+            "programs.biodiversity_desc": "حماية الحياة البرية المهددة بالانقراض واستعادة الغابات والأراضي الرطبة والنظم البيئية البحرية بدقة.",
             "programs.cities_title": "مدن مستدامة",
-            "programs.cities_desc": "تعزيز المباني الخضراء والبيئات الحضرية المستدامة.",
+            "programs.cities_desc": "تعزيز معايير البناء الأخضر والتنقل الحضري المستدام لخلق بيئات خالية من الكربون.",
             "partners.title": "تعاون عالمي",
             "partners.wwf": "الصندوق العالمي للطبيعة",
             "partners.unep": "برنامج الأمم المتحدة للبيئة",
@@ -1285,7 +1319,7 @@
             "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
             "contact.email_title": "البريد الإلكتروني",
             "contact.phone_title": "الهاتف",
-            "footer.about": "ملتزم WEPO بحماية البيئة العالمية.",
+            "footer.about": "ملتزمة WEPO بحماية البيئة العالمية، وإلهام التغيير من خلال العلم والتعليم والعمل.",
             "footer.links_title": "روابط سريعة",
             "footer.org_title": "المنظمة",
             "footer.council": "المجلس",
@@ -1357,7 +1391,7 @@
                     document.getElementById('hero-title-source').textContent = translations[lang][key];
                     typeWriter(translations[lang][key], 'hero-title', 80);
                 } else {
-                    element.textContent = translations[lang][key];
+                    element.innerHTML = translations[lang][key]; // Ensure HTML tags like <br> work properly
                 }
             }
         });
@@ -1433,9 +1467,7 @@
     // Call init immediately
     initCookieLogic();
 
-    // 7. Update Year (Prioritize Hardcoded Requirement for 2026)
-    // The requirement is to change copyright to 2026. 
-    // Since current year is 2026, dynamic year works.
+    // 7. Update Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // 8. Hero Carousel Logic & Priority Loading
