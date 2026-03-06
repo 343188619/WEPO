@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- 主页 -->
+    <url>
+        <loc>https://wepo2021.org/</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- 环保视频 -->
+    <url>
+        <loc>https://wepo2021.org/sp.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 捐赠支持 -->
+    <url>
+        <loc>https://wepo2021.org/jz.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 理事会 -->
+    <url>
+        <loc>https://wepo2021.org/crlsh.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 志愿者网络 -->
+    <url>
+        <loc>https://wepo2021.org/zyz.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 客服支持 -->
+    <url>
+        <loc>https://wepo2021.org/kf.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 年度报告 -->
+    <url>
+        <loc>https://wepo2021.org/ndbg.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 组织章程 -->
+    <url>
+        <loc>https://wepo2021.org/zc.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 全球视野 -->
+    <url>
+        <loc>https://wepo2021.org/map.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- 隐私政策 -->
+    <url>
+        <loc>https://wepo2021.org/yszc.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- 用户协议 -->
+    <url>
+        <loc>https://wepo2021.org/yhxy.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset><?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- 主页 -->
+    <url>
+        <loc>https://wepo2021.org/</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- 环保视频 -->
+    <url>
+        <loc>https://wepo2021.org/sp.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 捐赠支持 -->
+    <url>
+        <loc>https://wepo2021.org/jz.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 理事会 -->
+    <url>
+        <loc>https://wepo2021.org/crlsh.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 志愿者网络 -->
+    <url>
+        <loc>https://wepo2021.org/zyz.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 客服支持 -->
+    <url>
+        <loc>https://wepo2021.org/kf.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 年度报告 -->
+    <url>
+        <loc>https://wepo2021.org/ndbg.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 组织章程 -->
+    <url>
+        <loc>https://wepo2021.org/zc.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 全球视野 -->
+    <url>
+        <loc>https://wepo2021.org/map.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- 隐私政策 -->
+    <url>
+        <loc>https://wepo2021.org/yszc.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- 用户协议 -->
+    <url>
+        <loc>https://wepo2021.org/yhxy.html</loc>
+        <lastmod>2026-03-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>
