@@ -199,9 +199,9 @@
         }
         .logo:hover { transform: scale(1.03); }
 
-        nav ul { display: flex; gap: 35px; }
+        nav ul { display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
         nav ul li a {
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; 
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; 
             color: var(--text-primary); opacity: 0.8;
             position: relative; padding: 5px 0; font-weight: 500;
         }
@@ -234,8 +234,7 @@
         }
         .control-btn:active { transform: scale(0.95); }
 
-        .theme-icon { width: 14px; height: 14px; fill: currentColor; }
-        [data-theme="light"] .moon-icon { display: block; }[data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }[data-theme="dark"] .sun-icon { display: block; }
+        .theme-icon { width: 14px; height: 14px; fill: currentColor; }[data-theme="light"] .moon-icon { display: block; }[data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }[data-theme="dark"] .sun-icon { display: block; }
 
         .language-switcher { position: relative; }
         .language-dropdown {
@@ -492,25 +491,41 @@
         }[data-theme="dark"] .contact-map { filter: grayscale(1) invert(1) brightness(0.8); }[data-theme="light"] .contact-map { filter: grayscale(1); }
 
         /* --- Footer --- */
-        footer { padding: 100px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
-        .footer-top { display: flex; justify-content: space-between; margin-bottom: 80px; flex-wrap: wrap; gap: 60px; }
+        footer { padding: 80px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
+        
+        .footer-top { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
         .footer-brand img { height: 45px; margin-bottom: 25px; opacity: 0.9; }
-        .footer-brand p { max-width: 320px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;}
+        .footer-brand p { max-width: 600px; margin: 0 auto; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; }
         .footer-slogan { font-weight: 600; color: var(--accent-gold); font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 10px; }
         
-        .footer-navs { display: flex; gap: 100px; }
-        .footer-col h5 { color: var(--text-primary); margin-bottom: 25px; font-size: 0.95rem; letter-spacing: 0.05em; }
-        .footer-col ul li { margin-bottom: 15px; }
-        .footer-col a { color: var(--text-secondary); font-size: 0.9rem; position: relative; }
-        .footer-col a:hover { color: var(--accent-gold); }
+        .footer-disclaimer {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding: 0 5%;
+        }
 
-        /* Social Media Icons in Footer */
+        .footer-social-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .footer-social-wrapper {
+                align-items: center;
+            }
+        }
+        
         .social-links {
             display: flex;
             gap: 20px;
-            margin-bottom: 20px;
-            width: 100%;
-            justify-content: flex-start;
+            margin-bottom: 0;
+            width: auto;
+            justify-content: center;
             flex-wrap: wrap;
         }
         .social-icon {
@@ -589,12 +604,14 @@
             position: fixed; inset: 0; 
             background: var(--bg-void); 
             z-index: 1001;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
             opacity: 0; pointer-events: none; transition: 0.5s var(--ease-apple);
+            overflow-y: auto;
+            padding: 80px 20px 40px;
         }
         .mobile-menu.open { opacity: 1; pointer-events: all; }
         .mobile-menu a { 
-            font-size: 1.4rem; 
+            font-size: 1.2rem; 
             margin: 10px 0;    
             font-family: 'Playfair Display', serif; 
             color: var(--text-secondary); 
@@ -602,6 +619,11 @@
         }
         .mobile-menu a.active, .mobile-menu a:hover { color: var(--text-primary); transform: scale(1.1); }
         .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2.2rem; color: var(--text-primary); background: none; border: none; cursor: pointer; }
+
+        @media (max-width: 1200px) {
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
 
         @media (max-width: 1024px) {
             .about-grid, .contact-split { grid-template-columns: 1fr; gap: 60px; }
@@ -614,14 +636,11 @@
         }
 
         @media (max-width: 768px) {
-            nav ul { display: none; }
-            .mobile-menu-btn { display: block; }
             .hero h1 { font-size: 3rem; }
             .section { padding: 100px 6%; }
-            .footer-navs { flex-wrap: wrap; gap: 40px; justify-content: space-between; }
-            .footer-col { flex: 1 1 40%; }
             .footer-btm { flex-direction: column; align-items: center; text-align: center; }
-            .social-links { justify-content: center; }
+            .footer-social-wrapper { width: 100%; margin-bottom: 20px; }
+            .social-links { justify-content: center; width: 100%; margin-bottom: 0; }
         }
     </style>
 </head>
@@ -643,9 +662,13 @@
     <nav>
         <ul>
             <li><a href="#home" data-i18n="nav.home">Home</a></li>
-            <li><a href="#about" data-i18n="nav.about">About</a></li>
-            <li><a href="#mission" data-i18n="nav.mission">Mission</a></li>
-            <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
+            <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+            <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+            <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
+            <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+            <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
+            <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
+            <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
             <li><a href="#partners" data-i18n="nav.partners">Partners</a></li>
             <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
             <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
@@ -684,15 +707,18 @@
 <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
     <a href="#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
-    <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about">About</a>
-    <a href="#mission" onclick="toggleMobileMenu()" data-i18n="nav.mission">Mission</a>
-    <a href="#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs">Programs</a>
+    <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
+    <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
+    <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
+    <a href="zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
+    <a href="kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
+    <a href="ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
+    <a href="zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
     <a href="#partners" onclick="toggleMobileMenu()" data-i18n="nav.partners">Partners</a>
     <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
     <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
     <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
     <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
-    <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate" style="color: var(--accent-gold);">Donate</a>
 </div>
 
 <section class="hero" id="home">
@@ -712,7 +738,7 @@
         <p data-i18n="hero.description">WEPO is committed to global environmental protection through scientific research, policy advocacy, and public education.</p>
         <div class="btn-group">
             <a href="https://f.wps.cn/ksform/w/write/XERrq1aj/" class="btn btn-primary" data-i18n="hero.btn_join">Join Us</a>
-            <a href="#programs" class="btn btn-secondary" data-i18n="hero.btn_feedback">Learn More</a>
+            <a href="#about" class="btn btn-secondary" data-i18n="hero.btn_feedback">Learn More</a>
         </div>
     </div>
 </section>
@@ -850,48 +876,26 @@
             <span class="footer-slogan" data-i18n="slogan.text">Let's change the world.</span>
             <p data-i18n="footer.about">WEPO is dedicated to global environmental protection, inspiring change through science, education, and action.</p>
         </div>
-        <div class="footer-navs reveal stagger-1">
-            <div class="footer-col">
-                <h5 data-i18n="footer.links_title">Quick Links</h5>
-                <ul>
-                    <li><a href="#about" data-i18n="nav.about">About</a></li>
-                    <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
-                    <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                    <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5 data-i18n="footer.org_title">Organization</h5>
-                <ul>
-                    <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
-                    <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
-                    <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5 data-i18n="footer.resources_title">Resources</h5>
-                <ul>
-                    <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
-                    <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
-                </ul>
-            </div>
-        </div>
+    </div>
+
+    <div class="footer-disclaimer reveal" data-i18n="footer.disclaimer">
+        Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
     </div>
     
     <div class="footer-btm reveal">
-        <div class="social-links">
-            <a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok">
-                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-            </a>
-            <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0?from_ssr=1&from_aid=1128&u_code=gcg88cd3l8l&did=MS4wLjABAAAApOZKYdjjNL2hrbLOpXr2uX5LQ0IrFWkl9M19obx6x-7Y78xCEFArJDfEpm61CUIM&iid=MS4wLjABAAAAiwe7HAbFuC4SIlp8wwSeWpjtph9qWdz_7EBGa5SEQLXRTjwmfQw0-R6iTMNykaNx&with_sec_did=1&sec_uid=MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0&timestamp=1768493778&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22997e9b9045cc4211874e6521d1e24156%22%2C%22from_user_id%22%3A685719490932988%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22general_search%22%2C%22personal_enter_method%22%3A%22search_card%22%7D&ug_share_id=b3965a0e8290a_1768493779395&activity_info=%7B%22social_author_id%22%3A%227550976214778315833%22%2C%22social_share_id%22%3A%22685719490932988_1768493778235%22%2C%22social_share_time%22%3A%221768493778%22%2C%22social_share_user_id%22%3A%22685719490932988%22%7D" target="_blank" class="social-icon" aria-label="Douyin">
-                <svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg>
-            </a>
-            <a href="https://v.kuaishou.com/nu1YRjZ5" target="_blank" class="social-icon" aria-label="Kuaishou">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-            </a>
+        <div class="footer-social-wrapper">
+            <span data-i18n="footer.follow_us" style="color: var(--text-primary); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em;">关注我们</span>
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok" title="关注我们 (TikTok)">
+                    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+                <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)" title="关注我们 (X)">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0?from_ssr=1&from_aid=1128&u_code=gcg88cd3l8l&did=MS4wLjABAAAApOZKYdjjNL2hrbLOpXr2uX5LQ0IrFWkl9M19obx6x-7Y78xCEFArJDfEpm61CUIM&iid=MS4wLjABAAAAiwe7HAbFuC4SIlp8wwSeWpjtph9qWdz_7EBGa5SEQLXRTjwmfQw0-R6iTMNykaNx&with_sec_did=1&sec_uid=MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0&timestamp=1768493778&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22997e9b9045cc4211874e6521d1e24156%22%2C%22from_user_id%22%3A685719490932988%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22general_search%22%2C%22personal_enter_method%22%3A%22search_card%22%7D&ug_share_id=b3965a0e8290a_1768493779395&activity_info=%7B%22social_author_id%22%3A%227550976214778315833%22%2C%22social_share_id%22%3A%22685719490932988_1768493778235%22%2C%22social_share_time%22%3A%221768493778%22%2C%22social_share_user_id%22%3A%22685719490932988%22%7D" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
+                    <svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg>
+                </a>
+            </div>
         </div>
         
         <p>&copy; <span id="year">2026</span> WEPO. All rights reserved.</p>
@@ -987,7 +991,9 @@
             "footer.reports": "年度报告",
             "footer.charter": "组织章程",
             "footer.privacy": "隐私政策",
-            "footer.terms": "用户协议"
+            "footer.terms": "用户协议",
+            "footer.disclaimer": "免责声明：本网站使用国家或地区名称，并不意味着WEPO对任何国家、领地、城市或地区或其当局的法律地位，或其边界划定持任何看法。",
+            "footer.follow_us": "关注我们"
         },
         "en": {
             "lang.current": "EN",
@@ -1057,7 +1063,9 @@
             "footer.reports": "Reports",
             "footer.charter": "Charter",
             "footer.privacy": "Privacy Policy",
-            "footer.terms": "User Agreement"
+            "footer.terms": "User Agreement",
+            "footer.disclaimer": "Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.",
+            "footer.follow_us": "Follow Us"
         },
         "es": {
             "lang.current": "ES",
@@ -1127,7 +1135,9 @@
             "footer.reports": "Informes",
             "footer.charter": "Estatuto",
             "footer.privacy": "Privacidad",
-            "footer.terms": "Términos"
+            "footer.terms": "Términos",
+            "footer.disclaimer": "Descargo de responsabilidad: El uso de nombres de países o territorios en este sitio web no implica la expresión de opinión alguna por parte de WEPO sobre la condición jurídica de países, territorios, ciudades o zonas, o de sus autoridades, ni respecto de la delimitación de sus fronteras o límites.",
+            "footer.follow_us": "Síganos"
         },
         "fr": {
             "lang.current": "FR",
@@ -1173,7 +1183,7 @@
             "programs.climate_title": "Action Climatique",
             "programs.climate_desc": "Aider les communautés vulnérables à s'adapter au changement climatique et faire progresser la neutralité carbone mondiale.",
             "programs.biodiversity_title": "Biodiversité",
-            "programs.biodiversity_desc": "Protéger les espèces sauvages menacées et restaurer méticuleusement les écosystèmes forestiers, humides et marins.",
+            "programs.biodiversity_desc": "Protéger les espèces sauvages menacées et restaurer méticuleusement les écosystèmes forestales, humides et marins.",
             "programs.cities_title": "Villes Durables",
             "programs.cities_desc": "Promouvoir les normes de construction écologique et la mobilité urbaine pour créer des environnements zéro carbone.",
             "partners.title": "Collaboration Mondiale",
@@ -1197,7 +1207,9 @@
             "footer.reports": "Rapports",
             "footer.charter": "Charte",
             "footer.privacy": "Confidentialité",
-            "footer.terms": "Conditions"
+            "footer.terms": "Conditions",
+            "footer.disclaimer": "Avis de non-responsabilité : L'utilisation de noms de pays ou de territoires sur ce site Web n'implique l'expression d'aucune opinion de la part de WEPO concernant le statut juridique d'un pays, territoire, ville ou zone ou de ses autorités, ou concernant le tracé de ses frontières ou limites.",
+            "footer.follow_us": "Suivez-nous"
         },
         "ru": {
             "lang.current": "RU",
@@ -1267,7 +1279,9 @@
             "footer.reports": "Отчеты",
             "footer.charter": "Устав",
             "footer.privacy": "Конфиденциальность",
-            "footer.terms": "Условия"
+            "footer.terms": "Условия",
+            "footer.disclaimer": "Отказ от ответственности: Использование названий стран или территорий на этом веб-сайте не означает выражения какого-либо мнения со стороны WEPO относительно правового статуса какой-либо страны, территории, города или района или их властей, или относительно делимитации их границ.",
+            "footer.follow_us": "Подписывайтесь на нас"
         },
         "ar": {
             "lang.current": "العربية",
@@ -1337,7 +1351,9 @@
             "footer.reports": "التقارير",
             "footer.charter": "الميثاق",
             "footer.privacy": "الخصوصية",
-            "footer.terms": "الشروط"
+            "footer.terms": "الشروط",
+            "footer.disclaimer": "إخلاء المسؤولية: إن استخدام أسماء البلدان أو الأقاليم على هذا الموقع لا يعني التعبير عن أي رأي مهما كان من جانب WEPO بشأن الوضع القانوني لأي بلد أو إقليم أو مدينة أو منطقة أو سلطاتها، أو بشأن تعيين حدودها.",
+            "footer.follow_us": "تابعنا"
         }
     };
 
