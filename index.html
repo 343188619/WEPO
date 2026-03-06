@@ -5,12 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- --- 强力预加载：确保第一时间下载所有轮播图 --- -->
-    <link rel="preload" as="image" href="https://img.nickyam.com/file/AgACAgUAAyEGAASS2zT1AAI8V2mq1L8pjzXDrXwgzER7ZfKnsys0AAI6EWsbXQNYVchV2TWUjAOoAQADAgADeQADOgQ.jpg">
-    <link rel="preload" as="image" href="https://img.nickyam.com/file/AgACAgUAAyEGAASS2zT1AAI8WGmq1RQ23USnlSZsvuPG2TleslT_AAI7EWsbXQNYVcvmERgS3vo8AQADAgADeQADOgQ.jpeg">
-    <link rel="preload" as="image" href="https://img.yohuo.eu.org/1768492126290.webp">
-    <link rel="preload" as="image" href="https://img.yohuo.eu.org/1768492128208.webp">
-    <link rel="preload" as="image" href="https://img.yohuo.eu.org/1768492129862.webp">
+    <!-- --- 强力预加载：确保第一时间下载视频 --- -->
+    <link rel="preload" as="video" href="https://img.nickyam.com/file/BAACAgUAAyEGAASS2zT1AAI8Wmmq5rsfM5jrkErIn4A6QQ6Y3RBFAALAHQACXQNYVR7Ql6JBAAH_bDoE.mp4">
 
     <!-- --- SEO: 核心标题与描述 --- -->
     <title>世界环境保护组织 | WorldEnvironmentalProtectionOrganization(WEPO)</title>
@@ -59,7 +55,7 @@
         "contactType": "customer service",
         "email": "xcb@wepo2021.org",
         "areaServed": "Global",
-        "availableLanguage": ["English", "Chinese"]
+        "availableLanguage":["English", "Chinese"]
       },
       "sameAs":[
         "https://www.facebook.com/wepo",
@@ -257,7 +253,7 @@
         }
         .language-dropdown li:hover { color: var(--text-primary); background: rgba(125,125,125,0.1); }
 
-        /* --- Hero Section (Image Carousel) --- */
+        /* --- Hero Section (Video Background) --- */
         .hero {
             height: 100vh; position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: center; text-align: center;
@@ -275,23 +271,19 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.4);
         }
         
-        /* Carousel Container */
-        .hero-carousel {
+        /* Video Container */
+        .hero-video-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
+            z-index: -1; overflow: hidden;
+            background-color: #000;
         }
         
-        .carousel-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 8s ease-out, filter 0.8s ease;
-            transform: scale(1);
-        }
-        
-        .carousel-slide.active {
+        .hero-video {
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
             opacity: 1;
-            transform: scale(1.05); /* Slight zoom effect */
+            transition: opacity 1.5s ease-in-out;
         }
 
         /* Hero Overlay */
@@ -722,12 +714,10 @@
 </div>
 
 <section class="hero" id="home">
-    <div class="hero-carousel">
-        <div class="carousel-slide active" style="background-image: url('https://img.yohuo.eu.org/1768492122486.jpeg');"></div>
-        <div class="carousel-slide" style="background-image: url('https://img.yohuo.eu.org/1768492123932.jpg');"></div>
-        <div class="carousel-slide" style="background-image: url('https://img.yohuo.eu.org/1768492126290.webp');"></div>
-        <div class="carousel-slide" style="background-image: url('https://img.yohuo.eu.org/1768492128208.webp');"></div>
-        <div class="carousel-slide" style="background-image: url('https://img.yohuo.eu.org/1768492129862.webp');"></div>
+    <div class="hero-video-container">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="https://img.nickyam.com/file/BAACAgUAAyEGAASS2zT1AAI8Wmmq5rsfM5jrkErIn4A6QQ6Y3RBFAALAHQACXQNYVR7Ql6JBAAH_bDoE.mp4" type="video/mp4">
+        </video>
     </div>
     <div class="hero-content">
         <div class="hero-slogan" data-i18n="slogan.text">Let's change the world.</div>
@@ -1073,7 +1063,7 @@
             "nav.home": "Inicio",
             "nav.about": "Acerca de",
             "nav.mission": "Misión",
-            "nav.programs": "Programas",
+            "nav.programs": "Programmes",
             "nav.partners": "Socios",
             "nav.contact": "Contacto",
             "nav.videos": "Vídeos",
@@ -1474,70 +1464,52 @@
     // 7. Update Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 8. 强力保证：轮播图在GPU渲染完毕后再揭开遮罩层
-    function initCarousel() {
-        const slides = document.querySelectorAll('.carousel-slide');
-        let currentSlide = 0;
-        const totalSlides = slides.length;
+    // 8. 强力保证：视频加载到可播放状态后再揭开遮罩层
+    function initVideoBackground() {
+        const video = document.querySelector('.hero-video');
+        const loader = document.getElementById('page-loader');
 
-        const loadPromises =[];
-
-        // 提取轮播图的所有URL并准备强制解码
-        slides.forEach(slide => {
-            const style = slide.getAttribute('style');
-            const urlMatch = style.match(/url\(['"]?(.*?)['"]?\)/);
-            if (urlMatch && urlMatch[1]) {
-                const imgPromise = new Promise((resolve) => {
-                    const img = new Image();
-                    img.src = urlMatch[1];
-                    
-                    // 使用最新的 decode API，强制在 GPU/内存级别完成解码！
-                    // 这确保了在结束加载锁时，画面已经 100% 画在了屏幕里，绝不闪烁。
-                    if (img.decode) {
-                        img.decode().then(resolve).catch(() => {
-                            if (img.complete) resolve();
-                            else { img.onload = resolve; img.onerror = resolve; }
-                        });
-                    } else {
-                        if (img.complete) resolve();
-                        else { img.onload = resolve; img.onerror = resolve; }
-                    }
-                });
-                loadPromises.push(imgPromise);
-            }
-        });
-
-        // 10秒保底：若用户所在网络极差，10秒后仍放行，防止永久锁屏
-        const timeoutPromise = new Promise(resolve => setTimeout(resolve, 10000));
-
-        // 核心解锁流程
-        Promise.race([Promise.all(loadPromises), timeoutPromise]).then(() => {
-            
+        const unlockPage = () => {
             // 使用双层 requestAnimationFrame 强制浏览器等待下一帧渲染周期完成
-            // 确保所有的 CSS 渲染都已经真正在屏幕上画出来了
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    const loader = document.getElementById('page-loader');
                     if (loader) {
                         // 隐藏加载器并取消阻断
                         loader.classList.add('hidden');
                         setTimeout(() => loader.style.display = 'none', 800);
                     }
                     document.body.classList.remove('page-loading-locked');
-                    
-                    // 遮罩完全准备消失时，才正式开始走轮播计时
-                    setInterval(() => {
-                        slides[currentSlide].classList.remove('active');
-                        currentSlide = (currentSlide + 1) % totalSlides;
-                        slides[currentSlide].classList.add('active');
-                    }, 5000);
                 });
             });
-        });
+        };
+
+        // 10秒保底：若用户所在网络极差，10秒后仍放行，防止永久锁屏
+        const timeoutId = setTimeout(unlockPage, 10000);
+
+        if (video) {
+            // readyState >= 3 代表 HAVE_FUTURE_DATA (有足够数据播放一小段)
+            if (video.readyState >= 3) {
+                clearTimeout(timeoutId);
+                unlockPage();
+            } else {
+                video.addEventListener('canplay', () => {
+                    clearTimeout(timeoutId);
+                    unlockPage();
+                }, { once: true });
+                
+                // 处理视频加载失败的情况，直接放行页面
+                video.addEventListener('error', () => {
+                    clearTimeout(timeoutId);
+                    unlockPage();
+                }, { once: true });
+            }
+        } else {
+            unlockPage();
+        }
     }
 
-    // 启动图片强力验证程序
-    initCarousel();
+    // 启动视频强力验证程序
+    initVideoBackground();
 
 </script>
 
