@@ -229,7 +229,9 @@
         }
         .control-btn:active { transform: scale(0.95); }
 
-        .theme-icon { width: 14px; height: 14px; fill: currentColor; }[data-theme="light"] .moon-icon { display: block; }[data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }[data-theme="dark"] .sun-icon { display: block; }
+        .theme-icon { width: 14px; height: 14px; fill: currentColor; }
+        [data-theme="light"] .moon-icon { display: block; }
+        [data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }[data-theme="dark"] .sun-icon { display: block; }
 
         .language-switcher { position: relative; }
         .language-dropdown {
@@ -292,7 +294,9 @@
             z-index: 0; pointer-events: none;
         }
 
-        /* Adjust theme overlay specifics */[data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,0.8) 100%); }[data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
+        /* Adjust theme overlay specifics */
+        [data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,0.8) 100%); }
+        [data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
 
         .hero-content { 
             z-index: 2; max-width: 1200px; padding: 0 20px; 
@@ -479,7 +483,9 @@
         .contact-map { 
             width: 100%; height: 100%; border: none; 
             transition: filter 0.6s;
-        }[data-theme="dark"] .contact-map { filter: grayscale(1) invert(1) brightness(0.8); }[data-theme="light"] .contact-map { filter: grayscale(1); }
+        }
+        [data-theme="dark"] .contact-map { filter: grayscale(1) invert(1) brightness(0.8); }
+        [data-theme="light"] .contact-map { filter: grayscale(1); }
 
         /* --- Footer --- */
         footer { padding: 80px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
@@ -497,6 +503,67 @@
             color: var(--text-secondary);
             line-height: 1.6;
             padding: 0 5%;
+        }
+
+        /* Footer Tech & Info Blocks */
+        .footer-info-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 5%;
+        }
+        .info-block {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 20px 25px;
+            border-radius: 16px;
+            transition: transform 0.4s var(--ease-apple), border-color 0.4s;
+        }
+        .info-block:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .info-icon {
+            width: 32px; height: 32px;
+            fill: var(--accent-gold);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .info-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .info-links {
+            margin-top: 10px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .info-links a {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        .info-links a::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px;
+            background: var(--accent-gold); transform: scaleX(0); transform-origin: right; transition: transform 0.3s;
+        }
+        .info-links a:hover::after {
+            transform: scaleX(1); transform-origin: left;
+        }
+        .info-links .divider {
+            color: var(--border-glass);
         }
 
         .footer-social-wrapper {
@@ -870,6 +937,35 @@
     <div class="footer-disclaimer reveal" data-i18n="footer.disclaimer">
         Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
     </div>
+
+    <!-- 新增：Cookie法律条款与技术特性模块 -->
+    <div class="footer-info-blocks reveal">
+        <!-- Cookie 与法律信息模块 -->
+        <div class="info-block">
+            <svg class="info-icon" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+            </svg>
+            <div class="info-text">
+                <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
+                <div class="info-links">
+                    <a href="yszc.html" data-i18n="footer.privacy">隐私政策</a> 
+                    <span class="divider">|</span> 
+                    <a href="yhxy.html" data-i18n="footer.terms">用户协议</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术架构与无障碍模块 -->
+        <div class="info-block">
+            <svg class="info-icon" viewBox="0 0 24 24">
+                <path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/>
+            </svg>
+            <div class="info-text">
+                <div data-i18n="footer.tech_desc1">本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容 IE9、Safari、Edge、Chrome、Firefox 等主流浏览器。</div>
+                <div style="margin-top:5px;" data-i18n="footer.tech_desc2">本网站具备无障碍访问功能及多语言设计。</div>
+            </div>
+        </div>
+    </div>
     
     <div class="footer-btm reveal">
         <div class="footer-social-wrapper">
@@ -983,7 +1079,10 @@
             "footer.privacy": "隐私政策",
             "footer.terms": "用户协议",
             "footer.disclaimer": "免责声明：本网站使用国家或地区名称，并不意味着WEPO对任何国家、领地、城市或地区或其当局的法律地位，或其边界划定持任何看法。",
-            "footer.follow_us": "关注我们"
+            "footer.follow_us": "关注我们",
+            "footer.cookie_desc": "本网站使用 Cookie 来维持网站的正常运作。",
+            "footer.tech_desc1": "本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容 IE9、Safari、Edge、Chrome、Firefox 等主流浏览器。",
+            "footer.tech_desc2": "本网站具备无障碍访问（A11y）功能及多语言设计。"
         },
         "en": {
             "lang.current": "EN",
@@ -1055,7 +1154,10 @@
             "footer.privacy": "Privacy Policy",
             "footer.terms": "User Agreement",
             "footer.disclaimer": "Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.",
-            "footer.follow_us": "Follow Us"
+            "footer.follow_us": "Follow Us",
+            "footer.cookie_desc": "This website uses cookies to maintain normal operations.",
+            "footer.tech_desc1": "Built with HTML5, this site is fully responsive for mobile and desktop, and compatible with IE9, Safari, Edge, Chrome, Firefox, etc.",
+            "footer.tech_desc2": "Features accessibility functions and multi-language design."
         },
         "es": {
             "lang.current": "ES",
@@ -1127,7 +1229,10 @@
             "footer.privacy": "Privacidad",
             "footer.terms": "Términos",
             "footer.disclaimer": "Descargo de responsabilidad: El uso de nombres de países o territorios en este sitio web no implica la expresión de opinión alguna por parte de WEPO sobre la condición jurídica de países, territorios, ciudades o zonas, o de sus autoridades, ni respecto de la delimitación de sus fronteras o límites.",
-            "footer.follow_us": "Síganos"
+            "footer.follow_us": "Síganos",
+            "footer.cookie_desc": "Este sitio web utiliza cookies para mantener el funcionamiento normal.",
+            "footer.tech_desc1": "Construido con HTML5, adaptado para dispositivos móviles y de escritorio, compatible con IE9, Safari, Edge, Chrome, Firefox, etc.",
+            "footer.tech_desc2": "Cuenta con funciones de accesibilidad y diseño multilingüe."
         },
         "fr": {
             "lang.current": "FR",
@@ -1199,7 +1304,10 @@
             "footer.privacy": "Confidentialité",
             "footer.terms": "Conditions",
             "footer.disclaimer": "Avis de non-responsabilité : L'utilisation de noms de pays ou de territoires sur ce site Web n'implique l'expression d'aucune opinion de la part de WEPO concernant le statut juridique d'un pays, territoire, ville ou zone ou de ses autorités, ou concernant le tracé de ses frontières ou limites.",
-            "footer.follow_us": "Suivez-nous"
+            "footer.follow_us": "Suivez-nous",
+            "footer.cookie_desc": "Ce site Web utilise des cookies pour maintenir un fonctionnement normal.",
+            "footer.tech_desc1": "Construit avec HTML5, adapté aux mobiles et ordinateurs de bureau, compatible avec IE9, Safari, Edge, Chrome, Firefox, etc.",
+            "footer.tech_desc2": "Comprend des fonctions d'accessibilité et un design multilingue."
         },
         "ru": {
             "lang.current": "RU",
@@ -1271,7 +1379,10 @@
             "footer.privacy": "Конфиденциальность",
             "footer.terms": "Условия",
             "footer.disclaimer": "Отказ от ответственности: Использование названий стран или территорий на этом веб-сайте не означает выражения какого-либо мнения со стороны WEPO относительно правового статуса какой-либо страны, территории, города или района или их властей, или относительно делимитации их границ.",
-            "footer.follow_us": "Подписывайтесь на нас"
+            "footer.follow_us": "Подписывайтесь на нас",
+            "footer.cookie_desc": "Этот веб-сайт использует файлы cookie для поддержания нормальной работы.",
+            "footer.tech_desc1": "Создан на HTML5, адаптирован для мобильных и настольных устройств, совместим с IE9, Safari, Edge, Chrome, Firefox и др.",
+            "footer.tech_desc2": "Обеспечен функциями доступности и многоязычным дизайном."
         },
         "ar": {
             "lang.current": "العربية",
@@ -1343,7 +1454,10 @@
             "footer.privacy": "الخصوصية",
             "footer.terms": "الشروط",
             "footer.disclaimer": "إخلاء المسؤولية: إن استخدام أسماء البلدان أو الأقاليم على هذا الموقع لا يعني التعبير عن أي رأي مهما كان من جانب WEPO بشأن الوضع القانوني لأي بلد أو إقليم أو مدينة أو منطقة أو سلطاتها، أو بشأن تعيين حدودها.",
-            "footer.follow_us": "تابعنا"
+            "footer.follow_us": "تابعنا",
+            "footer.cookie_desc": "يستخدم هذا الموقع ملفات تعريف الارتباط للحفاظ على التشغيل العادي.",
+            "footer.tech_desc1": "مبني بتقنية HTML5، متوافق بالكامل مع الأجهزة المحمولة وسطح المكتب، ويدعم IE9 وSafari وEdge وChrome وFirefox وغيرها.",
+            "footer.tech_desc2": "يتميز بوظائف إمكانية الوصول والتصميم متعدد اللغات."
         }
     };
 
