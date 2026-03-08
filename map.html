@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>全球态势感知系统Global Situational Awareness System - WEPO</title>
+    
+    <!-- --- SEO: 核心标题与描述 --- -->
+    <title data-i18n="page.title">全球态势感知系统 Global Situational Awareness System - 世环组织 | WEPO</title>
+    <meta name="description" content="WEPO全球态势感知系统 (GAIA)。利用量子计算与3D可视化技术，实时监控全球气候、碳排放与生态流量。Explore the Global Situational Awareness System by the World Environmental Protection Organization (WEPO), featuring real-time 3D visualization of global climate and ecological data.">
+    <meta name="keywords" content="世环组织, WEPO, 全球态势感知系统, Global Situational Awareness System, GAIA联盟, 3D可视化系统, 环保数据监控, 世界环境保护组织, World Environmental Protection Organization">
+    <meta name="theme-color" content="#000000">
     
     <!-- 引入高级字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -173,6 +178,7 @@
         // --- 数据定义 ---
         const i18n = {
             'zh': {
+                'page.title': '全球态势感知系统 Global Situational Awareness System - 世环组织 | WEPO',
                 title: 'GAIA 全球联盟',
                 subtitle: '世界环境保护组织 | 3D 可视化系统',
                 card_title: '指挥中心：中国重庆',
@@ -190,6 +196,7 @@
                 loc_ch: '瑞士伯尔尼'
             },
             'en': {
+                'page.title': 'Global Situational Awareness System - World Environmental Protection Organization | WEPO',
                 title: 'GAIA ALLIANCE',
                 subtitle: 'Global Eco-Protection Org | Visualization',
                 card_title: 'HQ: CHONGQING, CN',
@@ -207,6 +214,7 @@
                 loc_ch: 'BERN'
             },
             'jp': {
+                'page.title': 'グローバル状況把握システム - 世界環境保護機関 | WEPO',
                 title: 'GAIA アライアンス',
                 subtitle: '世界環境保護機関 | 3D可視化システム',
                 card_title: '本部：中国・重慶',
@@ -224,6 +232,7 @@
                 loc_ch: 'ベルン'
             },
             'de': {
+                'page.title': 'Globales Situationsbewusstseinssystem - Weltumweltschutzorganisation | WEPO',
                 title: 'GAIA ALLIANZ',
                 subtitle: 'Weltumweltschutzorganisation',
                 card_title: 'HQ: CHONGQING',
@@ -242,7 +251,7 @@
             }
         };
 
-        const LOCATIONS = [
+        const LOCATIONS =[
             { id: 'cq', lat: 29.5630, lon: 106.5516, type: 'hq' },
             { id: 'bj', lat: 39.9042, lon: 116.4074 },
             { id: 'hk', lat: 22.3193, lon: 114.1694 },
@@ -256,7 +265,7 @@
 
         let scene, camera, renderer, labelRenderer, composer, controls;
         let earth, clouds;
-        let particles = [];
+        let particles =[];
         const labelObjects = {};
         let currentLang = 'zh';
 
@@ -286,6 +295,11 @@
                 btn.classList.remove('active');
                 if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
             });
+            
+            // 确保修改标题时也生效
+            if (i18n[lang]['page.title']) {
+                document.title = i18n[lang]['page.title'];
+            }
         }
 
         // 暴露给 HTML 按钮使用
