@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆市垫江县第十中学 | Dianjiang No.10 Middle School</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0A2540', /* 深邃学府蓝 */
+                        gold: '#C5A880',    /* 荣誉质感金 */
+                        light: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 高级定制动画与样式 */
+        body { font-family: 'Noto Sans SC', sans-serif; overflow-x: hidden; background-color: #F8F9FA; color: #333; }
+        h1, h2, h3, h4, h5, .font-serif { font-family: 'Noto Serif SC', serif; }
+        
+        /* 平滑滚动 */
+        html { scroll-behavior: smooth; }
+
+        /* 视差背景 */
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* 滚动揭示动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 玻璃拟态导航栏 */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* 图片悬停高级特效 */
+        .img-hover-wrap { overflow: hidden; position: relative; border-radius: 4px;}
+        .img-hover-wrap img {
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-hover-wrap:hover img { transform: scale(1.08); }
+        .img-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,37,64,0.9), transparent);
+            opacity: 0; transition: opacity 0.5s ease; display: flex; align-items: flex-end; padding: 20px;
+        }
+        .img-hover-wrap:hover .img-overlay { opacity: 1; }
+
+        /* 交互式卡片 */
+        .feature-card {
+            transition: all 0.4s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-bottom: 3px solid #C5A880;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #C5A880; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a68c68; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-white">
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo区 -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="https://img.nickyam.com/file/AgACAgUAAyEGAASS2zT1AAI8i2mtCsbb_iYr9Y6qt9yeTqUK6pFlAAIEEWsbqKVoVUf5f_BwzB9UAQADAgADeQADOgQ.jpeg" alt="Logo" class="h-12 w-12 rounded-full border border-gray-200 shadow-sm">
+                    <div>
+                        <h1 class="font-serif text-xl font-bold text-primary tracking-wider" data-i18n="nav_title">垫江第十中学校</h1>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-widest" data-i18n="nav_subtitle">Dianjiang No.10 Middle School</p>
+                    </div>
+                </div>
+
+                <!-- 桌面端菜单 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium text-gray-800 hover:text-gold transition" data-i18n="nav_about">学校概况</a>
+                    <a href="#culture" class="text-sm font-medium text-gray-800 hover:text-gold transition" data-i18n="nav_culture">文化标识</a>
+                    <a href="#education" class="text-sm font-medium text-gray-800 hover:text-gold transition" data-i18n="nav_edu">教育教学</a>
+                    <a href="#gallery" class="text-sm font-medium text-gray-800 hover:text-gold transition" data-i18n="nav_gallery">校园风貌</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-800 hover:text-gold transition" data-i18n="nav_contact">联系我们</a>
+                    
+                    <!-- 语言切换器 -->
+                    <div class="relative group">
+                        <button class="flex items-center gap-1 text-sm font-medium text-primary border border-primary px-3 py-1 rounded-full hover:bg-primary hover:text-white transition">
+                            <i class="fas fa-globe"></i> <span id="current-lang">中文</span>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-24 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                            <a href="#" onclick="switchLang('cn')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">中文</a>
+                            <a href="#" onclick="switchLang('en')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">English</a>
+                            <a href="#" onclick="switchLang('fr')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Français</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首屏英雄区 (Hero Section) -->
+    <section class="relative h-screen flex items-center justify-center parallax-bg" style="background-image: url('https://img.yohuo.eu.org/1772950503722.png');">
+        <div class="absolute inset-0 bg-primary/60 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-primary/90"></div>
+        
+        <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto reveal active">
+            <h2 class="text-gold text-lg md:text-2xl tracking-[0.3em] mb-4 uppercase font-light" data-i18n="hero_motto">恒德凝命 · 立德唯实</h2>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 drop-shadow-lg" data-i18n="hero_title">为党育人 为国育才</h1>
+            <p class="text-lg md:text-xl font-light text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed" data-i18n="hero_desc">
+                位于重庆市垫江县，秉承“以学生为中心”的核心理念，全面推进素质教育，打造垫江初中教育的亮丽名片。
+            </p>
+            <a href="#about" class="inline-block border border-gold text-gold hover:bg-gold hover:text-white px-8 py-3 rounded-full text-sm tracking-wider transition-all duration-300">
+                <span data-i18n="hero_btn">探索十中</span> <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 学校概况 (About) -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h4 class="text-gold font-bold tracking-widest uppercase mb-2" data-i18n="sec_about_sub">关于我们</h4>
+                    <h2 class="text-4xl font-serif text-primary mb-6" data-i18n="sec_about_title">承载厚重教育使命<br>追求卓越育人成果</h2>
+                    <div class="w-12 h-1 bg-gold mb-8"></div>
+                    <p class="text-gray-600 leading-relaxed mb-6 text-justify" data-i18n="about_p1">
+                        重庆市垫江第十中学校（简称“垫江十中”）位于桂溪街道渝巫路259号，是一所由垫江县教委直办的公办初级中学。学校前身为“垫江县凤山中学”，于2016年迁至现址开启新纪元，2018年正式成立。
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-8 text-justify" data-i18n="about_p2">
+                        作为财政全额拨款的事业单位（开办资金5843万元），学校规模宏大，在校学生逾3000人，拥有66个教学班。凭借卓越的办学质量，已成为众多小学毕业生的首选中学。
+                    </p>
+                    <div class="grid grid-cols-3 gap-6 border-t border-gray-100 pt-8">
+                        <div>
+                            <p class="text-3xl font-serif text-primary font-bold">3005<span class="text-gold text-lg">+</span></p>
+                            <p class="text-xs text-gray-500 mt-1 uppercase" data-i18n="stat_students">在校学生</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-serif text-primary font-bold">66</p>
+                            <p class="text-xs text-gray-500 mt-1 uppercase" data-i18n="stat_classes">教学班级</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-serif text-primary font-bold">5843<span class="text-gold text-lg">W</span></p>
+                            <p class="text-xs text-gray-500 mt-1 uppercase" data-i18n="stat_fund">开办资金</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal img-hover-wrap rounded-xl shadow-2xl h-[600px]">
+                    <img src="https://img.yohuo.eu.org/1772950347541.png" alt="Campus Scenery" class="w-full h-full object-cover">
+                    <div class="img-overlay">
+                        <h3 class="text-white font-serif text-2xl" data-i18n="about_img_caption">优美的校园风光</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 办学理念 (Culture) -->
+    <section id="culture" class="py-24 bg-light relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h4 class="text-gold font-bold tracking-widest uppercase mb-2" data-i18n="sec_culture_sub">文化标识</h4>
+                <h2 class="text-4xl font-serif text-primary mb-6" data-i18n="sec_culture_title">文化价值体系</h2>
+                <p class="text-gray-600" data-i18n="culture_desc">不仅注重知识的传授，更致力于构建一套完整而深刻的文化价值体系，以此为学生的终身发展奠基。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-lg feature-card reveal">
+                    <div class="w-14 h-14 bg-primary/5 text-primary rounded-full flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3" data-i18n="cult_1_title">核心理念</h3>
+                    <p class="text-gold font-bold mb-3">立德、成己、达人</p>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-i18n="cult_1_desc">修养品德，成就自我，进而惠及他人、奉献社会。这是对师生共同成长的期许。</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-lg feature-card reveal" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-primary/5 text-primary rounded-full flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3" data-i18n="cult_2_title">校训</h3>
+                    <p class="text-gold font-bold mb-3">恒德凝命</p>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-i18n="cult_2_desc">永恒不变的道德操守是凝聚生命力量、实现人生价值的根基，激励师生持之以恒。</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-lg feature-card reveal" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-primary/5 text-primary rounded-full flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3" data-i18n="cult_3_title">教风</h3>
+                    <p class="text-gold font-bold mb-3">敬业、勤业、精业、乐业</p>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-i18n="cult_3_desc">引导教师在教育事业中找到职业的幸福感和生命的意义，打造高素质骨干团队。</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-lg feature-card reveal" style="transition-delay: 300ms;">
+                    <div class="w-14 h-14 bg-primary/5 text-primary rounded-full flex items-center justify-center text-2xl mb-6">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-3" data-i18n="cult_4_title">学风</h3>
+                    <p class="text-gold font-bold mb-3">实学、善学、辩学、博学</p>
+                    <p class="text-gray-600 text-sm leading-relaxed" data-i18n="cult_4_desc">鼓励以求真务实的态度学习，培养批判性思维，最终达到学识渊博的境界。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育与特色 (Education & Features) -->
+    <section id="education" class="py-24 bg-primary text-white parallax-bg" style="background-image: linear-gradient(rgba(10,37,64,0.95), rgba(10,37,64,0.95)), url('https://img.yohuo.eu.org/1772949547424.webp');">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- 教学改革 -->
+                <div class="reveal">
+                    <h4 class="text-gold font-bold tracking-widest uppercase mb-2" data-i18n="sec_edu_sub">教育教学改革</h4>
+                    <h2 class="text-4xl font-serif mb-8" data-i18n="sec_edu_title">“三段六环—小组合作”<br>智慧课堂</h2>
+                    <p class="text-gray-300 font-light mb-6 leading-relaxed" data-i18n="edu_desc1">
+                        从“教为中心”向“学为中心”转变。模式将课堂分为课前、课中、课后三个阶段，通过“导、学、议、展、评、测”六个环节，充分调动学习主动性。
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-gold mt-1"></i>
+                            <span class="text-gray-200" data-i18n="edu_li1">升入重点高中人数连续两年突破500人大关。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-gold mt-1"></i>
+                            <span class="text-gray-200" data-i18n="edu_li2">构建“基础+特色”课后延时服务体系，设10余项目。</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-gold mt-1"></i>
+                            <span class="text-gray-200" data-i18n="edu_li3">重庆市义务教育教学改革实验校（2024年）。</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 四季四节 -->
+                <div class="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10 reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-2xl font-serif mb-6 text-gold" data-i18n="season_title">特色育人活动：“四季四节”</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center shrink-0 font-bold">春</div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-i18n="season_spring">春季体育节 (3月)</h4>
+                                <p class="text-sm text-gray-400" data-i18n="season_spring_desc">以体育铸魂，强体立德。团队拓展挑战、体育知识竞赛。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-yellow-500/20 text-yellow-400 flex items-center justify-center shrink-0 font-bold">夏</div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-i18n="season_summer">夏季耕读节 (5月)</h4>
+                                <p class="text-sm text-gray-400" data-i18n="season_summer_desc">以劳智相融。在30亩“耕读园”开展田园诗会、植物观察。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 font-bold">秋</div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-i18n="season_autumn">秋季科技节 (10月)</h4>
+                                <p class="text-sm text-gray-400" data-i18n="season_autumn_desc">以科技启智。举办科技博览、创新工坊、科学家讲堂。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center shrink-0 font-bold">冬</div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-i18n="season_winter">冬季艺术节 (12月)</h4>
+                                <p class="text-sm text-gray-400" data-i18n="season_winter_desc">以美育润心。结合“一二·九”开展红色艺术创作汇演。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 校园风貌图集 (Gallery) -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h4 class="text-gold font-bold tracking-widest uppercase mb-2" data-i18n="sec_gallery_sub">五育并举</h4>
+                <h2 class="text-4xl font-serif text-primary mb-6" data-i18n="sec_gallery_title">多元校园风貌</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[250px]">
+                <!-- Item 1 -->
+                <div class="img-hover-wrap reveal col-span-1 md:col-span-2 lg:col-span-2 row-span-2">
+                    <img src="https://img.yohuo.eu.org/1772949549648.webp" alt="Football" class="w-full h-full object-cover">
+                    <div class="img-overlay"><h3 class="text-white font-serif text-xl">全国校园足球特色学校</h3></div>
+                </div>
+                <!-- Item 2 -->
+                <div class="img-hover-wrap reveal">
+                    <img src="https://img.yohuo.eu.org/1772949542652.jpeg" alt="Art Show" class="w-full h-full object-cover">
+                    <div class="img-overlay"><h3 class="text-white font-serif text-xl">12·9爱国文艺汇演</h3></div>
+                </div>
+                <!-- Item 3 -->
+                <div class="img-hover-wrap reveal">
+                    <img src="https://img.yohuo.eu.org/1772949553595.webp" alt="Labor" class="w-full h-full object-cover">
+                    <div class="img-overlay"><h3 class="text-white font-serif text-xl">“三艺劳动”教育基地</h3></div>
+                </div>
+                <!-- Item 4 -->
+                <div class="img-hover-wrap reveal lg:col-span-2">
+                    <img src="https://img.yohuo.eu.org/1772949552136.webp" alt="Opening" class="w-full h-full object-cover object-top">
+                    <div class="img-overlay"><h3 class="text-white font-serif text-xl">特色德育：“拜师礼”等开学活动</h3></div>
+                </div>
+                <!-- Item 5 -->
+                <div class="img-hover-wrap reveal">
+                    <img src="https://img.yohuo.eu.org/1772950353114.png" alt="Campus 3" class="w-full h-full object-cover">
+                    <div class="img-overlay"><h3 class="text-white font-serif text-xl">统战文化大道</h3></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部与联系方式 (Footer & Contact) -->
+    <footer id="contact" class="bg-primary text-white pt-20 pb-10 border-t-4 border-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+                <!-- 信息区 -->
+                <div>
+                    <img src="https://img.nickyam.com/file/AgACAgUAAyEGAASS2zT1AAI8i2mtCsbb_iYr9Y6qt9yeTqUK6pFlAAIEEWsbqKVoVUf5f_BwzB9UAQADAgADeQADOgQ.jpeg" alt="Logo" class="h-16 w-16 rounded-full mb-6 border-2 border-gold">
+                    <h2 class="text-3xl font-serif mb-6" data-i18n="footer_title">重庆市垫江县第十中学</h2>
+                    <p class="text-gray-400 mb-8 max-w-md" data-i18n="footer_desc">
+                        上下贯通，全面发力，为把学校建设成为更高品质、更具特色的巴渝名校而不懈努力。
+                    </p>
+                    <div class="space-y-4 text-gray-300">
+                        <p><i class="fas fa-map-marker-alt text-gold w-6 text-center"></i> <span data-i18n="contact_addr">重庆市垫江县桂溪街道渝巫路259号 (邮编: 408300)</span></p>
+                        <p><i class="fas fa-phone-alt text-gold w-6 text-center"></i> 办公室: 023-74518864</p>
+                        <p><i class="fas fa-user-tie text-gold w-6 text-center"></i> 事务咨询: 023-74669301 (王老师)</p>
+                        <p><i class="fas fa-envelope text-gold w-6 text-center"></i> wanglian561@163.com</p>
+                    </div>
+                </div>
+                <!-- 地图嵌入区 -->
+                <div class="h-80 rounded-xl overflow-hidden shadow-2xl border border-white/10 relative">
+                    <iframe width="100%" height="100%" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp=30.345882415771484~107.36494445800781&lvl=15.7&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no" class="grayscale hover:grayscale-0 transition duration-500">
+                    </iframe>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2026 重庆市垫江县第十中学. All Rights Reserved.</p>
+                <p class="mt-2 md:mt-0">Design & Code by Advanced AI</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 交互脚本与国际化引擎 -->
+    <script>
+        // 1. 滚动动画揭示 (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 2. 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.replace('bg-white/80', 'bg-white/95');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.replace('bg-white/95', 'bg-white/80');
+            }
+        });
+
+        // 3. 国际化翻译字典 (中、英、法)
+        const dict = {
+            cn: {
+                nav_title: "垫江第十中学校", nav_subtitle: "Dianjiang No.10 Middle School",
+                nav_about: "学校概况", nav_culture: "文化标识", nav_edu: "教育教学", nav_gallery: "校园风貌", nav_contact: "联系我们",
+                hero_motto: "恒德凝命 · 立德唯实", hero_title: "为党育人 为国育才", hero_desc: "位于重庆市垫江县，秉承“以学生为中心”的核心理念，全面推进素质教育，打造垫江初中教育的亮丽名片。", hero_btn: "探索十中",
+                sec_about_sub: "关于我们", sec_about_title: "承载厚重教育使命<br>追求卓越育人成果",
+                about_p1: "重庆市垫江第十中学校（简称“垫江十中”）位于桂溪街道渝巫路259号，是一所由垫江县教委直办的公办初级中学。学校前身为“垫江县凤山中学”，于2016年迁至现址开启新纪元，2018年正式成立。",
+                about_p2: "作为财政全额拨款的事业单位（开办资金5843万元），学校规模宏大，在校学生逾3000人，拥有66个教学班。凭借卓越的办学质量，已成为众多小学毕业生的首选中学。",
+                stat_students: "在校学生", stat_classes: "教学班级", stat_fund: "开办资金", about_img_caption: "优美的校园风光",
+                sec_culture_sub: "文化标识", sec_culture_title: "文化价值体系", culture_desc: "不仅注重知识的传授，更致力于构建一套完整而深刻的文化价值体系，以此为学生的终身发展奠基。",
+                cult_1_title: "核心理念", cult_1_desc: "修养品德，成就自我，进而惠及他人、奉献社会。这是对师生共同成长的期许。",
+                cult_2_title: "校训", cult_2_desc: "永恒不变的道德操守是凝聚生命力量、实现人生价值的根基，激励师生持之以恒。",
+                cult_3_title: "教风", cult_3_desc: "引导教师在教育事业中找到职业的幸福感和生命的意义，打造高素质骨干团队。",
+                cult_4_title: "学风", cult_4_desc: "鼓励以求真务实的态度学习，培养批判性思维，最终达到学识渊博的境界。",
+                sec_edu_sub: "教育教学改革", sec_edu_title: "“三段六环—小组合作”<br>智慧课堂",
+                edu_desc1: "从“教为中心”向“学为中心”转变。模式将课堂分为课前、课中、课后三个阶段，通过“导、学、议、展、评、测”六个环节，充分调动学习主动性。",
+                edu_li1: "升入重点高中人数连续两年突破500人大关。", edu_li2: "构建“基础+特色”课后延时服务体系，设10余项目。", edu_li3: "重庆市义务教育教学改革实验校（2024年）。",
+                season_title: "特色育人活动：“四季四节”", season_spring: "春季体育节 (3月)", season_spring_desc: "以体育铸魂，强体立德。团队拓展挑战、体育知识竞赛。",
+                season_summer: "夏季耕读节 (5月)", season_summer_desc: "以劳智相融。在30亩“耕读园”开展田园诗会、植物观察。",
+                season_autumn: "秋季科技节 (10月)", season_autumn_desc: "以科技启智。举办科技博览、创新工坊、科学家讲堂。",
+                season_winter: "冬季艺术节 (12月)", season_winter_desc: "以美育润心。结合“一二·九”开展红色艺术创作汇演。",
+                sec_gallery_sub: "五育并举", sec_gallery_title: "多元校园风貌",
+                footer_title: "重庆市垫江县第十中学", footer_desc: "上下贯通，全面发力，为把学校建设成为更高品质、更具特色的巴渝名校而不懈努力。", contact_addr: "重庆市垫江县桂溪街道渝巫路259号 (邮编: 408300)"
+            },
+            en: {
+                nav_title: "Dianjiang No.10", nav_subtitle: "Middle School",
+                nav_about: "About Us", nav_culture: "Culture", nav_edu: "Education", nav_gallery: "Gallery", nav_contact: "Contact",
+                hero_motto: "Constant Virtue · Practical Education", hero_title: "Nurturing Talents for the Future", hero_desc: "Located in Dianjiang, Chongqing, we adhere to a student-centered philosophy, comprehensively promoting quality education and building a bright name card for junior high education.", hero_btn: "Explore Us",
+                sec_about_sub: "About Us", sec_about_title: "Bearing the Heavy Mission<br>Pursuing Excellence",
+                about_p1: "Chongqing Dianjiang No. 10 Middle School is a public junior high school directly run by the Dianjiang Education Commission. Formerly 'Fengshan Middle School', it moved to its current location in 2016 and was officially established in 2018.",
+                about_p2: "As a fully funded institution (fund: 58.43M RMB), the school has a large scale with over 3,000 students and 66 classes. With excellent teaching quality, it has become the top choice for graduates.",
+                stat_students: "Students", stat_classes: "Classes", stat_fund: "Funding", about_img_caption: "Beautiful Campus Scenery",
+                sec_culture_sub: "Identity", sec_culture_title: "Cultural Value System", culture_desc: "We focus not only on knowledge but also on building a profound cultural value system for students' lifelong development.",
+                cult_1_title: "Core Philosophy", cult_1_desc: "Cultivate morality, achieve oneself, and benefit others. This is our expectation for both teachers and students.",
+                cult_2_title: "Motto", cult_2_desc: "Constant virtue forms the foundation of life, inspiring everyone to persistently cultivate their moral character.",
+                cult_3_title: "Teaching Style", cult_3_desc: "Dedicated, diligent, exquisite, and joyful. Guiding teachers to find happiness and meaning in education.",
+                cult_4_title: "Learning Style", cult_4_desc: "Practical, adept, critical, and extensive. Encouraging critical thinking to reach profound knowledge.",
+                sec_edu_sub: "Educational Reform", sec_edu_title: "Smart Classroom<br>& Group Collaboration",
+                edu_desc1: "Shifting from 'teaching-centered' to 'learning-centered'. The model divides classes into three stages and six links, fully mobilizing students' initiative.",
+                edu_li1: "Over 500 students admitted to key high schools for two consecutive years.", edu_li2: "After-school service system with over 10 feature projects.", edu_li3: "Chongqing Compulsory Education Reform Experimental School (2024).",
+                season_title: "Features: Four Seasons & Festivals", season_spring: "Spring Sports Fest (Mar)", season_spring_desc: "Team expansion challenges and sports knowledge competitions.",
+                season_summer: "Summer Farming Fest (May)", season_summer_desc: "Poetry reading and plant observation in our 30-acre farm.",
+                season_autumn: "Autumn Tech Fest (Oct)", season_autumn_desc: "Tech expos, innovation workshops, and scientist lectures.",
+                season_winter: "Winter Arts Fest (Dec)", season_winter_desc: "Red art creation and revolutionary poetry recitations.",
+                sec_gallery_sub: "Five Educations", sec_gallery_title: "Diverse Campus Life",
+                footer_title: "Dianjiang No.10 Middle School", footer_desc: "Striving tirelessly to build a higher-quality, distinctive famous school in the Bayu region.", contact_addr: "259 Yuwu Rd, Guixi St, Dianjiang, Chongqing (Zip: 408300)"
+            },
+            fr: {
+                nav_title: "Collège N°10 Dianjiang", nav_subtitle: "Établissement d'Enseignement",
+                nav_about: "À Propos", nav_culture: "Culture", nav_edu: "Éducation", nav_gallery: "Galerie", nav_contact: "Contact",
+                hero_motto: "Vertu Constante · Éducation Pratique", hero_title: "Former les Talents de Demain", hero_desc: "Situé à Dianjiang, Chongqing, nous adhérons à une philosophie centrée sur l'élève, promouvant une éducation de qualité et créant une référence pour l'enseignement secondaire.", hero_btn: "Découvrir",
+                sec_about_sub: "À Propos de Nous", sec_about_title: "Porter la Mission<br>Viser l'Excellence",
+                about_p1: "Le Collège N°10 de Dianjiang est un établissement public géré par la Commission de l'Éducation. Anciennement 'Collège Fengshan', il a déménagé sur son site actuel en 2016.",
+                about_p2: "En tant qu'institution financée (58,43M RMB), l'école compte plus de 3 000 élèves et 66 classes. Grâce à son excellente qualité d'enseignement, elle est le premier choix des diplômés.",
+                stat_students: "Élèves", stat_classes: "Classes", stat_fund: "Financement", about_img_caption: "Magnifique Paysage",
+                sec_culture_sub: "Identité", sec_culture_title: "Système de Valeurs", culture_desc: "Nous nous concentrons non seulement sur les connaissances, mais aussi sur un système culturel profond pour le développement des élèves.",
+                cult_1_title: "Philosophie", cult_1_desc: "Cultiver la moralité, s'accomplir et profiter aux autres. C'est notre attente envers les enseignants et les élèves.",
+                cult_2_title: "Devise", cult_2_desc: "La vertu constante forme la base de la vie, inspirant chacun à cultiver continuellement son caractère moral.",
+                cult_3_title: "Enseignement", cult_3_desc: "Dévoué, diligent, exquis et joyeux. Guider les enseignants à trouver le bonheur dans l'éducation.",
+                cult_4_title: "Apprentissage", cult_4_desc: "Pratique, adepte, critique et vaste. Encourager la pensée critique pour atteindre une connaissance profonde.",
+                sec_edu_sub: "Réforme Éducative", sec_edu_title: "Classe Intelligente<br>& Collaboration",
+                edu_desc1: "Passage d'un modèle 'centré sur l'enseignement' à 'centré sur l'apprentissage'. Le modèle divise les cours en trois étapes, mobilisant l'initiative des élèves.",
+                edu_li1: "Plus de 500 élèves admis dans des lycées clés deux années de suite.", edu_li2: "Services parascolaires avec plus de 10 projets.", edu_li3: "École expérimentale de réforme de l'éducation de Chongqing (2024).",
+                season_title: "Quatre Saisons et Festivals", season_spring: "Festival de Printemps (Mar)", season_spring_desc: "Défis d'équipe et compétitions de connaissances sportives.",
+                season_summer: "Festival d'Été (Mai)", season_summer_desc: "Poésie et observation des plantes dans notre ferme de 30 acres.",
+                season_autumn: "Festival d'Automne (Oct)", season_autumn_desc: "Expositions techniques, ateliers et conférences de scientifiques.",
+                season_winter: "Festival d'Hiver (Déc)", season_winter_desc: "Création artistique rouge et récitations de poésie.",
+                sec_gallery_sub: "Cinq Éducations", sec_gallery_title: "Vie sur le Campus",
+                footer_title: "Collège N°10 de Dianjiang", footer_desc: "S'efforcer sans relâche de construire une école célèbre et de haute qualité dans la région de Bayu.", contact_addr: "259 Rue Yuwu, Dianjiang, Chongqing (Code : 408300)"
+            }
+        };
+
+        // 切换语言函数
+        function switchLang(lang) {
+            event.preventDefault();
+            // 更新语言显示名称
+            const langNames = { 'cn': '中文', 'en': 'English', 'fr': 'Français' };
+            document.getElementById('current-lang').innerText = langNames[lang];
+            
+            // 遍历并更新带有 data-i18n 属性的所有 DOM 元素
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[lang][key]) {
+                    el.innerHTML = dict[lang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
