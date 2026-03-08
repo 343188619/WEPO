@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page.title">隐私政策Privacy Policy - WEPO</title>
+    <title data-i18n="page.title">隐私政策 Privacy Policy - 世环组织 | WEPO</title>
     <meta name="description" content="WEPO Privacy Policy - How we collect, use, and protect your information.">
     <meta name="theme-color" content="#0a0a0a">
 
@@ -32,7 +32,8 @@
             --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Light Mode Variables */[data-theme="light"] {
+        /* Light Mode Variables */
+        [data-theme="light"] {
             --bg-void: #F2F2F7;
             --bg-surface: #FFFFFF;
             --bg-card: rgba(255, 255, 255, 0.6);
@@ -432,8 +433,8 @@
             "footer.council": "理事会", "footer.volunteers": "志愿者网络", "footer.reports": "年度报告", "footer.charter": "组织章程", "footer.privacy": "隐私政策", "footer.terms": "用户协议",
             "footer.disclaimer": "免责声明：本网站使用国家或地区名称，并不意味着WEPO对任何国家或其当局的法律地位持任何看法。", "footer.follow_us": "关注我们",
             
-            "page.title": "隐私条款 | WEPO - 世界环境保护组织",
-            "pp.title": "隐私条款",
+            "page.title": "隐私政策 Privacy Policy - 世环组织 | WEPO",
+            "pp.title": "隐私政策",
             "pp.subtitle": "World Environmental Protection Organization (WEPO)",
             "pp.s1.title": "1. 信息收集",
             "pp.s1.p1": "WEPO尊重并保护所有用户的个人隐私。我们收集信息的目的在于为您提供更好的服务，并改善我们的网站功能。我们收集的信息可能包括：",
@@ -468,7 +469,7 @@
             "footer.council": "Council", "footer.volunteers": "Volunteers", "footer.reports": "Reports", "footer.charter": "Charter", "footer.privacy": "Privacy Policy", "footer.terms": "User Agreement",
             "footer.disclaimer": "Disclaimer: The use of country or territory names does not imply any opinion on legal status.", "footer.follow_us": "Follow Us",
 
-            "page.title": "Privacy Policy | WEPO",
+            "page.title": "Privacy Policy - 世环组织 | WEPO",
             "pp.title": "Privacy Policy",
             "pp.subtitle": "World Environmental Protection Organization (WEPO)",
             "pp.s1.title": "1. Information Collection",
@@ -504,7 +505,7 @@
             "footer.council": "Consejo", "footer.volunteers": "Voluntarios", "footer.reports": "Informes", "footer.charter": "Estatuto", "footer.privacy": "Privacidad", "footer.terms": "Términos",
             "footer.disclaimer": "Descargo de responsabilidad: El uso de nombres no implica opinión sobre la condición jurídica.", "footer.follow_us": "Síganos",
             
-            "page.title": "Política de Privacidad | WEPO",
+            "page.title": "Política de Privacidad - 世环组织 | WEPO",
             "pp.title": "Política de Privacidad",
             "pp.subtitle": "World Environmental Protection Organization (WEPO)",
             "pp.s1.title": "1. Recopilación de Información",
@@ -540,7 +541,7 @@
             "footer.council": "Consejo", "footer.volunteers": "Bénévoles", "footer.reports": "Rapports", "footer.charter": "Charte", "footer.privacy": "Confidentialité", "footer.terms": "Conditions",
             "footer.disclaimer": "Avis : L'utilisation de noms n'implique aucune opinion sur le statut juridique.", "footer.follow_us": "Suivez-nous",
             
-            "page.title": "Politique de Confidentialité | WEPO",
+            "page.title": "Politique de Confidentialité - 世环组织 | WEPO",
             "pp.title": "Politique de Confidentialité",
             "pp.subtitle": "World Environmental Protection Organization (WEPO)",
             "pp.s1.title": "1. Collecte d'informations",
@@ -576,7 +577,7 @@
             "footer.council": "Совет", "footer.volunteers": "Волонтеры", "footer.reports": "Отчеты", "footer.charter": "Устав", "footer.privacy": "Конфиденциальность", "footer.terms": "Условия",
             "footer.disclaimer": "Отказ: Использование названий не означает выражения мнения относительно правового статуса.", "footer.follow_us": "Подписывайтесь на нас",
             
-            "page.title": "Политика Конфиденциальности | WEPO",
+            "page.title": "Политика Конфиденциальности - 世环组织 | WEPO",
             "pp.title": "Политика Конфиденциальности",
             "pp.subtitle": "World Environmental Protection Organization (WEPO)",
             "pp.s1.title": "1. Сбор информации",
@@ -612,7 +613,7 @@
             "footer.council": "المجلس", "footer.volunteers": "المتطوعون", "footer.reports": "التقارير", "footer.charter": "الميثاق", "footer.privacy": "الخصوصية", "footer.terms": "الشروط",
             "footer.disclaimer": "إخلاء المسؤولية: استخدام الأسماء لا يعني التعبير عن رأي بشأن الوضع القانوني.", "footer.follow_us": "تابعنا",
             
-            "page.title": "سياسة الخصوصية | WEPO",
+            "page.title": "سياسة الخصوصية - 世环组织 | WEPO",
             "pp.title": "سياسة الخصوصية",
             "pp.subtitle": "World Environmental Protection Organization (WEPO)",
             "pp.s1.title": "1. جمع المعلومات",
@@ -675,6 +676,7 @@
         });
         document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
         localStorage.setItem('lang', lang);
+        document.title = translations[lang]["page.title"] || document.title;
     }
     const savedLang = localStorage.getItem('lang') || 'en';
     setTimeout(() => setLanguage(savedLang), 100);
