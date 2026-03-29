@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=368, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Watch AI</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        * { box-sizing: border-box; touch-action: pan-y; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body, html { width: 100%; height: 100%; background-color: #000000; color: #FFFFFF; overflow: hidden; }
+        #app { display: flex; flex-direction: column; height: 100vh; }
+        
+        header { 
+            height: 50px; flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; 
+            background: #111; padding: 0 5px; border-bottom: 1px solid #222; 
+        }
+        .icon-btn { 
+            width: 44px; height: 44px; background: transparent; border: none; color: #007AFF; 
+            font-size: 22px; display: flex; justify-content: center; align-items: center; border-radius: 8px;
+        }
+        .icon-btn:active { background: #333; }
+        .header-title { font-size: 16px; font-weight: bold; color: #DDD; }
+
+        #chat-area { 
+            flex-grow: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 12px;
+            scrollbar-width: none; 
+        }
+        #chat-area::-webkit-scrollbar { display: none; }
+
+        .msg-row { display: flex; width: 100%; }
+        .msg-row.user { justify-content: flex-end; }
+        .msg-row.ai { justify-content: flex-start; }
+        
+        .bubble { 
+            max-width: 85%; padding: 10px 14px; font-size: 15px; line-height: 1.4; border-radius: 16px; word-wrap: break-word; 
+        }
+        .msg-row.user .bubble { background: #007AFF; color: #FFF; border-bottom-right-radius: 4px; }
+        .msg-row.ai .bubble { background: #222222; color: #EEE; border-bottom-left-radius: 4px; }
+        
+        .bubble pre { background: #000; padding: 8px; border-radius: 6px; overflow-x: auto; font-size: 13px; margin: 5px 0; }
+        .bubble code { font-family: monospace; }
+        .bubble p { margin-bottom: 6px; }
+        .bubble p:last-child { margin-bottom: 0; }
+        .bubble table { width: 100%; border-collapse: collapse; margin: 5px 0; font-size: 13px; }
+        .bubble th, .bubble td { border: 1px solid #555; padding: 4px; }
+
+        #input-area { 
+            flex-shrink: 0; background: #111; padding: 8px; border-top: 1px solid #222; display: flex; flex-direction: column; gap: 8px;
+        }
+        .input-row { display: flex; gap: 8px; }
+        input[type="text"] { 
+            flex-grow: 1; height: 44px; background: #222; border: 1px solid #333; color: #FFF; 
+            border-radius: 22px; padding: 0 16px; font-size: 16px; outline: none; 
+        }
+        .send-btn { 
+            width: 44px; height: 44px; background: #007AFF; border: none; border-radius: 22px; 
+            color: #FFF; font-size: 16px; font-weight: bold; display: flex; justify-content: center; align-items: center;
+        }
+        .send-btn:active { background: #005bb5; }
+
+        .tools-row { display: flex; align-items: center; justify-content: space-between; padding: 0 4px; }
+        .toggle-label { display: flex; align-items: center; gap: 6px; font-size: 14px; color: #AAA; }
+        input[type="checkbox"] { width: 18px; height: 18px; accent-color: #007AFF; }
+
+        #history-overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); 
+            z-index: 100; display: none; flex-direction: column; 
+        }
+        .history-header { 
+            height: 50px; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-bottom: 1px solid #333; 
+        }
+        #history-list { flex-grow: 1; overflow-y: auto; padding: 10px; }
+        .history-item { 
+            padding: 15px; background: #1A1A1A; border-radius: 12px; margin-bottom: 10px; 
+            font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
+        }
+        .history-item:active { background: #333; }
+        
+        /* 状态提示颜色 */
+        .status-net { color: #34C759; font-style: italic; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div id="history-overlay">
+        <div class="history-header">
+            <span style="font-size: 16px; font-weight: bold;">历史对话</span>
+            <button class="icon-btn" onclick="toggleHistory()" style="color: #FFF;">✕</button>
+        </div>
+        <div id="history-list"></div>
+    </div>
+
+    <header>
+        <button class="icon-btn" onclick="toggleHistory()">☰</button>
+        <span class="header-title">DeepSeek</span>
+        <div style="display: flex;">
+            <button class="icon-btn" onclick="createNewChat()" style="color: #34C759;">＋</button>
+            <button class="icon-btn" onclick="deleteCurrentChat()" style="color: #FF3B30;">🗑</button>
+        </div>
+    </header>
+
+    <div id="chat-area"></div>
+
+    <div id="input-area">
+        <div class="tools-row">
+            <label class="toggle-label">
+                <input type="checkbox" id="search-toggle" checked> 联网模式
+            </label>
+        </div>
+        <div class="input-row">
+            <input type="text" id="msg-input" placeholder="输入消息..." autocomplete="off">
+            <button class="send-btn" onclick="sendMessage()">↑</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_KEY = "sk-fff6f525357540e4a9ec1e98996ea9e0";
+    const API_URL = "https://api.deepseek.com/chat/completions";
+    
+    let chats = JSON.parse(localStorage.getItem('watch_ai_chats')) ||[];
+    let currentChatId = localStorage.getItem('watch_ai_current_id');
+    let isGenerating = false;
+
+    const chatArea = document.getElementById('chat-area');
+    const msgInput = document.getElementById('msg-input');
+    const historyOverlay = document.getElementById('history-overlay');
+    const historyList = document.getElementById('history-list');
+
+    function init() {
+        if (chats.length === 0 || !currentChatId) createNewChat();
+        else renderChat();
+    }
+
+    function saveData() {
+        localStorage.setItem('watch_ai_chats', JSON.stringify(chats));
+        localStorage.setItem('watch_ai_current_id', currentChatId);
+    }
+
+    function getCurrentChat() { return chats.find(c => c.id === currentChatId); }
+
+    function createNewChat() {
+        if (isGenerating) return;
+        const newChat = { id: Date.now().toString(), title: "新对话", messages:[] };
+        chats.unshift(newChat);
+        currentChatId = newChat.id;
+        saveData();
+        renderChat();
+        historyOverlay.style.display = 'none';
+    }
+
+    function deleteCurrentChat() {
+        if (isGenerating) return;
+        chats = chats.filter(c => c.id !== currentChatId);
+        if (chats.length === 0) createNewChat();
+        else {
+            currentChatId = chats[0].id;
+            saveData();
+            renderChat();
+        }
+    }
+
+    function toggleHistory() {
+        if (historyOverlay.style.display === 'flex') historyOverlay.style.display = 'none';
+        else { renderHistoryList(); historyOverlay.style.display = 'flex'; }
+    }
+
+    function renderHistoryList() {
+        historyList.innerHTML = '';
+        chats.forEach(chat => {
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerText = chat.title || "新对话";
+            div.onclick = () => { currentChatId = chat.id; saveData(); renderChat(); toggleHistory(); };
+            historyList.appendChild(div);
+        });
+    }
+
+    function renderChat() {
+        chatArea.innerHTML = '';
+        getCurrentChat().messages.forEach(msg => appendMessageDOM(msg.role, msg.content, true));
+        scrollToBottom();
+    }
+
+    function appendMessageDOM(role, content, isFinal = false) {
+        const row = document.createElement('div');
+        row.className = `msg-row ${role}`;
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        
+        if (isFinal) {
+            try {
+                bubble.innerHTML = marked.parse(content);
+                renderMathInElement(bubble, {
+                    delimiters:[ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\[', right: '\\]', display: true} ],
+                    throwOnError: false
+                });
+            } catch (e) { bubble.innerText = content; }
+        } else {
+            bubble.innerText = content;
+        }
+
+        row.appendChild(bubble);
+        chatArea.appendChild(row);
+        return bubble; 
+    }
+
+    function scrollToBottom() { chatArea.scrollTop = chatArea.scrollHeight; }
+
+    // 【黑科技】前端模拟智能体联网爬虫 (使用免费免越权的公共 CORS 代理搜索 Bing/DDG)
+    async function performWebSearch(query) {
+        try {
+            const searchUrl = 'https://cn.bing.com/search?q=' + encodeURIComponent(query);
+            // 使用公共跨域解析代理拉取网页
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(searchUrl)}`;
+            
+            // 设定 5 秒超时，防止网络差时手表卡住
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+            
+            const response = await fetch(proxyUrl, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            const data = await response.json();
+            
+            // 将文本转为虚拟 DOM 以提取摘要
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data.contents, 'text/html');
+            
+            // 抓取必应的搜索摘要片段
+            let snippets = Array.from(doc.querySelectorAll('.b_algo p, .b_caption p, .b_snippetText'))
+                .slice(0, 4) // 取前4条最相关结果
+                .map(el => el.innerText.trim())
+                .filter(text => text.length > 15)
+                .join('\n- ');
+
+            // 如果没有匹配到内容，尝试更广泛的抓取
+            if(!snippets) {
+                snippets = Array.from(doc.querySelectorAll('p'))
+                    .filter(el => el.innerText.length > 30)
+                    .slice(0, 3)
+                    .map(el => el.innerText.trim())
+                    .join('\n- ');
+            }
+            return snippets ? "- " + snippets : "";
+        } catch (error) {
+            console.log("前端搜索爬取失败", error);
+            return "";
+        }
+    }
+
+    async function sendMessage() {
+        if (isGenerating) return;
+        const text = msgInput.value.trim();
+        if (!text) return;
+
+        msgInput.value = '';
+        const chat = getCurrentChat();
+        
+        if (chat.messages.length === 0) chat.title = text.length > 10 ? text.substring(0, 10) + '...' : text;
+
+        chat.messages.push({ role: 'user', content: text });
+        appendMessageDOM('user', text, true);
+        saveData();
+        scrollToBottom();
+
+        isGenerating = true;
+        const useSearch = document.getElementById('search-toggle').checked;
+        const aiBubbleDOM = appendMessageDOM('ai', '...', false);
+        scrollToBottom();
+        
+        // 构造深拷贝的 API 请求体（避免污染本地记录的 UI 纯净度）
+        const apiMessages = chat.messages.map(m => ({ role: m.role, content: m.content }));
+
+        try {
+            // == 核心外挂联网逻辑 ==
+            if (useSearch) {
+                aiBubbleDOM.innerHTML = '<span class="status-net">🌐 正在全网检索实时信息...</span>';
+                const searchResult = await performWebSearch(text);
+                
+                if (searchResult) {
+                    aiBubbleDOM.innerHTML = '<span class="status-net">🌐 检索成功，正在思考...</span>';
+                    // 静默替换发送给 API 的最后一条问题，注入互联网抓取的内容
+                    apiMessages[apiMessages.length - 1].content = `【系统指令】：请务必基于以下来自前端外挂蜘蛛抓取的互联网最新网页摘要，来回答用户的实际问题。如果网页摘要无关，再使用你的基础知识。\n\n【最新网页摘要】：\n${searchResult}\n\n【用户实际问题】：\n${text}`;
+                } else {
+                    aiBubbleDOM.innerHTML = '<span class="status-net">⚠️ 检索超时，使用基础知识思考中...</span>';
+                }
+            } else {
+                aiBubbleDOM.innerText = '思考中...';
+            }
+
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: 'deepseek-chat',
+                    messages: apiMessages, // 传递可能已被联网知识强化的上下文
+                    stream: true
+                })
+            });
+
+            if (!response.ok) throw new Error("API 请求失败");
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let aiFullText = "";
+            let rawBuffer = "";
+            let lastRenderTime = 0;
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                
+                rawBuffer += decoder.decode(value, { stream: true });
+                const lines = rawBuffer.split('\n');
+                rawBuffer = lines.pop(); 
+
+                for (const line of lines) {
+                    if (line.trim().startsWith('data: ') && !line.includes('[DONE]')) {
+                        try {
+                            const data = JSON.parse(line.trim().substring(6));
+                            if (data.choices[0].delta.content) {
+                                aiFullText += data.choices[0].delta.content;
+                                
+                                const now = Date.now();
+                                if (now - lastRenderTime > 300) {
+                                    aiBubbleDOM.innerText = aiFullText + '▌';
+                                    scrollToBottom();
+                                    lastRenderTime = now;
+                                }
+                            }
+                        } catch (e) { }
+                    }
+                }
+            }
+
+            chat.messages.push({ role: 'assistant', content: aiFullText });
+            aiBubbleDOM.parentNode.remove(); 
+            appendMessageDOM('ai', aiFullText, true); 
+            
+        } catch (error) {
+            aiBubbleDOM.innerText = "请求错误，请检查网络或 API 密钥余额。";
+            chat.messages.push({ role: 'assistant', content: "请求错误，请检查网络或 API 密钥余额。" });
+        } finally {
+            saveData();
+            scrollToBottom();
+            isGenerating = false;
+        }
+    }
+
+    msgInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') { sendMessage(); msgInput.blur(); }
+    });
+
+    init();
+</script>
+</body>
+</html>
