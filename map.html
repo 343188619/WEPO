@@ -1,16 +1,56 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- --- SEO: 核心标题与描述 --- -->
-    <title data-i18n="page.title">全球态势感知系统 Global Situational Awareness System - 世环组织 | WEPO</title>
-    <meta name="description" content="WEPO全球态势感知系统 (GAIA)。利用量子计算与3D可视化技术，实时监控全球气候、碳排放与生态流量。Explore the Global Situational Awareness System by the World Environmental Protection Organization (WEPO), featuring real-time 3D visualization of global climate and ecological data.">
-    <meta name="keywords" content="世环组织, WEPO, 全球态势感知系统, Global Situational Awareness System, GAIA联盟, 3D可视化系统, 环保数据监控, 世界环境保护组织, World Environmental Protection Organization">
+    <title data-i18n="page.title">全球态势感知系统 Global Vision - 维科生态协会 (WEPO)</title>
+    <meta name="description" content="WEPO 全球态势感知系统 (GAIA)。利用量子计算与3D可视化技术，实时监控全球气候、碳排放与生态流量。Explore the Global Vision System by the Weco Ecology Protection Organization (WEPO), featuring real-time 3D visualization.">
+    <meta name="keywords" content="维科生态协会, WEPO, 全球态势感知系统, Global Vision, GAIA联盟, 3D可视化系统, 环保数据监控, Weco Ecology Protection Organization">
+    <meta name="author" content="WEPO Council">
     <meta name="theme-color" content="#000000">
+
+    <!-- --- SEO: 网站目录与规范化链接 --- -->
+    <link rel="canonical" href="https://wepo2021.org/map.html">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
+
+    <!-- --- SEO: Open Graph (优化微信/社交媒体分享显示) --- -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wepo2021.org/map.html">
+    <meta property="og:title" content="WEPO 全球态势感知系统 (GAIA)">
+    <meta property="og:description" content="基于 3D 可视化与量子计算技术，实时监控全球碳排放与核心生态数据。">
+    <meta property="og:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
+    <meta property="og:site_name" content="维科生态协会 (WEPO)">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- --- SEO: Twitter Card --- -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WEPO 全球态势感知系统 (GAIA)">
+    <meta name="twitter:description" content="探索 WEPO 的 3D 全球环境监控与数据可视化平台。">
+    <meta name="twitter:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
+
+    <!-- --- SEO: 结构化数据 (声明为 WebApplication) --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "WEPO GAIA Global Vision System",
+      "url": "https://wepo2021.org/map.html",
+      "description": "3D visualization system for monitoring global environmental and ecological data in real-time.",
+      "applicationCategory": "EducationalApplication",
+      "publisher": {
+        "@type": "NGO",
+        "name": "Weco Ecology Protection Organization",
+        "alternateName": "WEPO",
+        "logo": "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg"
+      }
+    }
+    </script>
     
-    <!-- 引入高级字体 -->
+    <!-- 引入图标与字体 -->
+    <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -48,25 +88,39 @@
 
         /* 顶部栏 */
         header {
-            display: flex; justify-content: space-between; align-items: center; pointer-events: auto;
-            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;
+            display: flex; justify-content: space-between; align-items: flex-start; pointer-events: auto;
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; position: relative;
         }
+
+        .brand-container { display: flex; flex-direction: column; }
 
         .brand h1 {
             font-family: 'Cinzel', serif; font-size: 2.2rem; letter-spacing: 3px;
             background: linear-gradient(90deg, #fff, var(--primary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.5); margin-bottom: 5px;
         }
-        .brand p { font-size: 0.75rem; color: rgba(255,255,255,0.7); letter-spacing: 4px; margin-top: 5px; }
+        .brand p { font-size: 0.75rem; color: rgba(255,255,255,0.7); letter-spacing: 4px; text-transform: uppercase; }
 
-        /* 语言切换 */
+        /* 返回首页按钮 */
+        .back-btn {
+            color: #fff; text-decoration: none; border: 1px solid var(--glass-border);
+            padding: 8px 20px; border-radius: 30px; backdrop-filter: blur(10px);
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s ease; background: rgba(255,255,255,0.05);
+            margin-right: 15px; font-weight: 500;
+        }
+        .back-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); box-shadow: 0 0 15px rgba(0,242,255,0.4); }
+
+        .header-right { display: flex; align-items: center; }
+
+        /* 语言切换 (同步主站 6 语言) */
         .lang-switch {
             display: flex; background: var(--glass-bg); backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border); border-radius: 30px; padding: 5px;
         }
         .lang-btn {
-            padding: 6px 16px; font-size: 0.75rem; cursor: pointer; border-radius: 20px;
+            padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border-radius: 20px;
             transition: all 0.3s; color: rgba(255,255,255,0.6); font-weight: 600;
         }
         .lang-btn:hover { color: #fff; }
@@ -101,23 +155,16 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); background: rgba(10, 20, 0, 0.85);
         }
 
-        /* Loading */
-        #loader {
-            position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%;
-            background: #020408; display: flex; justify-content: center; align-items: center;
-            flex-direction: column; transition: opacity 0.8s;
+        @media (max-width: 1024px) {
+            header { flex-direction: column; gap: 20px; }
+            .header-right { width: 100%; justify-content: space-between; }
         }
-        .loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.2); margin-top: 15px; position: relative; }
-        .loader-bar::after {
-            content:''; position: absolute; top:0; left:0; height:100%; width: 0%;
-            background: var(--primary); animation: load 1.5s ease-out forwards;
-        }
-        @keyframes load { to { width: 100%; } }
 
         @media (max-width: 768px) {
             #ui-layer { padding: 1.5rem; }
             .info-card { display: none; }
             .brand h1 { font-size: 1.5rem; }
+            .lang-switch { flex-wrap: wrap; justify-content: center; border-radius: 12px; }
             footer { flex-direction: column; gap: 5px; }
         }
     </style>
@@ -132,22 +179,25 @@
     </script>
 </head>
 <body>
-    <div id="loader">
-        <div style="font-family: 'Cinzel'; color: #fff; letter-spacing: 5px;">SYSTEM INITIALIZING</div>
-        <div class="loader-bar"></div>
-    </div>
 
     <div id="ui-layer">
         <header>
-            <div class="brand">
-                <h1 data-i18n="title">GAIA 全球联盟</h1>
-                <p data-i18n="subtitle">世界环境保护组织 | 3D 可视化系统</p>
+            <div class="brand-container">
+                <div class="brand">
+                    <h1 data-i18n="title">GAIA 全球联盟</h1>
+                    <p data-i18n="subtitle">维科生态协会 | 3D 可视化系统</p>
+                </div>
             </div>
-            <div class="lang-switch">
-                <div class="lang-btn active" onclick="changeLang('zh')">CN</div>
-                <div class="lang-btn" onclick="changeLang('en')">EN</div>
-                <div class="lang-btn" onclick="changeLang('jp')">JP</div>
-                <div class="lang-btn" onclick="changeLang('de')">DE</div>
+            <div class="header-right">
+                <a href="index.html" class="back-btn" data-i18n="back_home">返回首页</a>
+                <div class="lang-switch">
+                    <div class="lang-btn" data-lang="en" onclick="changeLang('en')">EN</div>
+                    <div class="lang-btn" data-lang="zh-CN" onclick="changeLang('zh-CN')">ZH</div>
+                    <div class="lang-btn" data-lang="es" onclick="changeLang('es')">ES</div>
+                    <div class="lang-btn" data-lang="fr" onclick="changeLang('fr')">FR</div>
+                    <div class="lang-btn" data-lang="ru" onclick="changeLang('ru')">RU</div>
+                    <div class="lang-btn" data-lang="ar" onclick="changeLang('ar')">AR</div>
+                </div>
             </div>
         </header>
 
@@ -175,12 +225,13 @@
         import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
         import TWEEN from 'three/addons/libs/tween.module.js';
 
-        // --- 数据定义 ---
+        // --- 数据定义 (与主站一致的 6 种语言) ---
         const i18n = {
-            'zh': {
-                'page.title': '全球态势感知系统 Global Situational Awareness System - 世环组织 | WEPO',
+            'zh-CN': {
+                'page.title': '全球态势感知系统 Global Vision - 维科生态协会 (WEPO)',
                 title: 'GAIA 全球联盟',
-                subtitle: '世界环境保护组织 | 3D 可视化系统',
+                subtitle: '维科生态协会 | 3D 可视化系统',
+                back_home: '返回首页',
                 card_title: '指挥中心：中国重庆',
                 card_desc: '全球环境数据汇聚节点。利用量子计算实时分析 8 大气候区的碳排放与生态流量。全天候监测网络已覆盖 99.8% 的关键生态区域。',
                 status: '系统状态：在线',
@@ -196,9 +247,10 @@
                 loc_ch: '瑞士伯尔尼'
             },
             'en': {
-                'page.title': 'Global Situational Awareness System - World Environmental Protection Organization | WEPO',
+                'page.title': 'Global Vision System - WEPO',
                 title: 'GAIA ALLIANCE',
-                subtitle: 'Global Eco-Protection Org | Visualization',
+                subtitle: 'Weco Ecology Protection Organization | 3D System',
+                back_home: 'Back to Home',
                 card_title: 'HQ: CHONGQING, CN',
                 card_desc: 'Central node for global environmental data. Utilizing quantum computing to analyze carbon emissions across 8 climate zones in real-time.',
                 status: 'SYSTEM: ONLINE',
@@ -213,41 +265,81 @@
                 loc_au: 'CANBERRA',
                 loc_ch: 'BERN'
             },
-            'jp': {
-                'page.title': 'グローバル状況把握システム - 世界環境保護機関 | WEPO',
-                title: 'GAIA アライアンス',
-                subtitle: '世界環境保護機関 | 3D可視化システム',
-                card_title: '本部：中国・重慶',
-                card_desc: '地球環境データの集約ノード。量子コンピューティングを駆使し、8つの気候帯における炭素排出と生態系フローをリアルタイムで解析。',
-                status: 'システム：オンライン',
-                hq_loc: '中国 重慶',
-                loc_cq: '本部：重慶',
-                loc_bj: '北京',
-                loc_hk: '香港',
-                loc_jp: '東京',
-                loc_in: 'ニューデリー',
-                loc_us: 'ニューヨーク',
-                loc_uk: 'ロンドン',
-                loc_au: 'キャンベラ',
-                loc_ch: 'ベルン'
-            },
-            'de': {
-                'page.title': 'Globales Situationsbewusstseinssystem - Weltumweltschutzorganisation | WEPO',
-                title: 'GAIA ALLIANZ',
-                subtitle: 'Weltumweltschutzorganisation',
-                card_title: 'HQ: CHONGQING',
-                card_desc: 'Zentraler Knotenpunkt für Umweltdaten. Echtzeitanalyse von Kohlenstoffemissionen in 8 Klimazonen mittels Quantencomputing.',
-                status: 'SYSTEM: ONLINE',
+            'es': {
+                'page.title': 'Sistema de Visión Global - WEPO',
+                title: 'ALIANZA GAIA',
+                subtitle: 'Weco Ecology Protection Organization | Visión 3D',
+                back_home: 'Volver al Inicio',
+                card_title: 'SEDE: CHONGQING, CN',
+                card_desc: 'Nodo central para datos ambientales globales. Utilizando computación cuántica para analizar emisiones de carbono en tiempo real.',
+                status: 'SISTEMA: EN LÍNEA',
                 hq_loc: 'CHONGQING, CN',
-                loc_cq: 'HQ: CHONGQING',
-                loc_bj: 'PEKING',
-                loc_hk: 'HONGKONG',
+                loc_cq: 'SEDE: CHONGQING',
+                loc_bj: 'BEIJING',
+                loc_hk: 'HONG KONG',
                 loc_jp: 'TOKIO',
-                loc_in: 'NEU-DELHI',
-                loc_us: 'NEW YORK',
-                loc_uk: 'LONDON',
+                loc_in: 'NUEVA DELHI',
+                loc_us: 'NUEVA YORK',
+                loc_uk: 'LONDRES',
                 loc_au: 'CANBERRA',
-                loc_ch: 'BERN'
+                loc_ch: 'BERNA'
+            },
+            'fr': {
+                'page.title': 'Système de Vision Globale - WEPO',
+                title: 'ALLIANCE GAIA',
+                subtitle: 'Weco Ecology Protection Organization | Vision 3D',
+                back_home: 'Retour à l\'accueil',
+                card_title: 'SIÈGE: CHONGQING, CN',
+                card_desc: 'Nœud central des données environnementales. Utilisation de l\'informatique quantique pour analyser les émissions en temps réel.',
+                status: 'SYSTÈME: EN LIGNE',
+                hq_loc: 'CHONGQING, CN',
+                loc_cq: 'SIÈGE: CHONGQING',
+                loc_bj: 'PÉKIN',
+                loc_hk: 'HONG KONG',
+                loc_jp: 'TOKYO',
+                loc_in: 'NEW DELHI',
+                loc_us: 'NEW YORK',
+                loc_uk: 'LONDRES',
+                loc_au: 'CANBERRA',
+                loc_ch: 'BERNE'
+            },
+            'ru': {
+                'page.title': 'Глобальная система видения - WEPO',
+                title: 'АЛЬЯНС GAIA',
+                subtitle: 'Weco Ecology Protection Organization | 3D',
+                back_home: 'На главную',
+                card_title: 'ШТАБ: ЧУНЦИН, КИТАЙ',
+                card_desc: 'Центральный узел экологических данных. Квантовые вычисления для анализа выбросов углерода в реальном времени.',
+                status: 'СИСТЕМА: ОНЛАЙН',
+                hq_loc: 'ЧУНЦИН, КИТАЙ',
+                loc_cq: 'ШТАБ: ЧУНЦИН',
+                loc_bj: 'ПЕКИН',
+                loc_hk: 'ГОНКОНГ',
+                loc_jp: 'ТОКИО',
+                loc_in: 'НЬЮ-ДЕЛИ',
+                loc_us: 'НЬЮ-ЙОРК',
+                loc_uk: 'ЛОНДОН',
+                loc_au: 'КАНБЕРРА',
+                loc_ch: 'БЕРН'
+            },
+            'ar': {
+                'page.title': 'نظام الرؤية العالمية - WEPO',
+                title: 'تحالف GAIA',
+                subtitle: 'Weco Ecology Protection Organization | 3D',
+                back_home: 'العودة للرئيسية',
+                card_title: 'المقر: تشونغتشينغ، الصين',
+                card_desc: 'العقدة المركزية للبيانات البيئية. استخدام الحوسبة الكمية لتحليل انبعاثات الكربون في الوقت الفعلي.',
+                status: 'النظام: متصل',
+                hq_loc: 'تشونغتشينغ، الصين',
+                loc_cq: 'المقر: تشونغتشينغ',
+                loc_bj: 'بكين',
+                loc_hk: 'هونغ كونغ',
+                loc_jp: 'طوكيو',
+                loc_in: 'نيودلهي',
+                loc_us: 'نيويورك',
+                loc_uk: 'لندن',
+                loc_au: 'كانبرا',
+                loc_ch: 'بيرن'
             }
         };
 
@@ -267,39 +359,41 @@
         let earth, clouds;
         let particles =[];
         const labelObjects = {};
-        let currentLang = 'zh';
 
-        // --- 核心修复：先定义函数，再赋值给 Window ---
+        // --- 语言处理逻辑 ---
         
         function updateLanguageText(lang) {
-            currentLang = lang;
+            const dict = i18n[lang] || i18n['en'];
             
             // UI 更新
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if(i18n[lang][key]) {
-                    el.textContent = i18n[lang][key];
+                if(dict[key]) {
+                    el.textContent = dict[key];
                 }
             });
 
             // 3D 标签更新
             Object.keys(labelObjects).forEach(id => {
                 const el = labelObjects[id];
-                if(el && i18n[lang]['loc_' + id]) {
-                    el.textContent = i18n[lang]['loc_' + id];
+                if(el && dict['loc_' + id]) {
+                    el.textContent = dict['loc_' + id];
                 }
             });
 
-            // 按钮样式
+            // 按钮样式更新
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if(btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+                if(btn.getAttribute('data-lang') === lang) btn.classList.add('active');
             });
             
-            // 确保修改标题时也生效
-            if (i18n[lang]['page.title']) {
-                document.title = i18n[lang]['page.title'];
+            // 标题及缓存更新
+            if (dict['page.title']) {
+                document.title = dict['page.title'];
             }
+
+            document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('lang', lang);
         }
 
         // 暴露给 HTML 按钮使用
@@ -316,14 +410,15 @@
             camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(0, 40, 80);
 
-            // 渲染器 - 高级感设置
+            // 渲染器
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.3; // 提升整体亮度
+            renderer.toneMappingExposure = 1.3;
             container.appendChild(renderer.domElement);
 
+            // 2D 标签渲染器
             labelRenderer = new CSS2DRenderer();
             labelRenderer.setSize(window.innerWidth, window.innerHeight);
             labelRenderer.domElement.style.position = 'absolute';
@@ -335,7 +430,7 @@
             const renderPass = new RenderPass(scene, camera);
             const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
             bloomPass.threshold = 0.25; 
-            bloomPass.strength = 1.0; // 增强辉光
+            bloomPass.strength = 1.0; 
             bloomPass.radius = 0.5;
             
             composer = new EffectComposer(renderer);
@@ -350,15 +445,13 @@
             controls.autoRotate = true;
             controls.autoRotateSpeed = 0.6;
 
-            // 灯光增强 - 确保地球明亮
+            // 灯光
             const ambient = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambient);
-
-            const sun = new THREE.DirectionalLight(0xffffff, 3.0); // 强阳光
+            const sun = new THREE.DirectionalLight(0xffffff, 3.0); 
             sun.position.set(50, 30, 50);
             scene.add(sun);
-
-            const rim = new THREE.SpotLight(0x0088ff, 3.0); // 侧边蓝光
+            const rim = new THREE.SpotLight(0x0088ff, 3.0); 
             rim.position.set(-50, 0, -20);
             scene.add(rim);
 
@@ -370,35 +463,28 @@
             // 入场动画
             startIntro();
 
-            // 初始化时强制刷新语言（解决初始语言不显示问题）
-            updateLanguageText('zh');
+            // 初始语言同步获取 (读取主站缓存的语言设置)
+            const savedLang = localStorage.getItem('lang') || 'en';
+            updateLanguageText(savedLang);
 
             window.addEventListener('resize', onWindowResize);
-            
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = 0;
-                setTimeout(() => loader.remove(), 800);
-            }, 1000);
         }
 
         function createEarth() {
             const loader = new THREE.TextureLoader();
             
-            // 明亮材质
             const mat = new THREE.MeshPhongMaterial({
                 map: loader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'),
                 bumpMap: loader.load('https://unpkg.com/three-globe/example/img/earth-topology.png'),
                 bumpScale: 0.05,
                 specular: new THREE.Color(0x222222),
                 shininess: 10,
-                emissive: new THREE.Color(0x001133), // 关键：自发光，防止背光太黑
+                emissive: new THREE.Color(0x001133), 
                 emissiveIntensity: 0.4
             });
             earth = new THREE.Mesh(new THREE.SphereGeometry(10, 64, 64), mat);
             scene.add(earth);
 
-            // 独立云层
             const cloudMat = new THREE.MeshLambertMaterial({
                 map: loader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_clouds_1024.png'),
                 transparent: true, opacity: 0.5, side: THREE.DoubleSide
@@ -406,7 +492,6 @@
             clouds = new THREE.Mesh(new THREE.SphereGeometry(10.2, 64, 64), cloudMat);
             earth.add(clouds);
 
-            // 大气光晕
             const atmosMat = new THREE.ShaderMaterial({
                 vertexShader: `
                     varying vec3 vNormal;
@@ -470,20 +555,18 @@
                 labelObjects[loc.id] = span;
                 setTimeout(() => div.style.opacity = 1, 2000);
 
-                // 连线
+                // 连线与粒子
                 if(!isHQ) {
                     const dist = hqPos.distanceTo(pos);
                     const mid = hqPos.clone().add(pos).multiplyScalar(0.5).normalize().multiplyScalar(10 + dist*0.6);
                     const curve = new THREE.QuadraticBezierCurve3(hqPos, mid, pos);
                     
-                    // 静态线
                     const line = new THREE.Line(
                         new THREE.BufferGeometry().setFromPoints(curve.getPoints(40)),
                         new THREE.LineBasicMaterial({ color: 0x00f2ff, transparent:true, opacity:0.15 })
                     );
                     earth.add(line);
 
-                    // 动态粒子
                     const pMesh = new THREE.Points(
                         new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0]), 3)),
                         new THREE.PointsMaterial({ color: 0xffffff, size: 0.35, transparent:true })
@@ -536,7 +619,7 @@
             });
         }
 
-        // 启动
+        // 启动系统
         init();
         animate();
     </script>
