@@ -1,384 +1,407 @@
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="page.title">研究报告Research Report - WEPO</title>
-    <meta name="description" content="Explore WEPO's latest environmental research reports and scientific analysis.">
+
+    <!-- --- SEO: 核心标题与描述 --- -->
+    <title data-i18n="page.title">研究报告 Research Reports - 维科生态协会 (WEPO)</title>
+    <meta name="description" content="探索维科生态协会 (WEPO) 最新的环境保护研究成果，深入了解全球环境挑战的科学分析和解决方案。Explore WEPO's latest environmental research reports and scientific analysis.">
+    <meta name="keywords" content="维科生态协会, WEPO, 研究报告, 环保年度报告, 气候变化分析, 生物多样性研究, Research Reports, Annual Reports">
+    <meta name="author" content="WEPO Council">
+
+    <!-- --- SEO: 网站目录与规范化链接 --- -->
+    <link rel="canonical" href="https://wepo2021.org/ndbg.html">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
     <meta name="theme-color" content="#0a0a0a">
 
-    <!-- Favicon -->
+    <!-- --- SEO: Open Graph --- -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wepo2021.org/ndbg.html">
+    <meta property="og:title" content="WEPO 研究报告与年度发布 - 维科生态协会">
+    <meta property="og:description" content="探索我们最新的环境保护研究成果，深入了解全球环境挑战的科学分析和解决方案。">
+    <meta property="og:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
+    <meta property="og:site_name" content="维科生态协会 (WEPO)">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- --- SEO: Twitter Card --- -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WEPO 研究报告与年度发布 - 维科生态协会">
+    <meta name="twitter:description" content="探索我们最新的环境保护研究成果，深入了解全球环境挑战的科学分析和解决方案。">
+    <meta name="twitter:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
+
+    <!-- --- SEO: 结构化数据 --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Research Reports - WEPO",
+      "url": "https://wepo2021.org/ndbg.html",
+      "description": "Environmental research reports and annual publications by the Weco Ecology Protection Organization (WEPO).",
+      "publisher": {
+        "@type": "NGO",
+        "name": "Weco Ecology Protection Organization",
+        "alternateName": "WEPO",
+        "logo": "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg"
+      }
+    }
+    </script>
+
     <link rel="icon" type="image/jpeg" href="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
+        /* --- 全局与首页完全一致的变量声明 --- */
         :root {
-            --bg-void: #080808;
-            --text-primary: #f2f2f2;
-            --text-secondary: #888888;
+            --bg-void: #050507;
+            --bg-surface: #111113;
+            --bg-card: rgba(30, 30, 35, 0.4);
+            --text-primary: #F5F5F7;
+            --text-secondary: #86868B;
             --accent-gold: #d4af37;
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            --easing: cubic-bezier(0.16, 1, 0.3, 1);
+            --shimmer-shine: #fff4ce;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(20px);
+            --nav-bg: rgba(5, 5, 7, 0.7);
+            --spotlight-color: rgba(60, 80, 120, 0.15);
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-void: #F2F2F7;
+            --bg-surface: #FFFFFF;
+            --bg-card: rgba(255, 255, 255, 0.6);
+            --text-primary: #1D1D1F;
+            --text-secondary: #515154;
+            --accent-gold: #B49020;
+            --shimmer-shine: #e5b73b;
+            --border-glass: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.75);
+            --spotlight-color: rgba(212, 175, 55, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-void);
-            color: var(--text-primary);
-            font-family: 'Manrope', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.8;
-            cursor: default;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--bg-void); color: var(--text-primary);
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden; line-height: 1.6;
+            transition: background-color 0.6s var(--ease-apple), color 0.6s var(--ease-apple);
+            display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        /* Noise Texture */
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: var(--noise-url);
-            pointer-events: none; z-index: 9999; opacity: 0.4;
+        body.page-loading-locked, body.cookie-locked { overflow: hidden !important; height: 100vh !important; }
+        #page-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-void); z-index: 9999999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s var(--ease-apple), visibility 0.8s;
         }
+        #page-loader.hidden { opacity: 0; visibility: hidden; }
+        .page-loader-spinner {
+            width: 50px; height: 50px; border: 3px solid rgba(125, 125, 125, 0.2);
+            border-radius: 50%; border-top-color: var(--accent-gold);
+            animation: spin 1s ease-in-out infinite; margin-bottom: 25px;
+        }
+        .page-loader-text {
+            color: var(--accent-gold); font-family: 'Playfair Display', serif; font-size: 1.1rem;
+            letter-spacing: 0.15em; animation: blink 1.5s infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Cursor Spotlight */
         #cursor-spotlight {
             position: fixed; top: 0; left: 0; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(40, 60, 100, 0.15), transparent 70%);
+            background: radial-gradient(circle, var(--spotlight-color), transparent 70%);
             transform: translate(-50%, -50%); pointer-events: none; z-index: -1;
             transition: transform 0.1s linear;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-        }
-
-        a { text-decoration: none; color: inherit; transition: all 0.4s var(--easing); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; letter-spacing: -0.015em; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease-apple); }
         ul { list-style: none; }
 
         /* --- Header --- */
         header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 25px 40px;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            background: rgba(8,8,8,0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-glass);
+            z-index: 1000; transition: padding 0.4s var(--ease-apple), background 0.4s, border 0.4s;
+            background: transparent; border-bottom: 1px solid transparent;
         }
+        header.scrolled {
+            background: var(--nav-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            padding: 15px 5%; border-bottom: 1px solid var(--border-glass);
+        }
+        
+        .logo-container {
+            display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer;
+            animation: logoEntrance 1.2s var(--ease-out-expo) backwards 0.3s;
+        }
+        @keyframes logoEntrance { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .logo { height: 45px; transition: transform 0.4s; }
-        .logo:hover { transform: scale(1.05); }
+        .logo { height: 42px; transition: transform 0.6s var(--ease-apple), box-shadow 0.6s; border-radius: 0; }
+        .logo-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; white-space: nowrap; }
+        .logo-title {
+            font-family: 'Playfair Display', 'Songti SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
+            font-size: 1.25rem; font-weight: 600; color: var(--text-primary); letter-spacing: 0.08em;
+            line-height: 1.1; transition: all 0.6s var(--ease-apple); position: relative;
+        }
+        .logo-subtitle {
+            font-family: 'Manrope', sans-serif; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.16em;
+            text-transform: uppercase; margin-top: 3px; transition: all 0.6s var(--ease-apple);
+            background: linear-gradient(110deg, var(--accent-gold) 0%, var(--shimmer-shine) 45%, var(--accent-gold) 60%);
+            background-size: 250% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
+            animation: textShimmer 4.5s linear infinite;
+        }
+        @keyframes textShimmer { to { background-position: 250% center; } }
+        .logo-container:hover .logo { transform: scale(1.05); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+        .logo-container:hover .logo-title { letter-spacing: 0.12em; color: var(--accent-gold); transform: translateX(2px); }
+        .logo-container:hover .logo-subtitle { letter-spacing: 0.22em; transform: translateX(2px); }
 
-        nav ul { display: flex; gap: 40px; }
+        nav ul { display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
         nav ul li a {
-            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary);
-            position: relative; padding: 5px 0;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; 
+            color: var(--text-primary); opacity: 0.8; position: relative; padding: 5px 0; font-weight: 500;
         }
-        nav ul li a::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-            background: var(--accent-gold); transition: width 0.4s var(--easing);
+        nav ul li a::after {
+            content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 1.5px;
+            background: var(--accent-gold); transition: all 0.4s var(--ease-apple); transform: translateX(-50%);
         }
-        nav ul li a:hover { color: var(--text-primary); }
-        nav ul li a:hover::before { width: 100%; }
+        nav ul li a:hover, nav ul li a.active { opacity: 1; }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
 
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .control-btn {
+            background: rgba(125,125,125, 0.1); border: 1px solid var(--border-glass);
+            color: var(--text-primary); padding: 8px 16px; border-radius: 0;
+            font-family: 'Manrope', sans-serif; font-size: 0.8rem; cursor: pointer;
+            transition: all 0.3s var(--ease-apple); display: flex; align-items: center; justify-content: center; gap: 6px;
+            backdrop-filter: blur(5px);
+        }
+        .control-btn:hover { background: rgba(125,125,125, 0.2); transform: scale(1.05); }
+        .control-btn:active { transform: scale(0.95); }
+
+        .theme-icon { width: 14px; height: 14px; fill: currentColor; }[data-theme="light"] .moon-icon { display: block; }[data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }[data-theme="dark"] .sun-icon { display: block; }
+        .lang-icon { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
         .language-switcher { position: relative; }
-        .language-btn {
-            background: transparent; border: 1px solid var(--border-glass);
-            color: var(--text-primary); padding: 8px 18px;
-            border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
-            cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px;
-        }
-        .language-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
-
         .language-dropdown {
-            position: absolute; top: 120%; right: 0;
-            background: #0f0f0f; border: 1px solid var(--border-glass);
-            border-radius: 8px; padding: 10px 0;
-            min-width: max-content;
-            opacity: 0; visibility: hidden; transform: translateY(10px);
-            transition: all 0.3s var(--easing);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            z-index: 1002;
+            position: absolute; top: calc(100% + 15px); right: 0;
+            background: var(--bg-surface); border: 1px solid var(--border-glass);
+            border-radius: 0; padding: 8px; min-width: 140px;
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.98);
+            transition: all 0.3s var(--ease-apple); box-shadow: 0 15px 40px rgba(0,0,0,0.2); z-index: 1001;
         }
-        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-        
+        .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
         .language-dropdown li {
-            padding: 10px 25px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
-            white-space: nowrap; text-align: right;
+            padding: 8px 16px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;
+            border-radius: 0; text-align: left; transition: 0.2s;
         }
-        .language-dropdown li:hover { color: var(--text-primary); background: rgba(255,255,255,0.03); }
+        .language-dropdown li:hover { color: var(--text-primary); background: rgba(125,125,125,0.1); }
 
-        /* --- Hero Section --- */
-        .page-hero {
-            padding: 180px 5% 80px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-glass);
+        /* --- Sections Specific --- */
+        .page-hero { padding: 160px 8% 40px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        .section-label {
+            font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; 
+            color: var(--accent-gold); margin-bottom: 25px; font-weight: 600;
+            display: flex; align-items: center; gap: 15px;
         }
-        .page-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #888);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .page-hero p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
+        .section-label::before, .section-label::after { content: ''; width: 40px; height: 1px; background: var(--accent-gold); }
+        .page-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; line-height: 1.1; color: var(--text-primary); margin-bottom: 25px; }
+        .page-hero p { max-width: 700px; margin: 0 auto; color: var(--text-secondary); font-size: 1.15rem; }
 
-        /* --- Filter Section --- */
-        .filter-section {
-            padding: 40px 5%;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+        .filter-section { padding: 40px 5%; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .filter-btn {
-            background: transparent;
-            border: 1px solid var(--border-glass);
-            color: var(--text-secondary);
-            padding: 8px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Manrope', sans-serif;
-            transition: 0.3s;
-            font-size: 0.9rem;
+            background: transparent; border: 1px solid var(--border-glass); color: var(--text-secondary);
+            padding: 10px 25px; border-radius: 0; cursor: pointer; font-family: 'Manrope', sans-serif;
+            transition: 0.3s var(--ease-apple); font-size: 0.9rem; backdrop-filter: var(--glass-blur);
         }
-        .filter-btn:hover, .filter-btn.active {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
+        .filter-btn:hover, .filter-btn.active { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(212, 175, 55, 0.05); transform: translateY(-2px); }
 
-        /* --- Research Grid --- */
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-            padding: 40px 8% 100px;
-        }
-
+        .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; padding: 40px 8% 100px; max-width: 1600px; margin: 0 auto; }
         .research-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-glass);
-            border-radius: 4px;
-            overflow: hidden;
-            transition: all 0.4s var(--easing);
-            group: hover;
-            display: flex;
-            flex-direction: column;
+            background: var(--bg-card); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-glass); border-radius: 0; overflow: hidden; transition: all 0.5s var(--ease-apple);
+            display: flex; flex-direction: column; position: relative;
         }
-        .research-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(212, 175, 55, 0.3);
-            background: rgba(255,255,255,0.04);
-        }
-
-        .card-img {
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-        }
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s;
-            filter: grayscale(0.3);
-        }
-        .research-card:hover .card-img img {
-            transform: scale(1.1);
-            filter: grayscale(0);
-        }
+        .research-card:hover { transform: translateY(-15px); border-color: var(--accent-gold); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .card-img { height: 240px; overflow: hidden; position: relative; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-apple); filter: grayscale(0.5); }
+        .research-card:hover .card-img img { transform: scale(1.1); filter: grayscale(0); }
         
-        .card-badge {
-            position: absolute; top: 15px; left: 15px;
-            background: var(--accent-gold);
-            color: #000;
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .card-content {
-            padding: 30px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-            line-height: 1.3;
-        }
-        .card-content p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            flex: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-glass);
-            padding-top: 20px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-        .read-btn {
-            color: var(--accent-gold);
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.8rem;
-        }
+        .card-badge { position: absolute; top: 15px; left: 15px; background: var(--accent-gold); color: #000; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border-radius: 0; }
+        .card-content { padding: 30px; flex: 1; display: flex; flex-direction: column; }
+        .card-content h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--text-primary); font-family: 'Playfair Display', serif; }
+        .card-content p { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 25px; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.7; }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-glass); padding-top: 20px; font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
+        .read-btn { color: var(--text-primary); font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; position: relative; display: inline-block; }
+        .read-btn::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px; background: var(--accent-gold); transform: scaleX(0); transform-origin: right; transition: transform 0.3s; }
+        .read-btn:hover::after { transform: scaleX(1); transform-origin: left; }
+        .read-btn:hover { color: var(--accent-gold); }
 
         /* --- Modal --- */
         .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            opacity: 0; visibility: hidden;
-            transition: 0.4s var(--easing);
-            display: flex; justify-content: center; align-items: center;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2000;
+            opacity: 0; visibility: hidden; transition: 0.4s var(--ease-apple); display: flex; justify-content: center; align-items: center; padding: 20px;
         }
         .modal.active { opacity: 1; visibility: visible; }
-        
         .modal-content {
-            background: #111;
-            border: 1px solid var(--border-glass);
-            width: 100%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            padding: 50px;
-            border-radius: 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: var(--bg-surface); border: 1px solid var(--border-glass); width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; position: relative; padding: 50px; border-radius: 0; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.4s var(--ease-apple);
         }
-        
+        .modal.active .modal-content { transform: scale(1); }
         .modal-close {
-            position: absolute; top: 20px; right: 20px;
-            background: none; border: none; color: var(--text-secondary);
-            font-size: 2rem; cursor: pointer; transition: 0.3s;
+            position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-secondary); font-size: 2rem; cursor: pointer; transition: 0.3s;
         }
-        .modal-close:hover { color: var(--accent-gold); }
+        .modal-close:hover { color: var(--accent-gold); transform: scale(1.1); }
 
-        .modal-header-content h2 { font-size: 2rem; color: var(--accent-gold); margin-bottom: 10px; }
-        .modal-meta-info { color: #666; font-size: 0.9rem; margin-bottom: 30px; display: flex; gap: 20px; }
-        
-        .modal-body h3 { font-size: 1.2rem; color: var(--text-primary); margin: 30px 0 15px; font-family: 'Manrope', sans-serif; }
-        .modal-body p { color: var(--text-secondary); margin-bottom: 15px; }
-        .modal-body ul { list-style: disc; padding-left: 20px; color: var(--text-secondary); }
+        .modal-header-content h2 { font-size: 2rem; color: var(--text-primary); margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+        .modal-meta-info { color: var(--accent-gold); font-size: 0.9rem; margin-bottom: 30px; display: flex; gap: 20px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-glass); padding-bottom: 15px; }
+        .modal-body h3 { font-size: 1.2rem; color: var(--text-primary); margin: 30px 0 15px; font-family: 'Manrope', sans-serif; display: flex; align-items: center; gap: 10px; }
+        .modal-body h3::before { content: ''; display: block; width: 4px; height: 18px; background: var(--accent-gold); }
+        .modal-body p { color: var(--text-secondary); margin-bottom: 15px; line-height: 1.8; text-align: justify; }
+        .modal-body ul { list-style: disc; padding-left: 20px; color: var(--text-secondary); line-height: 1.8; }
         .modal-body li { margin-bottom: 8px; }
+        .modal-download { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-glass); text-align: center; }
+        .btn-download { background: var(--text-primary); color: var(--bg-void); padding: 14px 35px; text-transform: uppercase; font-weight: 600; font-size: 0.9rem; display: inline-block; border-radius: 0; border: 1px solid var(--text-primary); transition: 0.3s var(--ease-apple); }
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-        .modal-download {
-            margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-glass);
-            text-align: center;
-        }
-        .btn-download {
-            background: var(--accent-gold); color: #000;
-            padding: 12px 30px; text-transform: uppercase; font-weight: bold; font-size: 0.85rem;
-            display: inline-block; border-radius: 2px; transition: 0.3s;
-        }
-        .btn-download:hover { background: #fff; }
+        /* --- Footer (完全对齐主页) --- */
+        footer { padding: 80px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; margin-top: auto;}
+        .footer-top { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
+        .footer-brand .logo-container { justify-content: center; margin-bottom: 25px; animation: none; }
+        .footer-brand .logo { height: 50px; margin-bottom: 0; }
+        .footer-brand .logo-title { font-size: 1.45rem; }
+        .footer-brand .logo-subtitle { font-size: 0.62rem; }
+        .footer-brand p { max-width: 600px; margin: 0 auto; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; }
+        .footer-slogan { font-weight: 600; color: var(--accent-gold); font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 10px; }
+        .footer-disclaimer { text-align: center; max-width: 1000px; margin: 0 auto 40px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; padding: 0 5%; }
+        .footer-info-blocks { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1200px; margin: 0 auto 40px; padding: 0 5%; }
+        .info-block { flex: 1; min-width: 280px; display: flex; align-items: flex-start; gap: 15px; background: var(--bg-card); border: 1px solid var(--border-glass); padding: 20px 25px; border-radius: 0; transition: transform 0.4s var(--ease-apple), border-color 0.4s; }
+        .info-block:hover { transform: translateY(-5px); border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .info-icon { width: 32px; height: 32px; fill: var(--accent-gold); flex-shrink: 0; margin-top: 2px; }
+        .info-text { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+        .info-links { margin-top: 10px; display: flex; gap: 12px; align-items: center; }
+        .info-links a { color: var(--text-primary); font-weight: 600; font-size: 0.8rem; position: relative; }
+        .info-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px; background: var(--accent-gold); transform: scaleX(0); transform-origin: right; transition: transform 0.3s; }
+        .info-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+        .info-links .divider { color: var(--border-glass); }
+        .footer-social-wrapper { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+        @media (max-width: 768px) { .footer-social-wrapper { align-items: center; } }
+        .social-links { display: flex; gap: 20px; margin-bottom: 0; width: auto; justify-content: center; flex-wrap: wrap; }
+        .social-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(125,125,125,0.1); border-radius: 0; color: var(--text-secondary); transition: all 0.3s ease; border: 1px solid var(--border-glass); }
+        .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
+        .social-icon:hover { background: var(--accent-gold); color: #000; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
+        .footer-btm { border-top: 1px solid var(--border-glass); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.85rem; flex-wrap: wrap; gap: 20px; }
 
-        /* --- Footer --- */
-        footer { padding: 80px 8% 40px; background: #020202; border-top: 1px solid var(--border-glass); margin-top: auto; }
-        .footer-top { display: flex; justify-content: space-between; margin-bottom: 60px; flex-wrap: wrap; gap: 40px; }
-        .footer-brand img { height: 50px; margin-bottom: 20px; opacity: 0.8; }
-        
-        .footer-navs { display: flex; gap: 80px; }
-        .footer-col h5 { color: var(--text-primary); margin-bottom: 20px; font-size: 0.9rem; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col a { color: var(--text-secondary); font-size: 0.85rem; }
-        .footer-col a:hover { color: var(--accent-gold); }
-        
-        .footer-btm {
-            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
-            display: flex; justify-content: space-between; color: #444; font-size: 0.8rem;
-            flex-wrap: wrap; gap: 20px;
-        }
+        /* --- Cookie Bar --- */
+        .cookie-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 99999; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.5s ease; }
+        .cookie-overlay.active { display: flex; opacity: 1; }
+        .cookie-modal { background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 40px; border-radius: 0; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.4s var(--ease-apple); }
+        .cookie-overlay.active .cookie-modal { transform: scale(1); }
+        .cookie-title { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+        .cookie-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 25px; }
+        .cookie-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; font-size: 0.9rem; }
+        .cookie-links a { color: var(--accent-gold); border-bottom: 1px solid transparent; }
+        .cookie-links a:hover { border-bottom-color: var(--accent-gold); }
+        .cookie-actions { display: flex; gap: 15px; justify-content: center; }
+        .c-btn { padding: 14px 35px; border-radius: 0; cursor: pointer; font-size: 1rem; transition: 0.3s var(--ease-apple); flex: 1; max-width: 150px; }
+        .c-btn.ok { background: var(--text-primary); color: var(--bg-void); border: 1px solid var(--text-primary); font-weight: 600; }
+        .c-btn.no { background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); }
+        .c-btn:hover { transform: scale(1.05); }
 
-        /* Mobile Menu */
-        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
-        .mobile-menu {
-            position: fixed; inset: 0; background: #080808; z-index: 1001;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: 0.4s;
-        }
+        /* --- Mobile Menu --- */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.6rem; cursor: pointer; }
+        .mobile-menu { position: fixed; inset: 0; background: var(--bg-void); z-index: 1001; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; opacity: 0; pointer-events: none; transition: 0.5s var(--ease-apple); overflow-y: auto; padding: 80px 20px 40px; }
         .mobile-menu.open { opacity: 1; pointer-events: all; }
-        .mobile-menu a { font-size: 2rem; margin: 15px 0; font-family: 'Playfair Display', serif; color: #888; }
-        .mobile-menu a.active { color: #fff; }
-        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; }
+        .mobile-menu a { font-size: 1.2rem; margin: 10px 0; font-family: 'Playfair Display', serif; color: var(--text-secondary); transition: 0.3s; }
+        .mobile-menu a.active, .mobile-menu a:hover { color: var(--text-primary); transform: scale(1.1); }
+        .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2.2rem; color: var(--text-primary); background: none; border: none; cursor: pointer; }
 
+        @media (max-width: 1200px) { nav ul { display: none; } .mobile-menu-btn { display: block; } }
+        @media (max-width: 1024px) { header { padding: 20px 5%; } }
         @media (max-width: 768px) {
-            nav ul { display: none; }
-            .mobile-menu-btn { display: block; }
-            .page-hero h1 { font-size: 2.5rem; }
-            .research-grid { grid-template-columns: 1fr; padding: 40px 5%; }
-            .footer-top { flex-direction: column; gap: 40px; }
-            .footer-navs { flex-wrap: wrap; gap: 30px; width: 100%; justify-content: space-between; }
+            .logo { height: 28px; flex-shrink: 0; }
+            .logo-container { gap: 6px; max-width: calc(100vw - 160px); } 
+            .logo-text { overflow: hidden; }
+            .logo-title { font-size: 0.8rem; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .logo-subtitle { font-size: 0.35rem; letter-spacing: 0.05em; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .header-actions { gap: 8px; }
+            .control-btn { padding: 6px 10px; font-size: 0.75rem; }
+            .page-hero { padding: 120px 6% 40px; }
+            .research-grid { grid-template-columns: 1fr; padding: 40px 6% 80px; }
+            .footer-btm { flex-direction: column; align-items: center; text-align: center; }
+            .footer-social-wrapper { width: 100%; margin-bottom: 20px; }
+            .social-links { justify-content: center; width: 100%; margin-bottom: 0; }
             .modal-content { padding: 30px; }
         }
+        @media (max-width: 400px) {
+            .logo { height: 24px; }
+            .logo-container { max-width: calc(100vw - 120px); }
+            .logo-title { font-size: 0.7rem; }
+            .logo-subtitle { font-size: 0.3rem; }
+            .control-btn { padding: 5px 8px; }
+            .language-switcher .control-btn span { display: none; }
+        }
+        
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
-<body>
+<body class="page-loading-locked">
+
+    <!-- Global Page Loader -->
+    <div id="page-loader">
+        <div class="page-loader-spinner"></div>
+        <div class="page-loader-text">LOADING...</div>
+    </div>
 
     <!-- Spotlight Effect -->
     <div id="cursor-spotlight"></div>
 
     <header id="header">
-        <a href="index.html" class="logo-container">
+        <a href="index.html#home" class="logo-container">
             <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+            <div class="logo-text">
+                <span class="logo-title">维科生态协会</span>
+                <span class="logo-subtitle">Weco Ecology Protection Organization</span>
+            </div>
         </a>
         <nav>
             <ul>
-                <li><a href="index.html" data-i18n="nav.home"></a></li>
-                <li><a href="crlsh.html" data-i18n="nav.council"></a></li>
-                <li><a href="index.html#programs" data-i18n="nav.programs"></a></li>
-                <li><a href="index.html#about" data-i18n="nav.about"></a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact"></a></li>
-                <li><a href="sp.html" data-i18n="nav.videos"></a></li>
-                <li><a href="jz.html" data-i18n="nav.donate"></a></li>
+                <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
+                <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
+                <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
+                <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+                <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
+                <li><a href="ndbg.html" class="active" data-i18n="footer.reports">Reports</a></li>
+                <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
+                <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
+                <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
+                <li><a href="map.html" data-i18n="nav.global">Global Vision</a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
         </nav>
         <div class="header-actions">
+            <button class="control-btn" id="themeBtn" aria-label="Toggle Theme">
+                <svg class="theme-icon sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29zm1.29-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.29 1.29c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.29-1.29zM7.28 17.65a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29z"></path></svg>
+                <svg class="theme-icon moon-icon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg>
+            </button>
+
             <div class="language-switcher">
-                <button class="language-btn" id="langBtn">
-                    <span data-i18n="lang.current"></span> ▾
+                <button class="control-btn" id="langBtn">
+                    <svg class="lang-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 015.08 16zm2.95-8H5.08a7.987 7.987 0 013.33-3.56A15.65 15.65 0 005.08 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.34.16-2h4.68c.09.66.16 1.32.16 2 0 .68-.07 1.34-.16 2zm1.43 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 01-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"></path></svg>
+                    <span data-i18n="lang.current">EN</span> ▾
                 </button>
                 <ul class="language-dropdown">
-                    <li data-lang="zh-CN">中文 (简体)</li>
                     <li data-lang="en">English</li>
+                    <li data-lang="zh-CN">简体中文</li>
                     <li data-lang="es">Español</li>
                     <li data-lang="fr">Français</li>
                     <li data-lang="ru">Русский</li>
@@ -389,263 +412,325 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav.home"></a>
-        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="nav.council"></a>
-        <a href="index.html#programs" onclick="toggleMobileMenu()" data-i18n="nav.programs"></a>
-        <a href="index.html#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
-        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
-        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos"></a>
-        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate"></a>
+        <a href="index.html#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
+        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
+        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
+        <a href="zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
+        <a href="kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
+        <a href="ndbg.html" class="active" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
+        <a href="zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
+        <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
+        <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
+        <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
+        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
     </div>
 
-    <section class="page-hero">
+    <section class="page-hero reveal">
+        <span class="section-label" data-i18n="hero.label">In-depth Analysis & Reports</span>
         <h1 data-i18n="hero.title">Research Reports</h1>
         <p data-i18n="hero.subtitle">Explore our scientific analysis and solutions for global environmental challenges.</p>
     </section>
 
     <!-- Filter -->
-    <div class="filter-section">
+    <div class="filter-section reveal stagger-1">
         <button class="filter-btn active" data-filter="all" data-i18n="filter.all">All</button>
         <button class="filter-btn" data-filter="climate" data-i18n="filter.climate">Climate Change</button>
         <button class="filter-btn" data-filter="biodiversity" data-i18n="filter.biodiversity">Biodiversity</button>
-        <button class="filter-btn" data-filter="water" data-i18n="filter.water">Water</button>
-        <button class="filter-btn" data-filter="pollution" data-i18n="filter.pollution">Pollution</button>
+        <button class="filter-btn" data-filter="water" data-i18n="filter.water">Water Conservation</button>
+        <button class="filter-btn" data-filter="pollution" data-i18n="filter.pollution">Pollution Control</button>
     </div>
 
-    <!-- Reports Grid (Dynamic Content will be injected here) -->
-    <div class="research-grid" id="reportsGrid">
-        <!-- JS will populate this -->
-    </div>
+    <!-- Reports Grid (Dynamic) -->
+    <div class="research-grid reveal stagger-2" id="reportsGrid"></div>
 
     <!-- Modal -->
     <div class="modal" id="reportModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <div id="modalData">
-                <!-- Dynamic Content -->
-            </div>
+            <div id="modalData"></div>
         </div>
     </div>
 
     <footer>
         <div class="footer-top">
-            <div class="footer-brand">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="Logo">
-                <p style="max-width: 300px; color: #666; font-size: 0.85rem;" data-i18n="footer.about">WEPO is dedicated to global environmental protection.</p>
+            <div class="footer-brand reveal">
+                <a href="index.html#home" class="logo-container">
+                    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+                    <div class="logo-text" style="text-align: left;">
+                        <span class="logo-title">维科生态协会</span>
+                        <span class="logo-subtitle">Weco Ecology Protection Organization</span>
+                    </div>
+                </a>
+                <span class="footer-slogan" data-i18n="slogan.text">Let's change the world.</span>
+                <p data-i18n="footer.about">WEPO is dedicated to global environmental protection, inspiring change through science, education, and action.</p>
             </div>
-            <div class="footer-navs">
-                <div class="footer-col">
-                    <h5 data-i18n="footer.links_title">Quick Links</h5>
-                    <ul>
-                        <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
-                        <li><a href="index.html#programs" data-i18n="nav.programs">Programs</a></li>
-                        <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                        <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                    </ul>
+        </div>
+    
+        <div class="footer-disclaimer reveal" data-i18n="footer.disclaimer">
+            Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
+        </div>
+
+        <div class="footer-info-blocks reveal">
+            <div class="info-block">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <div class="info-text">
+                    <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
+                    <div class="info-links">
+                        <a href="yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="yhxy.html" data-i18n="footer.terms">用户协议</a>
+                    </div>
                 </div>
-                <div class="footer-col">
-                    <h5 data-i18n="footer.contact_title">Contact</h5>
-                    <ul>
-                         <li data-i18n="footer.address">Address: No. 10 Xingsheng Ave, Chongqing, CN</li>
-                         <li><a href="mailto:xcb@wepo.top" data-i18n="footer.email">Email: xcb@wepo.top</a></li>
-                         <li data-i18n="footer.phone">Phone: (+86) 02386161804</li>
-                    </ul>
+            </div>
+            <div class="info-block">
+                <svg class="info-icon" viewBox="0 0 24 24"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/></svg>
+                <div class="info-text">
+                    <div data-i18n="footer.tech_desc1">本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容主流浏览器。</div>
+                    <div style="margin-top:5px;" data-i18n="footer.tech_desc2">本网站具备无障碍访问功能及多语言设计。</div>
                 </div>
             </div>
         </div>
-        <div class="footer-btm">
-            <p>&copy; <span id="year"></span> <span data-i18n="footer.copyright">WEPO. All rights reserved.</span></p>
+        
+        <div class="footer-btm reveal">
+            <div class="footer-social-wrapper">
+                <span data-i18n="footer.follow_us" style="color: var(--text-primary); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em;">关注我们</span>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+                    <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg></a>
+                    <a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+                    <a href="https://www.youtube.com/@WEPO2021" target="_blank" class="social-icon" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.66 2.66 0 0 0-1.874-1.884C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.708.442a2.66 2.66 0 0 0-1.874 1.884C2 7.852 2 12 2 12s0 4.148.418 5.814a2.66 2.66 0 0 0 1.874 1.884C5.947 20.14 12 20.14 12 20.14s6.053 0 7.708-.442a2.66 2.66 0 0 0 1.874-1.884C22 16.148 22 12 22 12s0-4.148-.418-5.814zm-11.82 8.52V9.294l5.353 2.706-5.353 2.706z"/></svg></a>
+                </div>
+            </div>
+            <p>&copy; <span id="year">2026</span> WEPO. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Cookie Modal -->
+    <div class="cookie-overlay" id="cookieBar">
+        <div class="cookie-modal">
+            <h3 class="cookie-title">Cookie Consent / Cookie 许可</h3>
+            <div class="cookie-text">
+                <p>We use cookies to provide the best experience. By continuing to browse, you agree to our policy.</p>
+                <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
+            </div>
+            <div class="cookie-links">
+                <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
+            </div>
+            <div class="cookie-actions">
+                <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
+                <button class="c-btn ok" onclick="acceptCookie()">Accept / 同意</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- Translation & Report Data ---
+        // --- 完整多语言字典 (包含 6 种语言) ---
         const translations = {
             "zh-CN": {
-                "lang.current": "中文",
-                "nav.home": "首页",
-                "nav.about": "关于我们",
-                "nav.mission": "使命愿景",
-                "nav.programs": "环保项目",
-                "nav.partners": "合作伙伴",
-                "nav.contact": "联系我们",
-                "nav.council": "常任理事会",
-                "nav.videos": "环保视频",
-                "nav.donate": "捐赠支持",
-                "page.title": "研究报告 | WEPO",
-                "hero.title": "环境保护研究报告",
-                "hero.subtitle": "探索我们最新的环境保护研究成果，深入了解全球环境挑战的科学分析和解决方案。",
-                "filter.all": "全部",
-                "filter.climate": "气候变化",
-                "filter.biodiversity": "生物多样性",
-                "filter.water": "水资源",
-                "filter.pollution": "污染防治",
-                "btn.details": "查看详情",
-                "btn.download": "下载PDF",
-                "modal.summary": "报告摘要",
-                "modal.findings": "主要发现",
-                "footer.about": "世界环境保护组织(WEPO)致力于全球环境保护。",
-                "footer.links_title": "快速链接",
-                "footer.contact_title": "联系我们",
-                "footer.address": "地址: 中国重庆市渝北区兴盛大道十号",
-                "footer.phone": "电话: (+86) 02386161804",
-                "footer.email": "邮箱: xcb@wepo.top",
-                "footer.copyright": "世界环境保护组织. 版权所有."
+                "lang.current": "中文", "slogan.text": "让我们一起改变世界。 (Let's change the world.)",
+                "nav.home": "首页", "nav.videos": "环保视频", "nav.donate": "捐赠支持", "nav.support": "客服支持", "nav.weather": "世环天气", "nav.query": "证书查询", "nav.global": "全球视野", "nav.contact": "联系我们",
+                "footer.about": "成立于2021年的维科生态协会(WEPO)致力于环境保护，期望通过科学与教育激发积极变革。",
+                "footer.council": "理事会", "footer.volunteers": "志愿者网络", "footer.reports": "年度报告", "footer.charter": "组织章程", "footer.privacy": "隐私政策", "footer.terms": "用户协议",
+                "footer.disclaimer": "免责声明：本网站使用国家或地区名称，并不意味着WEPO对任何国家、领地、城市或地区或其当局的法律地位，或其边界划定持任何看法。",
+                "footer.follow_us": "关注我们", "footer.cookie_desc": "本网站使用 Cookie 来维持网站的正常运作。", "footer.tech_desc1": "本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容主流浏览器。", "footer.tech_desc2": "本网站具备无障碍访问（A11y）功能及多语言设计。",
+                
+                "page.title": "研究报告 Research Reports - 维科生态协会 (WEPO)",
+                "hero.label": "深度分析与报告", "hero.title": "研究与年度报告", "hero.subtitle": "探索我们最新的环境保护研究成果，深入了解全球环境挑战的科学分析和解决方案。",
+                "filter.all": "全部", "filter.climate": "气候变化", "filter.biodiversity": "生物多样性", "filter.water": "水资源保护", "filter.pollution": "污染防治",
+                "btn.details": "查看详情", "btn.download": "下载 PDF", "modal.summary": "报告摘要", "modal.findings": "主要发现"
             },
             "en": {
-                "lang.current": "EN",
-                "nav.home": "Home",
-                "nav.about": "About",
-                "nav.mission": "Mission",
-                "nav.programs": "Programs",
-                "nav.partners": "Partners",
-                "nav.contact": "Contact",
-                "nav.council": "Council",
-                "nav.videos": "Videos",
-                "nav.donate": "Donate",
-                "page.title": "Research Reports | WEPO",
-                "hero.title": "Research Reports",
-                "hero.subtitle": "Explore our scientific analysis and solutions for global environmental challenges.",
-                "filter.all": "All",
-                "filter.climate": "Climate Change",
-                "filter.biodiversity": "Biodiversity",
-                "filter.water": "Water",
-                "filter.pollution": "Pollution",
-                "btn.details": "View Details",
-                "btn.download": "Download PDF",
-                "modal.summary": "Summary",
-                "modal.findings": "Key Findings",
-                "footer.about": "WEPO is dedicated to global environmental protection.",
-                "footer.links_title": "Quick Links",
-                "footer.contact_title": "Contact",
-                "footer.address": "Address: No. 10 Xingsheng Ave, Chongqing, CN",
-                "footer.phone": "Phone: (+86) 02386161804",
-                "footer.email": "Email: xcb@wepo.top",
-                "footer.copyright": "WEPO. All rights reserved."
+                "lang.current": "EN", "slogan.text": "Let's change the world.",
+                "nav.home": "Home", "nav.videos": "Videos", "nav.donate": "Donate", "nav.support": "Support", "nav.weather": "WEPO Weather", "nav.query": "Cert Query", "nav.global": "Global Vision", "nav.contact": "Contact",
+                "footer.about": "Founded in 2021, WEPO is dedicated to environmental protection, inspiring change through science and education.",
+                "footer.council": "Council", "footer.volunteers": "Volunteers", "footer.reports": "Reports", "footer.charter": "Charter", "footer.privacy": "Privacy Policy", "footer.terms": "User Agreement",
+                "footer.disclaimer": "Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status.",
+                "footer.follow_us": "Follow Us", "footer.cookie_desc": "This website uses cookies to maintain normal operations.", "footer.tech_desc1": "Built with HTML5, fully responsive for mobile and desktop, and compatible with modern browsers.", "footer.tech_desc2": "Features accessibility functions and multi-language design.",
+                
+                "page.title": "Research Reports - 维科生态协会 (WEPO)",
+                "hero.label": "In-depth Analysis & Reports", "hero.title": "Research & Annual Reports", "hero.subtitle": "Explore our scientific analysis and solutions for global environmental challenges.",
+                "filter.all": "All", "filter.climate": "Climate Change", "filter.biodiversity": "Biodiversity", "filter.water": "Water Conservation", "filter.pollution": "Pollution Control",
+                "btn.details": "View Details", "btn.download": "Download PDF", "modal.summary": "Summary", "modal.findings": "Key Findings"
+            },
+            "es": {
+                "lang.current": "ES", "slogan.text": "Cambiemos el mundo. (Let's change the world.)",
+                "nav.home": "Inicio", "nav.videos": "Vídeos", "nav.donate": "Donar", "nav.support": "Soporte", "nav.weather": "Clima WEPO", "nav.query": "Consulta Cert", "nav.global": "Visión Global", "nav.contact": "Contacto",
+                "footer.about": "Fundada en 2021, WEPO está dedicada a la protección ambiental, inspirando el cambio mediante la ciencia.",
+                "footer.council": "Consejo", "footer.volunteers": "Voluntarios", "footer.reports": "Informes", "footer.charter": "Estatuto", "footer.privacy": "Privacidad", "footer.terms": "Términos",
+                "footer.disclaimer": "Descargo de responsabilidad: El uso de nombres de países no implica expresión de opinión por parte de WEPO.",
+                "footer.follow_us": "Síganos", "footer.cookie_desc": "Este sitio utiliza cookies.", "footer.tech_desc1": "Construido con HTML5.", "footer.tech_desc2": "Accesible y multilingüe.",
+                
+                "page.title": "Informes de Investigación - 维科生态协会 (WEPO)",
+                "hero.label": "Análisis e Informes", "hero.title": "Investigación e Informes", "hero.subtitle": "Explore nuestros análisis científicos y soluciones para los desafíos ambientales.",
+                "filter.all": "Todos", "filter.climate": "Clima", "filter.biodiversity": "Biodiversidad", "filter.water": "Agua", "filter.pollution": "Contaminación",
+                "btn.details": "Ver Detalles", "btn.download": "Descargar PDF", "modal.summary": "Resumen", "modal.findings": "Hallazgos Clave"
+            },
+            "fr": {
+                "lang.current": "FR", "slogan.text": "Changeons le monde. (Let's change the world.)",
+                "nav.home": "Accueil", "nav.videos": "Vidéos", "nav.donate": "Donar", "nav.support": "Support", "nav.weather": "Météo WEPO", "nav.query": "Verif Cert", "nav.global": "Vision Globale", "nav.contact": "Contact",
+                "footer.about": "Fondée en 2021, WEPO est dédiée à la protection de l'environnement, inspirant le changement.",
+                "footer.council": "Conseil", "footer.volunteers": "Bénévoles", "footer.reports": "Rapports", "footer.charter": "Charte", "footer.privacy": "Confidentialité", "footer.terms": "Conditions",
+                "footer.disclaimer": "Avis de non-responsabilité : L'utilisation de noms de pays n'implique aucune opinion du WEPO.",
+                "footer.follow_us": "Suivez-nous", "footer.cookie_desc": "Ce site utilise des cookies.", "footer.tech_desc1": "Construit en HTML5.", "footer.tech_desc2": "Accessible et multilingue.",
+                
+                "page.title": "Rapports de Recherche - 维科生态协会 (WEPO)",
+                "hero.label": "Analyse et Rapports", "hero.title": "Recherche et Rapports Annuels", "hero.subtitle": "Explorez notre analyse scientifique et nos solutions.",
+                "filter.all": "Tout", "filter.climate": "Climat", "filter.biodiversity": "Biodiversité", "filter.water": "Eau", "filter.pollution": "Pollution",
+                "btn.details": "Voir les détails", "btn.download": "Télécharger PDF", "modal.summary": "Résumé", "modal.findings": "Principales conclusions"
+            },
+            "ru": {
+                "lang.current": "RU", "slogan.text": "Давайте изменим мир. (Let's change the world.)",
+                "nav.home": "Главная", "nav.videos": "Видео", "nav.donate": "Пожертвовать", "nav.support": "Поддержка", "nav.weather": "Погода WEPO", "nav.query": "Проверка", "nav.global": "Глобальный вид", "nav.contact": "Контакты",
+                "footer.about": "WEPO посвящена глобальной защите окружающей среды.",
+                "footer.council": "Совет", "footer.volunteers": "Волонтеры", "footer.reports": "Отчеты", "footer.charter": "Устав", "footer.privacy": "Конфиденциальность", "footer.terms": "Условия",
+                "footer.disclaimer": "Отказ от ответственности: Использование названий стран не означает выражения мнения.",
+                "footer.follow_us": "Подписывайтесь", "footer.cookie_desc": "Этот сайт использует файлы cookie.", "footer.tech_desc1": "Создан на HTML5.", "footer.tech_desc2": "Обеспечен функциями доступности.",
+                
+                "page.title": "Исследовательские Отчеты - 维科生态协会 (WEPO)",
+                "hero.label": "Глубокий анализ", "hero.title": "Исследования и Отчеты", "hero.subtitle": "Изучите наш научный анализ и решения экологических проблем.",
+                "filter.all": "Все", "filter.climate": "Климат", "filter.biodiversity": "Биоразнообразие", "filter.water": "Вода", "filter.pollution": "Загрязнение",
+                "btn.details": "Подробнее", "btn.download": "Скачать PDF", "modal.summary": "Резюме", "modal.findings": "Ключевые выводы"
+            },
+            "ar": {
+                "lang.current": "العربية", "slogan.text": "دعونا نغير العالم. (Let's change the world.)",
+                "nav.home": "الرئيسية", "nav.videos": "أشرطة الفيديو", "nav.donate": "التبرع", "nav.support": "دعم", "nav.weather": "طقس WEPO", "nav.query": "الشهادات", "nav.global": "رؤية عالمية", "nav.contact": "اتصل",
+                "footer.about": "تأسست WEPO في عام 2021، وهي مكرسة لحماية البيئة.",
+                "footer.council": "المجلس", "footer.volunteers": "المتطوعون", "footer.reports": "التقارير", "footer.charter": "الميثاق", "footer.privacy": "الخصوصية", "footer.terms": "الشروط",
+                "footer.disclaimer": "إخلاء المسؤولية: استخدام أسماء البلدان لا يعني أي رأي.",
+                "footer.follow_us": "تابعنا", "footer.cookie_desc": "يستخدم هذا الموقع ملفات تعريف الارتباط.", "footer.tech_desc1": "مبني بتقنية HTML5.", "footer.tech_desc2": "تصميم متعدد اللغات.",
+                
+                "page.title": "تقارير البحوث - 维科生态协会 (WEPO)",
+                "hero.label": "تحليل وتقارير", "hero.title": "تقارير البحوث", "hero.subtitle": "اكتشف تحليلاتنا العلمية وحلولنا للتحديات البيئية.",
+                "filter.all": "الكل", "filter.climate": "المناخ", "filter.biodiversity": "التنوع البيولوجي", "filter.water": "المياه", "filter.pollution": "التلوث",
+                "btn.details": "التفاصيل", "btn.download": "تحميل PDF", "modal.summary": "ملخص", "modal.findings": "النتائج الرئيسية"
             }
-            // Add other languages (ES, FR, RU, AR) mapping similarly if needed, defaulted to EN
         };
 
-        // Report Database
-        const reportsDB = [
+        // --- Reports Database (with 6 languages fallback mapped) ---
+        const reportsDB =[
             {
-                id: 1,
-                category: "climate",
-                img: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                id: 1, category: "climate", img: "https://images.unsplash.com/photo-1615751072497-5f5169febe17?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
                 data: {
                     "zh-CN": {
-                        title: "全球气候变化影响评估 2025",
-                        desc: "全面评估了全球气候变化的最新趋势及其对生态系统、经济和社会的影响。",
-                        category: "气候变化",
-                        date: "2025年6月",
-                        pages: "48页",
+                        title: "全球气候变化影响评估 2025", desc: "全面评估了全球气候变化的最新趋势及其对生态系统、经济和社会的影响。",
+                        category: "气候变化", date: "2025年6月", pages: "48页",
                         summary: "本报告基于全球气候观测数据和模型模拟结果，全面评估了气候变化对生态系统、农业、水资源的影响。报告显示全球平均气温较工业化前水平已上升1.2°C。",
-                        findings: ["极端高温事件频率增加5倍", "北极海冰范围达到历史最低水平", "海洋酸化加剧威胁生态系统"]
+                        findings:["极端高温事件频率增加5倍", "北极海冰范围达到历史最低水平", "海洋酸化加剧威胁生态系统"]
                     },
                     "en": {
-                        title: "Global Climate Change Assessment 2025",
-                        desc: "A comprehensive assessment of the latest trends in global climate change and its impact.",
-                        category: "Climate Change",
-                        date: "June 2025",
-                        pages: "48 Pages",
+                        title: "Global Climate Change Assessment 2025", desc: "A comprehensive assessment of the latest trends in global climate change and its impact.",
+                        category: "Climate Change", date: "June 2025", pages: "48 Pages",
                         summary: "Based on global climate observation data, this report assesses impacts on ecosystems, agriculture, and water resources. Global average temperature has risen by 1.2°C.",
-                        findings: ["Extreme heat events increased 5x", "Arctic sea ice at historic lows", "Ocean acidification threatening ecosystems"]
-                    }
+                        findings:["Extreme heat events increased 5x", "Arctic sea ice at historic lows", "Ocean acidification threatening ecosystems"]
+                    },
+                    "es": { title: "Evaluación del Cambio Climático 2025", desc: "Una evaluación completa de las tendencias y sus impactos.", category: "Clima", date: "Junio 2025", pages: "48 Páginas", summary: "La temperatura global ha subido 1.2°C.", findings:["Eventos de calor aumentaron 5x", "Hielo del Ártico en mínimos", "Acidificación de los océanos"] },
+                    "fr": { title: "Évaluation du changement climatique 2025", desc: "Une évaluation complète des tendances et de leurs impacts.", category: "Climat", date: "Juin 2025", pages: "48 Pages", summary: "La température mondiale a augmenté de 1,2°C.", findings:["Vagues de chaleur 5x plus fréquentes", "Glaces arctiques au plus bas", "L'acidification menace les écosystèmes"] },
+                    "ru": { title: "Оценка изменения климата 2025", desc: "Комплексная оценка тенденций и их последствий.", category: "Климат", date: "Июнь 2025", pages: "48 Страниц", summary: "Глобальная температура выросла на 1.2°C.", findings:["Жара участилась в 5 раз", "Арктический лед на минимуме", "Окисление океана"] },
+                    "ar": { title: "تقييم تغير المناخ لعام 2025", desc: "تقييم شامل لاتجاهات تغير المناخ وتأثيراتها.", category: "المناخ", date: "يونيو 2025", pages: "48 صفحة", summary: "ارتفع متوسط الحرارة العالمي بمقدار 1.2 درجة.", findings:["زادت موجات الحر 5 أضعاف", "الجليد القطبي في أدنى مستوياته", "تحمض المحيطات يهدد الأنظمة"] }
                 }
             },
             {
-                id: 2,
-                category: "biodiversity",
-                img: "https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                id: 2, category: "biodiversity", img: "https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
                 data: {
                     "zh-CN": {
-                        title: "全球生物多样性展望",
-                        desc: "分析了全球生物多样性保护的进展与未来十年的保护战略。",
-                        category: "生物多样性",
-                        date: "2025年4月",
-                        pages: "36页",
+                        title: "全球生物多样性展望", desc: "分析了全球生物多样性保护的进展与未来十年的保护战略。",
+                        category: "生物多样性", date: "2025年4月", pages: "36页",
                         summary: "尽管保护地建设取得进展，但生物多样性丧失速度未减。报告呼吁采取更积极的保护措施，包括扩大保护地网络。",
-                        findings: ["物种灭绝速度是自然率的100倍", "75%陆地环境被改变", "气候变化成为第二大驱动因素"]
+                        findings:["物种灭绝速度是自然率的100倍", "75%陆地环境被改变", "气候变化成为第二大驱动因素"]
                     },
                     "en": {
-                        title: "Global Biodiversity Outlook",
-                        desc: "Analysis of progress in biodiversity conservation and strategies for the next decade.",
-                        category: "Biodiversity",
-                        date: "April 2025",
-                        pages: "36 Pages",
+                        title: "Global Biodiversity Outlook", desc: "Analysis of progress in biodiversity conservation and strategies for the next decade.",
+                        category: "Biodiversity", date: "April 2025", pages: "36 Pages",
                         summary: "Despite progress in protected areas, biodiversity loss continues. The report calls for expanding protected area networks.",
-                        findings: ["Extinction rates 100x natural rate", "75% of land altered", "Climate change is the 2nd largest driver"]
-                    }
+                        findings:["Extinction rates 100x natural rate", "75% of land altered", "Climate change is the 2nd largest driver"]
+                    },
+                    "es": { title: "Perspectiva de la Biodiversidad", desc: "Análisis del progreso en la conservación de la biodiversidad.", category: "Biodiversidad", date: "Abril 2025", pages: "36 Páginas", summary: "La pérdida de biodiversidad continúa.", findings:["Tasas de extinción 100x", "75% de la tierra alterada", "El cambio climático es el segundo factor"] },
+                    "fr": { title: "Perspectives de la Biodiversité", desc: "Analyse des progrès dans la conservation de la biodiversité.", category: "Biodiversité", date: "Avril 2025", pages: "36 Pages", summary: "La perte de biodiversité se poursuit.", findings:["Taux d'extinction 100x", "75% des terres modifiées", "Le climat est le 2ème facteur"] },
+                    "ru": { title: "Перспективы Биоразнообразия", desc: "Анализ прогресса в сохранении биоразнообразия.", category: "Биоразнообразие", date: "Апрель 2025", pages: "36 Страниц", summary: "Утрата биоразнообразия продолжается.", findings:["Темпы вымирания в 100 раз выше", "75% суши изменено", "Изменение климата - второй фактор"] },
+                    "ar": { title: "توقعات التنوع البيولوجي", desc: "تحليل التقدم في الحفاظ على التنوع البيولوجي.", category: "التنوع البيولوجي", date: "أبريل 2025", pages: "36 صفحة", summary: "يستمر فقدان التنوع البيولوجي.", findings:["معدلات الانقراض 100 ضعف", "تغيير 75٪ من الأراضي", "تغير المناخ هو المحرك الثاني"] }
                 }
             },
             {
-                id: 3,
-                category: "water",
-                img: "https://images.unsplash.com/photo-1581669783977-9c0f222a3497?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                id: 3, category: "water", img: "https://images.unsplash.com/photo-1581669783977-9c0f222a3497?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
                 data: {
                     "zh-CN": {
-                        title: "淡水资源可持续管理",
-                        desc: "评估全球淡水挑战，提出创新管理方案以确保可持续利用。",
-                        category: "水资源",
-                        date: "2025年3月",
-                        pages: "42页",
+                        title: "淡水资源可持续管理", desc: "评估全球淡水挑战，提出创新管理方案以确保可持续利用。",
+                        category: "水资源", date: "2025年3月", pages: "42页",
                         summary: "全球约40%人口面临缺水问题。报告提出了基于流域的综合管理方法和节水技术推广。",
-                        findings: ["20亿人生活在缺水地区", "农业用水占70%但效率低", "地下水位持续下降"]
+                        findings:["20亿人生活在缺水地区", "农业用水占70%但效率低", "地下水位持续下降"]
                     },
                     "en": {
-                        title: "Sustainable Freshwater Management",
-                        desc: "Assessing global freshwater challenges and proposing innovative management solutions.",
-                        category: "Water",
-                        date: "March 2025",
-                        pages: "42 Pages",
+                        title: "Sustainable Freshwater Management", desc: "Assessing global freshwater challenges and proposing innovative solutions.",
+                        category: "Water", date: "March 2025", pages: "42 Pages",
                         summary: "40% of the global population faces water scarcity. The report proposes integrated watershed management.",
-                        findings: ["2 billion people in water scarcity", "Agriculture uses 70% of water", "Groundwater levels declining"]
-                    }
+                        findings:["2 billion people in water scarcity", "Agriculture uses 70% of water", "Groundwater levels declining"]
+                    },
+                    "es": { title: "Manejo Sostenible del Agua Dulce", desc: "Evaluando los desafíos mundiales del agua dulce.", category: "Agua", date: "Marzo 2025", pages: "42 Páginas", summary: "El 40% de la población enfrenta escasez de agua.", findings:["2 mil millones sin agua", "La agricultura usa el 70%", "Niveles de agua subterránea disminuyen"] },
+                    "fr": { title: "Gestion Durable de l'Eau Douce", desc: "Évaluation des défis mondiaux liés à l'eau douce.", category: "Eau", date: "Mars 2025", pages: "42 Pages", summary: "40% de la population fait face à une pénurie d'eau.", findings:["2 milliards manquent d'eau", "L'agriculture utilise 70%", "Baisse des nappes phréatiques"] },
+                    "ru": { title: "Устойчивое Управление Пресной Водой", desc: "Оценка глобальных проблем с пресной водой.", category: "Вода", date: "Март 2025", pages: "42 Страницы", summary: "40% населения сталкивается с нехваткой воды.", findings: ["2 миллиарда без воды", "Сельское хозяйство использует 70%", "Уровень грунтовых вод падает"] },
+                    "ar": { title: "الإدارة المستدامة للمياه العذبة", desc: "تقييم تحديات المياه العذبة العالمية.", category: "المياه", date: "مارس 2025", pages: "42 صفحة", summary: "يواجه 40٪ من السكان ندرة المياه.", findings:["2 مليار بدون مياه", "تستخدم الزراعة 70٪", "انخفاض مستويات المياه الجوفية"] }
                 }
             },
             {
-                id: 4,
-                category: "pollution",
-                img: "https://images.unsplash.com/photo-1611273426728-79658306adbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+                id: 4, category: "pollution", img: "https://images.unsplash.com/photo-1611273426728-79658306adbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
                 data: {
                     "zh-CN": {
-                        title: "城市空气污染治理策略",
-                        desc: "基于全球50个城市的案例分析，提出针对性的治理方案。",
-                        category: "污染防治",
-                        date: "2025年2月",
-                        pages: "56页",
+                        title: "城市空气污染治理策略", desc: "基于全球50个城市的案例分析，提出针对性的治理方案。",
+                        category: "污染防治", date: "2025年2月", pages: "56页",
                         summary: "交通和工业排放是主要源头。报告建议多污染物协同控制，包括清洁能源替代和交通调整。",
-                        findings: ["90%城市人口暴露于超标空气", "交通贡献30-50%的PM2.5", "城市绿化可降低浓度"]
+                        findings:["90%城市人口暴露于超标空气", "交通贡献30-50%的PM2.5", "城市绿化可降低浓度"]
                     },
                     "en": {
-                        title: "Urban Air Pollution Strategies",
-                        desc: "Targeted governance plans based on case studies of 50 cities worldwide.",
-                        category: "Pollution",
-                        date: "Feb 2025",
-                        pages: "56 Pages",
+                        title: "Urban Air Pollution Strategies", desc: "Targeted governance plans based on case studies of 50 cities worldwide.",
+                        category: "Pollution", date: "Feb 2025", pages: "56 Pages",
                         summary: "Traffic and industry are main sources. Report recommends clean energy substitution and traffic adjustments.",
-                        findings: ["90% exposed to bad air", "Traffic contributes 50% PM2.5", "Greening reduces pollution"]
-                    }
+                        findings:["90% exposed to bad air", "Traffic contributes 50% PM2.5", "Greening reduces pollution"]
+                    },
+                    "es": { title: "Estrategias de Contaminación del Aire", desc: "Planes basados en estudios de casos de 50 ciudades.", category: "Contaminación", date: "Feb 2025", pages: "56 Páginas", summary: "El tráfico y la industria son fuentes principales.", findings:["90% expuestos a mal aire", "Tráfico aporta 50% PM2.5", "Reverdecer reduce la contaminación"] },
+                    "fr": { title: "Stratégies de Pollution de l'Air", desc: "Plans basés sur des études de cas de 50 villes.", category: "Pollution", date: "Fév 2025", pages: "56 Pages", summary: "Le trafic et l'industrie sont les principales sources.", findings:["90% exposés au mauvais air", "Le trafic produit 50% de PM2.5", "Verdir réduit la pollution"] },
+                    "ru": { title: "Стратегии по Загрязнению Воздуха", desc: "Планы, основанные на тематических исследованиях 50 городов.", category: "Загрязнение", date: "Фев 2025", pages: "56 Страниц", summary: "Транспорт и промышленность — основные источники.", findings:["90% дышат плохим воздухом", "Транспорт дает 50% PM2.5", "Озеленение снижает загрязнение"] },
+                    "ar": { title: "استراتيجيات تلوث الهواء", desc: "خطط تعتمد على دراسات حالة لـ 50 مدينة.", category: "التلوث", date: "فبراير 2025", pages: "56 صفحة", summary: "المرور والصناعة هما المصادر الرئيسية.", findings:["90٪ يتعرضون لهواء سيء", "المرور يساهم بـ 50٪ من PM2.5", "التخضير يقلل من التلوث"] }
                 }
             }
         ];
 
-        // --- Logic Control ---
+        // --- 1. Theme Logic ---
+        const themeBtn = document.getElementById('themeBtn');
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+        }
+        themeBtn.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+        initTheme();
+
+        // --- 2. Dynamic Content & Reports ---
         let currentLang = localStorage.getItem('lang') || 'zh-CN';
 
         function updateContent() {
             const langData = translations[currentLang] || translations['en'];
             
-            // Update Static Text
+            // Translate static elements
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (langData[key]) el.textContent = langData[key];
+                if (langData[key]) el.innerHTML = langData[key];
             });
 
-            // Update Reports Grid
+            // Render Report Cards
             const grid = document.getElementById('reportsGrid');
             grid.innerHTML = '';
             
@@ -673,11 +758,8 @@
                 grid.appendChild(card);
             });
 
-            // RTL check
             document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            document.querySelectorAll('.language-btn').forEach(btn => {
-               btn.innerHTML = langData['lang.current'] + ' ▾'; 
-            });
+            document.title = langData["page.title"] || document.title;
         }
 
         function setLanguage(lang) {
@@ -689,10 +771,9 @@
             filterReports(activeFilter);
         }
 
-        // Initialization
         updateContent();
 
-        // Filter Logic
+        // --- 3. Filters ---
         const filterBtns = document.querySelectorAll('.filter-btn');
         function filterReports(filter) {
             const cards = document.querySelectorAll('.research-card');
@@ -704,7 +785,6 @@
                 }
             });
         }
-
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -713,7 +793,7 @@
             });
         });
 
-        // Modal Logic
+        // --- 4. Modal ---
         const modal = document.getElementById('reportModal');
         const modalData = document.getElementById('modalData');
 
@@ -730,6 +810,7 @@
                     <h2>${rData.title}</h2>
                     <div class="modal-meta-info">
                         <span>${rData.category}</span>
+                        <span>|</span>
                         <span>${rData.date}</span>
                     </div>
                 </div>
@@ -752,24 +833,60 @@
             document.body.style.overflow = 'auto';
         };
 
-        // Event Listeners
+        // --- 5. Scroll & Interactions ---
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
         document.querySelectorAll('.language-dropdown li').forEach(li => {
             li.addEventListener('click', () => setLanguage(li.getAttribute('data-lang')));
         });
 
-        // Spotlight
         const spot = document.getElementById('cursor-spotlight');
         document.addEventListener('mousemove', (e) => {
             spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         });
 
-        // Mobile Menu
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('open');
-        }
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
 
-        // Year
+        // --- 6. Cookie Bar Logic ---
+        function initCookieLogic() {
+            const status = localStorage.getItem('cookieStatus');
+            const cookieBar = document.getElementById('cookieBar');
+            if (status !== 'accepted') {
+                cookieBar.classList.add('active');
+                document.body.classList.add('cookie-locked');
+            }
+        }
+        function acceptCookie() {
+            document.getElementById('cookieBar').classList.remove('active');
+            document.body.classList.remove('cookie-locked');
+            localStorage.setItem('cookieStatus', 'accepted');
+        }
+        function declineCookie() { window.location.href = "https://bing.com"; }
+        initCookieLogic();
+
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    setTimeout(() => loader.style.display = 'none', 800);
+                    document.body.classList.remove('page-loading-locked');
+                }, 300);
+            }
+        });
     </script>
 </body>
 </html>
