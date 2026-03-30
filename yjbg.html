@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN" prefix="og: https://ogp.me/ns#">
 <head>
@@ -14,6 +13,16 @@
     <!-- --- SEO: 网站目录与规范化链接 --- -->
     <link rel="canonical" href="https://wepo2021.org/ndbg.html">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
+    
+    <!-- 国际化 SEO 声明，告诉搜索引擎页面支持的多语言 -->
+    <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/ndbg.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/ndbg.html">
+    <link rel="alternate" hreflang="en" href="https://wepo2021.org/ndbg.html">
+    <link rel="alternate" hreflang="es" href="https://wepo2021.org/ndbg.html">
+    <link rel="alternate" hreflang="fr" href="https://wepo2021.org/ndbg.html">
+    <link rel="alternate" hreflang="ru" href="https://wepo2021.org/ndbg.html">
+    <link rel="alternate" hreflang="ar" href="https://wepo2021.org/ndbg.html">
+
     <meta name="theme-color" content="#0a0a0a">
 
     <!-- --- SEO: Open Graph --- -->
@@ -96,7 +105,9 @@
             display: flex; flex-direction: column; min-height: 100vh;
         }
 
-        body.page-loading-locked, body.cookie-locked { overflow: hidden !important; height: 100vh !important; }
+        body.page-loading-locked { overflow: hidden !important; height: 100vh !important; }
+        /* body.cookie-locked 已移除以适配 SEO 抓取 */
+        
         #page-loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-void); z-index: 9999999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -365,7 +376,7 @@
     <div id="cursor-spotlight"></div>
 
     <header id="header">
-        <a href="index.html#home" class="logo-container">
+        <a href="https://wepo2021.org/#home" class="logo-container">
             <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
             <div class="logo-text">
                 <span class="logo-title">维科生态协会</span>
@@ -374,18 +385,18 @@
         </a>
         <nav>
             <ul>
-                <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
-                <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
-                <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
-                <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
-                <li><a href="ndbg.html" class="active" data-i18n="footer.reports">Reports</a></li>
-                <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
+                <li><a href="https://wepo2021.org/#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="https://wepo2021.org/sp.html" data-i18n="nav.videos">Videos</a></li>
+                <li><a href="https://wepo2021.org/jz.html" data-i18n="nav.donate">Donate</a></li>
+                <li><a href="https://wepo2021.org/crlsh.html" data-i18n="footer.council">Council</a></li>
+                <li><a href="https://wepo2021.org/zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+                <li><a href="https://wepo2021.org/kf.html" data-i18n="nav.support">Support</a></li>
+                <li><a href="https://wepo2021.org/ndbg.html" class="active" data-i18n="footer.reports">Reports</a></li>
+                <li><a href="https://wepo2021.org/zc.html" data-i18n="footer.charter">Charter</a></li>
                 <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
                 <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
-                <li><a href="map.html" data-i18n="nav.global">Global Vision</a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="https://wepo2021.org/map.html" data-i18n="nav.global">Global Vision</a></li>
+                <li><a href="https://wepo2021.org/#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
         </nav>
         <div class="header-actions">
@@ -414,18 +425,18 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-        <a href="index.html#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
-        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
-        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
-        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
-        <a href="zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
-        <a href="kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
-        <a href="ndbg.html" class="active" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
-        <a href="zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
+        <a href="https://wepo2021.org/#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+        <a href="https://wepo2021.org/sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
+        <a href="https://wepo2021.org/jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
+        <a href="https://wepo2021.org/crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
+        <a href="https://wepo2021.org/zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
+        <a href="https://wepo2021.org/kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
+        <a href="https://wepo2021.org/ndbg.html" class="active" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
+        <a href="https://wepo2021.org/zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
         <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
         <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
-        <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
-        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
+        <a href="https://wepo2021.org/map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
+        <a href="https://wepo2021.org/#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
     </div>
 
     <section class="page-hero reveal">
@@ -457,7 +468,7 @@
     <footer>
         <div class="footer-top">
             <div class="footer-brand reveal">
-                <a href="index.html#home" class="logo-container">
+                <a href="https://wepo2021.org/#home" class="logo-container">
                     <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
                     <div class="logo-text" style="text-align: left;">
                         <span class="logo-title">维科生态协会</span>
@@ -479,7 +490,7 @@
                 <div class="info-text">
                     <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
                     <div class="info-links">
-                        <a href="yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="yhxy.html" data-i18n="footer.terms">用户协议</a>
+                        <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">用户协议</a>
                     </div>
                 </div>
             </div>
@@ -516,8 +527,8 @@
                 <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
             </div>
             <div class="cookie-links">
-                <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
-                <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
+                <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">User Agreement</a>
             </div>
             <div class="cookie-actions">
                 <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
@@ -670,7 +681,7 @@
                     },
                     "es": { title: "Manejo Sostenible del Agua Dulce", desc: "Evaluando los desafíos mundiales del agua dulce.", category: "Agua", date: "Marzo 2025", pages: "42 Páginas", summary: "El 40% de la población enfrenta escasez de agua.", findings:["2 mil millones sin agua", "La agricultura usa el 70%", "Niveles de agua subterránea disminuyen"] },
                     "fr": { title: "Gestion Durable de l'Eau Douce", desc: "Évaluation des défis mondiaux liés à l'eau douce.", category: "Eau", date: "Mars 2025", pages: "42 Pages", summary: "40% de la population fait face à une pénurie d'eau.", findings:["2 milliards manquent d'eau", "L'agriculture utilise 70%", "Baisse des nappes phréatiques"] },
-                    "ru": { title: "Устойчивое Управление Пресной Водой", desc: "Оценка глобальных проблем с пресной водой.", category: "Вода", date: "Март 2025", pages: "42 Страницы", summary: "40% населения сталкивается с нехваткой воды.", findings: ["2 миллиарда без воды", "Сельское хозяйство использует 70%", "Уровень грунтовых вод падает"] },
+                    "ru": { title: "Устойчивое Управление Пресной Водой", desc: "Оценка глобальных проблем с пресной водой.", category: "Вода", date: "Март 2025", pages: "42 Страницы", summary: "40% населения сталкивается с нехваткой воды.", findings:["2 миллиарда без воды", "Сельское хозяйство использует 70%", "Уровень грунтовых вод падает"] },
                     "ar": { title: "الإدارة المستدامة للمياه العذبة", desc: "تقييم تحديات المياه العذبة العالمية.", category: "المياه", date: "مارس 2025", pages: "42 صفحة", summary: "يواجه 40٪ من السكان ندرة المياه.", findings:["2 مليار بدون مياه", "تستخدم الزراعة 70٪", "انخفاض مستويات المياه الجوفية"] }
                 }
             },
@@ -864,12 +875,11 @@
             const cookieBar = document.getElementById('cookieBar');
             if (status !== 'accepted') {
                 cookieBar.classList.add('active');
-                document.body.classList.add('cookie-locked');
+                // document.body.classList.add('cookie-locked'); 已移除，防止爬虫高度截断
             }
         }
         function acceptCookie() {
             document.getElementById('cookieBar').classList.remove('active');
-            document.body.classList.remove('cookie-locked');
             localStorage.setItem('cookieStatus', 'accepted');
         }
         function declineCookie() { window.location.href = "https://bing.com"; }
