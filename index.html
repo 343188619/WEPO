@@ -5,27 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- --- SEO: 基础信息 --- -->
+    <!-- --- SEO 核心优化 --- -->
     <title>维科生态协会 (WEPO) | Weco Ecology Protection Organization</title>
-    <!-- [修复] 优化 Meta Description 长度，控制在 160 字符内，避免被搜索引擎截断 -->
-    <meta name="description" content="维科生态协会(WEPO)成立于2021年，是一家致力于应对气候变化、保护生物多样性与推动可持续发展的非营利环保组织。WEPO is an NGO dedicated to climate action and biodiversity.">
+    <meta name="description" content="成立于2021年，维科生态协会 (WEPO) 是一家致力于应对气候变化、保护生物多样性与推动可持续发展的年轻、非营利性环保组织。Founded in 2021, WEPO is an emerging non-profit organization dedicated to climate action and sustainable development.">
     <meta name="keywords" content="维科生态协会, WEPO, 新兴环保组织, 环保机构, 气候变化, 生物多样性, 可持续发展, Weco Ecology Protection Organization, Environmental NGO, Climate Change, Biodiversity, 碳中和, 青年环保力量">
     <meta name="author" content="WEPO Council">
+    
+    <!-- 确保规范化链接指向主域名 -->
     <link rel="canonical" href="https://wepo2021.org/">
+    
+    <!-- 国际化 SEO 声明，告诉搜索引擎页面支持的语言 -->
+    <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/">
+    <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/">
+    <link rel="alternate" hreflang="en" href="https://wepo2021.org/">
+    <link rel="alternate" hreflang="es" href="https://wepo2021.org/">
+    <link rel="alternate" hreflang="fr" href="https://wepo2021.org/">
+    <link rel="alternate" hreflang="ru" href="https://wepo2021.org/">
+    <link rel="alternate" hreflang="ar" href="https://wepo2021.org/">
+
     <meta name="theme-color" content="#0a0a0a">
-
-    <!-- --- 多语言抓取声明 (hreflang) --- -->
-    <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/" />
-    <link rel="alternate" hreflang="en" href="https://wepo2021.org/" />
-    <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/" />
-
-    <!-- --- 性能优化: 首屏视频预加载 --- -->
-    <link rel="preload" href="https://img.nickyam.com/file/BAACAgUAAyEGAASS2zT1AAI8Wmmq5rsfM5jrkErIn4A6QQ6Y3RBFAALAHQACXQNYVR7Ql6JBAAH_bDoE.mp4" as="video" type="video/mp4">
-
-    <!-- --- Sitemap --- -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
 
-    <!-- --- SEO: Open Graph (优化微信/社交媒体分享显示) --- -->
+    <!-- --- SEO: Open Graph --- -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wepo2021.org/">
     <meta property="og:title" content="维科生态协会 (WEPO) - 致力于可持续发展的新兴力量">
@@ -41,7 +42,7 @@
     <meta name="twitter:description" content="成立于2021年，维科生态协会 (WEPO) 是一家积极投身于气候变化应对与生物多样性保护的年轻非营利组织。">
     <meta name="twitter:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
 
-    <!-- --- SEO: 结构化数据 (优化搜索引擎知识图谱与网站层级抓取) --- -->
+    <!-- --- SEO: 结构化数据 --- -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -67,16 +68,8 @@
         "availableLanguage":["Chinese", "English"]
       },
       "sameAs":[
-        "https://www.facebook.com/wepo",
-        "https://twitter.com/wepo",
-        "https://www.youtube.com/@WEPO2021",
-        "https://www.facebook.com/profile.php?id=61573689994100"
-      ],
-      "hasPart":[
-        { "@type": "WebPage", "url": "https://wepo2021.org/sp.html", "name": "Videos / 环保视频" },
-        { "@type": "WebPage", "url": "https://wepo2021.org/jz.html", "name": "Donate / 捐赠支持" },
-        { "@type": "WebPage", "url": "https://wepo2021.org/crlsh.html", "name": "Council / 理事会" },
-        { "@type": "WebPage", "url": "https://wepo2021.org/ndbg.html", "name": "Annual Reports / 年度报告" }
+        "https://www.facebook.com/profile.php?id=61573689994100",
+        "https://www.youtube.com/@WEPO2021"
       ]
     }
     </script>
@@ -95,32 +88,32 @@
             --text-primary: #F5F5F7;
             --text-secondary: #86868B;
             --accent-gold: #d4af37;
-            --shimmer-shine: #fff4ce; /* 黑夜模式流光高光色 */
+            --shimmer-shine: #fff4ce; 
             --border-glass: rgba(255, 255, 255, 0.1);
             --glass-blur: blur(20px);
             --nav-bg: rgba(5, 5, 7, 0.7);
             --spotlight-color: rgba(60, 80, 120, 0.15);
             
-            /* Animation Curves (Apple Style) */
+            /* Animation Curves */
             --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
             --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Light Mode Variables */[data-theme="light"] {
+        /* Light Mode Variables */
+        [data-theme="light"] {
             --bg-void: #F2F2F7;
             --bg-surface: #FFFFFF;
             --bg-card: rgba(255, 255, 255, 0.6);
             --text-primary: #1D1D1F;
             --text-secondary: #515154;
             --accent-gold: #B49020;
-            --shimmer-shine: #e5b73b; /* 白天模式流光高光色 */
+            --shimmer-shine: #e5b73b; 
             --border-glass: rgba(0, 0, 0, 0.08);
             --nav-bg: rgba(255, 255, 255, 0.75);
             --spotlight-color: rgba(212, 175, 55, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -132,7 +125,8 @@
             transition: background-color 0.6s var(--ease-apple), color 0.6s var(--ease-apple);
         }
 
-        body.cookie-locked { overflow: hidden; height: 100vh; }
+        /* 移除 body.cookie-locked 对高度的限制，保证爬虫能够完整抓取 DOM */
+        /* body.cookie-locked { overflow: hidden; height: 100vh; } <-- 此行已删除以利于 SEO */
 
         /* Spotlight */
         #cursor-spotlight {
@@ -148,112 +142,49 @@
 
         /* --- Header --- */
         header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 30px 5%;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            transition: padding 0.4s var(--ease-apple), background 0.4s, border 0.4s;
-            background: transparent; 
-            border-bottom: 1px solid transparent;
+            z-index: 1000; transition: padding 0.4s var(--ease-apple), background 0.4s, border 0.4s;
+            background: transparent; border-bottom: 1px solid transparent;
         }
-
         header.scrolled {
-            background: var(--nav-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            padding: 15px 5%;
-            border-bottom: 1px solid var(--border-glass);
+            background: var(--nav-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            padding: 15px 5%; border-bottom: 1px solid var(--border-glass);
         }
 
-        /* --- 高级 Logo 与品牌文字动画样式 --- */
         .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            cursor: pointer;
-            /* 进场动画 */
+            display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer;
             animation: logoEntrance 1.2s var(--ease-out-expo) backwards 0.3s;
         }
-        @keyframes logoEntrance {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes logoEntrance { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .logo { 
-            height: 42px; 
-            transition: transform 0.6s var(--ease-apple), box-shadow 0.6s; 
-            border-radius: 0; 
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            white-space: nowrap;
-        }
-
-        /* 中文标题 */
+        .logo { height: 42px; transition: transform 0.6s var(--ease-apple), box-shadow 0.6s; border-radius: 0; }
+        .logo-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; white-space: nowrap; }
         .logo-title {
             font-family: 'Playfair Display', 'Songti SC', 'Noto Serif SC', 'STSong', 'SimSun', serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 0.08em;
-            line-height: 1.1;
-            transition: all 0.6s var(--ease-apple);
-            position: relative;
+            font-size: 1.25rem; font-weight: 600; color: var(--text-primary); letter-spacing: 0.08em;
+            line-height: 1.1; transition: all 0.6s var(--ease-apple); position: relative;
         }
-
-        /* 英文副标题 + 鎏金动画 */
         .logo-subtitle {
-            font-family: 'Manrope', sans-serif;
-            font-size: 0.52rem;
-            font-weight: 700;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            margin-top: 3px;
-            transition: all 0.6s var(--ease-apple);
-
-            /* 核心流光质感特效 */
+            font-family: 'Manrope', sans-serif; font-size: 0.52rem; font-weight: 700; letter-spacing: 0.16em;
+            text-transform: uppercase; margin-top: 3px; transition: all 0.6s var(--ease-apple);
             background: linear-gradient(110deg, var(--accent-gold) 0%, var(--shimmer-shine) 45%, var(--accent-gold) 60%);
-            background-size: 250% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
+            background-size: 250% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
             animation: textShimmer 4.5s linear infinite;
         }
-
-        @keyframes textShimmer {
-            to { background-position: 250% center; }
-        }
-
-        /* Hover 高级互动：平滑膨胀与色彩渐变 */
-        .logo-container:hover .logo { 
-            transform: scale(1.05); 
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-        }
-        .logo-container:hover .logo-title {
-            letter-spacing: 0.12em;
-            color: var(--accent-gold);
-            transform: translateX(2px);
-        }
-        .logo-container:hover .logo-subtitle {
-            letter-spacing: 0.22em;
-            transform: translateX(2px);
-        }
+        @keyframes textShimmer { to { background-position: 250% center; } }
+        .logo-container:hover .logo { transform: scale(1.05); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+        .logo-container:hover .logo-title { letter-spacing: 0.12em; color: var(--accent-gold); transform: translateX(2px); }
+        .logo-container:hover .logo-subtitle { letter-spacing: 0.22em; transform: translateX(2px); }
 
         nav ul { display: flex; gap: 15px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
         nav ul li a {
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; 
-            color: var(--text-primary); opacity: 0.8;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary); opacity: 0.8;
             position: relative; padding: 5px 0; font-weight: 500;
         }
         nav ul li a::after {
             content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 1.5px;
-            background: var(--accent-gold); transition: all 0.4s var(--ease-apple);
-            transform: translateX(-50%);
+            background: var(--accent-gold); transition: all 0.4s var(--ease-apple); transform: translateX(-50%);
         }
         nav ul li a:hover { opacity: 1; }
         nav ul li a:hover::after { width: 100%; }
@@ -261,35 +192,24 @@
         .header-actions { display: flex; align-items: center; gap: 15px; }
 
         .control-btn {
-            background: rgba(125,125,125, 0.1);
-            border: 1px solid var(--border-glass);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 0;
-            font-family: 'Manrope', sans-serif;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-apple);
-            display: flex; align-items: center; justify-content: center; gap: 6px;
+            background: rgba(125,125,125, 0.1); border: 1px solid var(--border-glass); color: var(--text-primary);
+            padding: 8px 16px; border-radius: 0; font-family: 'Manrope', sans-serif; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.3s var(--ease-apple); display: flex; align-items: center; justify-content: center; gap: 6px;
             backdrop-filter: blur(5px);
         }
         .control-btn:hover { background: rgba(125,125,125, 0.2); transform: scale(1.05); }
         .control-btn:active { transform: scale(0.95); }
 
-        .theme-icon { width: 14px; height: 14px; fill: currentColor; }[data-theme="light"] .moon-icon { display: block; }[data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; }[data-theme="dark"] .sun-icon { display: block; }
+        .theme-icon { width: 14px; height: 14px; fill: currentColor; }
+        [data-theme="light"] .moon-icon { display: block; } [data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; } [data-theme="dark"] .sun-icon { display: block; }
         .lang-icon { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
         .language-switcher { position: relative; }
         .language-dropdown {
-            position: absolute; top: calc(100% + 15px); right: 0;
-            background: var(--bg-surface); 
-            border: 1px solid var(--border-glass);
-            border-radius: 0; padding: 8px;
-            min-width: 140px;
+            position: absolute; top: calc(100% + 15px); right: 0; background: var(--bg-surface); 
+            border: 1px solid var(--border-glass); border-radius: 0; padding: 8px; min-width: 140px;
             opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.98);
-            transition: all 0.3s var(--ease-apple);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            z-index: 1001;
+            transition: all 0.3s var(--ease-apple); box-shadow: 0 15px 40px rgba(0,0,0,0.2); z-index: 1001;
         }
         .language-switcher:hover .language-dropdown { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
         .language-dropdown li {
@@ -298,7 +218,7 @@
         }
         .language-dropdown li:hover { color: var(--text-primary); background: rgba(125,125,125,0.1); }
 
-        /* --- Hero Section (Video Background) --- */
+        /* --- Hero Section --- */
         .hero {
             height: 100vh; position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: center; text-align: center;
@@ -309,10 +229,7 @@
             animation: fadeUp 1s var(--ease-out-expo) forwards 0.2s; opacity: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.4);
         }
         
-        /* 默认底色为白色，在视频加载失败时展示 */
-        .hero-video-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background-color: #ffffff;
-        }
+        .hero-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background-color: #ffffff; }
         .hero-video {
             width: 100%; height: 100%; object-fit: cover; position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%); opacity: 1; transition: opacity 1.5s ease-in-out;
@@ -321,21 +238,14 @@
         .hero::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%); z-index: 0; pointer-events: none;
-        }[data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,0.8) 100%); }[data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
+        }
+        [data-theme="light"] .hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(242,242,247,0.8) 100%); }
+        [data-theme="dark"] .hero::after { background: radial-gradient(circle, transparent 0%, var(--bg-void) 90%); }
 
         .hero-content { z-index: 2; max-width: 1200px; padding: 0 20px; }
-        .hero h1 { text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-
-        .typewriter-cursor {
-            display: inline-block; width: 3px; background-color: var(--accent-gold);
-            animation: blink 1s step-end infinite; margin-left: 5px; vertical-align: middle;
-        }
+        .hero h1 { text-shadow: 0 4px 15px rgba(0,0,0,0.3); font-size: clamp(3rem, 7vw, 6.5rem); line-height: 1.1; margin-bottom: 25px; color: var(--text-primary); min-height: 1.2em; }
+        .typewriter-cursor { display: inline-block; width: 3px; background-color: var(--accent-gold); animation: blink 1s step-end infinite; margin-left: 5px; vertical-align: middle; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .hero h1 {
-            font-size: clamp(3rem, 7vw, 6.5rem); line-height: 1.1; margin-bottom: 25px;
-            color: var(--text-primary); min-height: 1.2em;
-        }
 
         .hero p {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text-primary); opacity: 0.95;
@@ -344,10 +254,7 @@
         }
 
         .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; animation: fadeUp 1s var(--ease-out-expo) forwards 0.8s; opacity: 0; }
-        .btn {
-            padding: 16px 42px; border-radius: 0; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;
-            transition: transform 0.2s var(--ease-apple), box-shadow 0.3s, background 0.3s; cursor: pointer; position: relative; overflow: hidden;
-        }
+        .btn { padding: 16px 42px; border-radius: 0; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; transition: transform 0.2s var(--ease-apple), box-shadow 0.3s, background 0.3s; cursor: pointer; position: relative; overflow: hidden; }
         .btn:active { transform: scale(0.96); }
         .btn-primary { background: var(--text-primary); color: var(--bg-void); border: 1px solid var(--text-primary); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
@@ -358,10 +265,7 @@
         /* --- Sections General --- */
         .section { padding: 160px 8%; position: relative; overflow: hidden; }
         .section-header { margin-bottom: 80px; }
-        .section-label {
-            font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; 
-            color: var(--accent-gold); margin-bottom: 25px; font-weight: 600; display: flex; align-items: center; gap: 15px;
-        }
+        .section-label { font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 25px; font-weight: 600; display: flex; align-items: center; gap: 15px; }
         .section-label::before { content: ''; width: 40px; height: 1px; background: var(--accent-gold); }
         .section-title { font-size: clamp(2.5rem, 5vw, 4rem); max-width: 900px; line-height: 1.1; color: var(--text-primary); }
         .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); }
@@ -382,10 +286,7 @@
         /* --- Mission --- */
         .mission-section { background: var(--bg-surface); }
         .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .mission-card {
-            background: var(--bg-card); border: 1px solid var(--border-glass); padding: 60px 40px; border-radius: 0;
-            transition: all 0.5s var(--ease-apple); position: relative; overflow: hidden;
-        }
+        .mission-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 60px 40px; border-radius: 0; transition: all 0.5s var(--ease-apple); position: relative; overflow: hidden; }
         .mission-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-color: var(--accent-gold); }
         .mission-card h3 { font-size: 1.8rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; color: var(--text-primary); }
         .mission-card p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
@@ -415,7 +316,7 @@
         /* --- Footer --- */
         footer { padding: 80px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
         .footer-top { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
-        .footer-brand .logo-container { justify-content: center; margin-bottom: 25px; animation: none; /* 去除底部进场重叠 */ }
+        .footer-brand .logo-container { justify-content: center; margin-bottom: 25px; animation: none; }
         .footer-brand .logo { height: 50px; margin-bottom: 0; }
         .footer-brand .logo-title { font-size: 1.45rem; }
         .footer-brand .logo-subtitle { font-size: 0.62rem; }
@@ -444,7 +345,7 @@
 
         .footer-btm { border-top: 1px solid var(--border-glass); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.85rem; flex-wrap: wrap; gap: 20px; }
 
-        /* --- Cookie Bar / Modal --- */
+        /* --- Cookie Bar --- */
         .cookie-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 99999; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.5s ease; }
         .cookie-overlay.active { display: flex; opacity: 1; }
         .cookie-modal { background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 40px; border-radius: 0; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.4s var(--ease-apple); }
@@ -468,12 +369,7 @@
         .mobile-menu a.active, .mobile-menu a:hover { color: var(--text-primary); transform: scale(1.1); }
         .mobile-close { position: absolute; top: 30px; right: 30px; font-size: 2.2rem; color: var(--text-primary); background: none; border: none; cursor: pointer; }
 
-        /* 移动端细致响应设计 */
-        @media (max-width: 1200px) {
-            nav ul { display: none; }
-            .mobile-menu-btn { display: block; }
-        }
-
+        @media (max-width: 1200px) { nav ul { display: none; } .mobile-menu-btn { display: block; } }
         @media (max-width: 1024px) {
             .about-grid, .contact-split { grid-template-columns: 1fr; gap: 60px; }
             .stats-row { grid-template-columns: 1fr 1fr; }
@@ -483,24 +379,20 @@
             .contact-map { height: 400px; }
             header { padding: 20px 5%; }
         }
-
         @media (max-width: 768px) {
             .logo { height: 28px; flex-shrink: 0; }
             .logo-container { gap: 6px; max-width: calc(100vw - 160px); } 
             .logo-text { overflow: hidden; }
             .logo-title { font-size: 0.8rem; letter-spacing: 0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
             .logo-subtitle { font-size: 0.35rem; letter-spacing: 0.05em; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-            
             .header-actions { gap: 8px; }
             .control-btn { padding: 6px 10px; font-size: 0.75rem; }
-            
             .hero h1 { font-size: 3rem; }
             .section { padding: 100px 6%; }
             .footer-btm { flex-direction: column; align-items: center; text-align: center; }
             .footer-social-wrapper { width: 100%; margin-bottom: 20px; }
             .social-links { justify-content: center; width: 100%; margin-bottom: 0; }
         }
-
         @media (max-width: 400px) {
             .logo { height: 24px; }
             .logo-container { max-width: calc(100vw - 120px); }
@@ -517,8 +409,8 @@
 <div id="cursor-spotlight"></div>
 
 <header id="header">
-    <a href="#home" class="logo-container">
-        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="维科生态协会(WEPO) Logo" class="logo">
+    <a href="https://wepo2021.org/#home" class="logo-container">
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
         <div class="logo-text">
             <span class="logo-title">维科生态协会</span>
             <span class="logo-subtitle">Weco Ecology Protection Organization</span>
@@ -526,18 +418,19 @@
     </a>
     <nav>
         <ul>
-            <li><a href="#home" data-i18n="nav.home">Home</a></li>
-            <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-            <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-            <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
-            <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
-            <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
-            <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
-            <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
+            <!-- 全部使用绝对路径，以防止多级子域名结构混乱 -->
+            <li><a href="https://wepo2021.org/#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="https://wepo2021.org/sp.html" data-i18n="nav.videos">Videos</a></li>
+            <li><a href="https://wepo2021.org/jz.html" data-i18n="nav.donate">Donate</a></li>
+            <li><a href="https://wepo2021.org/crlsh.html" data-i18n="footer.council">Council</a></li>
+            <li><a href="https://wepo2021.org/zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+            <li><a href="https://wepo2021.org/kf.html" data-i18n="nav.support">Support</a></li>
+            <li><a href="https://wepo2021.org/ndbg.html" data-i18n="footer.reports">Reports</a></li>
+            <li><a href="https://wepo2021.org/zc.html" data-i18n="footer.charter">Charter</a></li>
             <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
             <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
-            <li><a href="map.html" data-i18n="nav.global">Global Vision</a></li>
-            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+            <li><a href="https://wepo2021.org/map.html" data-i18n="nav.global">Global Vision</a></li>
+            <li><a href="https://wepo2021.org/#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
     </nav>
     <div class="header-actions">
@@ -573,24 +466,23 @@
 
 <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-    <a href="#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
-    <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
-    <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
-    <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
-    <a href="zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
-    <a href="kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
-    <a href="ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
-    <a href="zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
+    <a href="https://wepo2021.org/#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+    <a href="https://wepo2021.org/sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
+    <a href="https://wepo2021.org/jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
+    <a href="https://wepo2021.org/crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
+    <a href="https://wepo2021.org/zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
+    <a href="https://wepo2021.org/kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
+    <a href="https://wepo2021.org/ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
+    <a href="https://wepo2021.org/zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
     <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
     <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
-    <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
-    <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
+    <a href="https://wepo2021.org/map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
+    <a href="https://wepo2021.org/#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
 </div>
 
 <section class="hero" id="home">
     <div class="hero-video-container">
-        <!-- [修复] 增加 poster 属性，优化视频加载前的页面 LCP 绘制速度 -->
-        <video class="hero-video" autoplay loop muted playsinline poster="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
+        <video class="hero-video" autoplay loop muted playsinline>
             <source src="https://img.nickyam.com/file/BAACAgUAAyEGAASS2zT1AAI8Wmmq5rsfM5jrkErIn4A6QQ6Y3RBFAALAHQACXQNYVR7Ql6JBAAH_bDoE.mp4" type="video/mp4">
         </video>
     </div>
@@ -619,11 +511,10 @@
             <p data-i18n="about.p2">From mitigating climate change to reversing biodiversity loss, we are dedicated to finding and implementing practical, science-based solutions. Through rigorous policy advocacy, public education, and grassroots initiatives, we strive to bridge the gap between human development and ecological preservation.</p>
             <p data-i18n="about.p3">We actively collaborate with governmental bodies, indigenous communities, and multinational enterprises to drive systemic, long-lasting change. By deploying advanced ecological monitoring networks and championing green technologies, we empower millions of individuals to become proactive stewards of the Earth.</p>
             <p><span data-i18n="about.p4">Today, our dedicated professional teams and passionate volunteers span across more than 30 countries. Together, we are working tirelessly to protect vulnerable habitats, reshape sustainable policies, and inspire the next generation to safeguard our common home.</span> <br><br> <strong style="color:var(--accent-gold); font-size:1.25rem; font-family:'Playfair Display', serif;" data-i18n="slogan.text">Let's change the world.</strong></p>
-            <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500; display: inline-block; margin-top: 15px;" data-i18n="about.report_link">Read Our Annual Report →</a>
+            <a href="https://wepo2021.org/ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500; display: inline-block; margin-top: 15px;" data-i18n="about.report_link">Read Our Annual Report →</a>
         </div>
         <div class="about-image reveal stagger-2">
-            <!-- [修复] 优化图片 alt 属性，融入关键词 -->
-            <img src="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png" alt="维科生态协会(WEPO)核心团队与国际志愿者">
+            <img src="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png" alt="WEPO Team">
         </div>
     </div>
     <div class="stats-row reveal">
@@ -663,24 +554,21 @@
     <div class="programs-grid">
         <div class="program-item reveal stagger-1">
             <div class="program-img-box">
-                <!-- [修复] 优化图片 alt 属性 -->
-                <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="维科生态协会应对气候变化与碳中和项目">
+                <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Action">
             </div>
             <h3 data-i18n="programs.climate_title">Climate Action</h3>
             <p data-i18n="programs.climate_desc">Helping vulnerable communities adapt to climate change, advancing the global transition to renewable energy, and driving the ultimate goal of carbon neutrality.</p>
         </div>
         <div class="program-item reveal stagger-2">
             <div class="program-img-box">
-                <!-- [修复] 优化图片 alt 属性 -->
-                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="维科生态协会保护野生动植物与生物多样性">
+                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity">
             </div>
             <h3 data-i18n="programs.biodiversity_title">Biodiversity</h3>
             <p data-i18n="programs.biodiversity_desc">Protecting endangered wildlife, combating illegal poaching, and meticulously restoring degraded forests, wetlands, and marine ecosystems.</p>
         </div>
         <div class="program-item reveal stagger-3">
             <div class="program-img-box">
-                <!-- [修复] 优化图片 alt 属性 -->
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="维科生态协会推动绿色低碳的可持续城市建设">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities">
             </div>
             <h3 data-i18n="programs.cities_title">Sustainable Cities</h3>
             <p data-i18n="programs.cities_desc">Promoting green building standards, circular economy practices, and sustainable urban mobility to create zero-carbon, livable environments.</p>
@@ -716,8 +604,8 @@
 <footer>
     <div class="footer-top">
         <div class="footer-brand reveal">
-            <a href="#home" class="logo-container">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="维科生态协会(WEPO) Logo" class="logo">
+            <a href="https://wepo2021.org/#home" class="logo-container">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
                 <div class="logo-text" style="text-align: left;">
                     <span class="logo-title">维科生态协会</span>
                     <span class="logo-subtitle">Weco Ecology Protection Organization</span>
@@ -733,7 +621,6 @@
     </div>
 
     <div class="footer-info-blocks reveal">
-        <!-- Cookie 与法律信息模块 -->
         <div class="info-block">
             <svg class="info-icon" viewBox="0 0 24 24">
                 <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
@@ -741,14 +628,13 @@
             <div class="info-text">
                 <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
                 <div class="info-links">
-                    <a href="yszc.html" data-i18n="footer.privacy">隐私政策</a> 
+                    <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">隐私政策</a> 
                     <span class="divider">|</span> 
-                    <a href="yhxy.html" data-i18n="footer.terms">用户协议</a>
+                    <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">用户协议</a>
                 </div>
             </div>
         </div>
 
-        <!-- 技术架构与无障碍模块 -->
         <div class="info-block">
             <svg class="info-icon" viewBox="0 0 24 24">
                 <path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/>
@@ -770,7 +656,7 @@
                 <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)" title="关注我们 (X)">
                     <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
-                <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0?from_ssr=1&from_aid=1128&u_code=gcg88cd3l8l&did=MS4wLjABAAAApOZKYdjjNL2hrbLOpXr2uX5LQ0IrFWkl9M19obx6x-7Y78xCEFArJDfEpm61CUIM&iid=MS4wLjABAAAAiwe7HAbFuC4SIlp8wwSeWpjtph9qWdz_7EBGa5SEQLXRTjwmfQw0-R6iTMNykaNx&with_sec_did=1&sec_uid=MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0&timestamp=1768493778&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22997e9b9045cc4211874e6521d1e24156%22%2C%22from_user_id%22%3A685719490932988%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22general_search%22%2C%22personal_enter_method%22%3A%22search_card%22%7D&ug_share_id=b3965a0e8290a_1768493779395&activity_info=%7B%22social_author_id%22%3A%227550976214778315833%22%2C%22social_share_id%22%3A%22685719490932988_1768493778235%22%2C%22social_share_time%22%3A%221768493778%22%2C%22social_share_user_id%22%3A%22685719490932988%22%7D" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
+                <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
                     <svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook" title="关注我们 (Facebook)">
@@ -794,8 +680,8 @@
             <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
         </div>
         <div class="cookie-links">
-            <a href="yszc.html">Privacy Policy / 隐私政策</a>
-            <a href="yhxy.html">User Agreement / 用户协议</a>
+            <a href="https://wepo2021.org/yszc.html">Privacy Policy / 隐私政策</a>
+            <a href="https://wepo2021.org/yhxy.html">User Agreement / 用户协议</a>
         </div>
         <div class="cookie-actions">
             <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
@@ -859,11 +745,8 @@
             "contact.email_title": "邮箱",
             "contact.phone_title": "电话",
             "footer.about": "成立于2021年的维科生态协会(WEPO)致力于环境保护，期望通过科学与教育激发积极变革。",
-            "footer.links_title": "快速链接",
-            "footer.org_title": "组织架构",
             "footer.council": "理事会",
             "footer.volunteers": "志愿者网络",
-            "footer.resources_title": "资源中心",
             "footer.reports": "年度报告",
             "footer.charter": "组织章程",
             "footer.privacy": "隐私政策",
@@ -926,11 +809,8 @@
             "contact.email_title": "Email",
             "contact.phone_title": "Phone",
             "footer.about": "Founded in 2021, WEPO is dedicated to environmental protection, inspiring change through science and education.",
-            "footer.links_title": "Quick Links",
-            "footer.org_title": "Organization",
             "footer.council": "Council",
             "footer.volunteers": "Volunteers",
-            "footer.resources_title": "Resources",
             "footer.reports": "Reports",
             "footer.charter": "Charter",
             "footer.privacy": "Privacy Policy",
@@ -943,7 +823,7 @@
         },
         "es": {
             "lang.current": "ES",
-            "slogan.text": "Cambiemos el mundo. (Let's change the world.)",
+            "slogan.text": "Cambiemos el mundo.",
             "nav.home": "Inicio",
             "nav.about": "Acerca de",
             "nav.mission": "Misión",
@@ -993,11 +873,8 @@
             "contact.email_title": "Correo",
             "contact.phone_title": "Teléfono",
             "footer.about": "Fundada en 2021, WEPO está dedicada a la protección ambiental, inspirando el cambio mediante la ciencia.",
-            "footer.links_title": "Enlaces Rápidos",
-            "footer.org_title": "Organización",
             "footer.council": "Consejo",
             "footer.volunteers": "Voluntarios",
-            "footer.resources_title": "Recursos",
             "footer.reports": "Informes",
             "footer.charter": "Estatuto",
             "footer.privacy": "Privacidad",
@@ -1010,7 +887,7 @@
         },
         "fr": {
             "lang.current": "FR",
-            "slogan.text": "Changeons le monde. (Let's change the world.)",
+            "slogan.text": "Changeons le monde.",
             "nav.home": "Accueil",
             "nav.about": "À propos",
             "nav.mission": "Mission",
@@ -1026,7 +903,7 @@
             "hero.description": "Fondée en 2021, WEPO est une force environnementale émergente engagée à relever les défis écologiques par la recherche, le plaidoyer et l'éducation.",
             "hero.btn_feedback": "En savoir plus",
             "hero.btn_join": "Rejoindre",
-            "about.subtitle": "Construire un avenir durable où l'humain et la nature coexisten.",
+            "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
             "about.p1": "Fondée en 2021 et basée à Chongqing, en Chine, WEPO est une ONG jeune et dynamique qui contribue activement au développement durable mondial.",
             "about.p2": "De l'atténuation du changement climatique à la protection de la biodiversité, nous explorons et mettons en œuvre des solutions pratiques basées sur la science.",
             "about.p3": "Nous nous efforçons de nouer des partenariats avec les gouvernements locaux, les communautés et les entreprises pour favoriser un changement positif.",
@@ -1060,11 +937,8 @@
             "contact.email_title": "Email",
             "contact.phone_title": "Téléphone",
             "footer.about": "Fondée en 2021, WEPO est dédiée à la protection de l'environnement, inspirant le changement par la science.",
-            "footer.links_title": "Liens Rapides",
-            "footer.org_title": "Organisation",
-            "footer.council": "Consejo",
+            "footer.council": "Conseil",
             "footer.volunteers": "Bénévoles",
-            "footer.resources_title": "Ressources",
             "footer.reports": "Rapports",
             "footer.charter": "Charte",
             "footer.privacy": "Confidentialité",
@@ -1077,7 +951,7 @@
         },
         "ru": {
             "lang.current": "RU",
-            "slogan.text": "Давайте изменим мир. (Let's change the world.)",
+            "slogan.text": "Давайте изменим мир.",
             "nav.home": "Главная",
             "nav.about": "О нас",
             "nav.mission": "Миссия",
@@ -1127,11 +1001,8 @@
             "contact.email_title": "Email",
             "contact.phone_title": "Телефон",
             "footer.about": "Основанная в 2021 году, WEPO посвящена защите окружающей среды, вдохновляя на изменения через науку.",
-            "footer.links_title": "Быстрые Ссылки",
-            "footer.org_title": "Организация",
             "footer.council": "Совет",
             "footer.volunteers": "Волонтеры",
-            "footer.resources_title": "Ресурсы",
             "footer.reports": "Отчеты",
             "footer.charter": "Устав",
             "footer.privacy": "Конфиденциальность",
@@ -1144,7 +1015,7 @@
         },
         "ar": {
             "lang.current": "العربية",
-            "slogan.text": "دعونا نغير العالم. (Let's change the world.)",
+            "slogan.text": "دعونا نغير العالم.",
             "nav.home": "الرئيسية",
             "nav.about": "معلومات عنا",
             "nav.mission": "المهمة",
@@ -1194,11 +1065,8 @@
             "contact.email_title": "البريد الإلكتروني",
             "contact.phone_title": "الهاتف",
             "footer.about": "تأسست WEPO في عام 2021، وهي مكرسة لحماية البيئة وإلهام التغيير من خلال العلم.",
-            "footer.links_title": "روابط سريعة",
-            "footer.org_title": "المنظمة",
             "footer.council": "المجلس",
             "footer.volunteers": "المتطوعون",
-            "footer.resources_title": "الموارد",
             "footer.reports": "التقارير",
             "footer.charter": "الميثاق",
             "footer.privacy": "الخصوصية",
@@ -1231,9 +1099,23 @@
 
     // --- Logic Control ---
     const themeBtn = document.getElementById('themeBtn');
-    function setTheme(theme) { document.documentElement.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); }
-    function initTheme() { const savedTheme = localStorage.getItem('theme'); if (savedTheme) { setTheme(savedTheme); } else { const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; setTheme(prefersDark ? 'dark' : 'light'); } }
-    themeBtn.addEventListener('click', () => { const current = document.documentElement.getAttribute('data-theme'); setTheme(current === 'dark' ? 'light' : 'dark'); });
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+    }
+    themeBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
     initTheme();
 
     function setLanguage(lang) {
@@ -1244,7 +1126,9 @@
                 if (key === 'hero.title') {
                     document.getElementById('hero-title-source').textContent = translations[lang][key];
                     typeWriter(translations[lang][key], 'hero-title', 80);
-                } else { element.innerHTML = translations[lang][key]; }
+                } else {
+                    element.innerHTML = translations[lang][key]; 
+                }
             }
         });
         document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -1253,22 +1137,50 @@
     const savedLang = localStorage.getItem('lang') || 'en';
     setTimeout(() => setLanguage(savedLang), 100);
 
-    document.querySelectorAll('.language-dropdown li').forEach(li => { li.addEventListener('click', () => { setLanguage(li.getAttribute('data-lang')); }); });
+    document.querySelectorAll('.language-dropdown li').forEach(li => {
+        li.addEventListener('click', () => {
+            setLanguage(li.getAttribute('data-lang'));
+        });
+    });
 
     const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } }); }, observerOptions);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('active'); }
+        });
+    }, observerOptions);
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    window.addEventListener('scroll', () => { const header = document.querySelector('header'); header.classList.toggle('scrolled', window.scrollY > 20); });
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        header.classList.toggle('scrolled', window.scrollY > 20);
+    });
 
     const spot = document.getElementById('cursor-spotlight');
-    document.addEventListener('mousemove', (e) => { spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`; });
+    document.addEventListener('mousemove', (e) => {
+        spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    });
 
-    function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function toggleMobileMenu() {
+        document.getElementById('mobileMenu').classList.toggle('open');
+    }
 
-    function initCookieLogic() { const status = localStorage.getItem('cookieStatus'); const cookieBar = document.getElementById('cookieBar'); if (status !== 'accepted') { cookieBar.classList.add('active'); document.body.classList.add('cookie-locked'); } }
-    function acceptCookie() { document.getElementById('cookieBar').classList.remove('active'); document.body.classList.remove('cookie-locked'); localStorage.setItem('cookieStatus', 'accepted'); }
-    function declineCookie() { window.location.href = "https://bing.com"; }
+    function initCookieLogic() {
+        const status = localStorage.getItem('cookieStatus');
+        const cookieBar = document.getElementById('cookieBar');
+        // If cookie wasn't accepted, DO NOT add `body.cookie-locked` anymore!
+        // This is the critical fix for SEO. The modal shows, but the height isn't cropped to 100vh.
+        if (status !== 'accepted') {
+            cookieBar.classList.add('active');
+        }
+    }
+    function acceptCookie() {
+        document.getElementById('cookieBar').classList.remove('active');
+        localStorage.setItem('cookieStatus', 'accepted');
+    }
+    function declineCookie() {
+        window.location.href = "https://bing.com";
+    }
     initCookieLogic();
 
     document.getElementById('year').textContent = new Date().getFullYear();
