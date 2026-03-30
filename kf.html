@@ -13,6 +13,16 @@
     <!-- --- SEO: 网站目录与规范化链接 --- -->
     <link rel="canonical" href="https://wepo2021.org/kf.html">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
+    
+    <!-- 国际化 SEO 声明，告诉搜索引擎页面支持的多语言 -->
+    <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/kf.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/kf.html">
+    <link rel="alternate" hreflang="en" href="https://wepo2021.org/kf.html">
+    <link rel="alternate" hreflang="es" href="https://wepo2021.org/kf.html">
+    <link rel="alternate" hreflang="fr" href="https://wepo2021.org/kf.html">
+    <link rel="alternate" hreflang="ru" href="https://wepo2021.org/kf.html">
+    <link rel="alternate" hreflang="ar" href="https://wepo2021.org/kf.html">
+
     <meta name="theme-color" content="#0a0a0a">
 
     <!-- --- SEO: Open Graph (优化微信/社交媒体分享显示) --- -->
@@ -111,7 +121,7 @@
             min-height: 100vh;
         }
 
-        body.cookie-locked { overflow: hidden; height: 100vh; }
+        /* body.cookie-locked 已删除，确保不阻挡爬虫 */
 
         /* Spotlight */
         #cursor-spotlight {
@@ -412,7 +422,7 @@
     <div id="cursor-spotlight"></div>
 
     <header id="header">
-        <a href="index.html#home" class="logo-container">
+        <a href="https://wepo2021.org/#home" class="logo-container">
             <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
             <div class="logo-text">
                 <span class="logo-title">维科生态协会</span>
@@ -421,18 +431,19 @@
         </a>
         <nav>
             <ul>
-                <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
-                <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                <li><a href="crlsh.html" data-i18n="footer.council">Council</a></li>
-                <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
-                <li><a href="kf.html" class="active" data-i18n="nav.support">Support</a></li>
-                <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
-                <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
+                <!-- 全部应用绝对路径 -->
+                <li><a href="https://wepo2021.org/#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="https://wepo2021.org/sp.html" data-i18n="nav.videos">Videos</a></li>
+                <li><a href="https://wepo2021.org/jz.html" data-i18n="nav.donate">Donate</a></li>
+                <li><a href="https://wepo2021.org/crlsh.html" data-i18n="footer.council">Council</a></li>
+                <li><a href="https://wepo2021.org/zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+                <li><a href="https://wepo2021.org/kf.html" class="active" data-i18n="nav.support">Support</a></li>
+                <li><a href="https://wepo2021.org/ndbg.html" data-i18n="footer.reports">Reports</a></li>
+                <li><a href="https://wepo2021.org/zc.html" data-i18n="footer.charter">Charter</a></li>
                 <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
                 <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
-                <li><a href="map.html" data-i18n="nav.global">Global Vision</a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="https://wepo2021.org/map.html" data-i18n="nav.global">Global Vision</a></li>
+                <li><a href="https://wepo2021.org/#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
         </nav>
         <div class="header-actions">
@@ -462,18 +473,19 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-        <a href="index.html#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
-        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
-        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
-        <a href="crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
-        <a href="zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
-        <a href="kf.html" class="active" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
-        <a href="ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
-        <a href="zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
+        <!-- 全部应用绝对路径 -->
+        <a href="https://wepo2021.org/#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+        <a href="https://wepo2021.org/sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
+        <a href="https://wepo2021.org/jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
+        <a href="https://wepo2021.org/crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
+        <a href="https://wepo2021.org/zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
+        <a href="https://wepo2021.org/kf.html" class="active" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
+        <a href="https://wepo2021.org/ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
+        <a href="https://wepo2021.org/zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
         <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
         <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
-        <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
-        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
+        <a href="https://wepo2021.org/map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
+        <a href="https://wepo2021.org/#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
     </div>
 
     <!-- AI Support Chat Section -->
@@ -531,8 +543,9 @@
                 <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
             </div>
             <div class="cookie-links">
-                <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
-                <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
+                <!-- 绝对路径修复 -->
+                <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">User Agreement</a>
             </div>
             <div class="cookie-actions">
                 <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
@@ -544,7 +557,7 @@
     <footer>
         <div class="footer-top">
             <div class="footer-brand reveal">
-                <a href="index.html#home" class="logo-container">
+                <a href="https://wepo2021.org/#home" class="logo-container">
                     <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
                     <div class="logo-text" style="text-align: left;">
                         <span class="logo-title">维科生态协会</span>
@@ -567,7 +580,7 @@
                 <div class="info-text">
                     <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
                     <div class="info-links">
-                        <a href="yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="yhxy.html" data-i18n="footer.terms">用户协议</a>
+                        <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">用户协议</a>
                     </div>
                 </div>
             </div>
@@ -585,11 +598,21 @@
             <div class="footer-social-wrapper">
                 <span data-i18n="footer.follow_us" style="color: var(--text-primary); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em;">关注我们</span>
                 <div class="social-links">
-                    <a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok" title="关注我们 (TikTok)"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
-                    <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)" title="关注我们 (X)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-                    <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg></a>
-                    <a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook" title="关注我们 (Facebook)"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
-                    <a href="https://www.youtube.com/@WEPO2021" target="_blank" class="social-icon" aria-label="YouTube" title="关注我们 (YouTube)"><svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.66 2.66 0 0 0-1.874-1.884C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.708.442a2.66 2.66 0 0 0-1.874 1.884C2 7.852 2 12 2 12s0 4.148.418 5.814a2.66 2.66 0 0 0 1.874 1.884C5.947 20.14 12 20.14 12 20.14s6.053 0 7.708-.442a2.66 2.66 0 0 0 1.874-1.884C22 16.148 22 12 22 12s0-4.148-.418-5.814zm-11.82 8.52V9.294l5.353 2.706-5.353 2.706z"/></svg></a>
+                    <a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok" title="关注我们 (TikTok)">
+                        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                    <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)" title="关注我们 (X)">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
+                        <svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook" title="关注我们 (Facebook)">
+                        <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@WEPO2021" target="_blank" class="social-icon" aria-label="YouTube" title="关注我们 (YouTube)">
+                        <svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.66 2.66 0 0 0-1.874-1.884C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.708.442a2.66 2.66 0 0 0-1.874 1.884C2 7.852 2 12 2 12s0 4.148.418 5.814a2.66 2.66 0 0 0 1.874 1.884C5.947 20.14 12 20.14 12 20.14s6.053 0 7.708-.442a2.66 2.66 0 0 0 1.874-1.884C22 16.148 22 12 22 12s0-4.148-.418-5.814zm-11.82 8.52V9.294l5.353 2.706-5.353 2.706z"/></svg>
+                    </a>
                 </div>
             </div>
             <p>&copy; <span id="year">2026</span> WEPO. All rights reserved.</p>
@@ -945,14 +968,12 @@
             li.addEventListener('click', () => { setLanguage(li.getAttribute('data-lang')); clearChat(); });
         });
 
-        // Cookie Bar
+        // Cookie Bar (SEO Fix: Removes body class locking)
         if (localStorage.getItem('cookieStatus') !== 'accepted') {
             document.getElementById('cookieBar').classList.add('active');
-            document.body.classList.add('cookie-locked');
         }
         function acceptCookie() {
             document.getElementById('cookieBar').classList.remove('active');
-            document.body.classList.remove('cookie-locked');
             localStorage.setItem('cookieStatus', 'accepted');
         }
         function declineCookie() { window.location.href = "https://bing.com"; }
