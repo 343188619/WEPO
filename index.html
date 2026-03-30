@@ -5,15 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- --- SEO --- -->
+    <!-- --- SEO: 基础信息 --- -->
     <title>维科生态协会 (WEPO) | Weco Ecology Protection Organization</title>
-    <meta name="description" content="成立于2021年，维科生态协会 (WEPO) 是一家致力于应对气候变化、保护生物多样性与推动可持续发展的年轻、非营利性环保组织。Founded in 2021, WEPO is an emerging non-profit organization dedicated to climate action and sustainable development.">
+    <!-- [修复] 优化 Meta Description 长度，控制在 160 字符内，避免被搜索引擎截断 -->
+    <meta name="description" content="维科生态协会(WEPO)成立于2021年，是一家致力于应对气候变化、保护生物多样性与推动可持续发展的非营利环保组织。WEPO is an NGO dedicated to climate action and biodiversity.">
     <meta name="keywords" content="维科生态协会, WEPO, 新兴环保组织, 环保机构, 气候变化, 生物多样性, 可持续发展, Weco Ecology Protection Organization, Environmental NGO, Climate Change, Biodiversity, 碳中和, 青年环保力量">
     <meta name="author" content="WEPO Council">
     <link rel="canonical" href="https://wepo2021.org/">
     <meta name="theme-color" content="#0a0a0a">
 
-    <!-- --- itemap --- -->
+    <!-- --- 多语言抓取声明 (hreflang) --- -->
+    <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/" />
+    <link rel="alternate" hreflang="en" href="https://wepo2021.org/" />
+    <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/" />
+
+    <!-- --- 性能优化: 首屏视频预加载 --- -->
+    <link rel="preload" href="https://img.nickyam.com/file/BAACAgUAAyEGAASS2zT1AAI8Wmmq5rsfM5jrkErIn4A6QQ6Y3RBFAALAHQACXQNYVR7Ql6JBAAH_bDoE.mp4" as="video" type="video/mp4">
+
+    <!-- --- Sitemap --- -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
 
     <!-- --- SEO: Open Graph (优化微信/社交媒体分享显示) --- -->
@@ -509,7 +518,7 @@
 
 <header id="header">
     <a href="#home" class="logo-container">
-        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+        <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="维科生态协会(WEPO) Logo" class="logo">
         <div class="logo-text">
             <span class="logo-title">维科生态协会</span>
             <span class="logo-subtitle">Weco Ecology Protection Organization</span>
@@ -580,7 +589,8 @@
 
 <section class="hero" id="home">
     <div class="hero-video-container">
-        <video class="hero-video" autoplay loop muted playsinline>
+        <!-- [修复] 增加 poster 属性，优化视频加载前的页面 LCP 绘制速度 -->
+        <video class="hero-video" autoplay loop muted playsinline poster="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
             <source src="https://img.nickyam.com/file/BAACAgUAAyEGAASS2zT1AAI8Wmmq5rsfM5jrkErIn4A6QQ6Y3RBFAALAHQACXQNYVR7Ql6JBAAH_bDoE.mp4" type="video/mp4">
         </video>
     </div>
@@ -612,7 +622,8 @@
             <a href="ndbg.html" style="color: var(--accent-gold); border-bottom: 1px solid var(--accent-gold); padding-bottom: 3px; font-weight: 500; display: inline-block; margin-top: 15px;" data-i18n="about.report_link">Read Our Annual Report →</a>
         </div>
         <div class="about-image reveal stagger-2">
-            <img src="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png" alt="WEPO Team">
+            <!-- [修复] 优化图片 alt 属性，融入关键词 -->
+            <img src="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png" alt="维科生态协会(WEPO)核心团队与国际志愿者">
         </div>
     </div>
     <div class="stats-row reveal">
@@ -652,21 +663,24 @@
     <div class="programs-grid">
         <div class="program-item reveal stagger-1">
             <div class="program-img-box">
-                <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Action">
+                <!-- [修复] 优化图片 alt 属性 -->
+                <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="维科生态协会应对气候变化与碳中和项目">
             </div>
             <h3 data-i18n="programs.climate_title">Climate Action</h3>
             <p data-i18n="programs.climate_desc">Helping vulnerable communities adapt to climate change, advancing the global transition to renewable energy, and driving the ultimate goal of carbon neutrality.</p>
         </div>
         <div class="program-item reveal stagger-2">
             <div class="program-img-box">
-                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity">
+                <!-- [修复] 优化图片 alt 属性 -->
+                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="维科生态协会保护野生动植物与生物多样性">
             </div>
             <h3 data-i18n="programs.biodiversity_title">Biodiversity</h3>
             <p data-i18n="programs.biodiversity_desc">Protecting endangered wildlife, combating illegal poaching, and meticulously restoring degraded forests, wetlands, and marine ecosystems.</p>
         </div>
         <div class="program-item reveal stagger-3">
             <div class="program-img-box">
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities">
+                <!-- [修复] 优化图片 alt 属性 -->
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="维科生态协会推动绿色低碳的可持续城市建设">
             </div>
             <h3 data-i18n="programs.cities_title">Sustainable Cities</h3>
             <p data-i18n="programs.cities_desc">Promoting green building standards, circular economy practices, and sustainable urban mobility to create zero-carbon, livable environments.</p>
@@ -703,7 +717,7 @@
     <div class="footer-top">
         <div class="footer-brand reveal">
             <a href="#home" class="logo-container">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
+                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="维科生态协会(WEPO) Logo" class="logo">
                 <div class="logo-text" style="text-align: left;">
                     <span class="logo-title">维科生态协会</span>
                     <span class="logo-subtitle">Weco Ecology Protection Organization</span>
@@ -1012,7 +1026,7 @@
             "hero.description": "Fondée en 2021, WEPO est une force environnementale émergente engagée à relever les défis écologiques par la recherche, le plaidoyer et l'éducation.",
             "hero.btn_feedback": "En savoir plus",
             "hero.btn_join": "Rejoindre",
-            "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
+            "about.subtitle": "Construire un avenir durable où l'humain et la nature coexisten.",
             "about.p1": "Fondée en 2021 et basée à Chongqing, en Chine, WEPO est une ONG jeune et dynamique qui contribue activement au développement durable mondial.",
             "about.p2": "De l'atténuation du changement climatique à la protection de la biodiversité, nous explorons et mettons en œuvre des solutions pratiques basées sur la science.",
             "about.p3": "Nous nous efforçons de nouer des partenariats avec les gouvernements locaux, les communautés et les entreprises pour favoriser un changement positif.",
@@ -1048,7 +1062,7 @@
             "footer.about": "Fondée en 2021, WEPO est dédiée à la protection de l'environnement, inspirant le changement par la science.",
             "footer.links_title": "Liens Rapides",
             "footer.org_title": "Organisation",
-            "footer.council": "Conseil",
+            "footer.council": "Consejo",
             "footer.volunteers": "Bénévoles",
             "footer.resources_title": "Ressources",
             "footer.reports": "Rapports",
