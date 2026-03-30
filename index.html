@@ -42,34 +42,104 @@
     <meta name="twitter:description" content="成立于2021年，维科生态协会 (WEPO) 是一家积极投身于气候变化应对与生物多样性保护的年轻非营利组织。">
     <meta name="twitter:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
 
-    <!-- --- SEO: 结构化数据 --- -->
+    <!-- --- SEO: 核心聚合子链接与组织图谱结构化数据 (JSON-LD) --- -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "NGO",
-      "name": "Weco Ecology Protection Organization",
-      "alternateName":["WEPO", "维科生态协会", "Weco EPO"],
-      "url": "https://wepo2021.org",
-      "logo": "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg",
-      "description": "成立于2021年，维科生态协会 (WEPO) 是一家年轻且充满活力的国际非营利组织，正积极投身于气候变化应对与生物多样性保护事业。",
-      "foundingDate": "2021",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "No. 10 Xingsheng Ave",
-        "addressLocality": "Chongqing",
-        "addressCountry": "CN"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+86-023-86161804",
-        "contactType": "customer service",
-        "email": "xcb@wepo2021.org",
-        "areaServed": "Global",
-        "availableLanguage":["Chinese", "English"]
-      },
-      "sameAs":[
-        "https://www.facebook.com/profile.php?id=61573689994100",
-        "https://www.youtube.com/@WEPO2021"
+      "@graph":[
+        {
+          "@type": "WebSite",
+          "@id": "https://wepo2021.org/#website",
+          "url": "https://wepo2021.org/",
+          "name": "维科生态协会 (WEPO)",
+          "alternateName": ["Weco Ecology Protection Organization", "WEPO"],
+          "description": "成立于2021年，致力于应对气候变化、保护生物多样性与推动可持续发展的非营利性环保组织。",
+          "publisher": {
+            "@id": "https://wepo2021.org/#organization"
+          }
+        },
+        {
+          "@type": "NGO",
+          "@id": "https://wepo2021.org/#organization",
+          "name": "Weco Ecology Protection Organization",
+          "alternateName":["WEPO", "维科生态协会", "Weco EPO"],
+          "url": "https://wepo2021.org/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg"
+          },
+          "description": "成立于2021年，维科生态协会 (WEPO) 是一家年轻且充满活力的国际非营利组织，正积极投身于气候变化应对与生物多样性保护事业。",
+          "foundingDate": "2021",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "No. 10 Xingsheng Ave",
+            "addressLocality": "Chongqing",
+            "addressCountry": "CN"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+86-023-86161804",
+            "contactType": "customer service",
+            "email": "xcb@wepo2021.org",
+            "areaServed": "Global",
+            "availableLanguage": ["Chinese", "English"]
+          },
+          "sameAs":[
+            "https://www.tiktok.com/@wepo2021",
+            "https://x.com/wepo2011",
+            "https://www.youtube.com/@WEPO2021",
+            "https://www.facebook.com/profile.php?id=61573689994100",
+            "https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0"
+          ]
+        },
+        {
+          "@type": "ItemList",
+          "name": "WEPO Core Subpages",
+          "itemListElement":[
+            {
+              "@type": "SiteNavigationElement",
+              "position": 1,
+              "name": "志愿者网络 (Volunteers)",
+              "url": "https://wepo2021.org/zyz.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 2,
+              "name": "环保视频 (Videos)",
+              "url": "https://wepo2021.org/sp.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 3,
+              "name": "捐赠支持 (Donate)",
+              "url": "https://wepo2021.org/jz.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 4,
+              "name": "常任理事会 (Council)",
+              "url": "https://wepo2021.org/crlsh.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 5,
+              "name": "证书查询 (Cert Query)",
+              "url": "https://query.wepo2021.org/"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 6,
+              "name": "年度报告 (Reports)",
+              "url": "https://wepo2021.org/ndbg.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 7,
+              "name": "全球视野 (Global Vision)",
+              "url": "https://wepo2021.org/map.html"
+            }
+          ]
+        }
       ]
     }
     </script>
@@ -124,9 +194,6 @@
             line-height: 1.6;
             transition: background-color 0.6s var(--ease-apple), color 0.6s var(--ease-apple);
         }
-
-        /* 移除 body.cookie-locked 对高度的限制，保证爬虫能够完整抓取 DOM */
-        /* body.cookie-locked { overflow: hidden; height: 100vh; } <-- 此行已删除以利于 SEO */
 
         /* Spotlight */
         #cursor-spotlight {
@@ -419,7 +486,7 @@
     <nav>
         <ul>
             <!-- 全部使用绝对路径，以防止多级子域名结构混乱 -->
-            <li><a href="https://wepo2021.org/#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="https://wepo2021.org/#home" class="active" data-i18n="nav.home">Home</a></li>
             <li><a href="https://wepo2021.org/sp.html" data-i18n="nav.videos">Videos</a></li>
             <li><a href="https://wepo2021.org/jz.html" data-i18n="nav.donate">Donate</a></li>
             <li><a href="https://wepo2021.org/crlsh.html" data-i18n="footer.council">Council</a></li>
@@ -466,7 +533,7 @@
 
 <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-    <a href="https://wepo2021.org/#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+    <a href="https://wepo2021.org/#home" class="active" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
     <a href="https://wepo2021.org/sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
     <a href="https://wepo2021.org/jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
     <a href="https://wepo2021.org/crlsh.html" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
@@ -667,7 +734,6 @@
                 </a>
             </div>
         </div>
-        
         <p>&copy; <span id="year">2026</span> WEPO. All rights reserved.</p>
     </div>
 </footer>
@@ -840,7 +906,7 @@
             "hero.btn_feedback": "Más Información",
             "hero.btn_join": "Únete",
             "about.subtitle": "Construyendo un futuro sostenible donde humanos y naturaleza coexisten.",
-            "about.p1": "Fundada en 2021 con sede en Chongqing, China, WEPO es una ONG joven y dinámica que contribuye activamente al desarrollo sostenible global.",
+            "about.p1": "Fundada en 2021 con sede en Chongqing, China, WEPO es una ONG joven y dinámica que contribue activamente al desarrollo sostenible global.",
             "about.p2": "Desde mitigar el cambio climático hasta proteger la biodiversidad, nos dedicamos a explorar e implementar soluciones prácticas basadas en la ciencia.",
             "about.p3": "Buscamos construir asociaciones con gobiernos locales, comunidades y empresas para impulsar un cambio ambiental positivo. Al apoyar el monitoreo ecológico, empoderamos a las personas.",
             "about.p4": "Hoy, nuestro trabajo involucra a seguidores y voluntarios de más de 30 países. Trabajamos continuamente para proteger hábitats vulnerables y promover conceptos sostenibles.",
