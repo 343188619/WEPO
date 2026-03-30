@@ -13,6 +13,16 @@
     <!-- --- SEO: 网站目录与规范化链接 --- -->
     <link rel="canonical" href="https://wepo2021.org/crlsh.html">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
+
+    <!-- 国际化 SEO 声明，告诉搜索引擎页面支持的多语言 -->
+    <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/crlsh.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/crlsh.html">
+    <link rel="alternate" hreflang="en" href="https://wepo2021.org/crlsh.html">
+    <link rel="alternate" hreflang="es" href="https://wepo2021.org/crlsh.html">
+    <link rel="alternate" hreflang="fr" href="https://wepo2021.org/crlsh.html">
+    <link rel="alternate" hreflang="ru" href="https://wepo2021.org/crlsh.html">
+    <link rel="alternate" hreflang="ar" href="https://wepo2021.org/crlsh.html">
+
     <meta name="theme-color" content="#0a0a0a">
 
     <!-- --- SEO: Open Graph (优化微信/社交媒体分享显示) --- -->
@@ -101,8 +111,6 @@
             min-height: 100vh;
         }
 
-        body.cookie-locked { overflow: hidden; height: 100vh; }
-
         /* Spotlight */
         #cursor-spotlight {
             position: fixed; top: 0; left: 0; width: 800px; height: 800px;
@@ -127,7 +135,7 @@
             padding: 15px 5%; border-bottom: 1px solid var(--border-glass);
         }
 
-        /* --- 高级 Logo 与品牌文字动画样式 (与主页同步) --- */
+        /* --- 高级 Logo 与品牌文字动画样式 --- */
         .logo-container {
             display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer;
             animation: logoEntrance 1.2s var(--ease-out-expo) backwards 0.3s;
@@ -330,7 +338,7 @@
     <div id="cursor-spotlight"></div>
 
     <header id="header">
-        <a href="index.html#home" class="logo-container">
+        <a href="https://wepo2021.org/#home" class="logo-container">
             <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
             <div class="logo-text">
                 <span class="logo-title">维科生态协会</span>
@@ -338,19 +346,20 @@
             </div>
         </a>
         <nav>
+            <!-- 全部应用绝对路径 -->
             <ul>
-                <li><a href="index.html#home" data-i18n="nav.home">Home</a></li>
-                <li><a href="sp.html" data-i18n="nav.videos">Videos</a></li>
-                <li><a href="jz.html" data-i18n="nav.donate">Donate</a></li>
-                <li><a href="crlsh.html" class="active" data-i18n="footer.council">Council</a></li>
-                <li><a href="zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
-                <li><a href="kf.html" data-i18n="nav.support">Support</a></li>
-                <li><a href="ndbg.html" data-i18n="footer.reports">Reports</a></li>
-                <li><a href="zc.html" data-i18n="footer.charter">Charter</a></li>
+                <li><a href="https://wepo2021.org/#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="https://wepo2021.org/sp.html" data-i18n="nav.videos">Videos</a></li>
+                <li><a href="https://wepo2021.org/jz.html" data-i18n="nav.donate">Donate</a></li>
+                <li><a href="https://wepo2021.org/crlsh.html" class="active" data-i18n="footer.council">Council</a></li>
+                <li><a href="https://wepo2021.org/zyz.html" data-i18n="footer.volunteers">Volunteers</a></li>
+                <li><a href="https://wepo2021.org/kf.html" data-i18n="nav.support">Support</a></li>
+                <li><a href="https://wepo2021.org/ndbg.html" data-i18n="footer.reports">Reports</a></li>
+                <li><a href="https://wepo2021.org/zc.html" data-i18n="footer.charter">Charter</a></li>
                 <li><a href="https://weather.wepo2021.org" target="_blank" data-i18n="nav.weather">WEPO Weather</a></li>
                 <li><a href="https://query.wepo2021.org/" target="_blank" data-i18n="nav.query">Cert Query</a></li>
-                <li><a href="map.html" data-i18n="nav.global">Global Vision</a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="https://wepo2021.org/map.html" data-i18n="nav.global">Global Vision</a></li>
+                <li><a href="https://wepo2021.org/#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
         </nav>
         <div class="header-actions">
@@ -380,18 +389,19 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
-        <a href="index.html#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
-        <a href="sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
-        <a href="jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
-        <a href="crlsh.html" class="active" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
-        <a href="zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
-        <a href="kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
-        <a href="ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
-        <a href="zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
+        <!-- 全部应用绝对路径 -->
+        <a href="https://wepo2021.org/#home" onclick="toggleMobileMenu()" data-i18n="nav.home">Home</a>
+        <a href="https://wepo2021.org/sp.html" onclick="toggleMobileMenu()" data-i18n="nav.videos">Videos</a>
+        <a href="https://wepo2021.org/jz.html" onclick="toggleMobileMenu()" data-i18n="nav.donate">Donate</a>
+        <a href="https://wepo2021.org/crlsh.html" class="active" onclick="toggleMobileMenu()" data-i18n="footer.council">Council</a>
+        <a href="https://wepo2021.org/zyz.html" onclick="toggleMobileMenu()" data-i18n="footer.volunteers">Volunteers</a>
+        <a href="https://wepo2021.org/kf.html" onclick="toggleMobileMenu()" data-i18n="nav.support">Support</a>
+        <a href="https://wepo2021.org/ndbg.html" onclick="toggleMobileMenu()" data-i18n="footer.reports">Reports</a>
+        <a href="https://wepo2021.org/zc.html" onclick="toggleMobileMenu()" data-i18n="footer.charter">Charter</a>
         <a href="https://weather.wepo2021.org" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.weather">WEPO Weather</a>
         <a href="https://query.wepo2021.org/" target="_blank" onclick="toggleMobileMenu()" data-i18n="nav.query">Cert Query</a>
-        <a href="map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
-        <a href="index.html#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
+        <a href="https://wepo2021.org/map.html" onclick="toggleMobileMenu()" data-i18n="nav.global">Global Vision</a>
+        <a href="https://wepo2021.org/#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
     </div>
 
     <!-- Council Header Section -->
@@ -659,7 +669,7 @@
     <footer>
         <div class="footer-top">
             <div class="footer-brand reveal">
-                <a href="index.html#home" class="logo-container">
+                <a href="https://wepo2021.org/#home" class="logo-container">
                     <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
                     <div class="logo-text" style="text-align: left;">
                         <span class="logo-title">维科生态协会</span>
@@ -682,7 +692,7 @@
                 <div class="info-text">
                     <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
                     <div class="info-links">
-                        <a href="yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="yhxy.html" data-i18n="footer.terms">用户协议</a>
+                        <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">用户协议</a>
                     </div>
                 </div>
             </div>
@@ -706,7 +716,7 @@
                     <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)" title="关注我们 (X)">
                         <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0?from_ssr=1&from_aid=1128&u_code=gcg88cd3l8l&did=MS4wLjABAAAApOZKYdjjNL2hrbLOpXr2uX5LQ0IrFWkl9M19obx6x-7Y78xCEFArJDfEpm61CUIM&iid=MS4wLjABAAAAiwe7HAbFuC4SIlp8wwSeWpjtph9qWdz_7EBGa5SEQLXRTjwmfQw0-R6iTMNykaNx&with_sec_did=1&sec_uid=MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0&timestamp=1768493778&utm_source=copy&utm_campaign=client_share&utm_medium=android&app=aweme&life_share_ext=%7B%22life_share_id%22%3A%22997e9b9045cc4211874e6521d1e24156%22%2C%22from_user_id%22%3A685719490932988%2C%22enter_from%22%3A%22others_homepage%22%2C%22personal_enter_page%22%3A%22general_search%22%2C%22personal_enter_method%22%3A%22search_card%22%7D&ug_share_id=b3965a0e8290a_1768493779395&activity_info=%7B%22social_author_id%22%3A%227550976214778315833%22%2C%22social_share_id%22%3A%22685719490932988_1768493778235%22%2C%22social_share_time%22%3A%221768493778%22%2C%22social_share_user_id%22%3A%22685719490932988%22%7D" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
+                    <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
                         <svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg>
                     </a>
                     <a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook" title="关注我们 (Facebook)">
@@ -730,8 +740,8 @@
                 <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
             </div>
             <div class="cookie-links">
-                <a href="yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
-                <a href="yhxy.html" data-i18n="footer.terms">User Agreement</a>
+                <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">User Agreement</a>
             </div>
             <div class="cookie-actions">
                 <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
@@ -1049,17 +1059,17 @@
             document.getElementById('mobileMenu').classList.toggle('open');
         }
 
+        // 关键 SEO 修复：仅显示弹窗，不再截断高度
         function initCookieLogic() {
             const status = localStorage.getItem('cookieStatus');
             const cookieBar = document.getElementById('cookieBar');
             if (status !== 'accepted') {
                 cookieBar.classList.add('active');
-                document.body.classList.add('cookie-locked');
+                // document.body.classList.add('cookie-locked'); 已移除，不会阻止爬虫抓取整页
             }
         }
         function acceptCookie() {
             document.getElementById('cookieBar').classList.remove('active');
-            document.body.classList.remove('cookie-locked');
             localStorage.setItem('cookieStatus', 'accepted');
         }
         function declineCookie() {
