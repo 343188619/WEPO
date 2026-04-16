@@ -11,10 +11,8 @@
     <meta name="keywords" content="维科生态协会, WEPO, 新兴环保组织, 环保机构, 气候变化, 生物多样性, 可持续发展, Weco Ecology Protection Organization, Environmental NGO, Climate Change, Biodiversity, 碳中和, 青年环保力量">
     <meta name="author" content="WEPO Council">
     
-    <!-- 确保规范化链接指向主域名 -->
     <link rel="canonical" href="https://wepo2021.org/">
     
-    <!-- 国际化 SEO 声明，告诉搜索引擎页面支持的语言 -->
     <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/">
     <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/">
     <link rel="alternate" hreflang="en" href="https://wepo2021.org/">
@@ -151,7 +149,6 @@
 
     <style>
         :root {
-            /* Dark Mode (Default) */
             --bg-void: #050507;
             --bg-surface: #111113;
             --bg-card: rgba(30, 30, 35, 0.4);
@@ -163,13 +160,10 @@
             --glass-blur: blur(20px);
             --nav-bg: rgba(5, 5, 7, 0.7);
             --spotlight-color: rgba(60, 80, 120, 0.15);
-            
-            /* Animation Curves */
             --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
             --ease-apple: cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Light Mode Variables */
         [data-theme="light"] {
             --bg-void: #F2F2F7;
             --bg-surface: #FFFFFF;
@@ -195,7 +189,6 @@
             transition: background-color 0.6s var(--ease-apple), color 0.6s var(--ease-apple);
         }
 
-        /* Spotlight */
         #cursor-spotlight {
             position: fixed; top: 0; left: 0; width: 800px; height: 800px;
             background: radial-gradient(circle, var(--spotlight-color), transparent 70%);
@@ -207,7 +200,6 @@
         a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease-apple); }
         ul { list-style: none; }
 
-        /* --- Header --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 30px 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -268,7 +260,8 @@
         .control-btn:active { transform: scale(0.95); }
 
         .theme-icon { width: 14px; height: 14px; fill: currentColor; }
-        [data-theme="light"] .moon-icon { display: block; } [data-theme="light"] .sun-icon { display: none; }[data-theme="dark"] .moon-icon { display: none; } [data-theme="dark"] .sun-icon { display: block; }
+        [data-theme="light"] .moon-icon { display: block; } [data-theme="light"] .sun-icon { display: none; }
+        [data-theme="dark"] .moon-icon { display: none; } [data-theme="dark"] .sun-icon { display: block; }
         .lang-icon { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
         .language-switcher { position: relative; }
@@ -285,7 +278,6 @@
         }
         .language-dropdown li:hover { color: var(--text-primary); background: rgba(125,125,125,0.1); }
 
-        /* --- Hero Section --- */
         .hero {
             height: 100vh; position: relative; overflow: hidden;
             display: flex; align-items: center; justify-content: center; text-align: center;
@@ -329,7 +321,6 @@
         .btn-secondary:hover { background: rgba(125,125,125, 0.4); border-color: var(--text-primary); }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Sections General --- */
         .section { padding: 160px 8%; position: relative; overflow: hidden; }
         .section-header { margin-bottom: 80px; }
         .section-label { font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 25px; font-weight: 600; display: flex; align-items: center; gap: 15px; }
@@ -339,7 +330,6 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
         .stagger-1 { transition-delay: 0.1s; } .stagger-2 { transition-delay: 0.2s; } .stagger-3 { transition-delay: 0.3s; }
 
-        /* --- About --- */
         .about-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 100px; align-items: center; }
         .about-content p { color: var(--text-secondary); margin-bottom: 25px; font-size: 1.15rem; line-height: 1.8; }
         .about-image { position: relative; overflow: hidden; border-radius: 0; }
@@ -350,7 +340,6 @@
         .stat-item h4 { font-size: 3.5rem; color: var(--text-primary); margin-bottom: 5px; font-family: 'Manrope', sans-serif; font-weight: 600; }
         .stat-item span { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
 
-        /* --- Mission --- */
         .mission-section { background: var(--bg-surface); }
         .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .mission-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 60px 40px; border-radius: 0; transition: all 0.5s var(--ease-apple); position: relative; overflow: hidden; }
@@ -358,7 +347,6 @@
         .mission-card h3 { font-size: 1.8rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; color: var(--text-primary); }
         .mission-card p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 
-        /* --- Programs --- */
         .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
         .program-item { cursor: pointer; transition: transform 0.4s var(--ease-apple); }
         .program-item:hover { transform: translateY(-10px); }
@@ -368,7 +356,6 @@
         .program-item h3 { font-size: 1.6rem; margin-bottom: 12px; color: var(--text-primary); }
         .program-item p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 
-        /* --- Contact --- */
         .contact-section { background: var(--bg-void); padding: 0; border-top: 1px solid var(--border-glass); }
         .contact-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 700px; }
         .contact-info { padding: 120px 12%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border-glass); }
@@ -378,9 +365,10 @@
         a.info-val { position: relative; display: inline-block; }
         a.info-val::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--text-primary); transition: width 0.3s; }
         a.info-val:hover::after { width: 100%; }
-        .contact-map { width: 100%; height: 100%; border: none; transition: filter 0.6s; }[data-theme="dark"] .contact-map { filter: grayscale(1) invert(1) brightness(0.8); }[data-theme="light"] .contact-map { filter: grayscale(1); }
+        .contact-map { width: 100%; height: 100%; border: none; transition: filter 0.6s; }
+        [data-theme="dark"] .contact-map { filter: grayscale(1) invert(1) brightness(0.8); }
+        [data-theme="light"] .contact-map { filter: grayscale(1); }
 
-        /* --- Footer --- */
         footer { padding: 80px 8% 50px; background: var(--bg-surface); border-top: 1px solid var(--border-glass); transition: background 0.6s; }
         .footer-top { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
         .footer-brand .logo-container { justify-content: center; margin-bottom: 25px; animation: none; }
@@ -412,23 +400,39 @@
 
         .footer-btm { border-top: 1px solid var(--border-glass); padding-top: 40px; display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.85rem; flex-wrap: wrap; gap: 20px; }
 
-        /* --- Cookie Bar --- */
-        .cookie-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 99999; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.5s ease; }
-        .cookie-overlay.active { display: flex; opacity: 1; }
-        .cookie-modal { background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 40px; border-radius: 0; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.4s var(--ease-apple); }
-        .cookie-overlay.active .cookie-modal { transform: scale(1); }
-        .cookie-title { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 15px; font-family: 'Playfair Display', serif; }
-        .cookie-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 25px; }
-        .cookie-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; font-size: 0.9rem; }
-        .cookie-links a { color: var(--accent-gold); border-bottom: 1px solid transparent; }
-        .cookie-links a:hover { border-bottom-color: var(--accent-gold); }
-        .cookie-actions { display: flex; gap: 15px; justify-content: center; }
-        .c-btn { padding: 14px 35px; border-radius: 0; cursor: pointer; font-size: 1rem; transition: 0.3s var(--ease-apple); flex: 1; max-width: 150px; }
+        /* Cookie & Form Overlay */
+        .cookie-overlay, .form-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 99999;
+            display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.5s ease;
+        }
+        .cookie-overlay.active, .form-overlay.active { display: flex; opacity: 1; }
+        .cookie-modal, .form-modal {
+            background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 40px; border-radius: 0;
+            max-width: 600px; width: 90%; text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95); transition: transform 0.4s var(--ease-apple);
+            max-height: 85vh; overflow-y: auto;
+        }
+        .cookie-overlay.active .cookie-modal, .form-overlay.active .form-modal { transform: scale(1); }
+        .form-modal h3 { font-size: 2rem; margin-bottom: 25px; color: var(--text-primary); font-family: 'Playfair Display', serif; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 6px; color: var(--text-primary); font-weight: 500; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 15px; background: rgba(125,125,125,0.05);
+            border: 1px solid var(--border-glass); color: var(--text-primary);
+            font-family: 'Manrope', sans-serif; font-size: 0.95rem; border-radius: 0;
+            transition: border 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-gold); }
+        .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-actions { display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px; }
+        .form-tech-support { margin-top: 25px; text-align: center; font-size: 0.8rem; color: var(--text-secondary); border-top: 1px solid var(--border-glass); padding-top: 20px; }
+        .form-status { margin: 10px 0; min-height: 24px; color: var(--accent-gold); font-size: 0.9rem; }
+        .c-btn { padding: 14px 35px; border-radius: 0; cursor: pointer; font-size: 1rem; transition: 0.3s var(--ease-apple); }
         .c-btn.ok { background: var(--text-primary); color: var(--bg-void); border: 1px solid var(--text-primary); font-weight: 600; }
         .c-btn.no { background: transparent; border: 1px solid var(--border-glass); color: var(--text-primary); }
         .c-btn:hover { transform: scale(1.05); }
 
-        /* --- Mobile --- */
         .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.6rem; cursor: pointer; }
         .mobile-menu { position: fixed; inset: 0; background: var(--bg-void); z-index: 1001; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; opacity: 0; pointer-events: none; transition: 0.5s var(--ease-apple); overflow-y: auto; padding: 80px 20px 40px; }
         .mobile-menu.open { opacity: 1; pointer-events: all; }
@@ -459,20 +463,12 @@
             .footer-btm { flex-direction: column; align-items: center; text-align: center; }
             .footer-social-wrapper { width: 100%; margin-bottom: 20px; }
             .social-links { justify-content: center; width: 100%; margin-bottom: 0; }
-        }
-        @media (max-width: 400px) {
-            .logo { height: 24px; }
-            .logo-container { max-width: calc(100vw - 120px); }
-            .logo-title { font-size: 0.7rem; }
-            .logo-subtitle { font-size: 0.3rem; }
-            .control-btn { padding: 5px 8px; }
-            .language-switcher .control-btn span { display: none; }
+            .form-row-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- Spotlight Effect -->
 <div id="cursor-spotlight"></div>
 
 <header id="header">
@@ -485,7 +481,6 @@
     </a>
     <nav>
         <ul>
-            <!-- 全部使用绝对路径，以防止多级子域名结构混乱 -->
             <li><a href="https://wepo2021.org/#home" class="active" data-i18n="nav.home">Home</a></li>
             <li><a href="https://wepo2021.org/sp.html" data-i18n="nav.videos">Videos</a></li>
             <li><a href="https://wepo2021.org/jz.html" data-i18n="nav.donate">Donate</a></li>
@@ -501,21 +496,14 @@
         </ul>
     </nav>
     <div class="header-actions">
-        <!-- Theme Toggle -->
         <button class="control-btn" id="themeBtn" aria-label="Toggle Theme">
-            <svg class="theme-icon sun-icon" viewBox="0 0 24 24">
-                <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29zm1.29-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.29 1.29c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.29-1.29zM7.28 17.65a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29z"></path>
-            </svg>
-            <svg class="theme-icon moon-icon" viewBox="0 0 24 24">
-                <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
-            </svg>
+            <svg class="theme-icon sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29zm1.29-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.29 1.29c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.29-1.29zM7.28 17.65a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29z"></path></svg>
+            <svg class="theme-icon moon-icon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path></svg>
         </button>
 
         <div class="language-switcher">
             <button class="control-btn" id="langBtn">
-                <svg class="lang-icon" viewBox="0 0 24 24">
-                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 015.08 16zm2.95-8H5.08a7.987 7.987 0 013.33-3.56A15.65 15.65 0 005.08 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.34.16-2h4.68c.09.66.16 1.32.16 2 0 .68-.07 1.34-.16 2zm1.43 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 01-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"></path>
-                </svg>
+                <svg class="lang-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 015.08 16zm2.95-8H5.08a7.987 7.987 0 013.33-3.56A15.65 15.65 0 005.08 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.34.16-2h4.68c.09.66.16 1.32.16 2 0 .68-.07 1.34-.16 2zm1.43 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 01-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"></path></svg>
                 <span data-i18n="lang.current">EN</span> ▾
             </button>
             <ul class="language-dropdown">
@@ -555,13 +543,11 @@
     </div>
     <div class="hero-content">
         <div class="hero-slogan" data-i18n="slogan.text">Let's change the world.</div>
-        
         <h1><span id="hero-title">Protecting Earth Our Common Home</span><span class="typewriter-cursor"></span></h1>
         <span id="hero-title-source" data-i18n="hero.title" style="display:none;">Protecting Earth Our Common Home</span>
-
         <p data-i18n="hero.description">WEPO is committed to global environmental protection through scientific research, policy advocacy, and public education.</p>
         <div class="btn-group">
-            <a href="https://f.wps.cn/ksform/w/write/XERrq1aj/" class="btn btn-primary" data-i18n="hero.btn_join">Join Us</a>
+            <a href="#" class="btn btn-primary" id="joinUsBtn" data-i18n="hero.btn_join">Join Us</a>
             <a href="#about" class="btn btn-secondary" data-i18n="hero.btn_feedback">Learn More</a>
         </div>
     </div>
@@ -598,659 +584,212 @@
         <h2 class="section-title" data-i18n="mission.title">Mission & Vision</h2>
     </div>
     <div class="mission-grid">
-        <div class="mission-card reveal stagger-1">
-            <h3 data-i18n="mission.mission_title">Our Mission</h3>
-            <p data-i18n="mission.mission_desc">Driving global environmental protection through rigorous scientific research, proactive policy advocacy, and widespread public education to mitigate climate impact.</p>
-        </div>
-        <div class="mission-card reveal stagger-2">
-            <h3 data-i18n="mission.vision_title">Our Vision</h3>
-            <p data-i18n="mission.vision_desc">Creating a thriving, resilient world where humanity and nature coexist in perfect harmony, ensuring abundant resources for all future generations.</p>
-        </div>
-        <div class="mission-card reveal stagger-3">
-            <h3 data-i18n="mission.values_title">Our Values</h3>
-            <p data-i18n="mission.values_desc">Scientific rigor, borderless collaboration, unwavering transparency, and relentless innovation in tackling today's toughest ecological challenges.</p>
-        </div>
+        <div class="mission-card reveal stagger-1"><h3 data-i18n="mission.mission_title">Our Mission</h3><p data-i18n="mission.mission_desc">Driving global environmental protection through rigorous scientific research, proactive policy advocacy, and widespread public education to mitigate climate impact.</p></div>
+        <div class="mission-card reveal stagger-2"><h3 data-i18n="mission.vision_title">Our Vision</h3><p data-i18n="mission.vision_desc">Creating a thriving, resilient world where humanity and nature coexist in perfect harmony, ensuring abundant resources for all future generations.</p></div>
+        <div class="mission-card reveal stagger-3"><h3 data-i18n="mission.values_title">Our Values</h3><p data-i18n="mission.values_desc">Scientific rigor, borderless collaboration, unwavering transparency, and relentless innovation in tackling today's toughest ecological challenges.</p></div>
     </div>
 </section>
 
 <section class="section" id="programs">
-    <div class="section-header reveal">
-        <span class="section-label" data-i18n="nav.programs">Focus Areas</span>
-        <h2 class="section-title" data-i18n="programs.title">Programs</h2>
-    </div>
+    <div class="section-header reveal"><span class="section-label" data-i18n="nav.programs">Focus Areas</span><h2 class="section-title" data-i18n="programs.title">Programs</h2></div>
     <div class="programs-grid">
-        <div class="program-item reveal stagger-1">
-            <div class="program-img-box">
-                <img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Action">
-            </div>
-            <h3 data-i18n="programs.climate_title">Climate Action</h3>
-            <p data-i18n="programs.climate_desc">Helping vulnerable communities adapt to climate change, advancing the global transition to renewable energy, and driving the ultimate goal of carbon neutrality.</p>
-        </div>
-        <div class="program-item reveal stagger-2">
-            <div class="program-img-box">
-                <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity">
-            </div>
-            <h3 data-i18n="programs.biodiversity_title">Biodiversity</h3>
-            <p data-i18n="programs.biodiversity_desc">Protecting endangered wildlife, combating illegal poaching, and meticulously restoring degraded forests, wetlands, and marine ecosystems.</p>
-        </div>
-        <div class="program-item reveal stagger-3">
-            <div class="program-img-box">
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities">
-            </div>
-            <h3 data-i18n="programs.cities_title">Sustainable Cities</h3>
-            <p data-i18n="programs.cities_desc">Promoting green building standards, circular economy practices, and sustainable urban mobility to create zero-carbon, livable environments.</p>
-        </div>
+        <div class="program-item reveal stagger-1"><div class="program-img-box"><img src="https://q4.itc.cn/images01/20250903/e272b344538b4887a8a449e5b0334d42.jpeg" alt="Climate Action"></div><h3 data-i18n="programs.climate_title">Climate Action</h3><p data-i18n="programs.climate_desc">Helping vulnerable communities adapt to climate change, advancing the global transition to renewable energy, and driving the ultimate goal of carbon neutrality.</p></div>
+        <div class="program-item reveal stagger-2"><div class="program-img-box"><img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biodiversity"></div><h3 data-i18n="programs.biodiversity_title">Biodiversity</h3><p data-i18n="programs.biodiversity_desc">Protecting endangered wildlife, combating illegal poaching, and meticulously restoring degraded forests, wetlands, and marine ecosystems.</p></div>
+        <div class="program-item reveal stagger-3"><div class="program-img-box"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Cities"></div><h3 data-i18n="programs.cities_title">Sustainable Cities</h3><p data-i18n="programs.cities_desc">Promoting green building standards, circular economy practices, and sustainable urban mobility to create zero-carbon, livable environments.</p></div>
     </div>
 </section>
 
 <section id="contact" class="contact-section">
     <div class="contact-split">
-        <div class="contact-info reveal">
-            <h2 style="margin-bottom: 20px; font-size: 3rem;" data-i18n="contact.title">Contact Us</h2>
-            <h3 style="color:var(--accent-gold); margin-bottom: 50px; font-family:'Playfair Display', serif;" data-i18n="slogan.text">Let's change the world.</h3>
-            
-            <div class="info-row">
-                <span class="info-label" data-i18n="contact.address_title">Address</span>
-                <span class="info-val" data-i18n="contact.address" style="font-size: 1.4rem;">No. 10 Xingsheng Ave, Chongqing, CN</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label" data-i18n="contact.email_title">Email</span>
-                <a href="mailto:xcb@wepo2021.org" class="info-val">xcb@wepo2021.org</a>
-            </div>
-            <div class="info-row">
-                <span class="info-label" data-i18n="contact.phone_title">Phone</span>
-                <span class="info-val">(+86) 02386161804</span>
-            </div>
+        <div class="contact-info reveal"><h2 style="margin-bottom: 20px; font-size: 3rem;" data-i18n="contact.title">Contact Us</h2><h3 style="color:var(--accent-gold); margin-bottom: 50px; font-family:'Playfair Display', serif;" data-i18n="slogan.text">Let's change the world.</h3>
+            <div class="info-row"><span class="info-label" data-i18n="contact.address_title">Address</span><span class="info-val" data-i18n="contact.address" style="font-size: 1.4rem;">No. 10 Xingsheng Ave, Chongqing, CN</span></div>
+            <div class="info-row"><span class="info-label" data-i18n="contact.email_title">Email</span><a href="mailto:xcb@wepo2021.org" class="info-val">xcb@wepo2021.org</a></div>
+            <div class="info-row"><span class="info-label" data-i18n="contact.phone_title">Phone</span><span class="info-val">(+86) 02386161804</span></div>
         </div>
-        <div>
-            <iframe class="contact-map" title="WEPO Office Location" src="https://map.qq.com/m/place/info/uid=3303587459730765633&word=%E4%B8%8A%E5%93%81.%E6%8B%BE%E9%99%86&type=point"></iframe>
-        </div>
+        <div><iframe class="contact-map" title="WEPO Office Location" src="https://map.qq.com/m/place/info/uid=3303587459730765633&word=%E4%B8%8A%E5%93%81.%E6%8B%BE%E9%99%86&type=point"></iframe></div>
     </div>
 </section>
 
 <footer>
-    <div class="footer-top">
-        <div class="footer-brand reveal">
-            <a href="https://wepo2021.org/#home" class="logo-container">
-                <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo">
-                <div class="logo-text" style="text-align: left;">
-                    <span class="logo-title">维科生态协会</span>
-                    <span class="logo-subtitle">Weco Ecology Protection Organization</span>
-                </div>
-            </a>
-            <span class="footer-slogan" data-i18n="slogan.text">Let's change the world.</span>
-            <p data-i18n="footer.about">WEPO is dedicated to global environmental protection, inspiring change through science, education, and action.</p>
-        </div>
-    </div>
-
-    <div class="footer-disclaimer reveal" data-i18n="footer.disclaimer">
-        Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.
-    </div>
-
+    <div class="footer-top"><div class="footer-brand reveal"><a href="https://wepo2021.org/#home" class="logo-container"><img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEBGgZoupS08tmL4sCb3NLCDl0z9vLmgQACXCEAAi5q2VU7eyZzJwjEpDYE.jpeg" alt="WEPO Logo" class="logo"><div class="logo-text" style="text-align: left;"><span class="logo-title">维科生态协会</span><span class="logo-subtitle">Weco Ecology Protection Organization</span></div></a><span class="footer-slogan" data-i18n="slogan.text">Let's change the world.</span><p data-i18n="footer.about">WEPO is dedicated to global environmental protection, inspiring change through science, education, and action.</p></div></div>
+    <div class="footer-disclaimer reveal" data-i18n="footer.disclaimer">Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.</div>
     <div class="footer-info-blocks reveal">
-        <div class="info-block">
-            <svg class="info-icon" viewBox="0 0 24 24">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-            </svg>
-            <div class="info-text">
-                <div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div>
-                <div class="info-links">
-                    <a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">隐私政策</a> 
-                    <span class="divider">|</span> 
-                    <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">用户协议</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-block">
-            <svg class="info-icon" viewBox="0 0 24 24">
-                <path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/>
-            </svg>
-            <div class="info-text">
-                <div data-i18n="footer.tech_desc1">本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容 IE9、Safari、Edge、Chrome、Firefox 等主流浏览器。</div>
-                <div style="margin-top:5px;" data-i18n="footer.tech_desc2">本网站具备无障碍访问功能及多语言设计。</div>
-            </div>
-        </div>
+        <div class="info-block"><svg class="info-icon" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div class="info-text"><div data-i18n="footer.cookie_desc">本网站使用 Cookie 来维持网站的正常运作。</div><div class="info-links"><a href="https://wepo2021.org/yszc.html" data-i18n="footer.privacy">隐私政策</a> <span class="divider">|</span> <a href="https://wepo2021.org/yhxy.html" data-i18n="footer.terms">用户协议</a></div></div></div>
+        <div class="info-block"><svg class="info-icon" viewBox="0 0 24 24"><path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/></svg><div class="info-text"><div data-i18n="footer.tech_desc1">本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容 IE9、Safari、Edge、Chrome、Firefox 等主流浏览器。</div><div style="margin-top:5px;" data-i18n="footer.tech_desc2">本网站具备无障碍访问功能及多语言设计。</div></div></div>
     </div>
-    
     <div class="footer-btm reveal">
-        <div class="footer-social-wrapper">
-            <span data-i18n="footer.follow_us" style="color: var(--text-primary); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em;">关注我们</span>
-            <div class="social-links">
-                <a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok" title="关注我们 (TikTok)">
-                    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-                </a>
-                <a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X (Twitter)" title="关注我们 (X)">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
-                <a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin" title="关注我们 (Douyin)">
-                    <svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg>
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook" title="关注我们 (Facebook)">
-                    <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-                </a>
-                <a href="https://www.youtube.com/@WEPO2021" target="_blank" class="social-icon" aria-label="YouTube" title="关注我们 (YouTube)">
-                    <svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.66 2.66 0 0 0-1.874-1.884C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.708.442a2.66 2.66 0 0 0-1.874 1.884C2 7.852 2 12 2 12s0 4.148.418 5.814a2.66 2.66 0 0 0 1.874 1.884C5.947 20.14 12 20.14 12 20.14s6.053 0 7.708-.442a2.66 2.66 0 0 0 1.874-1.884C22 16.148 22 12 22 12s0-4.148-.418-5.814zm-11.82 8.52V9.294l5.353 2.706-5.353 2.706z"/></svg>
-                </a>
-            </div>
-        </div>
+        <div class="footer-social-wrapper"><span data-i18n="footer.follow_us" style="color: var(--text-primary); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.05em;">关注我们</span><div class="social-links"><a href="https://www.tiktok.com/@wepo2021" target="_blank" class="social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a><a href="https://x.com/wepo2011" target="_blank" class="social-icon" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://www.iesdouyin.com/share/user/MS4wLjABAAAAezXvVpm82z6ioUPXiLfwcOxGUtKbqBq86kn-omvxnPX80RFvZcCeSzKEBjoC0DG0" target="_blank" class="social-icon" aria-label="Douyin"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3v10.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 .9.1 1.3.3V5.8c-.4-.1-.9-.2-1.3-.2C6.5 5.6 3.6 8.5 3.6 12c0 3.5 2.9 6.4 6.4 6.4 3.5 0 6.4-2.9 6.4-6.4v-4c1.2.9 2.7 1.4 4.3 1.4V6c-1.8 0-3.4-.8-4.2-2z"/></svg></a><a href="https://www.facebook.com/profile.php?id=61573689994100" target="_blank" class="social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a><a href="https://www.youtube.com/@WEPO2021" target="_blank" class="social-icon" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.582 6.186a2.66 2.66 0 0 0-1.874-1.884C18.053 3.86 12 3.86 12 3.86s-6.053 0-7.708.442a2.66 2.66 0 0 0-1.874 1.884C2 7.852 2 12 2 12s0 4.148.418 5.814a2.66 2.66 0 0 0 1.874 1.884C5.947 20.14 12 20.14 12 20.14s6.053 0 7.708-.442a2.66 2.66 0 0 0 1.874-1.884C22 16.148 22 12 22 12s0-4.148-.418-5.814zm-11.82 8.52V9.294l5.353 2.706-5.353 2.706z"/></svg></a></div></div>
         <p>&copy; <span id="year">2026</span> WEPO. All rights reserved.</p>
     </div>
 </footer>
 
+<!-- Cookie bar -->
 <div class="cookie-overlay" id="cookieBar">
-    <div class="cookie-modal">
-        <h3 class="cookie-title">Cookie Consent / Cookie 许可</h3>
-        <div class="cookie-text">
-            <p>We use cookies to provide the best experience. By continuing to browse, you agree to our policy.</p>
-            <p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
-        </div>
-        <div class="cookie-links">
-            <a href="https://wepo2021.org/yszc.html">Privacy Policy / 隐私政策</a>
-            <a href="https://wepo2021.org/yhxy.html">User Agreement / 用户协议</a>
-        </div>
-        <div class="cookie-actions">
-            <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
-            <button class="c-btn ok" onclick="acceptCookie()">Accept / 同意</button>
-        </div>
+    <div class="cookie-modal"><h3 class="cookie-title">Cookie Consent / Cookie 许可</h3><div class="cookie-text"><p>We use cookies to provide the best experience. By continuing to browse, you agree to our policy.</p><p style="margin-top:10px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p></div><div class="cookie-links"><a href="https://wepo2021.org/yszc.html">Privacy Policy / 隐私政策</a><a href="https://wepo2021.org/yhxy.html">User Agreement / 用户协议</a></div><div class="cookie-actions"><button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button><button class="c-btn ok" onclick="acceptCookie()">Accept / 同意</button></div></div>
+</div>
+
+<!-- Join Us Form Overlay -->
+<div class="form-overlay" id="joinFormOverlay">
+    <div class="form-modal">
+        <h3 data-i18n="form.title">Join WEPO</h3>
+        <form id="joinForm" enctype="multipart/form-data">
+            <div class="form-row-2">
+                <div class="form-group"><label data-i18n="form.name">Name *</label><input type="text" name="name" required></div>
+                <div class="form-group"><label data-i18n="form.gender">Gender</label><select name="gender"><option value="" data-i18n="form.gender_opt">Prefer not to say</option><option value="男">Male (男)</option><option value="女">Female (女)</option></select></div>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group"><label data-i18n="form.nationality">Nationality</label><input type="text" name="nationality" placeholder="e.g. China"></div>
+                <div class="form-group"><label data-i18n="form.residence">Residence</label><input type="text" name="residence" placeholder="City"></div>
+            </div>
+            <div class="form-row-2">
+                <div class="form-group"><label data-i18n="form.phone">Phone</label><input type="tel" name="phone"></div>
+                <div class="form-group"><label data-i18n="form.email">Email *</label><input type="email" name="email" required></div>
+            </div>
+            <div class="form-group"><label data-i18n="form.position">Position / Interest</label><input type="text" name="position" placeholder="e.g. Volunteer, Researcher"></div>
+            <div class="form-group"><label data-i18n="form.reason">Reason to join *</label><textarea name="reason" rows="3" required></textarea></div>
+            <div class="form-group"><label data-i18n="form.file">Attachment (CV/Resume, optional)</label><input type="file" name="file"></div>
+            <div class="form-status" id="formStatus"></div>
+            <div class="form-actions">
+                <button type="button" class="c-btn no" onclick="closeJoinForm()" data-i18n="form.cancel">Cancel</button>
+                <button type="submit" class="c-btn ok" data-i18n="form.submit">Submit</button>
+            </div>
+            <div class="form-tech-support" data-i18n="form.tech_support">Technical support provided by WEPO Information Security Department</div>
+        </form>
     </div>
 </div>
 
 <script>
-    // --- Data ---
+    // --- Extended i18n for form ---
     const translations = {
         "zh-CN": {
-            "lang.current": "中文",
-            "slogan.text": "让我们一起改变世界。 (Let's change the world.)",
-            "nav.home": "首页",
-            "nav.about": "关于我们",
-            "nav.mission": "使命愿景",
-            "nav.programs": "环保项目",
-            "nav.contact": "联系我们",
-            "nav.videos": "环保视频",
-            "nav.donate": "捐赠支持",
-            "nav.support": "客服支持",
-            "nav.weather": "世环天气",
-            "nav.query": "证书查询",
-            "nav.global": "全球视野",
-            "hero.title": "保护地球 我们的共同家园",
-            "hero.description": "成立于2021年，维科生态协会(WEPO)作为一股年轻的环保力量，正通过科学研究、政策倡导和公众教育，积极参与应对全球生态挑战。",
-            "hero.btn_feedback": "了解更多",
-            "hero.btn_join": "加入我们",
-            "about.subtitle": "致力于构建人与自然和谐共生的可持续未来。",
-            "about.p1": "维科生态协会(WEPO)成立于2021年，总部位于中国重庆。作为一个年轻且充满活力的非营利性环保组织，我们正积极投身于全球可持续发展事业。",
+            "lang.current": "中文", "slogan.text": "让我们一起改变世界。 (Let's change the world.)",
+            "nav.home": "首页", "nav.about": "关于我们", "nav.mission": "使命愿景", "nav.programs": "环保项目", "nav.contact": "联系我们",
+            "nav.videos": "环保视频", "nav.donate": "捐赠支持", "nav.support": "客服支持", "nav.weather": "世环天气", "nav.query": "证书查询", "nav.global": "全球视野",
+            "hero.title": "保护地球 我们的共同家园", "hero.description": "成立于2021年，维科生态协会(WEPO)作为一股年轻的环保力量，正通过科学研究、政策倡导和公众教育，积极参与应对全球生态挑战。",
+            "hero.btn_feedback": "了解更多", "hero.btn_join": "加入我们",
+            "about.subtitle": "致力于构建人与自然和谐共生的可持续未来。", "about.p1": "维科生态协会(WEPO)成立于2021年，总部位于中国重庆。作为一个年轻且充满活力的非营利性环保组织，我们正积极投身于全球可持续发展事业。",
             "about.p2": "从缓解气候变化到扭转生物多样性丧失，我们积极探索并实施基于科学的切实解决方案。通过政策宣导、公众教育和扎根基层的环保行动，我们努力弥合人类发展与生态保护之间的鸿沟。",
             "about.p3": "我们努力与各地政府、本土社区以及企业建立合作，共同推动积极的环保变革。通过部署生态监测网络和推广绿色技术，我们赋能更多公众采取实际行动，共同守护地球家园。",
             "about.p4": "目前，我们的工作正逐步覆盖超过30个国家和地区的关注者与志愿者。我们正不断努力保护脆弱的生态栖息地，传递可持续发展理念，并激励下一代共同参与环保行动。",
             "about.report_link": "阅读我们的年度报告 →",
-            "stats.countries": "30+",
-            "stats.countries_text": "覆盖国家及地区",
-            "stats.staff": "500+",
-            "stats.staff_text": "专业人员",
-            "stats.projects": "100+",
-            "stats.projects_text": "环保项目",
-            "stats.volunteers": "10k+",
-            "stats.volunteers_text": "注册志愿者",
-            "mission.title": "使命与愿景",
-            "mission.mission_title": "我们的使命",
-            "mission.mission_desc": "通过科学研究、积极的政策倡导和广泛的公众教育，推动环境保护事业，有效减轻气候变化带来的影响。",
-            "mission.vision_title": "我们的愿景",
-            "mission.vision_desc": "创造一个繁荣且充满韧性的世界，让人类与自然在此和谐共生，为子孙后代留下生生不息的丰饶资源。",
-            "mission.values_title": "核心价值观",
-            "mission.values_desc": "科学严谨、透明协作，以及在应对生态挑战时坚持不懈的创新精神。",
-            "programs.title": "环保项目",
-            "programs.climate_title": "气候变化应对",
-            "programs.climate_desc": "帮助脆弱社区适应气候变化，推进可再生能源转型，支持碳中和目标。",
-            "programs.biodiversity_title": "生物多样性保护",
-            "programs.biodiversity_desc": "保护濒危动植物，反对非法盗猎，致力于恢复受损的森林、湿地及海洋生态系统。",
-            "programs.cities_title": "可持续城市",
-            "programs.cities_desc": "推广绿色建筑标准与循环经济实践，助力打造低碳宜居的现代城市环境。",
-            "contact.title": "联系我们",
-            "contact.address_title": "地址",
-            "contact.address": "中国重庆市渝北区兴盛大道十号",
-            "contact.email_title": "邮箱",
-            "contact.phone_title": "电话",
-            "footer.about": "成立于2021年的维科生态协会(WEPO)致力于环境保护，期望通过科学与教育激发积极变革。",
-            "footer.council": "理事会",
-            "footer.volunteers": "志愿者网络",
-            "footer.reports": "年度报告",
-            "footer.charter": "组织章程",
-            "footer.privacy": "隐私政策",
-            "footer.terms": "用户协议",
-            "footer.disclaimer": "免责声明：本网站使用国家或地区名称，并不意味着WEPO对任何国家、领地、城市或地区或其当局的法律地位，或其边界划定持任何看法。",
-            "footer.follow_us": "关注我们",
-            "footer.cookie_desc": "本网站使用 Cookie 来维持网站的正常运作。",
-            "footer.tech_desc1": "本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容主流浏览器。",
-            "footer.tech_desc2": "本网站具备无障碍访问（A11y）功能及多语言设计。"
+            "stats.countries": "30+", "stats.countries_text": "覆盖国家及地区", "stats.staff": "500+", "stats.staff_text": "专业人员", "stats.projects": "100+", "stats.projects_text": "环保项目", "stats.volunteers": "10k+", "stats.volunteers_text": "注册志愿者",
+            "mission.title": "使命与愿景", "mission.mission_title": "我们的使命", "mission.mission_desc": "通过科学研究、积极的政策倡导和广泛的公众教育，推动环境保护事业，有效减轻气候变化带来的影响。",
+            "mission.vision_title": "我们的愿景", "mission.vision_desc": "创造一个繁荣且充满韧性的世界，让人类与自然在此和谐共生，为子孙后代留下生生不息的丰饶资源。",
+            "mission.values_title": "核心价值观", "mission.values_desc": "科学严谨、透明协作，以及在应对生态挑战时坚持不懈的创新精神。",
+            "programs.title": "环保项目", "programs.climate_title": "气候变化应对", "programs.climate_desc": "帮助脆弱社区适应气候变化，推进可再生能源转型，支持碳中和目标。",
+            "programs.biodiversity_title": "生物多样性保护", "programs.biodiversity_desc": "保护濒危动植物，反对非法盗猎，致力于恢复受损的森林、湿地及海洋生态系统。",
+            "programs.cities_title": "可持续城市", "programs.cities_desc": "推广绿色建筑标准与循环经济实践，助力打造低碳宜居的现代城市环境。",
+            "contact.title": "联系我们", "contact.address_title": "地址", "contact.address": "中国重庆市渝北区兴盛大道十号", "contact.email_title": "邮箱", "contact.phone_title": "电话",
+            "footer.about": "成立于2021年的维科生态协会(WEPO)致力于环境保护，期望通过科学与教育激发积极变革。", "footer.council": "理事会", "footer.volunteers": "志愿者网络", "footer.reports": "年度报告", "footer.charter": "组织章程",
+            "footer.privacy": "隐私政策", "footer.terms": "用户协议", "footer.disclaimer": "免责声明：本网站使用国家或地区名称，并不意味着WEPO对任何国家、领地、城市或地区或其当局的法律地位，或其边界划定持任何看法。",
+            "footer.follow_us": "关注我们", "footer.cookie_desc": "本网站使用 Cookie 来维持网站的正常运作。", "footer.tech_desc1": "本网站采用 HTML5 技术构建，完美适配移动端与桌面端，兼容主流浏览器。", "footer.tech_desc2": "本网站具备无障碍访问（A11y）功能及多语言设计。",
+            "form.title": "加入 WEPO", "form.name": "姓名 *", "form.gender": "性别", "form.gender_opt": "不愿透露", "form.nationality": "国籍", "form.residence": "居住地",
+            "form.phone": "电话", "form.email": "邮箱 *", "form.position": "申请岗位/兴趣", "form.reason": "申请理由 *", "form.file": "附件 (简历等, 可选)",
+            "form.cancel": "取消", "form.submit": "提交", "form.tech_support": "由维科生态协会信息安全部提供技术支持"
         },
         "en": {
-            "lang.current": "EN",
-            "slogan.text": "Let's change the world.",
-            "nav.home": "Home",
-            "nav.about": "About",
-            "nav.mission": "Mission",
-            "nav.programs": "Programs",
-            "nav.contact": "Contact",
-            "nav.videos": "Videos",
-            "nav.donate": "Donate",
-            "nav.support": "Support",
-            "nav.weather": "WEPO Weather",
-            "nav.query": "Cert Query",
-            "nav.global": "Global Vision",
-            "hero.title": "Protecting Earth Our Common Home",
-            "hero.description": "Founded in 2021, WEPO is an emerging environmental force committed to addressing global ecological challenges through scientific research, policy advocacy, and public education.",
-            "hero.btn_feedback": "Learn More",
-            "hero.btn_join": "Join Us",
-            "about.subtitle": "Building a sustainable future where humans and nature coexist.",
-            "about.p1": "Founded in 2021 and headquartered in Chongqing, China, the Weco Ecology Protection Organization (WEPO) is a young, dynamic non-profit NGO actively contributing to global sustainable development.",
+            "lang.current": "EN", "slogan.text": "Let's change the world.", "nav.home": "Home", "nav.about": "About", "nav.mission": "Mission", "nav.programs": "Programs", "nav.contact": "Contact",
+            "nav.videos": "Videos", "nav.donate": "Donate", "nav.support": "Support", "nav.weather": "WEPO Weather", "nav.query": "Cert Query", "nav.global": "Global Vision",
+            "hero.title": "Protecting Earth Our Common Home", "hero.description": "Founded in 2021, WEPO is an emerging environmental force committed to addressing global ecological challenges through scientific research, policy advocacy, and public education.",
+            "hero.btn_feedback": "Learn More", "hero.btn_join": "Join Us",
+            "about.subtitle": "Building a sustainable future where humans and nature coexist.", "about.p1": "Founded in 2021 and headquartered in Chongqing, China, the Weco Ecology Protection Organization (WEPO) is a young, dynamic non-profit NGO actively contributing to global sustainable development.",
             "about.p2": "From mitigating climate change to protecting biodiversity, we are dedicated to exploring and implementing practical, science-based solutions. Through policy advocacy, public education, and grassroots initiatives, we strive to bridge the gap between human development and ecological preservation.",
             "about.p3": "We strive to build partnerships with local governments, communities, and businesses to drive positive environmental change. By supporting ecological monitoring and promoting green practices, we empower individuals to become stewards of the Earth.",
             "about.p4": "Today, our work and initiatives involve followers and volunteers from over 30 countries. We are continuously working to protect vulnerable habitats, promote sustainable concepts, and inspire the next generation to safeguard our common home.",
             "about.report_link": "Read Our Annual Report →",
-            "stats.countries": "30+",
-            "stats.countries_text": "Countries Reached",
-            "stats.staff": "500+",
-            "stats.staff_text": "Professionals",
-            "stats.projects": "100+",
-            "stats.projects_text": "Projects",
-            "stats.volunteers": "10k+",
-            "stats.volunteers_text": "Volunteers",
-            "mission.title": "Mission & Vision",
-            "mission.mission_title": "Mission",
-            "mission.mission_desc": "Promoting environmental protection through scientific research, proactive policy advocacy, and widespread public education to mitigate climate impact.",
-            "mission.vision_title": "Vision",
-            "mission.vision_desc": "Creating a thriving, resilient world where humanity and nature coexist in perfect harmony, ensuring resources for future generations.",
-            "mission.values_title": "Values",
-            "mission.values_desc": "Scientific rigor, transparent collaboration, and continuous innovation in tackling ecological challenges.",
-            "programs.title": "Programs",
-            "programs.climate_title": "Climate Action",
-            "programs.climate_desc": "Helping vulnerable communities adapt to climate change, advancing renewable energy, and supporting carbon neutrality goals.",
-            "programs.biodiversity_title": "Biodiversity",
-            "programs.biodiversity_desc": "Protecting endangered wildlife, opposing illegal poaching, and helping to restore forests, wetlands, and marine ecosystems.",
-            "programs.cities_title": "Sustainable Cities",
-            "programs.cities_desc": "Promoting green building standards and circular economy practices to create low-carbon, livable environments.",
-            "contact.title": "Contact Us",
-            "contact.address_title": "Address",
-            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-            "contact.email_title": "Email",
-            "contact.phone_title": "Phone",
-            "footer.about": "Founded in 2021, WEPO is dedicated to environmental protection, inspiring change through science and education.",
-            "footer.council": "Council",
-            "footer.volunteers": "Volunteers",
-            "footer.reports": "Reports",
-            "footer.charter": "Charter",
-            "footer.privacy": "Privacy Policy",
-            "footer.terms": "User Agreement",
-            "footer.disclaimer": "Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.",
-            "footer.follow_us": "Follow Us",
-            "footer.cookie_desc": "This website uses cookies to maintain normal operations.",
-            "footer.tech_desc1": "Built with HTML5, fully responsive for mobile and desktop, and compatible with modern browsers.",
-            "footer.tech_desc2": "Features accessibility functions and multi-language design."
+            "stats.countries": "30+", "stats.countries_text": "Countries Reached", "stats.staff": "500+", "stats.staff_text": "Professionals", "stats.projects": "100+", "stats.projects_text": "Projects", "stats.volunteers": "10k+", "stats.volunteers_text": "Volunteers",
+            "mission.title": "Mission & Vision", "mission.mission_title": "Mission", "mission.mission_desc": "Promoting environmental protection through scientific research, proactive policy advocacy, and widespread public education to mitigate climate impact.",
+            "mission.vision_title": "Vision", "mission.vision_desc": "Creating a thriving, resilient world where humanity and nature coexist in perfect harmony, ensuring resources for future generations.",
+            "mission.values_title": "Values", "mission.values_desc": "Scientific rigor, transparent collaboration, and continuous innovation in tackling ecological challenges.",
+            "programs.title": "Programs", "programs.climate_title": "Climate Action", "programs.climate_desc": "Helping vulnerable communities adapt to climate change, advancing renewable energy, and supporting carbon neutrality goals.",
+            "programs.biodiversity_title": "Biodiversity", "programs.biodiversity_desc": "Protecting endangered wildlife, opposing illegal poaching, and helping to restore forests, wetlands, and marine ecosystems.",
+            "programs.cities_title": "Sustainable Cities", "programs.cities_desc": "Promoting green building standards and circular economy practices to create low-carbon, livable environments.",
+            "contact.title": "Contact Us", "contact.address_title": "Address", "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN", "contact.email_title": "Email", "contact.phone_title": "Phone",
+            "footer.about": "Founded in 2021, WEPO is dedicated to environmental protection, inspiring change through science and education.", "footer.council": "Council", "footer.volunteers": "Volunteers", "footer.reports": "Reports", "footer.charter": "Charter",
+            "footer.privacy": "Privacy Policy", "footer.terms": "User Agreement", "footer.disclaimer": "Disclaimer: The use of country or territory names on this website does not imply the expression of any opinion whatsoever on the part of WEPO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.",
+            "footer.follow_us": "Follow Us", "footer.cookie_desc": "This website uses cookies to maintain normal operations.", "footer.tech_desc1": "Built with HTML5, fully responsive for mobile and desktop, and compatible with modern browsers.", "footer.tech_desc2": "Features accessibility functions and multi-language design.",
+            "form.title": "Join WEPO", "form.name": "Name *", "form.gender": "Gender", "form.gender_opt": "Prefer not to say", "form.nationality": "Nationality", "form.residence": "Residence",
+            "form.phone": "Phone", "form.email": "Email *", "form.position": "Position / Interest", "form.reason": "Reason to join *", "form.file": "Attachment (CV/Resume, optional)",
+            "form.cancel": "Cancel", "form.submit": "Submit", "form.tech_support": "Technical support provided by WEPO Information Security Department"
         },
-        "es": {
-            "lang.current": "ES",
-            "slogan.text": "Cambiemos el mundo.",
-            "nav.home": "Inicio",
-            "nav.about": "Acerca de",
-            "nav.mission": "Misión",
-            "nav.programs": "Programas",
-            "nav.contact": "Contacto",
-            "nav.videos": "Vídeos",
-            "nav.donate": "Donar",
-            "nav.support": "Soporte",
-            "nav.weather": "Clima WEPO",
-            "nav.query": "Consulta Cert",
-            "nav.global": "Visión Global",
-            "hero.title": "Protegiendo la Tierra Nuestro Hogar Común",
-            "hero.description": "Fundada en 2021, WEPO es una fuerza ambiental emergente comprometida a abordar los desafíos ecológicos mediante investigación, promoción de políticas y educación pública.",
-            "hero.btn_feedback": "Más Información",
-            "hero.btn_join": "Únete",
-            "about.subtitle": "Construyendo un futuro sostenible donde humanos y naturaleza coexisten.",
-            "about.p1": "Fundada en 2021 con sede en Chongqing, China, WEPO es una ONG joven y dinámica que contribue activamente al desarrollo sostenible global.",
-            "about.p2": "Desde mitigar el cambio climático hasta proteger la biodiversidad, nos dedicamos a explorar e implementar soluciones prácticas basadas en la ciencia.",
-            "about.p3": "Buscamos construir asociaciones con gobiernos locales, comunidades y empresas para impulsar un cambio ambiental positivo. Al apoyar el monitoreo ecológico, empoderamos a las personas.",
-            "about.p4": "Hoy, nuestro trabajo involucra a seguidores y voluntarios de más de 30 países. Trabajamos continuamente para proteger hábitats vulnerables y promover conceptos sostenibles.",
-            "about.report_link": "Lea Nuestro Informe Anual →",
-            "stats.countries": "30+",
-            "stats.countries_text": "Países Alcanzados",
-            "stats.staff": "500+",
-            "stats.staff_text": "Personal",
-            "stats.projects": "100+",
-            "stats.projects_text": "Proyectos",
-            "stats.volunteers": "10k+",
-            "stats.volunteers_text": "Voluntarios",
-            "mission.title": "Misión y Visión",
-            "mission.mission_title": "Misión",
-            "mission.mission_desc": "Promover la protección ambiental mediante la investigación científica y la educación pública para mitigar el impacto climático.",
-            "mission.vision_title": "Visión",
-            "mission.vision_desc": "Crear un mundo próspero y resiliente donde la humanidad y la naturaleza coexistan en armonía.",
-            "mission.values_title": "Valores",
-            "mission.values_desc": "Rigor científico, colaboración transparente e innovación continua en el abordaje de desafíos ecológicos.",
-            "programs.title": "Programas",
-            "programs.climate_title": "Acción Climática",
-            "programs.climate_desc": "Ayudando a comunidades vulnerables a adaptarse al cambio climático y avanzar hacia la neutralidad de carbono.",
-            "programs.biodiversity_title": "Biodiversidad",
-            "programs.biodiversity_desc": "Protegiendo la vida silvestre en peligro y apoyando la restauración de bosques y ecosistemas marinos.",
-            "programs.cities_title": "Ciudades Sostenibles",
-            "programs.cities_desc": "Promoviendo estándares de construcción verde y economía circular para crear entornos bajos en carbono.",
-            "contact.title": "Contáctenos",
-            "contact.address_title": "Dirección",
-            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-            "contact.email_title": "Correo",
-            "contact.phone_title": "Teléfono",
-            "footer.about": "Fundada en 2021, WEPO está dedicada a la protección ambiental, inspirando el cambio mediante la ciencia.",
-            "footer.council": "Consejo",
-            "footer.volunteers": "Voluntarios",
-            "footer.reports": "Informes",
-            "footer.charter": "Estatuto",
-            "footer.privacy": "Privacidad",
-            "footer.terms": "Términos",
-            "footer.disclaimer": "Descargo de responsabilidad: El uso de nombres de países en este sitio no implica la expresión de opinión alguna por parte de WEPO sobre la condición jurídica de los mismos.",
-            "footer.follow_us": "Síganos",
-            "footer.cookie_desc": "Este sitio web utiliza cookies para mantener el funcionamiento normal.",
-            "footer.tech_desc1": "Construido con HTML5, adaptado para móviles y escritorio, y compatible con navegadores modernos.",
-            "footer.tech_desc2": "Cuenta con funciones de accesibilidad y diseño multilingüe."
-        },
-        "fr": {
-            "lang.current": "FR",
-            "slogan.text": "Changeons le monde.",
-            "nav.home": "Accueil",
-            "nav.about": "À propos",
-            "nav.mission": "Mission",
-            "nav.programs": "Programmes",
-            "nav.contact": "Contact",
-            "nav.videos": "Vidéos",
-            "nav.donate": "Faire un don",
-            "nav.support": "Support",
-            "nav.weather": "Météo WEPO",
-            "nav.query": "Verif Cert",
-            "nav.global": "Vision Globale",
-            "hero.title": "Protéger la Terre Notre Maison Commune",
-            "hero.description": "Fondée en 2021, WEPO est une force environnementale émergente engagée à relever les défis écologiques par la recherche, le plaidoyer et l'éducation.",
-            "hero.btn_feedback": "En savoir plus",
-            "hero.btn_join": "Rejoindre",
-            "about.subtitle": "Construire un avenir durable où l'humain et la nature coexistent.",
-            "about.p1": "Fondée en 2021 et basée à Chongqing, en Chine, WEPO est une ONG jeune et dynamique qui contribue activement au développement durable mondial.",
-            "about.p2": "De l'atténuation du changement climatique à la protection de la biodiversité, nous explorons et mettons en œuvre des solutions pratiques basées sur la science.",
-            "about.p3": "Nous nous efforçons de nouer des partenariats avec les gouvernements locaux, les communautés et les entreprises pour favoriser un changement positif.",
-            "about.p4": "Aujourd'hui, notre travail implique des abonnés et des bénévoles de plus de 30 pays pour protéger les habitats et promouvoir des concepts durables.",
-            "about.report_link": "Lire Notre Rapport Annuel →",
-            "stats.countries": "30+",
-            "stats.countries_text": "Pays Atteints",
-            "stats.staff": "500+",
-            "stats.staff_text": "Personnel",
-            "stats.projects": "100+",
-            "stats.projects_text": "Projets",
-            "stats.volunteers": "10k+",
-            "stats.volunteers_text": "Bénévoles",
-            "mission.title": "Mission et Vision",
-            "mission.mission_title": "Mission",
-            "mission.mission_desc": "Promouvoir la protection de l'environnement grâce à la recherche scientifique et à l'éducation du public pour atténuer l'impact climatique.",
-            "mission.vision_title": "Vision",
-            "mission.vision_desc": "Créer un monde prospère et résilient où l'humanité et la nature coexistent en harmonie.",
-            "mission.values_title": "Valeurs",
-            "mission.values_desc": "Rigueur scientifique, collaboration transparente et innovation continue.",
-            "programs.title": "Programmes",
-            "programs.climate_title": "Action Climatique",
-            "programs.climate_desc": "Aider les communautés vulnérables à s'adapter au changement climatique et faire progresser la neutralité carbone.",
-            "programs.biodiversity_title": "Biodiversité",
-            "programs.biodiversity_desc": "Protéger la faune menacée et soutenir la restauration des forêts et des écosystèmes marins.",
-            "programs.cities_title": "Villes Durables",
-            "programs.cities_desc": "Promouvoir les normes de construction écologique pour créer des environnements à faible émission de carbone.",
-            "contact.title": "Contactez-nous",
-            "contact.address_title": "Adresse",
-            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-            "contact.email_title": "Email",
-            "contact.phone_title": "Téléphone",
-            "footer.about": "Fondée en 2021, WEPO est dédiée à la protection de l'environnement, inspirant le changement par la science.",
-            "footer.council": "Conseil",
-            "footer.volunteers": "Bénévoles",
-            "footer.reports": "Rapports",
-            "footer.charter": "Charte",
-            "footer.privacy": "Confidentialité",
-            "footer.terms": "Conditions",
-            "footer.disclaimer": "Avis de non-responsabilité : L'utilisation de noms de pays sur ce site n'implique aucune opinion de WEPO sur leur statut juridique.",
-            "footer.follow_us": "Suivez-nous",
-            "footer.cookie_desc": "Ce site Web utilise des cookies pour maintenir un fonctionnement normal.",
-            "footer.tech_desc1": "Construit en HTML5, entièrement réactif pour mobile et bureau, et compatible avec les navigateurs modernes.",
-            "footer.tech_desc2": "Comprend des fonctions d'accessibilité et un design multilingüe."
-        },
-        "ru": {
-            "lang.current": "RU",
-            "slogan.text": "Давайте изменим мир.",
-            "nav.home": "Главная",
-            "nav.about": "О нас",
-            "nav.mission": "Миссия",
-            "nav.programs": "Программы",
-            "nav.contact": "Контакты",
-            "nav.videos": "Видео",
-            "nav.donate": "Пожертвовать",
-            "nav.support": "Поддержка",
-            "nav.weather": "Погода WEPO",
-            "nav.query": "Проверка",
-            "nav.global": "Глобальный вид",
-            "hero.title": "Защита Земли Наш Общий Дом",
-            "hero.description": "Основанная в 2021 году, WEPO является новой экологической силой, стремящейся решать глобальные экологические проблемы с помощью науки и просвещения.",
-            "hero.btn_feedback": "Узнать больше",
-            "hero.btn_join": "Присоединиться",
-            "about.subtitle": "Создание устойчивого будущего, где человек и природа сосуществуют.",
-            "about.p1": "Основанная в 2021 году со штаб-квартирой в Чунцине, Китай, WEPO является молодой и динамичной НПО, активно способствующей устойчивому развитию.",
-            "about.p2": "От смягчения последствий изменения климата до защиты биоразнообразия, мы стремимся внедрять практические, научно обоснованные решения.",
-            "about.p3": "Мы стремимся налаживать партнерские отношения с местными органами власти, сообществами и предприятиями для стимулирования позитивных экологических изменений.",
-            "about.p4": "Сегодня в нашей работе участвуют последователи и волонтеры из более чем 30 стран для защиты уязвимых мест обитания.",
-            "about.report_link": "Прочитать Наш Годовой Отчет →",
-            "stats.countries": "30+",
-            "stats.countries_text": "Охваченные Страны",
-            "stats.staff": "500+",
-            "stats.staff_text": "Сотрудники",
-            "stats.projects": "100+",
-            "stats.projects_text": "Проекты",
-            "stats.volunteers": "10k+",
-            "stats.volunteers_text": "Волонтеры",
-            "mission.title": "Миссия и Видение",
-            "mission.mission_title": "Миссия",
-            "mission.mission_desc": "Продвижение защиты окружающей среды через научные исследования и общественное просвещение для смягчения воздействия на климат.",
-            "mission.vision_title": "Видение",
-            "mission.vision_desc": "Создание процветающего мира, где человечество и природа сосуществуют в гармонии.",
-            "mission.values_title": "Ценности",
-            "mission.values_desc": "Научная строгость, прозрачное сотрудничество и постоянные инновации.",
-            "programs.title": "Программы",
-            "programs.climate_title": "Климатические Действия",
-            "programs.climate_desc": "Помощь сообществам в адаптации к изменению климата и продвижение углеродной нейтральности.",
-            "programs.biodiversity_title": "Биоразнообразие",
-            "programs.biodiversity_desc": "Защита дикой природы и поддержка восстановления лесов и морских экосистем.",
-            "programs.cities_title": "Устойчивые Города",
-            "programs.cities_desc": "Продвижение стандартов зеленого строительства для создания экологически чистых сред.",
-            "contact.title": "Свяжитесь с нами",
-            "contact.address_title": "Адрес",
-            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-            "contact.email_title": "Email",
-            "contact.phone_title": "Телефон",
-            "footer.about": "Основанная в 2021 году, WEPO посвящена защите окружающей среды, вдохновляя на изменения через науку.",
-            "footer.council": "Совет",
-            "footer.volunteers": "Волонтеры",
-            "footer.reports": "Отчеты",
-            "footer.charter": "Устав",
-            "footer.privacy": "Конфиденциальность",
-            "footer.terms": "Условия",
-            "footer.disclaimer": "Отказ от ответственности: Использование названий стран на этом сайте не означает выражения мнения WEPO об их правовом статусе.",
-            "footer.follow_us": "Подписывайтесь",
-            "footer.cookie_desc": "Этот веб-сайт использует файлы cookie для нормальной работы.",
-            "footer.tech_desc1": "Создан на HTML5, адаптирован для мобильных и настольных устройств, совместим с современными браузерами.",
-            "footer.tech_desc2": "Обеспечен функциями доступности и многоязычным дизайном."
-        },
-        "ar": {
-            "lang.current": "العربية",
-            "slogan.text": "دعونا نغير العالم.",
-            "nav.home": "الرئيسية",
-            "nav.about": "معلومات عنا",
-            "nav.mission": "المهمة",
-            "nav.programs": "البرامج",
-            "nav.contact": "اتصل",
-            "nav.videos": "أشرطة الفيديو",
-            "nav.donate": "التبرع",
-            "nav.support": "دعم",
-            "nav.weather": "طقس WEPO",
-            "nav.query": "الشهادات",
-            "nav.global": "رؤية عالمية",
-            "hero.title": "حماية الأرض منزلنا المشترك",
-            "hero.description": "تأسست WEPO في عام 2021، وهي قوة بيئية ناشئة ملتزمة بمعالجة التحديات البيئية من خلال البحث والدعوة والتعليم.",
-            "hero.btn_feedback": "تعرف أكثر",
-            "hero.btn_join": "انضم إلينا",
-            "about.subtitle": "بناء مستقبل مستدام يتعايش فيه الإنسان والطبيعة.",
-            "about.p1": "تأسست WEPO في عام 2021 ومقرها في تشونغتشينغ، الصين، وهي منظمة غير حكومية شابة تساهم بنشاط في التنمية المستدامة.",
-            "about.p2": "نحن ملتزمون باستكشاف وتنفيذ حلول عملية قائمة على العلم للتخفيف من تغير المناخ وحماية التنوع البيولوجي.",
-            "about.p3": "نسعى لبناء شراكات مع الحكومات والمجتمعات والشركات لدفع التغيير البيئي الإيجابي.",
-            "about.p4": "اليوم، يشمل عملنا متابعين ومتطوعين من أكثر من 30 دولة لحماية الموائل وتعزيز المفاهيم المستدامة.",
-            "about.report_link": "اقرأ تقريرنا السنوي →",
-            "stats.countries": "30+",
-            "stats.countries_text": "الدول المشاركة",
-            "stats.staff": "500+",
-            "stats.staff_text": "الموظفون",
-            "stats.projects": "100+",
-            "stats.projects_text": "المشاريع",
-            "stats.volunteers": "10k+",
-            "stats.volunteers_text": "المتطوعون",
-            "mission.title": "المهمة والرؤية",
-            "mission.mission_title": "المهمة",
-            "mission.mission_desc": "تعزيز حماية البيئة من خلال البحث العلمي والتعليم العام للتخفيف من تأثير المناخ.",
-            "mission.vision_title": "الرؤية",
-            "mission.vision_desc": "خلق عالم مزدهر ومرن تتعايش فيه الإنسانية والطبيعة في وئام.",
-            "mission.values_title": "القيم",
-            "mission.values_desc": "الصرامة العلمية، والتعاون الشفاف، والابتكار المستمر.",
-            "programs.title": "البرامج",
-            "programs.climate_title": "العمل المناخي",
-            "programs.climate_desc": "مساعدة المجتمعات الضعيفة على التكيف مع تغير المناخ ودعم أهداف الحياد الكربوني.",
-            "programs.biodiversity_title": "التنوع البيولوجي",
-            "programs.biodiversity_desc": "حماية الحياة البرية ودعم استعادة الغابات والنظم البيئية البحرية.",
-            "programs.cities_title": "مدن مستدامة",
-            "programs.cities_desc": "تعزيز معايير البناء الأخضر لخلق بيئات منخفضة الكربون.",
-            "contact.title": "اتصل بنا",
-            "contact.address_title": "العنوان",
-            "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
-            "contact.email_title": "البريد الإلكتروني",
-            "contact.phone_title": "الهاتف",
-            "footer.about": "تأسست WEPO في عام 2021، وهي مكرسة لحماية البيئة وإلهام التغيير من خلال العلم.",
-            "footer.council": "المجلس",
-            "footer.volunteers": "المتطوعون",
-            "footer.reports": "التقارير",
-            "footer.charter": "الميثاق",
-            "footer.privacy": "الخصوصية",
-            "footer.terms": "الشروط",
-            "footer.disclaimer": "إخلاء المسؤولية: استخدام أسماء البلدان على هذا الموقع لا يعني التعبير عن رأي WEPO بشأن وضعها القانوني.",
-            "footer.follow_us": "تابعنا",
-            "footer.cookie_desc": "يستخدم هذا الموقع ملفات تعريف الارتباط للحفاظ على التشغيل العادي.",
-            "footer.tech_desc1": "مبني بتقنية HTML5، متوافق مع الأجهزة المحمولة وسطح المكتب.",
-            "footer.tech_desc2": "يتميز بوظائف إمكانية الوصول والتصميم متعدد اللغات."
-        }
+        "es": { "lang.current":"ES","form.title":"Únete a WEPO","form.name":"Nombre *","form.gender":"Género","form.gender_opt":"Prefiero no decirlo","form.nationality":"Nacionalidad","form.residence":"Residencia","form.phone":"Teléfono","form.email":"Correo *","form.position":"Puesto","form.reason":"Motivo *","form.file":"Adjunto","form.cancel":"Cancelar","form.submit":"Enviar","form.tech_support":"Soporte técnico por WEPO" },
+        "fr": { "lang.current":"FR","form.title":"Rejoindre WEPO","form.name":"Nom *","form.gender":"Genre","form.gender_opt":"Ne pas préciser","form.nationality":"Nationalité","form.residence":"Résidence","form.phone":"Téléphone","form.email":"Email *","form.position":"Poste","form.reason":"Motif *","form.file":"Pièce jointe","form.cancel":"Annuler","form.submit":"Envoyer","form.tech_support":"Support technique par WEPO" },
+        "ru": { "lang.current":"RU","form.title":"Присоединиться","form.name":"Имя *","form.gender":"Пол","form.gender_opt":"Не указывать","form.nationality":"Гражданство","form.residence":"Проживание","form.phone":"Телефон","form.email":"Email *","form.position":"Должность","form.reason":"Причина *","form.file":"Файл","form.cancel":"Отмена","form.submit":"Отправить","form.tech_support":"Техподдержка WEPO" },
+        "ar": { "lang.current":"العربية","form.title":"انضم إلى WEPO","form.name":"الاسم *","form.gender":"الجنس","form.gender_opt":"لا أريد الإفصاح","form.nationality":"الجنسية","form.residence":"الإقامة","form.phone":"الهاتف","form.email":"البريد *","form.position":"المنصب","form.reason":"السبب *","form.file":"مرفق","form.cancel":"إلغاء","form.submit":"إرسال","form.tech_support":"الدعم الفني من WEPO" }
     };
 
-    // --- Typewriter Effect ---
+    // --- Typewriter, Theme, Language, Scroll etc. ---
     let typewriterTimeout;
-    function typeWriter(text, elementId, speed = 100) {
-        const element = document.getElementById(elementId);
-        if (!element) return;
-        element.textContent = '';
-        clearTimeout(typewriterTimeout);
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-                typewriterTimeout = setTimeout(type, speed);
-            }
-        }
-        type();
+    function typeWriter(text, elementId, speed = 80) {
+        const el = document.getElementById(elementId); if(!el) return; el.textContent = ''; clearTimeout(typewriterTimeout);
+        let i=0; function type(){ if(i<text.length){ el.textContent += text.charAt(i); i++; typewriterTimeout = setTimeout(type, speed); } } type();
     }
 
-    // --- Logic Control ---
     const themeBtn = document.getElementById('themeBtn');
-    function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    }
-    function initTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else {
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            setTheme(prefersDark ? 'dark' : 'light');
-        }
-    }
-    themeBtn.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
-    });
+    function setTheme(t){ document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); }
+    function initTheme(){ const s = localStorage.getItem('theme'); if(s) setTheme(s); else setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }
+    themeBtn.addEventListener('click', ()=>{ setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'); });
     initTheme();
 
-    function setLanguage(lang) {
-        const elements = document.querySelectorAll('[data-i18n]');
-        elements.forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                if (key === 'hero.title') {
-                    document.getElementById('hero-title-source').textContent = translations[lang][key];
-                    typeWriter(translations[lang][key], 'hero-title', 80);
-                } else {
-                    element.innerHTML = translations[lang][key]; 
-                }
+    function setLanguage(lang){
+        document.querySelectorAll('[data-i18n]').forEach(el=>{
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang] && translations[lang][key]){
+                if(key==='hero.title'){ document.getElementById('hero-title-source').textContent = translations[lang][key]; typeWriter(translations[lang][key], 'hero-title', 80); }
+                else el.innerHTML = translations[lang][key];
             }
         });
-        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        localStorage.setItem('lang', lang);
+        document.body.dir = lang==='ar'?'rtl':'ltr'; localStorage.setItem('lang', lang);
     }
     const savedLang = localStorage.getItem('lang') || 'en';
-    setTimeout(() => setLanguage(savedLang), 100);
+    setTimeout(()=> setLanguage(savedLang), 100);
+    document.querySelectorAll('.language-dropdown li').forEach(li=> li.addEventListener('click', ()=> setLanguage(li.getAttribute('data-lang'))));
 
-    document.querySelectorAll('.language-dropdown li').forEach(li => {
-        li.addEventListener('click', () => {
-            setLanguage(li.getAttribute('data-lang'));
-        });
-    });
-
-    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) { entry.target.classList.add('active'); }
-        });
-    }, observerOptions);
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        header.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
+    const observer = new IntersectionObserver((e)=> e.forEach(en=> { if(en.isIntersecting) en.target.classList.add('active'); }), {threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el=> observer.observe(el));
+    window.addEventListener('scroll', ()=> document.querySelector('header').classList.toggle('scrolled', window.scrollY>20));
     const spot = document.getElementById('cursor-spotlight');
-    document.addEventListener('mousemove', (e) => {
-        spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-    });
+    document.addEventListener('mousemove', e=> spot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`);
+    function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 
-    function toggleMobileMenu() {
-        document.getElementById('mobileMenu').classList.toggle('open');
-    }
-
-    function initCookieLogic() {
-        const status = localStorage.getItem('cookieStatus');
-        const cookieBar = document.getElementById('cookieBar');
-        // If cookie wasn't accepted, DO NOT add `body.cookie-locked` anymore!
-        // This is the critical fix for SEO. The modal shows, but the height isn't cropped to 100vh.
-        if (status !== 'accepted') {
-            cookieBar.classList.add('active');
-        }
-    }
-    function acceptCookie() {
-        document.getElementById('cookieBar').classList.remove('active');
-        localStorage.setItem('cookieStatus', 'accepted');
-    }
-    function declineCookie() {
-        window.location.href = "https://bing.com";
-    }
+    // Cookie
+    function initCookieLogic(){ if(localStorage.getItem('cookieStatus')!=='accepted') document.getElementById('cookieBar').classList.add('active'); }
+    function acceptCookie(){ document.getElementById('cookieBar').classList.remove('active'); localStorage.setItem('cookieStatus','accepted'); }
+    function declineCookie(){ window.location.href="https://bing.com"; }
     initCookieLogic();
-
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // --- JOIN FORM LOGIC ---
+    const overlay = document.getElementById('joinFormOverlay');
+    const joinBtn = document.getElementById('joinUsBtn');
+    const form = document.getElementById('joinForm');
+    const statusDiv = document.getElementById('formStatus');
+
+    function openJoinForm(e){ e.preventDefault(); overlay.classList.add('active'); statusDiv.textContent = ''; form.reset(); }
+    function closeJoinForm(){ overlay.classList.remove('active'); }
+    joinBtn.addEventListener('click', openJoinForm);
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeJoinForm(); });
+
+    form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const formData = new FormData(form);
+        statusDiv.textContent = (savedLang==='zh-CN'?'提交中...':'Submitting...');
+        try {
+            const res = await fetch('https://chat.wepo2021.org:5005/api/submit', { method:'POST', body: formData });
+            if(res.status === 429) throw new Error('Too many requests. Please slow down.');
+            const data = await res.json();
+            if(data.code === 200){
+                statusDiv.textContent = savedLang==='zh-CN'?'✓ 提交成功！感谢加入。':'✓ Submitted successfully! Thank you.';
+                setTimeout(()=>{ closeJoinForm(); }, 2000);
+            } else {
+                throw new Error(data.msg || 'Server error');
+            }
+        } catch(err){
+            statusDiv.textContent = (savedLang==='zh-CN'?'提交失败: ':'Error: ') + err.message;
+        }
+    });
+
+    // Update select options for gender based on lang? keep simple.
 </script>
 </body>
 </html>
