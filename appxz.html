@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>维科办公 WEPO Office - 官方下载</title>
+    <style>
+        /* CSS 变量：Android 16 & 红点奖高级色彩系统 */
+        :root {
+            --bg-primary: #F4F7F4;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #E8EFE9;
+            --text-primary: #111B15;
+            --text-secondary: #4A5D52;
+            --accent-green: #0F5B3F;
+            --accent-green-hover: #0A3F2C;
+            --accent-glow: rgba(15, 91, 63, 0.1);
+            --border-color: rgba(15, 91, 63, 0.1);
+            --card-shadow: 0 12px 40px rgba(15, 91, 63, 0.06);
+            --card-radius: 28px;
+            --btn-radius: 18px;
+            --transition-smooth: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --red-dot: #E30613;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0C0F0D;
+            --bg-secondary: #131915;
+            --bg-tertiary: #1B241E;
+            --text-primary: #ECF2ED;
+            --text-secondary: #8E9E94;
+            --accent-green: #36D399;
+            --accent-green-hover: #4ADE80;
+            --accent-glow: rgba(54, 211, 153, 0.25);
+            --border-color: rgba(54, 211, 153, 0.15);
+            --card-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 背景流体渐变光晕（安卓16动态主题感） */
+        .ambient-glow {
+            position: absolute;
+            width: min(600px, 100vw);
+            height: min(600px, 100vw);
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
+            top: -150px;
+            right: -150px;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(60px);
+            animation: pulse-glow 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-30px, 30px); }
+        }
+
+        /* 顶部导航栏 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-subtitle {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 交互控制按钮 */
+        .icon-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: var(--transition-smooth);
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-green);
+            box-shadow: 0 8px 16px var(--accent-glow);
+        }
+
+        .icon-btn:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* 核心布局 */
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 40px;
+            padding: 20px 8% 60px 8%;
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            width: 100%;
+        }
+
+        /* 左侧下载及介绍区 */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* 红点设计奖荣誉标签 */
+        .reddot-badge {
+            align-self: flex-start;
+            background: rgba(227, 6, 19, 0.08);
+            border: 1px solid var(--red-dot);
+            color: var(--red-dot);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+            animation: pulse-red 2.5s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(227, 6, 19, 0.3); }
+            70% { box-shadow: 0 0 0 8px rgba(227, 6, 19, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(227, 6, 19, 0); }
+        }
+
+        .main-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .main-desc {
+            font-size: clamp(15px, 1.5vw, 17px);
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 580px;
+        }
+
+        /* 物理动态主下载按钮 */
+        .download-box {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .dl-btn {
+            position: relative;
+            background: linear-gradient(135deg, var(--accent-green) 0%, #16A34A 100%);
+            color: #FFFFFF;
+            border: none;
+            padding: 18px 32px;
+            border-radius: var(--btn-radius);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 12px 28px var(--accent-glow);
+            transition: var(--transition-smooth);
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .dl-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: none;
+        }
+
+        .dl-btn:hover::before {
+            left: 150%;
+            transition: all 1.2s ease-in-out;
+        }
+
+        .dl-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 36px var(--accent-glow);
+        }
+
+        .dl-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 右侧自适应手机框架 */
+        .visual-panel {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+            perspective: 1000px;
+            width: 100%;
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 290px;
+            aspect-ratio: 9 / 18.5; /* 现代高屏占比手机比例 */
+            background: #000000;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: var(--card-shadow), inset 0 0 2px 2px rgba(255,255,255,0.15);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease-out;
+        }
+
+        /* 安卓16 挖孔屏 */
+        .phone-camera {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 24px;
+            background: #000000;
+            border-radius: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .phone-camera::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #0c182d;
+            border-radius: 50%;
+            border: 1px solid #1a2c4c;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            background: #111;
+        }
+
+        /* 走马灯轮播图 */
+        .slider-wrapper {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+
+        .slide {
+            width: 25%;
+            height: 100%;
+            position: relative;
+            cursor: zoom-in;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* 轮播指示器 */
+        .slider-dots {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .dot.active {
+            width: 18px;
+            border-radius: 10px;
+            background: #FFFFFF;
+        }
+
+        /* 轮播方向按钮 (大屏悬浮显示，小屏安全区域内置) */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            z-index: 11;
+            transition: var(--transition-smooth);
+            opacity: 0;
+        }
+
+        .visual-panel:hover .slider-arrow {
+            opacity: 1;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .arrow-left { left: -50px; }
+        .arrow-right { right: -50px; }
+
+        /* 微信遮罩层 */
+        #wechat-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(12, 15, 13, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            justify-content: flex-end;
+            padding: 30px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .wechat-tips-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+            max-width: 350px;
+            animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .wechat-arrow {
+            width: 60px;
+            height: 60px;
+            transform: rotate(-10deg);
+            stroke-dasharray: 100;
+            animation: drawLine 2s infinite alternate;
+        }
+
+        .wechat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+        }
+
+        .wechat-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-green);
+        }
+
+        .wechat-step {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 优雅页脚 */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 30px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            z-index: 10;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* 全屏图片灯箱 */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #lightbox img {
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* 动画集 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes drawLine {
+            to { stroke-dashoffset: 180; }
+        }
+
+        /* 响应式媒体查询：平板、大折叠屏 */
+        @media (max-width: 1024px) {
+            main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding-top: 10px;
+                text-align: center;
+            }
+            .info-panel {
+                align-items: center;
+            }
+            .reddot-badge {
+                align-self: center;
+            }
+            .main-desc {
+                margin: 0 auto;
+            }
+            .download-box {
+                align-items: center;
+                margin: 0 auto;
+            }
+            .visual-panel {
+                margin-top: 10px;
+            }
+            /* 在平板端将切换箭头向内移动，避免超出屏幕 */
+            .arrow-left { left: 5%; }
+            .arrow-right { right: 5%; }
+            .slider-arrow {
+                opacity: 0.8; /* 移动端/平板直接可见 */
+            }
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        /* 响应式媒体查询：小屏手机 */
+        @media (max-width: 480px) {
+            header {
+                padding: 16px 6%;
+            }
+            main {
+                padding: 0 6% 40px 6%;
+            }
+            .main-title {
+                font-size: 28px;
+            }
+            /* 小屏手机中，为了保证最舒适的手持视效，去掉箭头改用滑动，或将箭头贴在边缘 */
+            .slider-arrow {
+                display: none; /* 小屏手机完全依赖底部圆点点按与手势 */
+            }
+            .phone-mockup {
+                max-width: 250px; /* 窄屏完美契合 */
+            }
+            .dl-btn {
+                padding: 16px 24px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <!-- 头部导航 -->
+    <header>
+        <div class="logo-area">
+            <img src="https://wepo2021org-uqewhjj.cdn.7caiyun.com/mmexport1780063379770.jpg" alt="WEPO Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-title" id="logoText">维科办公</span>
+                <span class="logo-subtitle">WEPO OA SYSTEM</span>
+            </div>
+        </div>
+        <div class="nav-controls">
+            <!-- 语言切换 -->
+            <button class="icon-btn" onclick="toggleLanguage()" id="langBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>EN</span>
+            </button>
+            <!-- 主题切换 (浅色初始显示月亮) -->
+            <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="16" height="16" class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg width="16" height="16" class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主展示区 -->
+    <main>
+        <!-- 左侧文案与下载 -->
+        <div class="info-panel">
+            <div class="reddot-badge">
+                <svg width="10" height="10" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#E30613"/></svg>
+                <span id="badgeText">2026 红点杰出设计奖得主</span>
+            </div>
+            <h1 class="main-title" id="mainTitle">协同无界<br>绿色生态办公</h1>
+            <p class="main-desc" id="mainDesc">维科生态协会（WEPO）专属内部智能化协作终端。结合先进环境数据洞察与流畅工作流，用科技赋能绿色未来。</p>
+            
+            <div class="download-box">
+                <a href="https://wepo2021org-uqewhjj.cdn.7caiyun.com/app-release.apk" class="dl-btn" id="dlBtn" onclick="handleDownload(event)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span id="dlBtnText">立即下载安卓版</span>
+                </a>
+                <div class="meta-info">
+                    <div class="meta-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <span id="metaVer">版本: v1.0.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <span>63.78 MB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧自适应手机框架 -->
+        <div class="visual-panel" id="visualPanel">
+            <button class="slider-arrow arrow-left" onclick="slidePrev()" aria-label="Previous Slide">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="slider-arrow arrow-right" onclick="slideNext()" aria-label="Next Slide">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            
+            <div class="phone-mockup" id="phoneMockup">
+                <div class="phone-camera"></div>
+                <div class="phone-screen">
+                    <div class="slider-wrapper" id="sliderWrapper">
+                        <!-- 宣传图 1 -->
+                        <div class="slide" onclick="openLightbox(this)">
+                            <img src="https://wepo2021org-uqewhjj.cdn.7caiyun.com/Screenshot_2026-05-29-21-19-37-598_com.vkoa.app.jpg" alt="Screenshot 1">
+                        </div>
+                        <!-- 宣传图 2 -->
+                        <div class="slide" onclick="openLightbox(this)">
+                            <img src="https://wepo2021org-uqewhjj.cdn.7caiyun.com/mmexport1780063369071.jpg" alt="Screenshot 2">
+                        </div>
+                        <!-- 宣传图 3 -->
+                        <div class="slide" onclick="openLightbox(this)">
+                            <img src="https://wepo2021org-uqewhjj.cdn.7caiyun.com/mmexport1780063383842.jpg" alt="Screenshot 3">
+                        </div>
+                        <!-- 宣传图 4 -->
+                        <div class="slide" onclick="openLightbox(this)">
+                            <img src="https://wepo2021org-uqewhjj.cdn.7caiyun.com/mmexport1780063379770.jpg" alt="Screenshot 4">
+                        </div>
+                    </div>
+                    <div class="slider-dots" id="sliderDots">
+                        <div class="dot active" onclick="goToSlide(0)"></div>
+                        <div class="dot" onclick="goToSlide(1)"></div>
+                        <div class="dot" onclick="goToSlide(2)"></div>
+                        <div class="dot" onclick="goToSlide(3)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-brand">
+            <span style="font-weight:700; color: var(--text-primary);">© 2026 WEPO. All rights reserved.</span>
+            <span id="philosophy">维科生态协会：科技与自然共生。</span>
+        </div>
+        <div>
+            <span id="footerTips">本应用为维科内部办公协作工具，请勿外传。</span>
+        </div>
+    </footer>
+
+    <!-- 微信引导遮罩 -->
+    <div id="wechat-overlay" onclick="closeWeChatOverlay()">
+        <div class="wechat-tips-container">
+            <svg class="wechat-arrow" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="4" stroke-linecap="round">
+                <path d="M20 80 C 40 50, 70 30, 80 15 M 80 15 L 60 15 M 80 15 L 80 35"/>
+            </svg>
+            <div class="wechat-card">
+                <div class="wechat-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <span id="wxTitle">由于微信限制，请在外部下载</span>
+                </div>
+                <div class="wechat-step">
+                    <span>1.</span>
+                    <span id="wxStep1">点击右上角三个点按钮（···）</span>
+                </div>
+                <div class="wechat-step">
+                    <span>2.</span>
+                    <span id="wxStep2">选择“在浏览器中打开”</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全屏灯箱查看器 -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="Zoomed View">
+    </div>
+
+    <script>
+        // ------------------ 语言本地化词典 ------------------
+        const langData = {
+            zh: {
+                logo: "维科办公",
+                badge: "2026 红点杰出设计奖得主",
+                title: "协同无界<br>绿色生态办公",
+                desc: "维科生态协会（WEPO）专属内部智能化协作终端。结合先进环境数据与流畅工作流，用科技赋能绿色未来。",
+                dlBtn: "立即下载安卓版",
+                ver: "版本: v1.0.0",
+                philosophy: "维科生态协会：科技与自然共生。",
+                footerTips: "本应用为维科内部办公协作工具，请勿外传。",
+                wxTitle: "需在外部浏览器打开",
+                wxStep1: "点击右上角的 “···” 菜单",
+                wxStep2: "选择 “在浏览器打开” 即可直接下载",
+                langBtn: "English"
+            },
+            en: {
+                logo: "WEPO Office",
+                badge: "2026 Red Dot Winner",
+                title: "Ecological<br>Seamless Collaboration",
+                desc: "Exclusive collaboration portal for Weko Environmental Protection Organization (WEPO). Empowering green future via advanced flow.",
+                dlBtn: "Download for Android",
+                ver: "Version: v1.0.0",
+                philosophy: "WEPO: Harmony of Technology & Nature.",
+                footerTips: "Internal collaboration suite. Strictly confidential.",
+                wxTitle: "Open in Browser Required",
+                wxStep1: "Tap the top-right menu button (···)",
+                wxStep2: "Select 'Open in Browser' to begin downloading",
+                langBtn: "中文"
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            const dict = langData[currentLang];
+
+            document.getElementById('logoText').innerHTML = dict.logo;
+            document.getElementById('badgeText').innerText = dict.badge;
+            document.getElementById('mainTitle').innerHTML = dict.title;
+            document.getElementById('mainDesc').innerText = dict.desc;
+            document.getElementById('dlBtnText').innerText = dict.dlBtn;
+            document.getElementById('metaVer').innerText = dict.ver;
+            document.getElementById('philosophy').innerText = dict.philosophy;
+            document.getElementById('footerTips').innerText = dict.footerTips;
+            document.getElementById('langBtn').querySelector('span').innerText = dict.langBtn;
+
+            // 微信文案替换
+            document.getElementById('wxTitle').innerText = dict.wxTitle;
+            document.getElementById('wxStep1').innerText = dict.wxStep1;
+            document.getElementById('wxStep2').innerText = dict.wxStep2;
+        }
+
+        // ------------------ 深浅色模式切换 ------------------
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            
+            const sunIcon = document.querySelector('.theme-sun');
+            const moonIcon = document.querySelector('.theme-moon');
+
+            if (newTheme === 'dark') {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        // ------------------ 手机走马灯逻辑 ------------------
+        let currentSlide = 0;
+        const totalSlides = 4;
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            sliderWrapper.style.transform = `translateX(-${currentSlide * 25}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function slideNext() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function slidePrev() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        // 自动轮播
+        let autoPlay = setInterval(slideNext, 4500);
+
+        function resetAutoPlay() {
+            clearInterval(autoPlay);
+            autoPlay = setInterval(slideNext, 4500);
+        }
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                goToSlide(idx);
+                resetAutoPlay();
+            });
+        });
+
+        // ------------------ 3D 拟真手机倾斜交互（非移动设备上激活） ------------------
+        const card = document.getElementById('phoneMockup');
+        const container = document.getElementById('visualPanel');
+
+        // 检测是否为移动端
+        const isMobileDevice = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+        if (!isMobileDevice) {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+                
+                const factor = 0.05; 
+                card.style.transform = `rotateY(${x * factor}deg) rotateX(${-y * factor}deg)`;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+                card.style.transition = 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+            });
+
+            container.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
+        }
+
+        // ------------------ 灯箱放大展示 ------------------
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        function openLightbox(slideElement) {
+            const src = slideElement.querySelector('img').src;
+            lightboxImg.src = src;
+            lightbox.style.display = 'flex';
+            setTimeout(() => {
+                lightbox.style.opacity = '1';
+                lightboxImg.style.transform = 'scale(1)';
+            }, 10);
+            clearInterval(autoPlay);
+        }
+
+        function closeLightbox() {
+            lightbox.style.opacity = '0';
+            lightboxImg.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+            }, 300);
+            resetAutoPlay();
+        }
+
+        // ------------------ 微信环境检测 ------------------
+        function isWeChat() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('micromessenger') !== -1;
+        }
+
+        function handleDownload(event) {
+            if (isWeChat()) {
+                event.preventDefault();
+                showWeChatOverlay();
+            }
+        }
+
+        function showWeChatOverlay() {
+            const overlay = document.getElementById('wechat-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+            }, 10);
+        }
+
+        function closeWeChatOverlay() {
+            const overlay = document.getElementById('wechat-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 400);
+        }
+    </script>
+</body>
+</html>
