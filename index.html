@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- --- SEO 核心优化 --- -->
     <title>维科生态协会 (WEPO) | Weco Ecology Protection Organization</title>
     <meta name="description" content="成立于2021年，维科生态协会 (WEPO) 是一家致力于应对气候变化、保护生物多样性与推动可持续发展的年轻、非营利性环保组织。">
     <meta name="keywords" content="维科生态协会, WEPO, 新兴环保组织, 环保机构, 气候变化, 生物多样性, 可持续发展, Weco Ecology Protection Organization, Environmental NGO, Climate Change, Biodiversity, 碳中和, 青年环保力量">
     <meta name="author" content="WEPO Council">
 
     <link rel="canonical" href="https://wepo2021.org/">
-
     <link rel="alternate" hreflang="x-default" href="https://wepo2021.org/">
     <link rel="alternate" hreflang="zh-CN" href="https://wepo2021.org/">
     <link rel="alternate" hreflang="en" href="https://wepo2021.org/">
@@ -23,7 +21,6 @@
     <meta name="theme-color" content="#0a0a0a">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://wepo2021.org/sitemap.xml">
 
-    <!-- --- SEO: Open Graph --- -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wepo2021.org/">
     <meta property="og:title" content="维科生态协会 (WEPO) - 致力于可持续发展的新兴力量">
@@ -33,13 +30,11 @@
     <meta property="og:locale" content="zh_CN">
     <meta property="og:locale:alternate" content="en_US">
 
-    <!-- --- SEO: Twitter Card --- -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="维科生态协会 (WEPO) - 致力于可持续发展的新兴环保力量">
     <meta name="twitter:description" content="成立于2021年，维科生态协会 (WEPO) 是一家积极投身于气候变化应对与生物多样性保护的年轻非营利组织。">
     <meta name="twitter:image" content="https://www.yn12377.cn/jubao/upload/smjb/2025/12/22/578e693fff1441e0b84dc4bd3c0fd7b1.png">
 
-    <!-- --- SEO: 核心聚合子链接与组织图谱结构化数据 (JSON-LD) --- -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -942,7 +937,158 @@
             gap: 20px;
         }
 
-        /* ============ COOKIE OVERLAY - 修复排版 ============ */
+        /* ============ 人机验证 Overlay - 最高优先级，在Cookie之前 ============ */
+        .captcha-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100001;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .captcha-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .captcha-modal {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            padding: 35px 30px 25px;
+            border-radius: 0;
+            max-width: 500px;
+            width: 95%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+            transform: scale(0.95);
+            transition: transform 0.4s var(--ease-apple);
+        }
+        .captcha-overlay.active .captcha-modal {
+            transform: scale(1);
+        }
+        .captcha-modal .captcha-title {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.04em;
+        }
+        .captcha-modal .captcha-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .captcha-iframe-wrapper {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 420px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-glass);
+            overflow: hidden;
+        }
+        .captcha-iframe-wrapper iframe {
+            width: 100%;
+            max-width: 400px;
+            height: 520px;
+            border: none;
+            display: block;
+        }
+        .captcha-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            gap: 12px;
+            pointer-events: none;
+            transition: opacity 0.4s;
+        }
+        .captcha-loading.hidden {
+            opacity: 0;
+        }
+        .captcha-spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border-glass);
+            border-top-color: var(--accent-gold);
+            border-radius: 50%;
+            animation: spinRing 1s linear infinite;
+        }
+        .captcha-error {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 20px;
+            text-align: center;
+        }
+        .captcha-error.visible {
+            display: flex;
+        }
+        .captcha-retry-btn {
+            padding: 10px 28px;
+            background: var(--accent-gold);
+            color: #000;
+            border: 1px solid var(--accent-gold);
+            cursor: pointer;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+        .captcha-retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .captcha-kf-link {
+            color: var(--accent-gold);
+            font-weight: 600;
+            border-bottom: 1px solid var(--accent-gold);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .captcha-kf-link:hover {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+        @media (max-width: 768px) {
+            .captcha-modal {
+                padding: 24px 14px 18px;
+                max-width: 98vw;
+            }
+            .captcha-iframe-wrapper {
+                min-height: 380px;
+            }
+            .captcha-iframe-wrapper iframe {
+                max-width: 100%;
+                height: 460px;
+            }
+            .captcha-modal .captcha-title {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* ============ COOKIE OVERLAY ============ */
         .cookie-overlay {
             position: fixed;
             top: 0;
@@ -1189,7 +1335,6 @@
             gap: 12px;
         }
 
-        /* Radio & Checkbox styling */
         .radio-group {
             display: flex;
             gap: 20px;
@@ -1227,7 +1372,6 @@
             flex-shrink: 0;
         }
 
-        /* Application type toggle */
         .app-type-toggle {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1721,6 +1865,232 @@
         <a href="https://wepo2021.org/#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contact</a>
     </div>
 
+    <!-- ============ 人机验证 Overlay - 在Cookie弹窗之前显示，不可绕过 ============ -->
+    <div class="captcha-overlay" id="captchaOverlay">
+        <div class="captcha-modal">
+            <h3 class="captcha-title">人机验证 / Human Verification</h3>
+            <p class="captcha-subtitle">请完成以下验证以继续访问网站。<br>Please complete the verification below to continue.</p>
+            <div class="captcha-iframe-wrapper" id="captchaIframeWrapper">
+                <div class="captcha-loading" id="captchaLoading">
+                    <div class="captcha-spinner"></div>
+                    <span>正在加载验证组件...</span>
+                </div>
+                <div class="captcha-error" id="captchaError">
+                    <span>⚠️ 验证组件加载超时，请重试</span>
+                    <button class="captcha-retry-btn" onclick="reloadCaptcha()">重新加载 / Retry</button>
+                    <a href="https://wepo2021.org/kf.html" class="captcha-kf-link">联系客服 / Contact Support</a>
+                </div>
+                <iframe
+                    id="captchaIframe"
+                    src="https://chat.wepo2021.org:7001/"
+                    width="400"
+                    height="520"
+                    frameborder="0"
+                    allow="camera; microphone; clipboard-read; clipboard-write"
+                    title="人机验证">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie bar -->
+    <div class="cookie-overlay" id="cookieBar">
+        <div class="cookie-modal">
+            <h3 class="cookie-title">Cookie Consent / Cookie 许可</h3>
+            <div class="cookie-text">
+                <p>We use cookies to provide the best experience. By continuing to browse, you agree to our policy.</p>
+                <p style="margin-top:8px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
+            </div>
+            <div class="cookie-links">
+                <a href="https://wepo2021.org/yszc.html">Privacy Policy / 隐私政策</a>
+                <a href="https://wepo2021.org/yhxy.html">User Agreement / 用户协议</a>
+            </div>
+            <div class="cookie-actions">
+                <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
+                <button class="c-btn ok" onclick="acceptCookie()">Accept / 同意</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 表单 Overlay -->
+    <div class="form-overlay" id="joinFormOverlay">
+        <div class="form-modal" id="formModal">
+            <h3>维科生态协会（WEPO）分社机构成立/部门加入申请表</h3>
+            <p class="form-subtitle">请如实、详细填写各项内容，所有信息将作为协会审核、录用、任职分配的核心依据。</p>
+
+            <form id="joinForm" enctype="multipart/form-data" novalidate>
+                <div class="form-section-title">一、基础个人信息（必填）</div>
+                <div class="form-row-2">
+                    <div class="form-group"><label>1. 姓名 <span class="required-star">*</span></label><input type="text" name="name" id="f_name" required placeholder="请输入您的姓名"></div>
+                    <div class="form-group"><label>2. 性别 <span class="required-star">*</span></label>
+                        <div class="radio-group" style="padding-top:8px;">
+                            <label><input type="radio" name="gender" value="男" required> 男</label>
+                            <label><input type="radio" name="gender" value="女" required> 女</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row-3">
+                    <div class="form-group"><label>3. 出生日期 <span class="required-star">*</span></label><input type="date" name="birthdate" id="f_birthdate" required></div>
+                    <div class="form-group"><label>4. 身份类型 <span class="required-star">*</span></label><select name="identity_type" id="f_identity_type" required><option value="">请选择</option><option value="学生">学生</option><option value="社会志愿者">社会志愿者</option><option value="行业从业者">行业从业者</option><option value="其他">其他</option></select></div>
+                    <div class="form-group"><label>5. 所属单位/学校 <span class="required-star">*</span></label><input type="text" name="affiliation" id="f_affiliation" required placeholder="请输入单位或学校名称"></div>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-group"><label>6. 联系电话 <span class="required-star">*</span></label><input type="tel" name="phone" id="f_phone" required placeholder="请输入联系电话"></div>
+                    <div class="form-group"><label>7. 常用邮箱 <span class="required-star">*</span></label><input type="email" name="email" id="f_email" required placeholder="请输入常用邮箱"></div>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-group"><label>8. 所在地区（省/市/区）<span class="required-star">*</span></label><input type="text" name="region" id="f_region" required placeholder="例如：重庆市渝北区"></div>
+                    <div class="form-group"><label>9. 紧急联系人及电话 <span class="required-star">*</span></label><input type="text" name="emergency_contact" id="f_emergency_contact" required placeholder="姓名 - 电话"></div>
+                </div>
+                <div class="form-group">
+                    <label>10. 是否有环保相关经历 <span class="required-star">*</span></label>
+                    <div class="radio-group" style="padding-top:6px;">
+                        <label><input type="radio" name="has_env_exp" value="是" required id="env_exp_yes"> 是</label>
+                        <label><input type="radio" name="has_env_exp" value="否" required id="env_exp_no"> 否</label>
+                    </div>
+                    <input type="text" name="env_exp_detail" id="f_env_exp_detail" placeholder="若有，请简要说明（选填）" style="margin-top:8px;">
+                </div>
+
+                <div class="form-section-title">二、申请类型与意向选择（必填）</div>
+                <div class="app-type-toggle" id="appTypeToggle">
+                    <button type="button" class="app-type-btn" data-type="branch" id="btnTypeBranch">
+                        <span class="btn-icon">🏛️</span>
+                        <span class="btn-label">申请成立维科生态协会地方/校园分社机构</span>
+                        <span class="btn-desc">适用于申请成立新的地方或校园分社</span>
+                    </button>
+                    <button type="button" class="app-type-btn" data-type="department" id="btnTypeDept">
+                        <span class="btn-icon">👥</span>
+                        <span class="btn-label">申请加入协会直属部门/志愿者团队</span>
+                        <span class="btn-desc">适用于加入现有部门或志愿者团队</span>
+                    </button>
+                </div>
+                <input type="hidden" name="application_type" id="f_application_type" value="">
+
+                <div class="hidden-section" id="deptSection">
+                    <div class="form-group"><label>意向部门/团队（第一意向）<span class="required-star">*</span></label>
+                        <select name="dept_first" id="f_dept_first"><option value="">请选择</option><option value="运营与财务部">运营与财务部</option><option value="宣传部">宣传部</option><option value="人事部">人事部</option><option value="策划与组织部">策划与组织部</option><option value="秘书处">秘书处</option><option value="线上志愿者团队">线上志愿者团队</option><option value="线下志愿者团队">线下志愿者团队</option></select></div>
+                    <div class="form-row-2">
+                        <div class="form-group"><label>第二意向</label><select name="dept_second"><option value="">请选择（可选）</option><option value="运营与财务部">运营与财务部</option><option value="宣传部">宣传部</option><option value="人事部">人事部</option><option value="策划与组织部">策划与组织部</option><option value="秘书处">秘书处</option><option value="线上志愿者团队">线上志愿者团队</option><option value="线下志愿者团队">线下志愿者团队</option></select></div>
+                        <div class="form-group"><label>第三意向</label><select name="dept_third"><option value="">请选择（可选）</option><option value="运营与财务部">运营与财务部</option><option value="宣传部">宣传部</option><option value="人事部">人事部</option><option value="策划与组织部">策划与组织部</option><option value="秘书处">秘书处</option><option value="线上志愿者团队">线上志愿者团队</option><option value="线下志愿者团队">线下志愿者团队</option></select></div>
+                    </div>
+                    <div class="form-group"><label>是否服从协会调剂 <span class="required-star">*</span></label>
+                        <div class="radio-group" style="padding-top:6px;">
+                            <label><input type="radio" name="accept_transfer" value="服从" id="transfer_yes"> 服从</label>
+                            <label><input type="radio" name="accept_transfer" value="不服从" id="transfer_no"> 不服从</label>
+                        </div>
+                    </div>
+                    <div style="background:var(--bg-card); border:1px solid var(--border-glass); padding:16px 20px; margin:10px 0; font-size:0.85rem; color:var(--text-secondary); line-height:1.7;">
+                        <strong style="color:var(--accent-gold);">📋 各部门职能简介：</strong><br>
+                        <strong>运营与财务部：</strong>日常运营统筹、物资管理、经费核算、财务公示、赞助对接。<br>
+                        <strong>宣传部：</strong>品牌形象、环保科普、图文视频制作、新媒体运营、活动报道。<br>
+                        <strong>人事部：</strong>成员招募、面试考核、档案管理、考勤评优、人才培养。<br>
+                        <strong>策划与组织部：</strong>环保项目策划、方案撰写、活动执行、现场统筹、复盘。<br>
+                        <strong>秘书处：</strong>章程落地、会议组织、文件归档、年度报告、公文撰写。<br>
+                        <strong>线上志愿者团队：</strong>线上科普、数据整理、翻译校对、云植树、云护生。<br>
+                        <strong>线下志愿者团队：</strong>低碳巡查、生态维护、社区宣讲、校园实践、乡村帮扶。
+                    </div>
+                </div>
+
+                <div class="form-section-title">四、专项申请问答（必填）</div>
+                <div class="form-group">
+                    <label>1. 你对维科生态协会（WEPO）的使命、愿景和核心价值观有怎样的理解？<span class="required-star">*</span>（不少于100字）</label>
+                    <textarea name="q1_understanding" id="f_q1" rows="4" required placeholder="请详细描述您对WEPO使命、愿景和核心价值观的理解..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>2. 你选择申请该部门/团队/成立分社的核心原因是什么？你认为该岗位工作的意义是什么？<span class="required-star">*</span></label>
+                    <textarea name="q2_reason" id="f_q2" rows="4" required placeholder="请说明您的核心原因和对岗位意义的理解..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>3. 结合自身特长、经历，说明你能够胜任意向岗位/分社工作的优势（技能、经验、性格、资源等均可）<span class="required-star">*</span></label>
+                    <textarea name="q3_advantage" id="f_q3" rows="4" required placeholder="请说明您的优势和特长..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>4. 若成功入选/分社获批，你未来半年的工作规划和目标是什么？将如何配合协会开展环保相关工作？</label>
+                    <textarea name="q4_plan" id="f_q4" rows="4" placeholder="请描述您的半年工作规划（选填）..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>5. 你每周可稳定投入的工作/志愿时长是多少？能否保证积极参与协会培训、活动及日常工作？<span class="required-star">*</span></label>
+                    <textarea name="q5_time" id="f_q5" rows="2" required placeholder="例如：每周可投入10小时，能保证积极参与..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>6. 你了解协会三大核心环保项目吗？谈谈你对其中任意一项的认知和参与想法。</label>
+                    <textarea name="q6_program" id="f_q6" rows="4" placeholder="气候变化应对 / 生物多样性保护 / 可持续城市（选填）..."></textarea>
+                </div>
+
+                <div class="form-section-title">五、特长与技能补充（选填，加分项）</div>
+                <div class="form-group">
+                    <label>1. 专业技能（可多选）</label>
+                    <div class="radio-group" style="gap:10px; flex-wrap:wrap;">
+                        <label><input type="checkbox" name="skills" value="文案写作"> 文案写作</label>
+                        <label><input type="checkbox" name="skills" value="视频剪辑"> 视频剪辑</label>
+                        <label><input type="checkbox" name="skills" value="海报设计"> 海报设计</label>
+                        <label><input type="checkbox" name="skills" value="数据分析"> 数据分析</label>
+                        <label><input type="checkbox" name="skills" value="财务统计"> 财务统计</label>
+                        <label><input type="checkbox" name="skills" value="活动策划"> 活动策划</label>
+                        <label><input type="checkbox" name="skills" value="主持宣讲"> 主持宣讲</label>
+                        <label><input type="checkbox" name="skills" value="公文写作"> 公文写作</label>
+                        <label><input type="checkbox" name="skills" value="外语翻译"> 外语翻译</label>
+                        <label><input type="checkbox" name="skills" value="其他"> 其他</label>
+                    </div>
+                </div>
+                <div class="form-group"><label>2. 获奖经历、志愿证书、环保相关资质</label><textarea name="awards" rows="2" placeholder="请简要说明（选填）..."></textarea></div>
+                <div class="form-group"><label>3. 过往社团、工作、公益实践经历</label><textarea name="experience" rows="3" placeholder="请简要说明（选填）..."></textarea></div>
+
+                <div class="hidden-section" id="branchSection">
+                    <div class="form-section-title">六、分社成立专项填写（仅申请成立分社人员必填）</div>
+                    <div class="form-group"><label>1. 拟成立分社名称 <span class="required-star branch-req">*</span></label><input type="text" name="branch_name" id="f_branch_name" placeholder="维科生态协会___________分社"></div>
+                    <div class="form-group"><label>2. 分社落地地点（学校/城市/社区）<span class="required-star branch-req">*</span></label><input type="text" name="branch_location" id="f_branch_location" placeholder="请输入落地地点"></div>
+                    <div class="form-group"><label>3. 分社筹备核心成员人数及简介 <span class="required-star branch-req">*</span></label><textarea name="branch_members" id="f_branch_members" rows="3" placeholder="请说明核心成员人数及简要介绍..."></textarea></div>
+                    <div class="form-group"><label>4. 成立分社的初衷与发展定位 <span class="required-star branch-req">*</span></label><textarea name="branch_purpose" id="f_branch_purpose" rows="3" placeholder="请说明成立分社的初衷与发展定位..."></textarea></div>
+                    <div class="form-group"><label>5. 分社未来一年工作计划（活动、宣传、团队建设、公益落地等）<span class="required-star branch-req">*</span></label><textarea name="branch_plan" id="f_branch_plan" rows="4" placeholder="请详细说明未来一年的工作计划..."></textarea></div>
+                    <div class="form-group"><label>6. 可对接的本地资源（学校、社区、企业、公益组织等）<span class="required-star branch-req">*</span></label><textarea name="branch_resources" id="f_branch_resources" rows="3" placeholder="请说明可对接的本地资源..."></textarea></div>
+                </div>
+
+                <div class="form-section-title">七、诚信承诺与授权声明</div>
+                <div style="background:var(--bg-card); border:1px solid var(--border-glass); padding:18px 20px; margin-bottom:12px; font-size:0.84rem; color:var(--text-secondary); line-height:1.8;">
+                    <p>1. 本人郑重承诺：本次填报的所有信息均真实、准确、完整，无虚假填报、隐瞒信息等情况，自愿接受维科生态协会核查与监督。</p>
+                    <p>2. 本人自愿加入维科生态协会，认同协会章程、使命愿景及核心价值观，承诺遵守协会各项规章制度，积极参与协会环保工作、志愿活动、培训会议，服从协会统一管理与安排。</p>
+                    <p>3. 本人同意协会合法留存、使用本人填报的个人信息，用于会员登记、志愿时长统计、证书发放、工作对接等协会内部公益工作，协会严格保护个人隐私信息。</p>
+                    <p>4. 若本人出现无故缺勤、消极怠工、违反协会规章制度、损害协会声誉等行为，协会有权取消本人任职资格及会员、志愿者身份。</p>
+                </div>
+                <div class="checkbox-group" style="font-weight:600;">
+                    <input type="checkbox" name="agree_terms" id="f_agree_terms" required>
+                    <label for="f_agree_terms" style="cursor:pointer;">本人已认真阅读并自愿遵守以上所有条款 <span class="required-star">*</span></label>
+                </div>
+                <div class="form-row-2" style="margin-top:14px;">
+                    <div class="form-group"><label>填报日期 <span class="required-star">*</span></label><input type="date" name="submit_date" id="f_submit_date" required></div>
+                    <div class="form-group"><label>签名确认 <span class="required-star">*</span></label><input type="text" name="signature" id="f_signature" required placeholder="请输入您的姓名作为签名"></div>
+                </div>
+
+                <!-- 隐藏字段：人机验证token -->
+                <input type="hidden" name="captcha_token" id="f_captcha_token" value="">
+                <input type="hidden" name="captcha_score" id="f_captcha_score" value="">
+
+                <div class="form-status" id="formStatus"></div>
+                <div class="form-actions">
+                    <button type="button" class="c-btn no" onclick="closeJoinForm()">取消</button>
+                    <button type="submit" class="c-btn ok" id="submitBtn">提交申请</button>
+                </div>
+                <div class="form-tech-support">由维科生态协会信息安全部提供技术支持 | 如有疑问请联系客服：<a href="https://wepo2021.org/kf.html" style="color:var(--accent-gold);font-weight:600;">kf.html</a></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 提交动画覆盖层 -->
+    <div class="submit-overlay" id="submitOverlay">
+        <div id="submitSpinner">
+            <div class="submit-spinner-container">
+                <div class="submit-spinner-ring"></div>
+                <div class="submit-spinner-ring"></div>
+                <div class="submit-spinner-ring"></div>
+                <div class="submit-spinner-icon">🌍</div>
+            </div>
+        </div>
+        <div class="submit-status-text" id="submitStatusText">正在提交申请...</div>
+        <div class="submit-status-sub" id="submitStatusSub">请稍候，我们将尽快处理您的申请</div>
+        <button class="close-submit-btn" id="closeSubmitBtn" style="display:none;" onclick="closeSubmitOverlay()">关闭</button>
+    </div>
+
     <section class="hero" id="home">
         <div class="hero-video-container">
             <video class="hero-video" autoplay loop muted playsinline>
@@ -1809,211 +2179,16 @@
         </div>
     </footer>
 
-    <!-- Cookie bar - 修复排版 -->
-    <div class="cookie-overlay" id="cookieBar">
-        <div class="cookie-modal">
-            <h3 class="cookie-title">Cookie Consent / Cookie 许可</h3>
-            <div class="cookie-text">
-                <p>We use cookies to provide the best experience. By continuing to browse, you agree to our policy.</p>
-                <p style="margin-top:8px;">我们使用 Cookie 以提供最佳体验。继续浏览即表示您同意我们的政策。</p>
-            </div>
-            <div class="cookie-links">
-                <a href="https://wepo2021.org/yszc.html">Privacy Policy / 隐私政策</a>
-                <a href="https://wepo2021.org/yhxy.html">User Agreement / 用户协议</a>
-            </div>
-            <div class="cookie-actions">
-                <button class="c-btn no" onclick="declineCookie()">Decline / 拒绝</button>
-                <button class="c-btn ok" onclick="acceptCookie()">Accept / 同意</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============ 完整申请表 Overlay ============ -->
-    <div class="form-overlay" id="joinFormOverlay">
-        <div class="form-modal" id="formModal">
-            <h3>维科生态协会（WEPO）分社机构成立/部门加入申请表</h3>
-            <p class="form-subtitle">请如实、详细填写各项内容，所有信息将作为协会审核、录用、任职分配的核心依据。</p>
-
-            <form id="joinForm" enctype="multipart/form-data" novalidate>
-
-                <!-- ===== 一、基础个人信息 ===== -->
-                <div class="form-section-title">一、基础个人信息（必填）</div>
-                <div class="form-row-2">
-                    <div class="form-group"><label>1. 姓名 <span class="required-star">*</span></label><input type="text" name="name" id="f_name" required placeholder="请输入您的姓名"></div>
-                    <div class="form-group"><label>2. 性别 <span class="required-star">*</span></label>
-                        <div class="radio-group" style="padding-top:8px;">
-                            <label><input type="radio" name="gender" value="男" required> 男</label>
-                            <label><input type="radio" name="gender" value="女" required> 女</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row-3">
-                    <div class="form-group"><label>3. 出生日期 <span class="required-star">*</span></label><input type="date" name="birthdate" id="f_birthdate" required></div>
-                    <div class="form-group"><label>4. 身份类型 <span class="required-star">*</span></label><select name="identity_type" id="f_identity_type" required><option value="">请选择</option><option value="学生">学生</option><option value="社会志愿者">社会志愿者</option><option value="行业从业者">行业从业者</option><option value="其他">其他</option></select></div>
-                    <div class="form-group"><label>5. 所属单位/学校 <span class="required-star">*</span></label><input type="text" name="affiliation" id="f_affiliation" required placeholder="请输入单位或学校名称"></div>
-                </div>
-                <div class="form-row-2">
-                    <div class="form-group"><label>6. 联系电话 <span class="required-star">*</span></label><input type="tel" name="phone" id="f_phone" required placeholder="请输入联系电话"></div>
-                    <div class="form-group"><label>7. 常用邮箱 <span class="required-star">*</span></label><input type="email" name="email" id="f_email" required placeholder="请输入常用邮箱"></div>
-                </div>
-                <div class="form-row-2">
-                    <div class="form-group"><label>8. 所在地区（省/市/区）<span class="required-star">*</span></label><input type="text" name="region" id="f_region" required placeholder="例如：重庆市渝北区"></div>
-                    <div class="form-group"><label>9. 紧急联系人及电话 <span class="required-star">*</span></label><input type="text" name="emergency_contact" id="f_emergency_contact" required placeholder="姓名 - 电话"></div>
-                </div>
-                <div class="form-group">
-                    <label>10. 是否有环保相关经历 <span class="required-star">*</span></label>
-                    <div class="radio-group" style="padding-top:6px;">
-                        <label><input type="radio" name="has_env_exp" value="是" required id="env_exp_yes"> 是</label>
-                        <label><input type="radio" name="has_env_exp" value="否" required id="env_exp_no"> 否</label>
-                    </div>
-                    <input type="text" name="env_exp_detail" id="f_env_exp_detail" placeholder="若有，请简要说明（选填）" style="margin-top:8px;">
-                </div>
-
-                <!-- ===== 二、申请类型与意向选择 ===== -->
-                <div class="form-section-title">二、申请类型与意向选择（必填）</div>
-                <div class="app-type-toggle" id="appTypeToggle">
-                    <button type="button" class="app-type-btn" data-type="branch" id="btnTypeBranch">
-                        <span class="btn-icon">🏛️</span>
-                        <span class="btn-label">申请成立维科生态协会地方/校园分社机构</span>
-                        <span class="btn-desc">适用于申请成立新的地方或校园分社</span>
-                    </button>
-                    <button type="button" class="app-type-btn" data-type="department" id="btnTypeDept">
-                        <span class="btn-icon">👥</span>
-                        <span class="btn-label">申请加入协会直属部门/志愿者团队</span>
-                        <span class="btn-desc">适用于加入现有部门或志愿者团队</span>
-                    </button>
-                </div>
-                <input type="hidden" name="application_type" id="f_application_type" value="">
-
-                <!-- 部门意向（仅加入部门时显示） -->
-                <div class="hidden-section" id="deptSection">
-                    <div class="form-group"><label>意向部门/团队（第一意向）<span class="required-star">*</span></label>
-                        <select name="dept_first" id="f_dept_first"><option value="">请选择</option><option value="运营与财务部">运营与财务部</option><option value="宣传部">宣传部</option><option value="人事部">人事部</option><option value="策划与组织部">策划与组织部</option><option value="秘书处">秘书处</option><option value="线上志愿者团队">线上志愿者团队</option><option value="线下志愿者团队">线下志愿者团队</option></select></div>
-                    <div class="form-row-2">
-                        <div class="form-group"><label>第二意向</label><select name="dept_second"><option value="">请选择（可选）</option><option value="运营与财务部">运营与财务部</option><option value="宣传部">宣传部</option><option value="人事部">人事部</option><option value="策划与组织部">策划与组织部</option><option value="秘书处">秘书处</option><option value="线上志愿者团队">线上志愿者团队</option><option value="线下志愿者团队">线下志愿者团队</option></select></div>
-                        <div class="form-group"><label>第三意向</label><select name="dept_third"><option value="">请选择（可选）</option><option value="运营与财务部">运营与财务部</option><option value="宣传部">宣传部</option><option value="人事部">人事部</option><option value="策划与组织部">策划与组织部</option><option value="秘书处">秘书处</option><option value="线上志愿者团队">线上志愿者团队</option><option value="线下志愿者团队">线下志愿者团队</option></select></div>
-                    </div>
-                    <div class="form-group"><label>是否服从协会调剂 <span class="required-star">*</span></label>
-                        <div class="radio-group" style="padding-top:6px;">
-                            <label><input type="radio" name="accept_transfer" value="服从" id="transfer_yes"> 服从</label>
-                            <label><input type="radio" name="accept_transfer" value="不服从" id="transfer_no"> 不服从</label>
-                        </div>
-                    </div>
-                    <div style="background:var(--bg-card); border:1px solid var(--border-glass); padding:16px 20px; margin:10px 0; font-size:0.85rem; color:var(--text-secondary); line-height:1.7;">
-                        <strong style="color:var(--accent-gold);">📋 各部门职能简介：</strong><br>
-                        <strong>运营与财务部：</strong>日常运营统筹、物资管理、经费核算、财务公示、赞助对接。<br>
-                        <strong>宣传部：</strong>品牌形象、环保科普、图文视频制作、新媒体运营、活动报道。<br>
-                        <strong>人事部：</strong>成员招募、面试考核、档案管理、考勤评优、人才培养。<br>
-                        <strong>策划与组织部：</strong>环保项目策划、方案撰写、活动执行、现场统筹、复盘。<br>
-                        <strong>秘书处：</strong>章程落地、会议组织、文件归档、年度报告、公文撰写。<br>
-                        <strong>线上志愿者团队：</strong>线上科普、数据整理、翻译校对、云植树、云护生。<br>
-                        <strong>线下志愿者团队：</strong>低碳巡查、生态维护、社区宣讲、校园实践、乡村帮扶。
-                    </div>
-                </div>
-
-                <!-- ===== 三、各部门职能介绍（已整合到上方） ===== -->
-
-                <!-- ===== 四、专项申请问答 ===== -->
-                <div class="form-section-title">四、专项申请问答（必填）</div>
-                <div class="form-group">
-                    <label>1. 你对维科生态协会（WEPO）的使命、愿景和核心价值观有怎样的理解？<span class="required-star">*</span>（不少于100字）</label>
-                    <textarea name="q1_understanding" id="f_q1" rows="4" required placeholder="请详细描述您对WEPO使命、愿景和核心价值观的理解..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>2. 你选择申请该部门/团队/成立分社的核心原因是什么？你认为该岗位工作的意义是什么？<span class="required-star">*</span></label>
-                    <textarea name="q2_reason" id="f_q2" rows="4" required placeholder="请说明您的核心原因和对岗位意义的理解..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>3. 结合自身特长、经历，说明你能够胜任意向岗位/分社工作的优势（技能、经验、性格、资源等均可）<span class="required-star">*</span></label>
-                    <textarea name="q3_advantage" id="f_q3" rows="4" required placeholder="请说明您的优势和特长..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>4. 若成功入选/分社获批，你未来半年的工作规划和目标是什么？将如何配合协会开展环保相关工作？</label>
-                    <textarea name="q4_plan" id="f_q4" rows="4" placeholder="请描述您的半年工作规划（选填）..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>5. 你每周可稳定投入的工作/志愿时长是多少？能否保证积极参与协会培训、活动及日常工作？<span class="required-star">*</span></label>
-                    <textarea name="q5_time" id="f_q5" rows="2" required placeholder="例如：每周可投入10小时，能保证积极参与..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>6. 你了解协会三大核心环保项目吗？谈谈你对其中任意一项的认知和参与想法。</label>
-                    <textarea name="q6_program" id="f_q6" rows="4" placeholder="气候变化应对 / 生物多样性保护 / 可持续城市（选填）..."></textarea>
-                </div>
-
-                <!-- ===== 五、特长与技能补充 ===== -->
-                <div class="form-section-title">五、特长与技能补充（选填，加分项）</div>
-                <div class="form-group">
-                    <label>1. 专业技能（可多选）</label>
-                    <div class="radio-group" style="gap:10px; flex-wrap:wrap;">
-                        <label><input type="checkbox" name="skills" value="文案写作"> 文案写作</label>
-                        <label><input type="checkbox" name="skills" value="视频剪辑"> 视频剪辑</label>
-                        <label><input type="checkbox" name="skills" value="海报设计"> 海报设计</label>
-                        <label><input type="checkbox" name="skills" value="数据分析"> 数据分析</label>
-                        <label><input type="checkbox" name="skills" value="财务统计"> 财务统计</label>
-                        <label><input type="checkbox" name="skills" value="活动策划"> 活动策划</label>
-                        <label><input type="checkbox" name="skills" value="主持宣讲"> 主持宣讲</label>
-                        <label><input type="checkbox" name="skills" value="公文写作"> 公文写作</label>
-                        <label><input type="checkbox" name="skills" value="外语翻译"> 外语翻译</label>
-                        <label><input type="checkbox" name="skills" value="其他"> 其他</label>
-                    </div>
-                </div>
-                <div class="form-group"><label>2. 获奖经历、志愿证书、环保相关资质</label><textarea name="awards" rows="2" placeholder="请简要说明（选填）..."></textarea></div>
-                <div class="form-group"><label>3. 过往社团、工作、公益实践经历</label><textarea name="experience" rows="3" placeholder="请简要说明（选填）..."></textarea></div>
-
-                <!-- ===== 六、分社成立专项（仅成立分社时显示） ===== -->
-                <div class="hidden-section" id="branchSection">
-                    <div class="form-section-title">六、分社成立专项填写（仅申请成立分社人员必填）</div>
-                    <div class="form-group"><label>1. 拟成立分社名称 <span class="required-star branch-req">*</span></label><input type="text" name="branch_name" id="f_branch_name" placeholder="维科生态协会___________分社"></div>
-                    <div class="form-group"><label>2. 分社落地地点（学校/城市/社区）<span class="required-star branch-req">*</span></label><input type="text" name="branch_location" id="f_branch_location" placeholder="请输入落地地点"></div>
-                    <div class="form-group"><label>3. 分社筹备核心成员人数及简介 <span class="required-star branch-req">*</span></label><textarea name="branch_members" id="f_branch_members" rows="3" placeholder="请说明核心成员人数及简要介绍..."></textarea></div>
-                    <div class="form-group"><label>4. 成立分社的初衷与发展定位 <span class="required-star branch-req">*</span></label><textarea name="branch_purpose" id="f_branch_purpose" rows="3" placeholder="请说明成立分社的初衷与发展定位..."></textarea></div>
-                    <div class="form-group"><label>5. 分社未来一年工作计划（活动、宣传、团队建设、公益落地等）<span class="required-star branch-req">*</span></label><textarea name="branch_plan" id="f_branch_plan" rows="4" placeholder="请详细说明未来一年的工作计划..."></textarea></div>
-                    <div class="form-group"><label>6. 可对接的本地资源（学校、社区、企业、公益组织等）<span class="required-star branch-req">*</span></label><textarea name="branch_resources" id="f_branch_resources" rows="3" placeholder="请说明可对接的本地资源..."></textarea></div>
-                </div>
-
-                <!-- ===== 七、诚信承诺与授权声明 ===== -->
-                <div class="form-section-title">七、诚信承诺与授权声明</div>
-                <div style="background:var(--bg-card); border:1px solid var(--border-glass); padding:18px 20px; margin-bottom:12px; font-size:0.84rem; color:var(--text-secondary); line-height:1.8;">
-                    <p>1. 本人郑重承诺：本次填报的所有信息均真实、准确、完整，无虚假填报、隐瞒信息等情况，自愿接受维科生态协会核查与监督。</p>
-                    <p>2. 本人自愿加入维科生态协会，认同协会章程、使命愿景及核心价值观，承诺遵守协会各项规章制度，积极参与协会环保工作、志愿活动、培训会议，服从协会统一管理与安排。</p>
-                    <p>3. 本人同意协会合法留存、使用本人填报的个人信息，用于会员登记、志愿时长统计、证书发放、工作对接等协会内部公益工作，协会严格保护个人隐私信息。</p>
-                    <p>4. 若本人出现无故缺勤、消极怠工、违反协会规章制度、损害协会声誉等行为，协会有权取消本人任职资格及会员、志愿者身份。</p>
-                </div>
-                <div class="checkbox-group" style="font-weight:600;">
-                    <input type="checkbox" name="agree_terms" id="f_agree_terms" required>
-                    <label for="f_agree_terms" style="cursor:pointer;">本人已认真阅读并自愿遵守以上所有条款 <span class="required-star">*</span></label>
-                </div>
-                <div class="form-row-2" style="margin-top:14px;">
-                    <div class="form-group"><label>填报日期 <span class="required-star">*</span></label><input type="date" name="submit_date" id="f_submit_date" required></div>
-                    <div class="form-group"><label>签名确认 <span class="required-star">*</span></label><input type="text" name="signature" id="f_signature" required placeholder="请输入您的姓名作为签名"></div>
-                </div>
-
-                <div class="form-status" id="formStatus"></div>
-                <div class="form-actions">
-                    <button type="button" class="c-btn no" onclick="closeJoinForm()">取消</button>
-                    <button type="submit" class="c-btn ok" id="submitBtn">提交申请</button>
-                </div>
-                <div class="form-tech-support">由维科生态协会信息安全部提供技术支持 | 如有疑问请联系客服：<a href="https://wepo2021.org/kf.html" style="color:var(--accent-gold);font-weight:600;">kf.html</a></div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ============ 提交动画覆盖层 ============ -->
-    <div class="submit-overlay" id="submitOverlay">
-        <div id="submitSpinner">
-            <div class="submit-spinner-container">
-                <div class="submit-spinner-ring"></div>
-                <div class="submit-spinner-ring"></div>
-                <div class="submit-spinner-ring"></div>
-                <div class="submit-spinner-icon">🌍</div>
-            </div>
-        </div>
-        <div class="submit-status-text" id="submitStatusText">正在提交申请...</div>
-        <div class="submit-status-sub" id="submitStatusSub">请稍候，我们将尽快处理您的申请</div>
-        <button class="close-submit-btn" id="closeSubmitBtn" style="display:none;" onclick="closeSubmitOverlay()">关闭</button>
-    </div>
-
     <script>
+        // --- 常量：人机验证token过期时间（小时） ---
+        const CAPTCHA_TOKEN_EXPIRY_HOURS = 24;
+        const CAPTCHA_STORAGE_KEY = 'wepo_captcha_token';
+        const CAPTCHA_SCORE_KEY = 'wepo_captcha_score';
+        const CAPTCHA_EXPIRY_KEY = 'wepo_captcha_expiry';
+        const CAPTCHA_ORIGIN = 'https://chat.wepo2021.org:7001';
+        const CAPTCHA_IFRAME_SRC = 'https://chat.wepo2021.org:7001/';
+        const CAPTCHA_LOAD_TIMEOUT_MS = 20000; // 20秒加载超时
+
         // --- i18n Translations ---
         const translations = {
             "zh-CN": {
@@ -2153,14 +2328,14 @@
                 "about.p1": "Fundado en 2021 en Chongqing, WEPO es una ONG joven y dinámica.", "about.p2": "Dedicados a soluciones basadas en la ciencia.",
                 "about.p3": "Colaboramos con gobiernos y comunidades.", "about.p4": "Nuestro trabajo abarca más de 30 países.",
                 "about.report_link": "Leer Informe Anual →", "stats.countries": "30+",
-            "stats.countries_text": "Países", "stats.staff": "500+", "stats.staff_text": "Profesionales",
+                "stats.countries_text": "Países", "stats.staff": "500+", "stats.staff_text": "Profesionales",
                 "stats.projects": "100+", "stats.projects_text": "Proyectos", "stats.volunteers": "10k+",
                 "stats.volunteers_text": "Voluntarios", "mission.title": "Misión y Visión", "mission.mission_title": "Misión",
                 "mission.mission_desc": "Promoviendo la protección ambiental mediante investigación y educación.",
                 "mission.vision_title": "Visión", "mission.vision_desc": "Un mundo próspero donde humanidad y naturaleza coexisten.",
                 "mission.values_title": "Valores", "mission.values_desc": "Rigor científico y colaboración transparente.",
                 "programs.title": "Programas", "programs.climate_title": "Acción Climática",
-            "programs.climate_desc": "Ayudando comunidades vulnerables.", "programs.biodiversity_title": "Biodiversidad",
+                "programs.climate_desc": "Ayudando comunidades vulnerables.", "programs.biodiversity_title": "Biodiversidad",
                 "programs.biodiversity_desc": "Protegiendo vida silvestre.", "programs.cities_title": "Ciudades Sostenibles",
                 "programs.cities_desc": "Promoviendo estándares verdes.", "contact.title": "Contacto",
                 "contact.address_title": "Dirección", "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
@@ -2173,20 +2348,20 @@
             "fr": { "lang.current": "FR", "slogan.text": "Changeons le monde.", "nav.home": "Accueil",
                 "nav.about": "À propos", "nav.mission": "Mission", "nav.programs": "Programmes", "nav.contact": "Contact",
                 "nav.videos": "Vidéos", "nav.donate": "Faire un don", "nav.support": "Support",
-            "nav.weather": "Météo WEPO", "nav.query": "Recherche Cert", "nav.global": "Vision Globale",
+                "nav.weather": "Météo WEPO", "nav.query": "Recherche Cert", "nav.global": "Vision Globale",
                 "hero.title": "Protéger la Terre Notre Maison Commune", "hero.description": "Fondé en 2021.",
                 "hero.btn_feedback": "En Savoir Plus", "hero.btn_join": "Rejoindre",
-            "about.subtitle": "Construire un avenir durable.", "about.p1": "Fondé en 2021 à Chongqing.",
+                "about.subtitle": "Construire un avenir durable.", "about.p1": "Fondé en 2021 à Chongqing.",
                 "about.p2": "Dédiés aux solutions scientifiques.", "about.p3": "Collaboration avec gouvernements.",
                 "about.p4": "Présents dans plus de 30 pays.", "about.report_link": "Lire le Rapport Annuel →",
                 "stats.countries": "30+", "stats.countries_text": "Pays", "stats.staff": "500+",
-            "stats.staff_text": "Professionnels", "stats.projects": "100+", "stats.projects_text": "Projets",
+                "stats.staff_text": "Professionnels", "stats.projects": "100+", "stats.projects_text": "Projets",
                 "stats.volunteers": "10k+", "stats.volunteers_text": "Bénévoles", "mission.title": "Mission & Vision",
                 "mission.mission_title": "Mission", "mission.mission_desc": "Promouvoir la protection environnementale.",
                 "mission.vision_title": "Vision", "mission.vision_desc": "Un monde où humanité et nature coexistent.",
                 "mission.values_title": "Valeurs", "mission.values_desc": "Rigueur scientifique et collaboration.",
                 "programs.title": "Programmes", "programs.climate_title": "Action Climatique",
-            "programs.climate_desc": "Aider les communautés.", "programs.biodiversity_title": "Biodiversité",
+                "programs.climate_desc": "Aider les communautés.", "programs.biodiversity_title": "Biodiversité",
                 "programs.biodiversity_desc": "Protéger la faune.", "programs.cities_title": "Villes Durables",
                 "programs.cities_desc": "Promouvoir les normes vertes.", "contact.title": "Contact",
                 "contact.address_title": "Adresse", "contact.address": "No. 10 Xingsheng Ave, Chongqing, CN",
@@ -2199,20 +2374,20 @@
             "ru": { "lang.current": "RU", "slogan.text": "Изменим мир.", "nav.home": "Главная",
                 "nav.about": "О нас", "nav.mission": "Миссия", "nav.programs": "Программы", "nav.contact": "Контакты",
                 "nav.videos": "Видео", "nav.donate": "Пожертвовать", "nav.support": "Поддержка",
-            "nav.weather": "Погода WEPO", "nav.query": "Поиск сертификата", "nav.global": "Глобальное видение",
+                "nav.weather": "Погода WEPO", "nav.query": "Поиск сертификата", "nav.global": "Глобальное видение",
                 "hero.title": "Защищая Землю Наш Общий Дом", "hero.description": "Основан в 2021 году.",
                 "hero.btn_feedback": "Узнать больше", "hero.btn_join": "Присоединиться",
-            "about.subtitle": "Строим устойчивое будущее.", "about.p1": "Основан в 2021 году в Чунцине.",
+                "about.subtitle": "Строим устойчивое будущее.", "about.p1": "Основан в 2021 году в Чунцине.",
                 "about.p2": "Посвящены научным решениям.", "about.p3": "Сотрудничаем с правительствами.",
                 "about.p4": "Работаем в более чем 30 странах.", "about.report_link": "Читать годовой отчёт →",
                 "stats.countries": "30+", "stats.countries_text": "Стран", "stats.staff": "500+",
-            "stats.staff_text": "Специалистов", "stats.projects": "100+", "stats.projects_text": "Проектов",
+                "stats.staff_text": "Специалистов", "stats.projects": "100+", "stats.projects_text": "Проектов",
                 "stats.volunteers": "10k+", "stats.volunteers_text": "Волонтёров", "mission.title": "Миссия и Видение",
                 "mission.mission_title": "Миссия", "mission.mission_desc": "Продвижение защиты окружающей среды.",
                 "mission.vision_title": "Видение", "mission.vision_desc": "Мир где человечество и природа сосуществуют.",
                 "mission.values_title": "Ценности", "mission.values_desc": "Научная строгость и сотрудничество.",
                 "programs.title": "Программы", "programs.climate_title": "Климатические действия",
-            "programs.climate_desc": "Помощь уязвимым сообществам.", "programs.biodiversity_title": "Биоразнообразие",
+                "programs.climate_desc": "Помощь уязвимым сообществам.", "programs.biodiversity_title": "Биоразнообразие",
                 "programs.biodiversity_desc": "Защита дикой природы.", "programs.cities_title": "Устойчивые города",
                 "programs.cities_desc": "Продвижение зелёных стандартов.", "contact.title": "Контакты",
                 "contact.address_title": "Адрес", "contact.address": "No. 10 Xingsheng Ave, Чунцин, КНР",
@@ -2227,11 +2402,11 @@
                 "nav.videos": "فيديوهات", "nav.donate": "تبرع", "nav.support": "الدعم", "nav.weather": "طقس WEPO",
                 "nav.query": "استعلام الشهادة", "nav.global": "رؤية عالمية", "hero.title": "حماية الأرض بيتنا المشترك",
                 "hero.description": "تأسست عام 2021.", "hero.btn_feedback": "اعرف المزيد",
-            "hero.btn_join": "انضم إلينا", "about.subtitle": "بناء مستقبل مستدام.", "about.p1": "تأسست عام 2021 في تشونغتشينغ.",
+                "hero.btn_join": "انضم إلينا", "about.subtitle": "بناء مستقبل مستدام.", "about.p1": "تأسست عام 2021 في تشونغتشينغ.",
                 "about.p2": "ملتزمون بالحلول العلمية.", "about.p3": "نتعاون مع الحكومات والمجتمعات.",
                 "about.p4": "نعمل في أكثر من 30 دولة.", "about.report_link": "اقرأ التقرير السنوي →",
                 "stats.countries": "30+", "stats.countries_text": "دولة", "stats.staff": "500+",
-            "stats.staff_text": "محترف", "stats.projects": "100+", "stats.projects_text": "مشروع",
+                "stats.staff_text": "محترف", "stats.projects": "100+", "stats.projects_text": "مشروع",
                 "stats.volunteers": "10k+", "stats.volunteers_text": "متطوع", "mission.title": "المهمة والرؤية",
                 "mission.mission_title": "المهمة", "mission.mission_desc": "تعزيز حماية البيئة.",
                 "mission.vision_title": "الرؤية", "mission.vision_desc": "عالم يتعايش فيه الإنسان والطبيعة.",
@@ -2240,13 +2415,150 @@
                 "programs.biodiversity_title": "التنوع البيولوجي", "programs.biodiversity_desc": "حماية الحياة البرية.",
                 "programs.cities_title": "مدن مستدامة", "programs.cities_desc": "تعزيز المعايير الخضراء.",
                 "contact.title": "اتصل بنا", "contact.address_title": "العنوان",
-            "contact.address": "No. 10 Xingsheng Ave, تشونغتشينغ", "contact.email_title": "البريد",
+                "contact.address": "No. 10 Xingsheng Ave, تشونغتشينغ", "contact.email_title": "البريد",
                 "contact.phone_title": "الهاتف", "footer.about": "WEPO لحماية البيئة.", "footer.council": "المجلس",
                 "footer.volunteers": "متطوعون", "footer.reports": "تقارير", "footer.charter": "الميثاق",
                 "footer.privacy": "الخصوصية", "footer.terms": "الشروط", "footer.disclaimer": "إخلاء مسؤولية.",
                 "footer.follow_us": "تابعنا", "footer.cookie_desc": "يستخدم الموقع ملفات تعريف الارتباط.",
                 "footer.tech_desc1": "مبني بتقنية HTML5.", "footer.tech_desc2": "ميزات إمكانية الوصول وتصميم متعدد اللغات." }
         };
+
+        // --- 人机验证相关函数 ---
+        function getCaptchaToken() {
+            return localStorage.getItem(CAPTCHA_STORAGE_KEY);
+        }
+        function getCaptchaScore() {
+            return localStorage.getItem(CAPTCHA_SCORE_KEY);
+        }
+        function getCaptchaExpiry() {
+            return localStorage.getItem(CAPTCHA_EXPIRY_KEY);
+        }
+        function isCaptchaTokenValid() {
+            const token = getCaptchaToken();
+            const expiry = getCaptchaExpiry();
+            if (!token || !expiry) return false;
+            const now = Date.now();
+            if (now > parseInt(expiry, 10)) {
+                // 过期则清除
+                clearCaptchaToken();
+                return false;
+            }
+            return true;
+        }
+        function saveCaptchaToken(token, score) {
+            const expiry = Date.now() + (CAPTCHA_TOKEN_EXPIRY_HOURS * 60 * 60 * 1000);
+            localStorage.setItem(CAPTCHA_STORAGE_KEY, token);
+            localStorage.setItem(CAPTCHA_SCORE_KEY, score || '');
+            localStorage.setItem(CAPTCHA_EXPIRY_KEY, expiry.toString());
+            // 同步更新隐藏字段
+            document.getElementById('f_captcha_token').value = token;
+            document.getElementById('f_captcha_score').value = score || '';
+        }
+        function clearCaptchaToken() {
+            localStorage.removeItem(CAPTCHA_STORAGE_KEY);
+            localStorage.removeItem(CAPTCHA_SCORE_KEY);
+            localStorage.removeItem(CAPTCHA_EXPIRY_KEY);
+            document.getElementById('f_captcha_token').value = '';
+            document.getElementById('f_captcha_score').value = '';
+        }
+
+        function showCaptchaOverlay() {
+            document.getElementById('captchaOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // 重置状态
+            document.getElementById('captchaLoading').classList.remove('hidden');
+            document.getElementById('captchaError').classList.remove('visible');
+            // 重新加载iframe
+            reloadCaptchaIframe();
+            // 启动超时检测
+            startCaptchaTimeout();
+        }
+
+        function hideCaptchaOverlay() {
+            document.getElementById('captchaOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            clearCaptchaTimeout();
+        }
+
+        function reloadCaptchaIframe() {
+            const iframe = document.getElementById('captchaIframe');
+            const loading = document.getElementById('captchaLoading');
+            const error = document.getElementById('captchaError');
+            loading.classList.remove('hidden');
+            error.classList.remove('visible');
+            // 重新设置src来刷新iframe
+            iframe.src = CAPTCHA_IFRAME_SRC;
+            // 重置超时
+            clearCaptchaTimeout();
+            startCaptchaTimeout();
+        }
+
+        function reloadCaptcha() {
+            reloadCaptchaIframe();
+        }
+
+        let captchaTimeoutId = null;
+        function startCaptchaTimeout() {
+            clearCaptchaTimeout();
+            captchaTimeoutId = setTimeout(() => {
+                // 超时：显示错误
+                document.getElementById('captchaLoading').classList.add('hidden');
+                document.getElementById('captchaError').classList.add('visible');
+            }, CAPTCHA_LOAD_TIMEOUT_MS);
+        }
+        function clearCaptchaTimeout() {
+            if (captchaTimeoutId) {
+                clearTimeout(captchaTimeoutId);
+                captchaTimeoutId = null;
+            }
+        }
+
+        // 监听iframe的load事件
+        document.getElementById('captchaIframe').addEventListener('load', function() {
+            // iframe加载完成，隐藏loading
+            document.getElementById('captchaLoading').classList.add('hidden');
+            document.getElementById('captchaError').classList.remove('visible');
+        });
+
+        // --- 监听人机验证结果 (postMessage) ---
+        window.addEventListener('message', function(event) {
+            // 严格验证来源域名
+            if (event.origin !== CAPTCHA_ORIGIN) return;
+
+            if (event.data && event.data.type === 'verification_success') {
+                console.log('[WEPO Captcha] 验证成功！');
+                console.log('[WEPO Captcha] 令牌:', event.data.token);
+                console.log('[WEPO Captcha] 评分:', event.data.score);
+
+                // 存储token
+                saveCaptchaToken(event.data.token, event.data.score);
+
+                // 隐藏验证overlay
+                hideCaptchaOverlay();
+
+                // 可选：发送token到后端进行二次验证
+                fetch(CAPTCHA_ORIGIN + '/api/verify-token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: event.data.token })
+                }).then(res => res.json()).then(data => {
+                    console.log('[WEPO Captcha] 后端验证结果:', data);
+                }).catch(err => {
+                    console.warn('[WEPO Captcha] 后端验证请求失败（不影响前端流程）:', err);
+                });
+
+                // 验证成功后显示Cookie弹窗
+                if (localStorage.getItem('cookieStatus') !== 'accepted') {
+                    document.getElementById('cookieBar').classList.add('active');
+                }
+            }
+        });
+
+        // 初始化时同步隐藏字段
+        if (isCaptchaTokenValid()) {
+            document.getElementById('f_captcha_token').value = getCaptchaToken();
+            document.getElementById('f_captcha_score').value = getCaptchaScore() || '';
+        }
 
         // --- Typewriter, Theme, Language, Scroll ---
         let typewriterTimeout;
@@ -2315,11 +2627,24 @@
             localStorage.setItem('cookieStatus', 'accepted'); }
 
         function declineCookie() { window.location.href = "https://bing.com"; }
-        initCookieLogic();
+
+        // --- 初始化流程：先检查人机验证，再显示Cookie ---
+        function initPageFlow() {
+            if (isCaptchaTokenValid()) {
+                // 已有有效token，直接显示Cookie弹窗
+                initCookieLogic();
+            } else {
+                // 无有效token，显示人机验证overlay
+                showCaptchaOverlay();
+            }
+        }
+        // 页面加载时启动初始化流程
+        initPageFlow();
+
         document.getElementById('year').textContent = new Date().getFullYear();
 
         // ============ 申请类型切换逻辑 ============
-        let currentAppType = ''; // 'branch' or 'department'
+        let currentAppType = '';
         const btnTypeBranch = document.getElementById('btnTypeBranch');
         const btnTypeDept = document.getElementById('btnTypeDept');
         const deptSection = document.getElementById('deptSection');
@@ -2333,8 +2658,6 @@
             btnTypeDept.classList.toggle('active', type === 'department');
             deptSection.classList.toggle('visible', type === 'department');
             branchSection.classList.toggle('visible', type === 'branch');
-
-            // 清除相关字段的错误状态
             clearAllErrors();
             document.getElementById('formStatus').textContent = '';
         }
@@ -2359,8 +2682,6 @@
         function validateForm() {
             clearAllErrors();
             const errors = [];
-
-            // 基础信息校验
             const requiredFields = [
                 { id: 'f_name', name: '姓名' },
                 { id: 'f_birthdate', name: '出生日期' },
@@ -2377,7 +2698,6 @@
                 { id: 'f_submit_date', name: '填报日期' },
                 { id: 'f_signature', name: '签名确认' },
             ];
-
             for (const field of requiredFields) {
                 const el = document.getElementById(field.id);
                 if (!el || !el.value.trim()) {
@@ -2385,8 +2705,6 @@
                     markError(el);
                 }
             }
-
-            // 性别
             const genderRadios = document.querySelectorAll('input[name="gender"]');
             const genderChecked = Array.from(genderRadios).some(r => r.checked);
             if (!genderChecked) {
@@ -2394,21 +2712,15 @@
                 const genderGroup = document.querySelector('.radio-group');
                 if (genderGroup) genderGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-
-            // 环保经历
             const envRadios = document.querySelectorAll('input[name="has_env_exp"]');
             const envChecked = Array.from(envRadios).some(r => r.checked);
             if (!envChecked) {
                 errors.push('是否有环保相关经历');
             }
-
-            // 申请类型
             if (!currentAppType) {
                 errors.push('申请类型（请选择成立分社或加入部门）');
                 document.getElementById('appTypeToggle').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-
-            // 部门意向（仅加入部门时）
             if (currentAppType === 'department') {
                 const deptFirst = document.getElementById('f_dept_first');
                 if (!deptFirst.value.trim()) {
@@ -2421,8 +2733,6 @@
                     errors.push('是否服从调剂');
                 }
             }
-
-            // 分社专项（仅成立分社时）
             if (currentAppType === 'branch') {
                 const branchFields = [
                     { id: 'f_branch_name', name: '分社名称' },
@@ -2440,15 +2750,11 @@
                     }
                 }
             }
-
-            // 诚信承诺
             const agreeCheckbox = document.getElementById('f_agree_terms');
             if (!agreeCheckbox.checked) {
                 errors.push('诚信承诺与授权声明（需勾选同意）');
                 agreeCheckbox.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-
-            // 邮箱格式校验
             const emailEl = document.getElementById('f_email');
             if (emailEl && emailEl.value.trim()) {
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -2457,30 +2763,31 @@
                     markError(emailEl);
                 }
             }
-
-            // 问答1字数校验（不少于100字）
             const q1El = document.getElementById('f_q1');
             if (q1El && q1El.value.trim() && q1El.value.trim().length < 100) {
                 errors.push('问答1：对WEPO的理解（不少于100字，当前' + q1El.value.trim().length + '字）');
                 markError(q1El);
             }
-
+            // 检查人机验证token
+            if (!isCaptchaTokenValid()) {
+                errors.push('人机验证已过期，请重新验证');
+                showCaptchaOverlay();
+            }
             return errors;
         }
 
         // ============ 提交动画覆盖层 ============
-        const submitOverlay = document.getElementById('submitOverlay');
+        const submitOverlayEl = document.getElementById('submitOverlay');
         const submitStatusText = document.getElementById('submitStatusText');
         const submitStatusSub = document.getElementById('submitStatusSub');
         const submitSpinner = document.getElementById('submitSpinner');
         const closeSubmitBtn = document.getElementById('closeSubmitBtn');
 
         function showSubmitOverlay(status, message, subMessage, showClose = false) {
-            submitOverlay.classList.add('active');
+            submitOverlayEl.classList.add('active');
             submitStatusText.textContent = message;
             submitStatusSub.innerHTML = subMessage;
             closeSubmitBtn.style.display = showClose ? 'inline-block' : 'none';
-
             if (status === 'loading') {
                 submitSpinner.style.display = 'block';
             } else if (status === 'error') {
@@ -2509,9 +2816,8 @@
         }
 
         function closeSubmitOverlay() {
-            submitOverlay.classList.remove('active');
+            submitOverlayEl.classList.remove('active');
             resetSubmitOverlay();
-            // 如果之前成功，关闭表单
             if (submitStatusText.textContent.includes('成功') || submitStatusText.textContent.includes('Success')) {
                 closeJoinForm();
             }
@@ -2526,10 +2832,21 @@
 
         function openJoinForm(e) {
             e.preventDefault();
+            // 检查人机验证token是否有效
+            if (!isCaptchaTokenValid()) {
+                showCaptchaOverlay();
+                statusDiv.textContent = '⚠️ 请先完成人机验证';
+                statusDiv.style.color = '#e74c3c';
+                setTimeout(() => { statusDiv.style.color = ''; }, 3000);
+                return;
+            }
+            // 同步token到隐藏字段
+            document.getElementById('f_captcha_token').value = getCaptchaToken();
+            document.getElementById('f_captcha_score').value = getCaptchaScore() || '';
             overlay.classList.add('active');
             statusDiv.textContent = '';
             form.reset();
-            setAppType(''); // 重置申请类型
+            setAppType('');
             clearAllErrors();
             document.body.style.overflow = 'hidden';
         }
@@ -2542,18 +2859,22 @@
         joinBtn.addEventListener('click', openJoinForm);
         overlay.addEventListener('click', (e) => { if (e.target === overlay) closeJoinForm(); });
 
-        // ESC键关闭
+        // ESC键关闭（但验证overlay显示时不能关闭）
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && overlay.classList.contains('active') && !submitOverlay.classList
-                .contains('active')) {
-                closeJoinForm();
+            if (e.key === 'Escape') {
+                const captchaActive = document.getElementById('captchaOverlay').classList.contains('active');
+                if (captchaActive) {
+                    // 验证overlay显示时，ESC键无效
+                    return;
+                }
+                if (overlay.classList.contains('active') && !submitOverlayEl.classList.contains('active')) {
+                    closeJoinForm();
+                }
             }
         });
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // 校验
             const errors = validateForm();
             if (errors.length > 0) {
                 statusDiv.textContent = '⚠️ 请填写以下必填项：' + errors.join('、');
@@ -2561,35 +2882,27 @@
                 setTimeout(() => { statusDiv.style.color = ''; }, 4000);
                 return;
             }
-
             statusDiv.textContent = '';
             statusDiv.style.color = '';
-
-            // 显示提交动画
             showSubmitOverlay('loading', '正在提交申请...', '请稍候，我们将尽快处理您的申请');
             submitBtn.disabled = true;
-
-            // 构建FormData
             const formData = new FormData(form);
-            // 处理checkbox技能
             const skillCheckboxes = document.querySelectorAll('input[name="skills"]:checked');
             const skills = Array.from(skillCheckboxes).map(cb => cb.value).join(',');
             formData.set('skills_list', skills);
-
+            // 确保captcha token在FormData中
+            formData.set('captcha_token', getCaptchaToken() || '');
+            formData.set('captcha_score', getCaptchaScore() || '');
             try {
                 const res = await fetch('https://chat.wepo2021.org:5005/api/submit', {
                     method: 'POST',
                     body: formData
                 });
-
                 if (res.status === 429) {
                     throw new Error('rate_limit');
                 }
-
                 const data = await res.json();
-
                 if (data.code === 200) {
-                    // 成功
                     showSubmitOverlay('success', '✓ 申请提交成功！',
                         '感谢您的申请，我们将尽快审核并与您联系。<br>请留意您的邮箱通知。', true);
                     statusDiv.textContent = '✓ 提交成功！感谢申请。';
@@ -2602,8 +2915,8 @@
                     throw new Error('server_error');
                 }
             } catch (err) {
-                // 统一失败提示
-                const kfLink = '<a href="https://wepo2021.org/kf.html" style="color:#d4af37;font-weight:600;border-bottom:1px solid #d4af37;">kf.html</a>';
+                const kfLink =
+                    '<a href="https://wepo2021.org/kf.html" style="color:#d4af37;font-weight:600;border-bottom:1px solid #d4af37;">kf.html</a>';
                 showSubmitOverlay('error', '系统维护中，请稍后再试',
                     '如有疑问请联系客服：' + kfLink + '<br>我们对此造成的不便深表歉意。', true);
                 statusDiv.textContent = '系统维护中，请稍后再试。联系客服：kf.html';
